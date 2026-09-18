@@ -1,13 +1,27 @@
 import { PageFooter } from "@/components/home/PageFooter";
-import { CareersHeader } from "./CareersHeader";
+import { SiteHeader } from "@/components/home/SiteHeader";
 import { CareersTeamPhoto } from "./CareersTeamPhoto";
 import { RoleCard } from "./RoleCard";
 import { CAREERS_INTRO, CAREERS_TEAM_HREF, ROLES } from "@/data/careers";
 
+/** Same header as /TrainerTwin_home_v3 — its own section links don't exist
+    here, so the nav points out instead, same idea as invite_trainer's. */
+const CAREERS_NAV = [
+  { href: "/TrainerTwin_home_v3", label: "Home" },
+  { href: "/TrainerTwin_home_v3/invite_trainer", label: "Startup program" },
+];
+
 export function CareersPage() {
   return (
     <>
-      <CareersHeader />
+      {/* No `mobileMenu`: that collapse panel's CSS lives under
+          `.tt-home--v3` only, and this route doesn't carry that scope. Two
+          links do not need a hamburger anyway. */}
+      <SiteHeader
+        nav={CAREERS_NAV}
+        ctaLabel="Early Access"
+        logoColor="var(--tt-text-primary)"
+      />
       <main id="top" className="careers flex-1 bg-canvas">
         <div className="wrap flex flex-col gap-12 py-16 md:gap-16 md:py-24">
           <header className="careers-hero">
@@ -48,7 +62,7 @@ export function CareersPage() {
           )}
         </div>
       </main>
-      <PageFooter />
+      <PageFooter hideCta layout="v3" />
     </>
   );
 }

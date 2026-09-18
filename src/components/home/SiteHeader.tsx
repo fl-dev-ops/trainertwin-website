@@ -51,12 +51,15 @@ export function SiteHeader({
   nav = NAV,
   mobileMenu = false,
   ctaLabel = "Early access",
+  logoColor,
 }: {
   nav?: typeof NAV;
   /** v3: section links collapse behind a menu icon below 768px. */
   mobileMenu?: boolean;
   /** v3: "Request a demo" — the other two pages keep the default. */
   ctaLabel?: string;
+  /** Careers keeps the lockup in ink instead of brand orange. */
+  logoColor?: string;
 } = {}) {
   const [current, setCurrent] = useState<string | null>(null);
   /* Only /TrainerTwin_home_v3's stylesheet draws anything for `is-on-dark`;
@@ -153,7 +156,7 @@ export function SiteHeader({
               and the same size /TrainerTwin_home carries, so the two bars show
               one mark rather than two treatments of it. It is one colour
               across mark and wordmark, which is §9's rule. */}
-          <Logo size={22} />
+          <Logo size={22} color={logoColor} />
         </a>
         <nav className="nav" aria-label="Sections">
           {nav.map((item) =>

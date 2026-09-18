@@ -37,7 +37,11 @@ const COLUMNS = [
   },
   {
     heading: "Services",
-    links: FIELDS.map((field) => ({ label: field.label, href: field.href })),
+    links: FIELDS.map((field) => ({
+      label: field.label,
+      href: field.href,
+      live: field.live ?? false,
+    })),
   },
   {
     heading: "Resources",
@@ -51,13 +55,23 @@ const COLUMNS = [
 
 export function PageFooter({
   cta,
+  hideCta,
   nav = NAV,
+  eyebrow,
+  title,
+  body,
   points,
   pointsNote,
   layout = "default",
 }: {
   cta?: ReactNode;
+  /** See `SiteFooter` — drops the intro-copy-plus-form row entirely. */
+  hideCta?: boolean;
   nav?: typeof NAV;
+  /** Overrides the footer's own intro copy. See `SiteFooter`. */
+  eyebrow?: string;
+  title?: ReactNode;
+  body?: ReactNode;
   points?: string[];
   pointsNote?: string;
   layout?: "default" | "v3";
@@ -79,6 +93,10 @@ export function PageFooter({
       <SiteFooter
         columns={columns}
         cta={cta}
+        hideCta={hideCta}
+        eyebrow={eyebrow}
+        title={title}
+        body={body}
         points={points}
         pointsNote={pointsNote}
         layout={layout}

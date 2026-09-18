@@ -5,51 +5,38 @@
 
 export const INVITE_HERO = {
   eyebrow: "Startup program",
-  title: "Increase Your Reach. Preserve Your Training Style",
-  lead: "TrainerTwin is built on a patent-pending approach to modelling a trainer’s instructional method, domain expertise and learner context. Together, we can create an AI TrainerTwin that reflects how you train while keeping your IP intact.",
+  title: "Become a Founding Trainer",
+  lead: "Turn your expertise into an AI TrainerTwin — and own a part of what we build together.",
   experiencesIntro:
-    "Your TrainerTwin can support learners across three connected experiences:",
+    "TrainerTwin captures how you teach, what you know and how you work with learners to create an AI learning experience shaped by you.",
   experiences: [
     "Learn with your TrainerTwin shaped by your teaching approach,",
     "Practice with your TrainerTwin through guided exercises, adaptive challenges",
     "Get assessed with your TrainerTwin using your rubrics and feedback principles.",
   ],
+  /** Sits under the CTA, in italic — the equity mention isn't a promise, so
+      it reads as a footnote rather than as part of the pitch above it. */
+  disclaimer: "Equity participation subject to mutually agreed terms.",
 } as const;
 
 export const INVITE_LAYERS = {
   eyebrow: "How it works",
-  title: "Built on Four Intelligence Layers",
-  lead: "Your training is defined by your judgement, expertise and the way you help each learner move forward. TrainerTwin brings these elements together to create a learning experience that reflects how you teach - not just what you teach",
+  title: "Your Training. Your Twin.",
+  lead: "Your TrainerTwin is built around three things that make your training yours.",
   items: [
     {
-      title: "Instructional Policy Model",
-      body: "Trainer-specific teaching and decision patterns",
+      title: "Knowledge",
+      body: "Your expertise, frameworks, examples and domain knowledge.",
     },
     {
-      title: "Domain Knowledge and Competency Model",
-      body: "Subject knowledge, examples and evaluation standards",
+      title: "Presence",
+      body: "Your voice, personality, communication style and way of connecting.",
     },
     {
-      title: "Learner State and Personalisation Model",
-      body: "Goals, history, proficiency and evolving needs",
-    },
-    {
-      title: "Multimodal Interaction Layer",
-      body: "Voice, video, avatar, facial expressions and trainer-specific communication behavior",
+      title: "Training DNA",
+      body: "How you explain, guide, challenge and give feedback.",
     },
   ],
-} as const;
-
-export const INVITE_PRIVACY = {
-  eyebrow: "Trust",
-  title: "Data Protection by Design",
-  body: "Trainer and learner data is handled with privacy, security and purpose limitation at its core. We collect and use data only to create, personalize and improve the TrainerTwin experience with appropriate access controls and retention practices. Trainers and learners remain informed about how their data is used.",
-} as const;
-
-export const INVITE_EVOLVE = {
-  eyebrow: "Always current",
-  title: "You evolve. So does your Twin.",
-  body: "You don’t stop learning and growing as a trainer. Your teaching methods, insights and standards evolve too. Your TrainerTwin can evolve with you, so your learners continue to benefit with your latest and sharpest thinking. Update and refine as your expertise grows. Think Delphi, for Trainers. Think HeyGen, for Trainers. But built pedagogy-first: not just a digital representation of you, but an AI learning experience shaped by the way you teach.",
 } as const;
 
 export const INVITE_TEAM = {
@@ -60,48 +47,57 @@ export const INVITE_TEAM = {
     {
       name: "Shanmuga (Shyam) Anandaraman",
       role: "CEO, Ex Freshworks",
+      photo: "/invite/team/shyam.jpeg",
     },
     {
       name: "Harini Shekar",
       role: "Co-Founder & AI Director, Ex Paypal",
+      photo: "/invite/team/harini.jpeg",
     },
     {
       name: "Dharshini Jenefer",
       role: "Head of Partnerships",
+      photo: "/invite/team/dharshini.jpeg",
     },
     {
       name: "Catherine Nivedha",
       role: "Learning Sciences & Pedagogy",
+      photo: "/invite/team/catherine.jpeg",
     },
     {
       name: "Bhuvan T",
       role: "Founding Designer, Ex Freshworks",
+      photo: "/invite/team/bhuvan.jpeg",
     },
     {
       name: "Surya Umapathy",
       role: "Founding Engineer, Ex Freshworks",
+      photo: "/invite/team/surya.jpeg",
     },
     {
       name: "Mohammed Hasan",
       role: "Founding Engineer, Ex Freshworks",
+      photo: "/invite/team/hasan.png",
     },
   ],
 } as const;
 
 export const INVITE_FOUNDING = {
-  eyebrow: "Equity program",
-  title: "Become a Founding Trainer",
-  lead: "Inspired by the 2-sigma challenge – the idea that personalised tutoring can significantly improve learning outcomes – we believe AI can help make personalised guidance accessible to more learners",
-  equity:
-    "We want to explore this possibility with early-adopter trainers who believe in the vision and want to help shape it. Eligible founding trainers receive equity participation, subject to mutually agreed terms.",
-  domains:
-    "Today we are starting with Tech Trainers. If this resonates with you as a fitness coach, sales coach or trainer in any other domain, reach out to us. The domain may change but the opportunity to extend your teaching remains the same",
-  points: [
-    "Work closely with our team as a design partner",
-    "Co-build and test TrainerTwin with your learners",
-    "Shape the product before its wider release",
-    "Receive equity participation, subject to mutually agreed terms",
+  eyebrow: "The Equity Programme",
+  title: "Build With Us. Grow With Us. Own With Us.",
+  lead: "We’re inviting a small group of trainers to become early design partners and help shape TrainerTwin before wider release.",
+  cardsIntro: "As a Founding Trainer, you will:",
+  cards: [
+    { title: "Co-build", body: "Work directly with our team." },
+    { title: "Test", body: "Use your Twin with real learners." },
+    { title: "Shape", body: "Influence the product and experience." },
+    {
+      title: "Own",
+      body: "Receive equity participation, subject to mutually agreed terms.",
+    },
   ],
-  close:
-    "If this resonates with you - and you want to help define what trainer-led AI learning should be - we'd love to talk.",
+  note: {
+    title: "Starting with Tech Trainers",
+    body: "We’re also exploring Fitness, Sales, Coaching and other training domains.",
+  },
 } as const;

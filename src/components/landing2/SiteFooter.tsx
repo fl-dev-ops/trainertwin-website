@@ -2,9 +2,13 @@ import type { ReactNode } from "react";
 import { CursorGrid } from "@/components/CursorGrid";
 import { Logo } from "@/components/Logo";
 import { InviteForm } from "./InviteForm";
+import "./site-footer-v3.css";
 
-/** One link in the grid. `href` is `#top` where there is nowhere to go yet. */
-export type FooterLink = { label: string; href: string };
+/** One link in the grid. `href` is `#top` where there is nowhere to go yet.
+    `live: false` renders it as plain, unlinked text with a "Coming soon" pill
+    instead of a link to nowhere — same treatment `WhoMenu` gives the same
+    fields. Omitted (or true) keeps the ordinary clickable link. */
+export type FooterLink = { label: string; href: string; live?: boolean };
 export type FooterColumn = { heading: string; links: FooterLink[] };
 
 const placeholders = (labels: string[]): FooterLink[] =>
@@ -76,6 +80,10 @@ const SOCIALS = [
 export function SiteFooter({
   columns = DEFAULT_COLUMNS,
   cta,
+  hideCta = false,
+  eyebrow,
+  title,
+  body,
   points,
   pointsNote,
   layout = "default",
@@ -86,6 +94,18 @@ export function SiteFooter({
    * the right, stacking under the copy below `md`.
    */
   cta?: ReactNode;
+  /** Drops the whole intro-copy-plus-form row, for a page that already asks
+      for the invite elsewhere (careers) and does not need the footer asking
+      again above its own link grid. */
+  hideCta?: boolean;
+  /** Overrides the `v3` eyebrow ("Help shape what comes next"). No effect
+      on `default`, which does not show one. */
+  eyebrow?: string;
+  /** Overrides the headline for either layout. */
+  title?: ReactNode;
+  /** Overrides the one-line subtext. Pass multiple `<p>`s for more than a
+      line — invite_trainer's founding pitch runs three. */
+  body?: ReactNode;
   /** Optional check-list under the subtext (v3 Linear-style band). */
   points?: string[];
   pointsNote?: string;
@@ -106,33 +126,44 @@ export function SiteFooter({
       {layout === "v3" ? <ExpertiseBadge /> : null}
       {layout === "v3" ? (
         <span className="eyebrow" data-reveal>
-          Help shape what comes next
+          {eyebrow ?? "Help shape what comes next"}
         </span>
       ) : null}
       <h2
         data-reveal
         className="font-display text-[20px] leading-[1.3] font-semibold tracking-[-0.32px] text-[var(--tt-neutral-200)] sm:text-[30px] sm:leading-[1.2] md:text-[36px] md:leading-[44px]"
       >
-        {layout === "v3" ? (
-          "Build a Twin that trains like you"
-        ) : (
-          <>
-            Your expertise shouldn&rsquo;t scale
-            {/* Two lines at every width — the mobile size is set so the
-                first half fits on one. */}
-            <br /> only when you&rsquo;re available
-          </>
-        )}
+        {title ??
+          (layout === "v3" ? (
+            "Build a Twin that trains like you"
+          ) : (
+            <>
+              Your expertise shouldn&rsquo;t scale
+              {/* Two lines at every width — the mobile size is set so the
+                  first half fits on one. */}
+              <br /> only when you&rsquo;re available
+            </>
+          ))}
       </h2>
-      <p
-        data-reveal
-        data-reveal-delay="80"
-        className="l-footer-type max-w-[720px] text-[16px] leading-[24px] text-[var(--tt-neutral-500)]"
-      >
-        {layout === "v3"
-          ? "Join the early-access list to hear when we’re ready to invite trainers to try the experience and help us make it real."
-          : "Create your Twin and give every learner more opportunities to practice with the way you teach."}
-      </p>
+      {body ? (
+        <div
+          data-reveal
+          data-reveal-delay="80"
+          className="l-footer-type flex max-w-[720px] flex-col gap-3 text-[16px] leading-[24px] text-[var(--tt-neutral-500)]"
+        >
+          {body}
+        </div>
+      ) : (
+        <p
+          data-reveal
+          data-reveal-delay="80"
+          className="l-footer-type max-w-[720px] text-[16px] leading-[24px] text-[var(--tt-neutral-500)]"
+        >
+          {layout === "v3"
+            ? "Join the early-access list to hear when we’re ready to invite trainers to try the experience and help us make it real."
+            : "Create your Twin and give every learner more opportunities to practice with the way you teach."}
+        </p>
+      )}
       {points && points.length > 0 ? (
         <ul className="ea-points" data-reveal data-reveal-delay="120">
           {points.map((point) => (
@@ -165,7 +196,7 @@ export function SiteFooter({
     </div>
   );
 
-  const ctaRow = cta ? (
+  const ctaRow = hideCta ? null : cta ? (
     <div className="l-footer-cta-row grid items-start gap-10 border-b border-[var(--l-line-footer)] pb-[48px] md:grid-cols-2 md:gap-16">
       {copy}
       <div data-reveal data-reveal-delay="160">
@@ -230,16 +261,28 @@ export function SiteFooter({
                   {column.heading}
                 </h3>
                 <ul className="mt-4 flex flex-col gap-3">
-                  {column.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="font-ui text-[14px] leading-[20px] text-[var(--tt-neutral-400)] transition-colors duration-150 ease-standard hover:text-white"
+                  {column.links.map((link) =>
+                    link.live === false ? (
+                      <li
+                        key={link.label}
+                        className="font-ui flex items-center gap-2 text-[14px] leading-[20px] text-[var(--tt-neutral-400)]"
                       >
                         {link.label}
-                      </a>
-                    </li>
-                  ))}
+                        <span className="font-ui rounded-full bg-white/10 px-[7px] py-[2px] text-[10px] font-medium whitespace-nowrap text-[var(--tt-neutral-300)]">
+                          Coming soon
+                        </span>
+                      </li>
+                    ) : (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          className="font-ui text-[14px] leading-[20px] text-[var(--tt-neutral-400)] transition-colors duration-150 ease-standard hover:text-white"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ),
+                  )}
                 </ul>
               </nav>
             ))}
@@ -308,13 +351,18 @@ export function SiteFooter({
   if (layout === "v3") {
     return (
       <footer id="early-access" className="l-footer-v3 relative">
-        <section id="build" className="l-footer-v3-cta relative overflow-clip">
-          <div className="pointer-events-none absolute -top-[280px] -left-[280px] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(255,102,0,0.22)_0%,rgba(255,150,80,0.08)_35%,rgba(255,197,178,0)_70%)] blur-[120px]" />
-          <div className="pointer-events-none absolute -right-[280px] -bottom-[200px] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(255,102,0,0.22)_0%,rgba(255,150,80,0.08)_35%,rgba(255,197,178,0)_70%)] blur-[120px]" />
-          <div className="relative mx-auto w-full max-w-[1280px] px-6">
-            {ctaRow}
-          </div>
-        </section>
+        {ctaRow ? (
+          <section
+            id="build"
+            className="l-footer-v3-cta relative overflow-clip"
+          >
+            <div className="pointer-events-none absolute -top-[280px] -left-[280px] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(255,102,0,0.22)_0%,rgba(255,150,80,0.08)_35%,rgba(255,197,178,0)_70%)] blur-[120px]" />
+            <div className="pointer-events-none absolute -right-[280px] -bottom-[200px] h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle,rgba(255,102,0,0.22)_0%,rgba(255,150,80,0.08)_35%,rgba(255,197,178,0)_70%)] blur-[120px]" />
+            <div className="relative mx-auto w-full max-w-[1280px] px-6">
+              {ctaRow}
+            </div>
+          </section>
+        ) : null}
         {/* The dark end of the page. `tt-night` sits on a full-bleed wrapper
             rather than on the measure itself, so the ground and the lit seam
             across its top run the whole width. */}

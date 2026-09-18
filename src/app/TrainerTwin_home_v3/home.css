@@ -4777,6 +4777,95 @@
   line-height: 1.56;
 }
 
+/* The hero's own clip, with three fact cards half over it and half off —
+   title and body only, no illustration. The box is wider than the video
+   itself and the video sits flush to that box's left edge rather than
+   centred in it, so the right-hand card ("Your training DNA") has room to
+   hang off the video's right edge without the two elements needing to be
+   sized to match by hand. */
+.tt-home--v3 .hero-v3-visual {
+  position: relative;
+  width: 420px;
+  max-width: 100%;
+}
+.tt-home--v3 .hero-v3-visual-video {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 3 / 4;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--tt-v3-card-fill);
+}
+.tt-home--v3 .hero-v3-visual-clip {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+/* Plain glass cards — a fill and a hairline, nothing else competing with the
+   face behind them. */
+.tt-home--v3 .hero-v3-float {
+  position: absolute;
+  z-index: 1;
+  width: 200px;
+  padding: var(--tt-space-4);
+  border-radius: var(--tt-radius-md);
+  border: var(--tt-border-thin) solid var(--tt-line-night);
+  background: color-mix(in srgb, var(--tt-night) 80%, transparent);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 24px rgb(0 0 0 / 0.35);
+}
+.tt-home--v3 .hero-v3-float h3 {
+  margin: 0;
+  font-family: var(--tt-font-ui);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: var(--tt-weight-title);
+  color: var(--tt-on-night);
+}
+.tt-home--v3 .hero-v3-float p {
+  margin: var(--tt-space-1) 0 0;
+  font-family: var(--tt-font-ui);
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--tt-on-night-3);
+}
+/* Two hang off the video's left edge, one off its right — the same
+   half-in-half-out placement the reference uses. Offsets are in pixels
+   against the box's own corners rather than percentages, since the box's
+   width is fixed. */
+.tt-home--v3 .hero-v3-float--intelligence {
+  top: 32px;
+  left: 0;
+  transform: translateX(-45%);
+}
+.tt-home--v3 .hero-v3-float--presence {
+  bottom: 32px;
+  left: 0;
+  transform: translateX(-45%);
+}
+.tt-home--v3 .hero-v3-float--dna {
+  top: 50%;
+  left: 300px;
+  transform: translate(-45%, -50%);
+}
+@media (max-width: 480px) {
+  .tt-home--v3 .hero-v3-visual {
+    width: 340px;
+  }
+  .tt-home--v3 .hero-v3-visual-video {
+    width: 240px;
+  }
+  .tt-home--v3 .hero-v3-float {
+    width: 160px;
+    padding: var(--tt-space-3);
+  }
+  .tt-home--v3 .hero-v3-float--dna {
+    left: 240px;
+  }
+}
+
 .tt-home--v3 .hero-v3-pills-block {
   display: flex;
   flex-direction: column;
@@ -5012,6 +5101,9 @@
   }
   .tt-home--v3 .hero-v3-inner {
     grid-template-columns: 1fr;
+  }
+  .tt-home--v3 .hero-v3-visual {
+    margin-top: var(--tt-space-10);
   }
   .tt-home--v3 .hero-v3-pills-block {
     margin-top: var(--tt-space-10);
@@ -7971,231 +8063,32 @@
   box-shadow: var(--tt-elevation-1);
 }
 
-/* Full-viewport CTA band on the page's own ground, then the dark chrome */
-.tt-home--v3 .l-footer-v3 {
-  background: var(--tt-canvas);
-}
-.tt-home--v3 .l-footer-v3-cta {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 44px 0 var(--tt-space-16);
-  border-top: var(--tt-border-thin) solid var(--tt-border);
-}
-/* The band's blueprint lattice. Same 48px cell as the fold's corners so the
-   page keeps one grid, and drawn at the border token rather than a grey of its
-   own. It fades out toward the bottom, where the form card's own edge is doing
-   the work and a second set of lines behind it would only crowd it. */
-.tt-home--v3 .l-footer-v3-cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, var(--tt-border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--tt-border) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.55;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
-}
-/* z-index alone, no `position`. The band is a flex container, so its children
-   honour z-index whether or not they are positioned — and two of them are the
-   absolutely placed glows, which a blanket `position: relative` here pulled
-   back into flow as flex items, squeezing the measure into half the band. */
-.tt-home--v3 .l-footer-v3-cta > * {
-  z-index: 1;
-}
-/* The band carries the same Tailwind text colours as the night footers this
-   component still serves, so the two that name a night value outright are
-   re-pointed here rather than in the shared markup. */
-.tt-home--v3 .l-footer-v3-cta h2 {
-  color: var(--tt-text-primary);
-}
-.tt-home--v3 .l-footer-v3-cta .l-footer-type {
-  color: var(--tt-text-secondary);
-}
-.tt-home--v3 .l-footer-v3-cta .l-footer-cta-row {
-  align-items: center;
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-.tt-home--v3 .ea-badge {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 72px;
-  height: 72px;
-  margin: 0 0 var(--tt-space-6);
-}
-.tt-home--v3 .ea-badge-glow {
-  position: absolute;
-  left: 10%;
-  right: 10%;
-  bottom: -10px;
-  height: 22px;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at 50% 0%,
-    color-mix(in srgb, var(--tt-blue-300) 70%, transparent),
-    transparent 72%
-  );
-  filter: blur(7px);
-}
-.tt-home--v3 .ea-badge-mark {
-  position: relative;
-  z-index: 1;
-  width: 72px;
-  height: 72px;
-  filter: drop-shadow(
-    0 10px 14px color-mix(in srgb, var(--tt-blue-500) 35%, transparent)
-  );
-}
-.tt-home--v3 .ea-badge-fill {
-  fill: var(--tt-night-panel);
-}
-.tt-home--v3 .ea-badge-ring {
-  fill: none;
-  stroke: color-mix(in srgb, var(--tt-on-night-3) 55%, var(--tt-blue-300));
-  stroke-width: 1;
-}
-.tt-home--v3 .ea-badge-stroke {
-  fill: none;
-  stroke: var(--tt-on-night-2);
-  stroke-width: 1.4;
-  stroke-linejoin: round;
-}
-/* Same layer the hero draws its lattice on: absolute, full-bleed, behind
-   everything in the footer's dark chrome. `.l-footer-v3-content` is what the
-   visible footer actually sits in, lifted to `z-index: 1` so the grid stays
-   underneath it. */
-.tt-home--v3 .l-footer-v3-cursor {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-.tt-home--v3 .l-footer-v3-content {
-  z-index: 1;
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-logo {
-  color: var(--tt-on-night) !important;
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-type {
-  color: var(--tt-text-secondary);
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-status {
-  /* `--tt-surface` is the night ground itself under this scope, which would
-     leave the pill invisible; raised is the one step up from it. */
-  background: var(--tt-surface-raised);
-  border-color: var(--tt-border);
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-status span:last-child {
-  color: var(--tt-text-tertiary);
-}
-.tt-home--v3 .l-footer-v3-chrome h3 {
-  color: var(--tt-text-primary);
-  font-weight: var(--tt-weight-title);
-}
-.tt-home--v3 .l-footer-v3-chrome nav a {
-  color: var(--tt-text-secondary);
-}
-.tt-home--v3 .l-footer-v3-chrome nav a:hover {
-  color: var(--tt-text-primary);
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-hey {
-  display: none;
-}
-.tt-home--v3 .l-footer-end {
-  display: flex;
-  flex-direction: column;
-}
-.tt-home--v3 .l-footer-end .l-footer-wordmark {
-  height: auto;
-  pointer-events: none;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: var(--tt-space-4);
-}
-.tt-home--v3 .l-footer-end .l-wordmark {
-  position: relative;
-  inset: auto;
-  pointer-events: auto;
-  cursor: default;
-  line-height: 0.82;
-  opacity: 1;
-  transform: none !important;
-  color: transparent;
-  background-image:
-    linear-gradient(
-      105deg,
-      transparent 0%,
-      transparent 42%,
-      rgb(255 255 255 / 0.92) 50%,
-      transparent 58%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--tt-on-night) 20%, transparent),
-      color-mix(in srgb, var(--tt-on-night) 5%, transparent)
-    );
-  background-size: 220% 100%, 100% 100%;
-  background-position: 140% 0, 0 0;
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-.tt-home--v3 .l-footer-end .l-wordmark:hover {
-  animation: tt-v3-wordmark-shine 0.85s ease-out;
-}
-@keyframes tt-v3-wordmark-shine {
-  from {
-    background-position: 140% 0, 0 0;
-  }
-  to {
-    background-position: -40% 0, 0 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .tt-home--v3 .l-footer-end .l-wordmark:hover {
-    animation: none;
-  }
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-bar {
-  border-top: var(--tt-border-thin) solid var(--tt-border);
-  padding-top: var(--tt-space-8);
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-bar a {
-  color: var(--tt-text-secondary);
-}
-.tt-home--v3 .l-footer-v3-chrome .l-footer-bar a:hover {
-  color: var(--tt-text-primary);
-}
 
 /* ============================================================ Invite trainer
    /TrainerTwin_home_v3/invite_trainer — same section rhythm as the v3 home. */
 
-.tt-home--v3 .invite-hero .wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-.tt-home--v3 .invite-hero-head {
-  margin-bottom: var(--tt-space-10);
-}
-.tt-home--v3 .invite-hero-head h1 {
+/* This hero's own h1 — the shared `.hero--v3 h1` rule is written for a
+   multi-line rotating headline (`WantToTwin`'s several flex children), which
+   is why it centres itself; a plain title with one text node reads as
+   ragged-left wrapped text under that rule instead of a normal paragraph, so
+   this page gets its own left-aligned, serif override rather than one. */
+.tt-home--v3 .hero--v3 h1.invite-hero-title {
+  align-items: flex-start;
+  text-align: left;
   font-family: var(--tt-font-display);
-  font-size: clamp(32px, 5vw, 52px);
-  line-height: 1.12;
-  font-weight: var(--tt-weight-title);
-  letter-spacing: -0.02em;
-  color: var(--tt-on-night);
 }
+/* A footnote, not a fourth line of the pitch — italic and quieter than the
+   copy above it, and close under the button rather than under the checklist
+   so it reads with the CTA it's qualifying. */
+.tt-home--v3 .invite-hero-disclaimer {
+  margin: var(--tt-space-3) 0 0;
+  font-family: var(--tt-font-ui);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--tt-on-night-3);
+}
+
 .tt-home--v3 .invite-lead {
   max-width: 46ch;
   margin: 0 0 var(--tt-space-5);
@@ -8211,7 +8104,7 @@
 }
 .tt-home--v3 .invite-layers {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--tt-space-5);
 }
 .tt-home--v3 .invite-layer-card p {
@@ -8220,24 +8113,133 @@
   font-size: 15px;
   line-height: 24px;
 }
-.tt-home--v3 .invite-layer-num {
-  display: block;
+/* One tint per layer rather than a shared chip colour — four different
+   models read as four different things faster than four numbered ones do. */
+.tt-home--v3 .invite-layer-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
   margin-bottom: var(--tt-space-3);
-  font-family: var(--tt-font-mono);
-  font-size: 11px;
-  line-height: 16px;
-  letter-spacing: 0.08em;
-  color: var(--tt-text-muted);
+  border-radius: var(--tt-radius-sm);
 }
+.tt-home--v3 .invite-layer-icon svg {
+  width: var(--tt-icon-sm);
+  height: var(--tt-icon-sm);
+}
+.tt-home--v3 .invite-layer-icon--primary {
+  background: color-mix(in srgb, var(--tt-primary) 12%, transparent);
+  color: var(--tt-primary);
+}
+.tt-home--v3 .invite-layer-icon--blue {
+  background: color-mix(in srgb, var(--tt-blue-500) 12%, transparent);
+  color: var(--tt-blue-600);
+}
+.tt-home--v3 .invite-layer-icon--green {
+  background: color-mix(in srgb, var(--tt-green-500) 12%, transparent);
+  color: var(--tt-green-600);
+}
+/* Back for the equity cards, which need a fourth tint — `Layers` only uses
+   three now, but the badge and the tone scale are shared. */
+.tt-home--v3 .invite-layer-icon--gold {
+  background: color-mix(in srgb, var(--tt-gold-500) 14%, transparent);
+  color: var(--tt-gold-600);
+}
+
+/* ---------------------------------------------------------- Equity Programme
+   Same card language as Layers (`Card` + `.invite-layer-card`, which is why
+   neither needs its own colour override here — `.tt-night` already repoints
+   `Card`'s surface/border/text tokens for a dark card, same as it does for
+   `Layers`' light one). */
+.tt-home--v3 .invite-equity-intro {
+  margin: 0 0 var(--tt-space-6);
+  text-align: center;
+  font-family: var(--tt-font-ui);
+  font-size: 16px;
+  font-weight: var(--tt-weight-title);
+  color: var(--tt-on-night);
+}
+.tt-home--v3 .invite-equity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--tt-space-5);
+}
+@media (max-width: 1100px) {
+  .tt-home--v3 .invite-equity-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .tt-home--v3 .invite-equity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* The note sits apart from the cards on purpose — a caveat about scope, not
+   a fifth benefit — so it gets a flat panel instead of a card. Grey against
+   the section's own black ground, the same `color-mix off the ground` recipe
+   the mind-map hub and the footer badges already use. */
+.tt-home--v3 .invite-equity-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tt-space-4);
+  margin-top: var(--tt-space-8);
+  padding: var(--tt-space-5);
+  border-radius: var(--tt-radius-md);
+  background: color-mix(in srgb, var(--tt-on-night) 6%, var(--tt-night));
+  border: var(--tt-border-thin) solid var(--tt-line-night);
+}
+.tt-home--v3 .invite-equity-note-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--tt-on-night-2);
+}
+.tt-home--v3 .invite-equity-note-title {
+  margin: 0;
+  font-family: var(--tt-font-ui);
+  font-size: 15px;
+  font-weight: var(--tt-weight-title);
+  color: var(--tt-on-night);
+}
+.tt-home--v3 .invite-equity-note-body {
+  margin: var(--tt-space-1) 0 0;
+  font-family: var(--tt-font-ui);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--tt-on-night-3);
+}
+
 .tt-home--v3 .invite-team {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: var(--tt-space-5) var(--tt-space-6);
+  /* A fixed max rather than `1fr`: a stretchy column spreads each tile
+     across the leftover row width, which is what was reading as a wide gap
+     between people rather than a tight roster. Capped, the tiles sit at
+     their own width and the gap is the only space between them. */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 220px));
+  /* Auto-fill's tracks hug the start of the row by default, which reads as
+     the grid sitting left of the centered heading above it once the row is
+     narrower than the wrap. Centering the tracks is what `.cmp-grid` already
+     does for the same reason. */
+  justify-content: center;
+  gap: var(--tt-space-4) var(--tt-space-5);
   margin: 0;
   padding: 0;
   list-style: none;
 }
+/* Grayscale, same as trainertwin.com/invite's own team grid — a page of
+   colour photos next to a monochrome product reads as a stock-photo team
+   page, which this one specifically isn't. */
+.tt-home--v3 .invite-team-photo {
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin-bottom: var(--tt-space-3);
+  border-radius: var(--tt-radius-md);
+  object-fit: cover;
+  filter: grayscale(1);
+}
 .tt-home--v3 .invite-team-name {
+  max-width: 200px;
   margin: 0;
   font-size: 16px;
   line-height: 24px;
@@ -8250,78 +8252,13 @@
   line-height: 22px;
   color: var(--tt-on-night-3);
 }
-.tt-home--v3 .invite-founding-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
-  gap: var(--tt-space-10);
-  align-items: start;
-}
-.tt-home--v3 .invite-founding-copy {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tt-space-4);
-  max-width: 58ch;
-}
-.tt-home--v3 .invite-founding-copy > p {
-  margin: 0;
-  color: var(--tt-text-secondary);
-  font-size: 16px;
-  line-height: 26px;
-}
-.tt-home--v3 .invite-founding-close {
-  font-weight: var(--tt-weight-title);
-  color: var(--tt-text-primary) !important;
-}
-.tt-home--v3 .invite-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--tt-space-3);
-  width: 100%;
-  max-width: 440px;
-}
-.tt-home--v3 .invite-form input {
-  height: 46px;
-  padding: 0 var(--tt-space-4);
-  border-radius: var(--tt-radius-sm);
-  border: var(--tt-border-thin) solid var(--tt-border);
-  background: var(--tt-surface);
-  color: var(--tt-text-primary);
-  font-family: var(--tt-font-ui);
-  font-size: 15px;
-  outline: none;
-  transition: border-color var(--tt-duration-base) var(--tt-ease-standard);
-}
-.tt-home--v3 .invite-form input::placeholder {
-  color: var(--tt-text-muted);
-}
-.tt-home--v3 .invite-form input:hover {
-  border-color: var(--tt-border-strong, var(--tt-neutral-300));
-}
-.tt-home--v3 .invite-form input:focus-visible {
-  border-color: var(--tt-neutral-500);
-}
-.tt-home--v3 .invite-form--night input {
-  border-color: var(--tt-line-night);
-  background: var(--tt-neutral-900);
-  color: var(--tt-neutral-200);
-}
-.tt-home--v3 .invite-form--night input::placeholder {
-  color: var(--tt-neutral-500);
-}
-.tt-home--v3 .invite-form--night input:hover {
-  border-color: var(--tt-neutral-700);
-}
-.tt-home--v3 .invite-form--night input:focus-visible {
-  border-color: var(--tt-neutral-500);
-}
 @media (max-width: 1100px) {
   .tt-home--v3 .invite-layers {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 860px) {
-  .tt-home--v3 .invite-layers,
-  .tt-home--v3 .invite-founding-grid {
+  .tt-home--v3 .invite-layers {
     grid-template-columns: 1fr;
   }
 }

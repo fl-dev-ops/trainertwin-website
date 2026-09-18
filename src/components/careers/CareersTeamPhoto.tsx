@@ -6,10 +6,10 @@ export function CareersTeamPhoto() {
     <div className="careers-team">
       <img
         className="careers-team-img"
-        src="/assets/team.jpg"
+        src="/founders/team_pic_1.png"
         alt="TrainerTwin team"
-        width={1504}
-        height={479}
+        width={2102}
+        height={757}
       />
     </div>
   );

@@ -52,6 +52,10 @@ export interface LogoProps {
   /** Mark only, no wordmark. Use below 104px, where the wordmark stops being legible. */
   symbolOnly?: boolean;
   className?: string;
+  /** Inline override for the default `text-primary` — set where a page needs
+      the lockup off-brand-colour (e.g. plain ink on a header). Wins over the
+      class regardless of Tailwind's utility ordering, since it's inline. */
+  color?: string;
 }
 
 /**
@@ -61,15 +65,21 @@ export interface LogoProps {
  * Colour comes from `currentColor` on both halves. On canvas that is
  * --tt-primary in both themes; over imagery, set the colour to --tt-canvas.
  */
-export function Logo({ size = 28, symbolOnly = false, className }: LogoProps) {
+export function Logo({ size = 28, symbolOnly = false, className, color }: LogoProps) {
   if (symbolOnly) {
-    return <LogoSymbol size={size} className={className} title="TrainerTwin" />;
+    return (
+      <LogoSymbol
+        size={size}
+        className={className}
+        title="TrainerTwin"
+      />
+    );
   }
 
   return (
     <span
       className={cn("inline-flex items-center text-primary", className)}
-      style={{ gap: size * 0.3 }}
+      style={{ gap: size * 0.3, ...(color ? { color } : null) }}
     >
       <LogoSymbol size={size} />
       <span
