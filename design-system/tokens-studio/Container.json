@@ -1,0 +1,20 @@
+{
+  "container": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "640px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "900px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "1200px"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "1440px"
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "canvas": {
+    "$type": "color",
+    "$value": "{neutral.950}",
+    "$description": "CSS: var(--tt-canvas)"
+  },
+  "surface": {
+    "default": {
+      "$type": "color",
+      "$value": "{neutral.900}",
+      "$description": "CSS: var(--tt-surface)"
+    },
+    "raised": {
+      "$type": "color",
+      "$value": "{neutral.800}",
+      "$description": "CSS: var(--tt-surface-raised)"
+    },
+    "sunken": {
+      "$type": "color",
+      "$value": "{neutral.1000}",
+      "$description": "CSS: var(--tt-surface-sunken)"
+    }
+  },
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "{neutral.25}",
+      "$description": "CSS: var(--tt-text-primary)"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{neutral.300}",
+      "$description": "CSS: var(--tt-text-secondary)"
+    },
+    "tertiary": {
+      "$type": "color",
+      "$value": "{neutral.400}",
+      "$description": "CSS: var(--tt-text-tertiary)"
+    },
+    "muted": {
+      "$type": "color",
+      "$value": "{neutral.500}",
+      "$description": "CSS: var(--tt-text-muted)"
+    }
+  },
+  "primary": {
+    "default": {
+      "$type": "color",
+      "$value": "{orange.500}",
+      "$description": "CSS: var(--tt-primary)"
+    },
+    "hover": {
+      "$type": "color",
+      "$value": "{orange.400}",
+      "$description": "CSS: var(--tt-primary-hover)"
+    },
+    "ink": {
+      "$type": "color",
+      "$value": "{orange.400}",
+      "$description": "CSS: var(--tt-primary-ink)"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{orange.950}",
+      "$description": "CSS: var(--tt-primary-subtle)"
+    }
+  },
+  "on-primary": {
+    "$type": "color",
+    "$value": "{neutral.0}",
+    "$description": "CSS: var(--tt-on-primary)"
+  },
+  "cta-strong": {
+    "$type": "color",
+    "$value": "{neutral.0}",
+    "$description": "CSS: var(--tt-cta-strong)"
+  },
+  "cta-strong-hover": {
+    "$type": "color",
+    "$value": "{neutral.100}",
+    "$description": "CSS: var(--tt-cta-strong-hover)"
+  },
+  "on-cta-strong": {
+    "$type": "color",
+    "$value": "{neutral.1000}",
+    "$description": "CSS: var(--tt-on-cta-strong)"
+  },
+  "border": {
+    "default": {
+      "$type": "color",
+      "$value": "{neutral.800}",
+      "$description": "CSS: var(--tt-border)"
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "{neutral.500}",
+      "$description": "CSS: var(--tt-border-interactive)"
+    },
+    "field": {
+      "$type": "color",
+      "$value": "{neutral.700}",
+      "$description": "CSS: var(--tt-border-field)"
+    }
+  },
+  "focus": {
+    "$type": "color",
+    "$value": "{orange.500}",
+    "$description": "CSS: var(--tt-focus)"
+  },
+  "danger": {
+    "default": {
+      "$type": "color",
+      "$value": "{red.300}",
+      "$description": "CSS: var(--tt-danger)"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{red.900}",
+      "$description": "CSS: var(--tt-danger-subtle)"
+    }
+  },
+  "live": {
+    "$type": "color",
+    "$value": "{red.500}",
+    "$description": "CSS: var(--tt-live)"
+  },
+  "success": {
+    "default": {
+      "$type": "color",
+      "$value": "{green.300}",
+      "$description": "CSS: var(--tt-success)"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{green.900}",
+      "$description": "CSS: var(--tt-success-subtle)"
+    }
+  },
+  "info": {
+    "default": {
+      "$type": "color",
+      "$value": "{blue.300}",
+      "$description": "CSS: var(--tt-info)"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{blue.900}",
+      "$description": "CSS: var(--tt-info-subtle)"
+    }
+  },
+  "caution": {
+    "default": {
+      "$type": "color",
+      "$value": "{gold.300}",
+      "$description": "CSS: var(--tt-caution)"
+    },
+    "subtle": {
+      "$type": "color",
+      "$value": "{gold.900}",
+      "$description": "CSS: var(--tt-caution-subtle)"
+    }
+  }
+}

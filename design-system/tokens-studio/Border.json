@@ -1,0 +1,16 @@
+{
+  "border": {
+    "form": {
+      "$type": "dimension",
+      "$value": "0.5px"
+    },
+    "thin": {
+      "$type": "dimension",
+      "$value": "1px"
+    },
+    "focus": {
+      "$type": "dimension",
+      "$value": "2px"
+    }
+  }
+}

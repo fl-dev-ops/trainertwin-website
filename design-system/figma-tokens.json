@@ -1,0 +1,1505 @@
+{
+  "meta": {
+    "source": "src/styles/tokens.css",
+    "spec": "design-system/foundations.html",
+    "note": "Generated from code. Regenerate rather than editing by hand."
+  },
+  "collections": {
+    "Primitives": {
+      "modes": [
+        "Value"
+      ],
+      "variables": [
+        {
+          "name": "orange/50",
+          "type": "COLOR",
+          "value": "#FFF4EC",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-50)"
+          }
+        },
+        {
+          "name": "orange/100",
+          "type": "COLOR",
+          "value": "#FFE3D1",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-100)"
+          }
+        },
+        {
+          "name": "orange/200",
+          "type": "COLOR",
+          "value": "#FFC5A3",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-200)"
+          }
+        },
+        {
+          "name": "orange/300",
+          "type": "COLOR",
+          "value": "#FFA36B",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-300)"
+          }
+        },
+        {
+          "name": "orange/400",
+          "type": "COLOR",
+          "value": "#FF7E33",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-400)"
+          }
+        },
+        {
+          "name": "orange/500",
+          "type": "COLOR",
+          "value": "#FF5A00",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-500)"
+          }
+        },
+        {
+          "name": "orange/600",
+          "type": "COLOR",
+          "value": "#E04D00",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-600)"
+          }
+        },
+        {
+          "name": "orange/700",
+          "type": "COLOR",
+          "value": "#B83E00",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-700)"
+          }
+        },
+        {
+          "name": "orange/800",
+          "type": "COLOR",
+          "value": "#8E3000",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-800)"
+          }
+        },
+        {
+          "name": "orange/900",
+          "type": "COLOR",
+          "value": "#6B2400",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-900)"
+          }
+        },
+        {
+          "name": "orange/950",
+          "type": "COLOR",
+          "value": "#3A1300",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-orange-950)"
+          }
+        },
+        {
+          "name": "neutral/0",
+          "type": "COLOR",
+          "value": "#FFFFFF",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-0)"
+          }
+        },
+        {
+          "name": "neutral/25",
+          "type": "COLOR",
+          "value": "#FEFEFF",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-25)"
+          }
+        },
+        {
+          "name": "neutral/50",
+          "type": "COLOR",
+          "value": "#F7F7F7",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-50)"
+          }
+        },
+        {
+          "name": "neutral/100",
+          "type": "COLOR",
+          "value": "#F0F0F0",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-100)"
+          }
+        },
+        {
+          "name": "neutral/200",
+          "type": "COLOR",
+          "value": "#E9E9E9",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-200)"
+          }
+        },
+        {
+          "name": "neutral/300",
+          "type": "COLOR",
+          "value": "#C4C4C4",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-300)"
+          }
+        },
+        {
+          "name": "neutral/400",
+          "type": "COLOR",
+          "value": "#A3A3A3",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-400)"
+          }
+        },
+        {
+          "name": "neutral/500",
+          "type": "COLOR",
+          "value": "#828282",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-500)"
+          }
+        },
+        {
+          "name": "neutral/600",
+          "type": "COLOR",
+          "value": "#656565",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-600)"
+          }
+        },
+        {
+          "name": "neutral/700",
+          "type": "COLOR",
+          "value": "#4A4A4A",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-700)"
+          }
+        },
+        {
+          "name": "neutral/800",
+          "type": "COLOR",
+          "value": "#2B2B2B",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-800)"
+          }
+        },
+        {
+          "name": "neutral/900",
+          "type": "COLOR",
+          "value": "#1C1B1B",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-900)"
+          }
+        },
+        {
+          "name": "neutral/950",
+          "type": "COLOR",
+          "value": "#141414",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-950)"
+          }
+        },
+        {
+          "name": "neutral/1000",
+          "type": "COLOR",
+          "value": "#0A0A0A",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-neutral-1000)"
+          }
+        },
+        {
+          "name": "red/50",
+          "type": "COLOR",
+          "value": "#FFF1F1",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-red-50)"
+          }
+        },
+        {
+          "name": "red/100",
+          "type": "COLOR",
+          "value": "#FFE0E1",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-red-100)"
+          }
+        },
+        {
+          "name": "red/300",
+          "type": "COLOR",
+          "value": "#F58F93",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-red-300)"
+          }
+        },
+        {
+          "name": "red/500",
+          "type": "COLOR",
+          "value": "#E5484D",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-red-500)"
+          }
+        },
+        {
+          "name": "red/600",
+          "type": "COLOR",
+          "value": "#CE2C33",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-red-600)"
+          }
+        },
+        {
+          "name": "red/700",
+          "type": "COLOR",
+          "value": "#A81F26",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-red-700)"
+          }
+        },
+        {
+          "name": "red/900",
+          "type": "COLOR",
+          "value": "#6B1216",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-red-900)"
+          }
+        },
+        {
+          "name": "green/50",
+          "type": "COLOR",
+          "value": "#EDF9F1",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-green-50)"
+          }
+        },
+        {
+          "name": "green/100",
+          "type": "COLOR",
+          "value": "#D3F0DE",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-green-100)"
+          }
+        },
+        {
+          "name": "green/300",
+          "type": "COLOR",
+          "value": "#7FD1A0",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-green-300)"
+          }
+        },
+        {
+          "name": "green/500",
+          "type": "COLOR",
+          "value": "#2E9E5B",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-green-500)"
+          }
+        },
+        {
+          "name": "green/600",
+          "type": "COLOR",
+          "value": "#23834A",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-green-600)"
+          }
+        },
+        {
+          "name": "green/700",
+          "type": "COLOR",
+          "value": "#1A6739",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-green-700)"
+          }
+        },
+        {
+          "name": "green/900",
+          "type": "COLOR",
+          "value": "#0E3E22",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-green-900)"
+          }
+        },
+        {
+          "name": "blue/50",
+          "type": "COLOR",
+          "value": "#EEF4FF",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-blue-50)"
+          }
+        },
+        {
+          "name": "blue/100",
+          "type": "COLOR",
+          "value": "#DBE7FF",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-blue-100)"
+          }
+        },
+        {
+          "name": "blue/300",
+          "type": "COLOR",
+          "value": "#8FB6F5",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-blue-300)"
+          }
+        },
+        {
+          "name": "blue/500",
+          "type": "COLOR",
+          "value": "#3B7DE8",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-blue-500)"
+          }
+        },
+        {
+          "name": "blue/600",
+          "type": "COLOR",
+          "value": "#2A63C4",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-blue-600)"
+          }
+        },
+        {
+          "name": "blue/700",
+          "type": "COLOR",
+          "value": "#1F4C9B",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-blue-700)"
+          }
+        },
+        {
+          "name": "blue/900",
+          "type": "COLOR",
+          "value": "#12305F",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-blue-900)"
+          }
+        },
+        {
+          "name": "gold/50",
+          "type": "COLOR",
+          "value": "#FDF6E3",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-gold-50)"
+          }
+        },
+        {
+          "name": "gold/100",
+          "type": "COLOR",
+          "value": "#F8EAC0",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-gold-100)"
+          }
+        },
+        {
+          "name": "gold/300",
+          "type": "COLOR",
+          "value": "#E9C86A",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-gold-300)"
+          }
+        },
+        {
+          "name": "gold/500",
+          "type": "COLOR",
+          "value": "#C99A08",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-gold-500)"
+          }
+        },
+        {
+          "name": "gold/600",
+          "type": "COLOR",
+          "value": "#A87E00",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-gold-600)"
+          }
+        },
+        {
+          "name": "gold/700",
+          "type": "COLOR",
+          "value": "#7F5F00",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-gold-700)"
+          }
+        },
+        {
+          "name": "gold/900",
+          "type": "COLOR",
+          "value": "#3A2A00",
+          "scopes": [],
+          "codeSyntax": {
+            "WEB": "var(--tt-gold-900)"
+          }
+        }
+      ]
+    },
+    "Color": {
+      "modes": [
+        "Light",
+        "Dark"
+      ],
+      "variables": [
+        {
+          "name": "canvas",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/25"
+            },
+            "Dark": {
+              "alias": "neutral/950"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-canvas)"
+          }
+        },
+        {
+          "name": "surface",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/0"
+            },
+            "Dark": {
+              "alias": "neutral/900"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-surface)"
+          }
+        },
+        {
+          "name": "surface/raised",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/0"
+            },
+            "Dark": {
+              "alias": "neutral/800"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-surface-raised)"
+          }
+        },
+        {
+          "name": "surface/sunken",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/50"
+            },
+            "Dark": {
+              "alias": "neutral/1000"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-surface-sunken)"
+          }
+        },
+        {
+          "name": "text/primary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/900"
+            },
+            "Dark": {
+              "alias": "neutral/25"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-text-primary)"
+          }
+        },
+        {
+          "name": "text/secondary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/700"
+            },
+            "Dark": {
+              "alias": "neutral/300"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-text-secondary)"
+          }
+        },
+        {
+          "name": "text/tertiary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/600"
+            },
+            "Dark": {
+              "alias": "neutral/400"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-text-tertiary)"
+          }
+        },
+        {
+          "name": "text/muted",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/500"
+            },
+            "Dark": {
+              "alias": "neutral/500"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-text-muted)"
+          }
+        },
+        {
+          "name": "primary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "orange/500"
+            },
+            "Dark": {
+              "alias": "orange/500"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-primary)"
+          }
+        },
+        {
+          "name": "primary/hover",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "orange/600"
+            },
+            "Dark": {
+              "alias": "orange/400"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-primary-hover)"
+          }
+        },
+        {
+          "name": "primary/ink",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "orange/700"
+            },
+            "Dark": {
+              "alias": "orange/400"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-primary-ink)"
+          }
+        },
+        {
+          "name": "primary/subtle",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "orange/50"
+            },
+            "Dark": {
+              "alias": "orange/950"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-primary-subtle)"
+          }
+        },
+        {
+          "name": "on-primary",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/0"
+            },
+            "Dark": {
+              "alias": "neutral/0"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-on-primary)"
+          }
+        },
+        {
+          "name": "cta-strong",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/800"
+            },
+            "Dark": {
+              "alias": "neutral/0"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-cta-strong)"
+          }
+        },
+        {
+          "name": "cta-strong-hover",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/700"
+            },
+            "Dark": {
+              "alias": "neutral/100"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-cta-strong-hover)"
+          }
+        },
+        {
+          "name": "on-cta-strong",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/0"
+            },
+            "Dark": {
+              "alias": "neutral/1000"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-on-cta-strong)"
+          }
+        },
+        {
+          "name": "border",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/200"
+            },
+            "Dark": {
+              "alias": "neutral/800"
+            }
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-border)"
+          }
+        },
+        {
+          "name": "border/interactive",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/500"
+            },
+            "Dark": {
+              "alias": "neutral/500"
+            }
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-border-interactive)"
+          }
+        },
+        {
+          "name": "border/field",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "neutral/300"
+            },
+            "Dark": {
+              "alias": "neutral/700"
+            }
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-border-field)"
+          }
+        },
+        {
+          "name": "focus",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "orange/500"
+            },
+            "Dark": {
+              "alias": "orange/500"
+            }
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-focus)"
+          }
+        },
+        {
+          "name": "danger",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "red/600"
+            },
+            "Dark": {
+              "alias": "red/300"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL",
+            "STROKE_COLOR",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-danger)"
+          }
+        },
+        {
+          "name": "danger/subtle",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "red/50"
+            },
+            "Dark": {
+              "alias": "red/900"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-danger-subtle)"
+          }
+        },
+        {
+          "name": "live",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "red/600"
+            },
+            "Dark": {
+              "alias": "red/500"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL",
+            "STROKE_COLOR",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-live)"
+          }
+        },
+        {
+          "name": "success",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "green/700"
+            },
+            "Dark": {
+              "alias": "green/300"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL",
+            "STROKE_COLOR",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-success)"
+          }
+        },
+        {
+          "name": "success/subtle",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "green/50"
+            },
+            "Dark": {
+              "alias": "green/900"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-success-subtle)"
+          }
+        },
+        {
+          "name": "info",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "blue/600"
+            },
+            "Dark": {
+              "alias": "blue/300"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL",
+            "STROKE_COLOR",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-info)"
+          }
+        },
+        {
+          "name": "info/subtle",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "blue/50"
+            },
+            "Dark": {
+              "alias": "blue/900"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-info-subtle)"
+          }
+        },
+        {
+          "name": "caution",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "gold/700"
+            },
+            "Dark": {
+              "alias": "gold/300"
+            }
+          },
+          "scopes": [
+            "TEXT_FILL",
+            "STROKE_COLOR",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-caution)"
+          }
+        },
+        {
+          "name": "caution/subtle",
+          "type": "COLOR",
+          "valuesByMode": {
+            "Light": {
+              "alias": "gold/50"
+            },
+            "Dark": {
+              "alias": "gold/900"
+            }
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-caution-subtle)"
+          }
+        }
+      ]
+    },
+    "Spacing": {
+      "modes": [
+        "Value"
+      ],
+      "variables": [
+        {
+          "name": "space/1",
+          "type": "FLOAT",
+          "value": 4,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-1)"
+          }
+        },
+        {
+          "name": "space/2",
+          "type": "FLOAT",
+          "value": 8,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-2)"
+          }
+        },
+        {
+          "name": "space/3",
+          "type": "FLOAT",
+          "value": 12,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-3)"
+          }
+        },
+        {
+          "name": "space/4",
+          "type": "FLOAT",
+          "value": 16,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-4)"
+          }
+        },
+        {
+          "name": "space/5",
+          "type": "FLOAT",
+          "value": 20,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-5)"
+          }
+        },
+        {
+          "name": "space/6",
+          "type": "FLOAT",
+          "value": 24,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-6)"
+          }
+        },
+        {
+          "name": "space/8",
+          "type": "FLOAT",
+          "value": 32,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-8)"
+          }
+        },
+        {
+          "name": "space/10",
+          "type": "FLOAT",
+          "value": 40,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-10)"
+          }
+        },
+        {
+          "name": "space/12",
+          "type": "FLOAT",
+          "value": 48,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-12)"
+          }
+        },
+        {
+          "name": "space/16",
+          "type": "FLOAT",
+          "value": 64,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-16)"
+          }
+        },
+        {
+          "name": "space/20",
+          "type": "FLOAT",
+          "value": 80,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-20)"
+          }
+        },
+        {
+          "name": "space/24",
+          "type": "FLOAT",
+          "value": 96,
+          "scopes": [
+            "GAP",
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-space-24)"
+          }
+        }
+      ]
+    },
+    "Radius": {
+      "modes": [
+        "Value"
+      ],
+      "variables": [
+        {
+          "name": "radius/xs",
+          "type": "FLOAT",
+          "value": 8,
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-radius-xs)"
+          }
+        },
+        {
+          "name": "radius/sm",
+          "type": "FLOAT",
+          "value": 8,
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-radius-sm)"
+          }
+        },
+        {
+          "name": "radius/md",
+          "type": "FLOAT",
+          "value": 12,
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-radius-md)"
+          }
+        },
+        {
+          "name": "radius/lg",
+          "type": "FLOAT",
+          "value": 16,
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-radius-lg)"
+          }
+        },
+        {
+          "name": "radius/pill",
+          "type": "FLOAT",
+          "value": 999,
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-radius-pill)"
+          }
+        }
+      ]
+    },
+    "Border": {
+      "modes": [
+        "Value"
+      ],
+      "variables": [
+        {
+          "name": "border/form",
+          "type": "FLOAT",
+          "value": 0.5,
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-border-form)"
+          }
+        },
+        {
+          "name": "border/thin",
+          "type": "FLOAT",
+          "value": 1,
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-border-thin)"
+          }
+        },
+        {
+          "name": "border/focus",
+          "type": "FLOAT",
+          "value": 2,
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-border-focus)"
+          }
+        }
+      ]
+    },
+    "Container": {
+      "modes": [
+        "Value"
+      ],
+      "variables": [
+        {
+          "name": "container/sm",
+          "type": "FLOAT",
+          "value": 640,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-container-sm)"
+          }
+        },
+        {
+          "name": "container/md",
+          "type": "FLOAT",
+          "value": 900,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-container-md)"
+          }
+        },
+        {
+          "name": "container/lg",
+          "type": "FLOAT",
+          "value": 1200,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-container-lg)"
+          }
+        },
+        {
+          "name": "container/xl",
+          "type": "FLOAT",
+          "value": 1440,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-container-xl)"
+          }
+        }
+      ]
+    },
+    "Layer": {
+      "modes": [
+        "Value"
+      ],
+      "variables": [
+        {
+          "name": "z/base",
+          "type": "FLOAT",
+          "value": 0,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-base)"
+          }
+        },
+        {
+          "name": "z/raised",
+          "type": "FLOAT",
+          "value": 10,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-raised)"
+          }
+        },
+        {
+          "name": "z/sticky",
+          "type": "FLOAT",
+          "value": 20,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-sticky)"
+          }
+        },
+        {
+          "name": "z/dropdown",
+          "type": "FLOAT",
+          "value": 30,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-dropdown)"
+          }
+        },
+        {
+          "name": "z/overlay",
+          "type": "FLOAT",
+          "value": 40,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-overlay)"
+          }
+        },
+        {
+          "name": "z/modal",
+          "type": "FLOAT",
+          "value": 50,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-modal)"
+          }
+        },
+        {
+          "name": "z/toast",
+          "type": "FLOAT",
+          "value": 60,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-toast)"
+          }
+        },
+        {
+          "name": "z/tooltip",
+          "type": "FLOAT",
+          "value": 70,
+          "scopes": [
+            "ALL_SCOPES"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-z-tooltip)"
+          }
+        }
+      ]
+    },
+    "Icon": {
+      "modes": [
+        "Value"
+      ],
+      "variables": [
+        {
+          "name": "icon/xs",
+          "type": "FLOAT",
+          "value": 12,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-icon-xs)"
+          }
+        },
+        {
+          "name": "icon/sm",
+          "type": "FLOAT",
+          "value": 16,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-icon-sm)"
+          }
+        },
+        {
+          "name": "icon/md",
+          "type": "FLOAT",
+          "value": 20,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-icon-md)"
+          }
+        },
+        {
+          "name": "icon/lg",
+          "type": "FLOAT",
+          "value": 24,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-icon-lg)"
+          }
+        },
+        {
+          "name": "target/min",
+          "type": "FLOAT",
+          "value": 24,
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "codeSyntax": {
+            "WEB": "var(--tt-target-min)"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "icon": {
+    "xs": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "sm": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "24px"
+    }
+  },
+  "target": {
+    "min": {
+      "$type": "dimension",
+      "$value": "24px"
+    }
+  }
+}
