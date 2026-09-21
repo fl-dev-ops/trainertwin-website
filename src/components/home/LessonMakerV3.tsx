@@ -153,7 +153,7 @@ export function LessonMakerV3() {
   return (
     <div
       ref={ref}
-      className={inView ? "art-sq is-inview" : "art-sq"}
+      className={inView ? "art-sq is-light is-inview" : "art-sq is-light"}
       role="img"
       aria-label="Five steps: drop your training material in or type a prompt, wait while it is analysed, read the script it wrote, pick a hand-drawn style, choose an explainer video and press generate, then check the render is in your voice and publish."
     >
@@ -164,7 +164,8 @@ export function LessonMakerV3() {
 
       <GlowCard
         className="glow-mk art-front"
-        background="var(--tt-night-panel)"
+        background="#fff"
+        surface="light"
         radius="20px"
       >
         <div className="mk mk--v3">
