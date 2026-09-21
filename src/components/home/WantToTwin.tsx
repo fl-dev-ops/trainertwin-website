@@ -1,130 +1,79 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import FoldText from "./FoldText";
 
 /**
- * v3-only rotating pair. Sticky prefixes stay static; the ask/can lines type
- * and erase the way `RotatingHeadline`'s slots do on the live home — swapped
- * back from the flip-card entrance FoldText gave them, to match.
+ * v3-only rotating line. "Want to" and "Your AI Twin can do it." are sticky
+ * and static; only the ask in between changes, folding in char-by-char via
+ * `FoldText` (React Bits) each time it's replaced.
+ *
+ * The word intentionally does NOT carry the shimmer gradient the rest of
+ * `.rot-word` gets elsewhere: `FoldText` layer-promotes every character to
+ * animate it independently (a 3D transform context + `will-change`), and a
+ * `background-clip: text` gradient doesn't survive that — tried painting the
+ * same gradient per character instead (sized to the word, offset per
+ * character), which worked when it worked, but the layer promotion combined
+ * with the rapid remount-per-ask made GSAP's fold-in intermittently stick at
+ * `opacity: 0` or paint a stale frame. A solid colour was the only version
+ * that came back reliable across repeated cycles.
  */
-const PAIRS: Array<{ askPrefix: string; ask: string; can: string }> = [
-  {
-    askPrefix: "Want to",
-    ask: "reach more people?",
-    can: "can extend your reach.",
-  },
-  {
-    askPrefix: "Want to",
-    ask: "enable more practice?",
-    can: "can run role-plays.",
-  },
-  {
-    askPrefix: "Want to",
-    ask: "be available 24/7?",
-    can: "can always be there.",
-  },
-  { askPrefix: "Want to", ask: "create more videos?", can: "can do it." },
+const ASKS: string[] = [
+  "create more videos?",
+  "be available 24/7?",
+  "enable more 1:1 practice?",
+  "reach more people?",
 ];
 
-/* ms typing or erasing one line, and holding once both are typed. Ask and can
-   type in sequence (the way FoldText's own delay staggered them) and erase in
-   the reverse order, so the last thing written is the first thing taken back —
-   one rAF clock drives all five phases rather than a timeout per phase, so the
-   loop can't drift in a throttled background tab. */
-const TYPE = 480;
-const ERASE = 320;
-const HOLD = 2000;
-
-type Phase = "typeAsk" | "typeCan" | "hold" | "eraseCan" | "eraseAsk";
+/* How long an ask sits fully folded-in before the next one replaces it. The
+   fold-in itself (duration + stagger, below) plays on top of this, not
+   instead of it — the swap is a hard cut, and FoldText's own unfold sells
+   the transition. */
+const HOLD = 3200;
+const FOLD_DURATION = 1;
+const FOLD_STAGGER = 0.06;
 
 export function WantToTwin() {
   const [index, setIndex] = useState(0);
-  /* Both start fully typed, same as `RotatingHeadline`: the first pair simply
-     appears rather than typing in, and only cycles once `HOLD` has passed. */
-  const [askProgress, setAskProgress] = useState(1);
-  const [canProgress, setCanProgress] = useState(1);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    let frame = 0;
-    let phase: Phase = "hold";
-    let started = performance.now();
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % ASKS.length);
+    }, HOLD);
 
-    const tick = (now: number) => {
-      const elapsed = now - started;
-
-      if (phase === "hold") {
-        if (elapsed >= HOLD) {
-          phase = "eraseCan";
-          started = now;
-        }
-      } else if (phase === "eraseCan") {
-        const t = Math.min(elapsed / ERASE, 1);
-        setCanProgress(1 - t);
-        if (t >= 1) {
-          phase = "eraseAsk";
-          started = now;
-        }
-      } else if (phase === "eraseAsk") {
-        const t = Math.min(elapsed / ERASE, 1);
-        setAskProgress(1 - t);
-        if (t >= 1) {
-          setIndex((i) => (i + 1) % PAIRS.length);
-          phase = "typeAsk";
-          started = now;
-        }
-      } else if (phase === "typeAsk") {
-        const t = Math.min(elapsed / TYPE, 1);
-        setAskProgress(t);
-        if (t >= 1) {
-          phase = "typeCan";
-          started = now;
-        }
-      } else {
-        const t = Math.min(elapsed / TYPE, 1);
-        setCanProgress(t);
-        if (t >= 1) {
-          phase = "hold";
-          started = now;
-        }
-      }
-
-      frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+    return () => window.clearInterval(id);
   }, []);
 
-  const pair = PAIRS[index];
-  const spokenAsk = pair.askPrefix
-    ? `${pair.askPrefix} ${pair.ask}`
-    : pair.ask;
-
-  /* Rounded, not floored: a word is whole for the last half-character of the
-     type rather than arriving a frame late. */
-  const cut = (word: string, progress: number) =>
-    word.slice(0, Math.round(progress * word.length));
+  const ask = ASKS[index];
 
   return (
     <p className="hero-v3-want">
       <span className="sr-only">
-        {spokenAsk} Your AI Twin {pair.can}.
+        Want to {ask} Your AI Twin can do it.
       </span>
       <span aria-hidden="true">
         <span className="rot-line">Want to</span>
         <span className="rot-line">
           <span className="rot-slot">
-            <span className="rot-word">{cut(pair.ask, askProgress)}</span>
+            <FoldText
+              key={ask}
+              text={ask}
+              splitBy="char"
+              hinge="top"
+              trigger="mount"
+              duration={FOLD_DURATION}
+              stagger={FOLD_STAGGER}
+              ease="power3.out"
+              className="rot-word rot-word--fold"
+              fontSize="inherit"
+              fontWeight="inherit"
+              color="var(--tt-on-night)"
+            />
           </span>
         </span>
-        <span className="rot-line">Your AI Twin</span>
-        <span className="rot-line">
-          <span className="rot-slot">
-            <span className="rot-word">{cut(pair.can, canProgress)}</span>
-          </span>
-        </span>
+        <span className="rot-line">Your AI Twin can do it.</span>
       </span>
     </p>
   );

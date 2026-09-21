@@ -138,7 +138,7 @@ export function EarlyAccessSteps() {
 
         <div className="ea-actions">
           <Button variant="strong" size="xl" type="submit" className="ea-go">
-            Request early access
+            Submit
           </Button>
         </div>
       </div>

@@ -4693,6 +4693,17 @@
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
+/* `FoldText` layer-promotes each character (`will-change`, a 3D transform
+   context) so it can animate them independently — and a background-clip:text
+   gradient painted on the ancestor doesn't composite through that per-child
+   layering, rendering blank (or, worse, an intermittently stale frame). Its
+   word gets the plain on-night colour instead of the shimmer — see the
+   comment in `WantToTwin`. */
+.tt-home--v3 .hero-v3-want .rot-word--fold {
+  background-image: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--tt-on-night);
+}
 .tt-home--v3 .hero-v3-copy + .hero-v3-cta {
   margin-top: 38px;
 }
@@ -6740,14 +6751,14 @@
   height: auto;
   overflow: visible;
   border-radius: var(--tt-radius-pill);
-  background: color-mix(in srgb, var(--tt-on-night) 10%, var(--tt-night));
-  border: var(--tt-border-thin) solid var(--tt-line-night);
-  color: var(--tt-on-night-2);
+  background: var(--tt-neutral-600);
+  border: none;
+  color: var(--tt-on-night);
   font-size: 12px;
   line-height: 16px;
   font-weight: var(--tt-weight-label);
   white-space: nowrap;
-  box-shadow: none;
+  box-shadow: var(--tt-elevation-2);
 }
 .tt-home--v3 .steps-tip svg {
   width: 11px;
@@ -7487,10 +7498,10 @@
   position: static;
   left: auto;
   bottom: auto;
-  background: color-mix(in srgb, var(--tt-on-night) 10%, var(--tt-night));
-  border: var(--tt-border-thin) solid var(--tt-line-night);
-  color: var(--tt-on-night-2);
-  box-shadow: none;
+  background: var(--tt-neutral-600);
+  border: none;
+  color: var(--tt-on-night);
+  box-shadow: var(--tt-elevation-2);
 }
 .tt-home--v3 .twin-dna .st-orb {
   position: static;

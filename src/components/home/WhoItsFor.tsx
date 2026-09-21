@@ -181,7 +181,7 @@ export function WhoItsFor({
   );
 }
 
-const ACCORDION_HOLD = 5600;
+const ACCORDION_HOLD = 2800;
 
 /**
  * v3 "Who it's for": accordion list + one illustration, then the Other card
@@ -193,7 +193,6 @@ function WhoScroll({ profiles }: { profiles: WhoProfileCard[] }) {
   const other = profiles.find((card) => card.key === "other");
   const [open, setOpen] = useState(0);
   const [paused, setPaused] = useState(false);
-  const shared = items[0];
   const { ref, inView } = useInView<HTMLElement>();
 
   useEffect(() => {
@@ -281,15 +280,6 @@ function WhoScroll({ profiles }: { profiles: WhoProfileCard[] }) {
                             </li>
                           ))}
                         </ul>
-                      ) : null}
-                      {shared ? (
-                        <CtaLink
-                          size="md"
-                          href={shared.href}
-                          className="hero-v3-cta ws-cta"
-                        >
-                          {shared.cta ?? "Request a demo"}
-                        </CtaLink>
                       ) : null}
                     </div>
                   </div>

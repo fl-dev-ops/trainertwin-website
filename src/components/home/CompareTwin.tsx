@@ -19,8 +19,8 @@ const COLUMNS = [
       { ok: true, label: "Uses your content" },
       { ok: true, label: "Answers questions" },
       { ok: false, label: "Generic teaching style" },
-      { ok: false, label: "No video creation" },
-      { ok: false, label: "No your presence" },
+      { ok: false, label: "Video creation" },
+      { ok: false, label: "Your presence" },
     ],
   },
   {
@@ -32,10 +32,10 @@ const COLUMNS = [
     rows: [
       { ok: true, label: "Looks like you" },
       { ok: true, label: "Speaks in your voice" },
-      { ok: false, label: "No teaching style" },
+      { ok: false, label: "Teaching style" },
       { ok: false, label: "Limited to videos" },
-      { ok: false, label: "No interactive Q&A" },
-      { ok: false, label: "No deep knowledge" },
+      { ok: false, label: "Interactive Q&A" },
+      { ok: false, label: "Deep knowledge" },
     ],
   },
   {
