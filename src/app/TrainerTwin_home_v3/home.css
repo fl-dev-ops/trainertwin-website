@@ -1368,45 +1368,17 @@
     radial-gradient(56% 54% at 0% 78%, #eaa8c2 0%, rgba(234, 168, 194, 0) 76%);
 }
 
-/* v3 demo stages: charcoal centre, rose/mauve sides, peach floor.
-   Cursor iOS promo atmosphere — not a light wash, not Linear purple. */
+/* Flat, no ambient mesh: the two v3 illustrations (LessonMakerV3,
+   InteractiveTwinArt) carry their own dark card fill already, so the panel
+   behind them just needs to be plain, not another lit backdrop. */
 .tt-home--v3 .way-art--orchid {
-  background-color: #120e10;
-  background-image:
-    radial-gradient(
-      ellipse 46% 42% at 50% 46%,
-      #080607 0%,
-      rgba(8, 6, 7, 0.55) 42%,
-      transparent 74%
-    ),
-    radial-gradient(
-      ellipse 78% 52% at 18% -8%,
-      rgb(196 148 164 / 0.4) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 70% 48% at 90% 4%,
-      rgb(176 150 168 / 0.34) 0%,
-      transparent 72%
-    ),
-    radial-gradient(
-      ellipse 48% 62% at 102% 52%,
-      rgb(186 136 150 / 0.26) 0%,
-      transparent 72%
-    ),
-    radial-gradient(
-      ellipse 46% 58% at -4% 58%,
-      rgb(168 124 142 / 0.24) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 90% 50% at 50% 108%,
-      color-mix(in srgb, var(--tt-primary) 28%, rgb(232 176 148 / 0.55)) 0%,
-      transparent 70%
-    );
+  /* Matches `.way-copy`'s own white exactly, so the two panels read as one
+     continuous surface rather than a seam between two near-whites. */
+  background-color: #f8fbfe;
+  background-image: none;
 }
 .tt-home--v3 .way-art::after {
-  opacity: 0.22;
+  opacity: 0;
 }
 
 .tt-home .way-art--clay {
