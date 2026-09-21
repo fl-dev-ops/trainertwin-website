@@ -1314,6 +1314,36 @@
   font-size: 15px;
   line-height: 24px;
 }
+/* This row's own CTA reads as a light, quiet action rather than the header's
+   dark pill: white fill, a hairline border, brand-orange label, no shadow —
+   `.way-copy` is already a light panel, so the dark gradient pill this class
+   otherwise inherits from `.hdr-cta` would be the odd one out here. */
+.tt-home--v3 a.hdr-cta.way-cta {
+  color: var(--tt-primary);
+  background-color: var(--tt-canvas);
+  background-image: none;
+  border: 1px solid var(--tt-neutral-200);
+  box-shadow: none;
+}
+.tt-home--v3 a.hdr-cta.way-cta::before {
+  content: none;
+}
+.tt-home--v3 a.hdr-cta.way-cta:hover {
+  color: var(--tt-primary);
+  background-color: var(--tt-canvas);
+  background-image: none;
+  border-color: var(--tt-primary-badge-border);
+  box-shadow: var(--tt-elevation-2);
+  transform: none;
+}
+.tt-home--v3 a.hdr-cta.way-cta:active {
+  color: var(--tt-primary);
+  background-color: var(--tt-canvas);
+  background-image: none;
+  border-color: var(--tt-primary-badge-border);
+  box-shadow: var(--tt-elevation-1);
+  transform: none;
+}
 .tt-home .way-copy .kicker {
   font-size: 14px;
   line-height: 20px;
@@ -1321,9 +1351,10 @@
   color: var(--tt-primary-ink);
 }
 .tt-home .way-copy h3 {
-  font-family: var(--tt-font-display);
-  font-size: 24px; /* product/title-l */
+  font-family: var(--tt-font-ui);
+  font-size: 24px;
   line-height: 30px;
+  font-weight: var(--tt-weight-semibold);
 }
 /* Tertiary, not secondary: on this panel's pale blueprint ground the secondary
    step reads as a second headline rather than as supporting copy. 5.83:1 —
@@ -1592,6 +1623,13 @@
   color: #fff;
   mix-blend-mode: difference;
   opacity: 1;
+  /* `.tt-home .mk-tab` (the plain underline tabs the other two pages still
+     use) attaches its own opacity/border-colour keyframe loop, staggered per
+     tab — inherited here since nothing had cancelled it, so every v3 tab was
+     independently flickering to 0.4 opacity on its own 12.8s clock, on top
+     of (and unrelated to) the blend trick above. That's the "disabled"
+     third state: not a state this component ever meant to have. */
+  animation: none;
 }
 
 /* The panes follow the same clock, so they cross-fade on a transition rather
@@ -2007,6 +2045,7 @@
   width: 70%;
 }
 .tt-home--v3 .mk-dest {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2025,6 +2064,27 @@
   width: 14px;
   height: 14px;
   color: var(--tt-on-night-2);
+}
+/* YouTube, picked by default — same selected language `.mk-tile.is-on`
+   uses for Style/Format, so "selected" reads the same way everywhere in
+   this mock. */
+.tt-home--v3 .mk-dest.is-on {
+  background: var(--tt-primary-subtle);
+  border-color: var(--tt-primary-badge-border);
+  color: var(--tt-primary-ink);
+}
+.tt-home--v3 .mk-dest.is-on svg {
+  color: var(--tt-primary-ink);
+}
+.tt-home--v3 .mk-dest .mk-dest-check {
+  top: 2px;
+  right: 2px;
+  width: 11px;
+  height: 11px;
+}
+.tt-home--v3 .mk-dest .mk-dest-check svg {
+  width: 8px;
+  height: 8px;
 }
 .tt-home--v3 .mk-pane.is-active .mk-dest {
   animation: tt-v3-mk-tick 220ms var(--tt-ease-standard) both;
@@ -2581,9 +2641,20 @@
 .tt-home--v3 .art-sq.is-light .mk-dest svg {
   color: var(--tt-text-secondary);
 }
+/* Out-specificities the plain `.is-light .mk-dest` above, so the selected
+   YouTube tile keeps its brand tint instead of the light variant's neutral
+   one. */
+.tt-home--v3 .art-sq.is-light .mk-dest.is-on,
+.tt-home--v3 .art-sq.is-light .mk-dest.is-on svg {
+  color: var(--tt-primary-ink);
+}
+.tt-home--v3 .art-sq.is-light .mk-dest.is-on {
+  background: var(--tt-primary-subtle);
+  border-color: var(--tt-primary-badge-border);
+}
 .tt-home--v3 .art-sq.is-light .mk-tile {
   border-color: var(--tt-neutral-200);
-  background: var(--tt-surface-sunken);
+  background: var(--tt-canvas);
   color: var(--tt-text-secondary);
 }
 /* `.mk-btn` is shared with every other page's making-of mock (`.tt-home
@@ -5397,31 +5468,6 @@
    Each copy block is a viewport-ish tall so one audience is on the middle line
    at a time; below `lg` the two columns stack and the stage pins to the top
    of the viewport instead of beside the copy. */
-/* This section's own atmosphere, layered over `.tt-night`'s flat fill —
-   `background-image` only, so the near-black `background-color` `.tt-night`
-   sets globally stays as the base coat underneath. Scoped to `.who-scroll`
-   rather than the shared `.tt-night`/`.sec--line.tt-night` rules, which
-   every other night section on the page (Team, Equity Program, the footer)
-   also carries and doesn't ask for this. */
-.tt-home--v3 .who-scroll {
-  background-image:
-    radial-gradient(
-      ellipse 46% 42% at 50% 46%,
-      #080607 0%,
-      #0806078c 42%,
-      transparent 74%
-    ),
-    radial-gradient(ellipse 78% 52% at 18% -8%, #c494a466 0%, transparent 70%),
-    radial-gradient(ellipse 70% 48% at 90% 4%, #b096a857 0%, transparent 72%),
-    radial-gradient(ellipse 48% 62% at 102% 52%, #ba889642 0%, transparent 72%),
-    radial-gradient(ellipse 46% 58% at -4% 58%, #a87c8e3d 0%, transparent 70%),
-    radial-gradient(
-      ellipse 90% 50% at 50% 108%,
-      color-mix(in srgb, var(--tt-primary) 28%, #e8b0948c) 0%,
-      transparent 70%
-    );
-}
-
 /* GitHub Issues-style accordion: list on the left, one scene on the right. */
 .tt-home--v3 .who-acc {
   display: grid;
@@ -6968,15 +7014,15 @@
   height: auto;
   overflow: visible;
   border-radius: var(--tt-radius-pill);
-  background: color-mix(in srgb, var(--tt-on-night) 10%, var(--tt-night));
-  border: var(--tt-border-thin) solid var(--tt-line-night);
-  color: var(--tt-on-night-2);
+  background: var(--tt-canvas);
+  border: 1px solid var(--tt-neutral-200);
+  color: var(--tt-text-primary);
   font-family: var(--tt-font-ui);
   font-size: 12px;
   line-height: 16px;
   font-weight: var(--tt-weight-label);
   text-align: center;
-  box-shadow: none;
+  box-shadow: var(--tt-elevation-2);
 }
 .tt-home--v3 .itwin-trait-slot {
   position: relative;
@@ -7141,12 +7187,13 @@
 }
 .tt-home--v3 .itwin-turn--learner .itwin-bubble {
   margin-right: auto;
-  background: color-mix(in srgb, var(--tt-night) 72%, #000);
-  color: var(--tt-on-night);
+  background: var(--tt-canvas);
+  border: 1px solid var(--tt-neutral-200);
+  color: var(--tt-text-primary);
   border-bottom-left-radius: 4px;
 }
 .tt-home--v3 .itwin-turn--learner .itwin-bubble-head {
-  color: var(--tt-on-night-3);
+  color: var(--tt-text-secondary);
 }
 .tt-home--v3 .itwin-turn--twin .itwin-bubble {
   margin-left: auto;

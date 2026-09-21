@@ -362,9 +362,10 @@ export function LessonMakerV3() {
                 {DESTINATIONS.map((name, i) => (
                   <span
                     key={name}
-                    className="mk-dest"
+                    className={i === 0 ? "mk-dest is-on" : "mk-dest"}
                     style={{ ["--i" as string]: i } as CSSProperties}
                   >
+                    {i === 0 ? <TileCheck className="mk-dest-check" /> : null}
                     <DestMark kind={name} />
                     {name}
                   </span>
@@ -641,9 +642,12 @@ function CoursePreview() {
   );
 }
 
-function TileCheck() {
+function TileCheck({ className }: { className?: string } = {}) {
   return (
-    <span className="mk-tile-check" aria-hidden="true">
+    <span
+      className={className ? `mk-tile-check ${className}` : "mk-tile-check"}
+      aria-hidden="true"
+    >
       <svg viewBox="0 0 12 12" width="10" height="10" fill="none">
         <path
           d="M2.5 6.2 5 8.6 9.5 3.4"

@@ -203,6 +203,7 @@ function Way({
             className={v3 ? "hdr-cta way-cta" : "way-cta"}
           >
             {v3 ? "Request a demo" : "Request for early demo"}
+            <Icon name="chevron" />
           </CtaLink>
         </div>
       </div>
