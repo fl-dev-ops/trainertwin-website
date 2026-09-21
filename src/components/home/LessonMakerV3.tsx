@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type CSSProperties } from "react";
 import { ConfettiBurst } from "@/components/ui/motion-confetti";
+import { MutedClip } from "@/components/landing2/MutedClip";
 import { CardStroke } from "./CardStroke";
 import { GlowCard } from "./GlowCard";
 import { Icon } from "./icons";
@@ -362,7 +363,7 @@ export function LessonMakerV3() {
                 {DESTINATIONS.map((name, i) => (
                   <span
                     key={name}
-                    className={i === 0 ? "mk-dest is-on" : "mk-dest"}
+                    className="mk-dest"
                     style={{ ["--i" as string]: i } as CSSProperties}
                   >
                     {i === 0 ? <TileCheck className="mk-dest-check" /> : null}
@@ -615,12 +616,10 @@ function CoursePreview() {
               <i />
             </span>
             <span className="sd-avatar" aria-hidden="true">
-              <svg viewBox="0 0 48 48">
-                <circle cx="24" cy="24" r="24" fill="#3A2A24" />
-                <circle cx="24" cy="20" r="8" fill="#C48A6A" />
-                <path d="M10 46c2-10 10-16 14-16s12 6 14 16" fill="#2A2422" />
-                <path d="M16 18c2-7 14-8 16-1" fill="#1A1210" />
-              </svg>
+              <MutedClip
+                src="/home-v3/interactive-twin/trainers_twin_avatar.mp4"
+                className="sd-avatar-video"
+              />
             </span>
           </span>
 

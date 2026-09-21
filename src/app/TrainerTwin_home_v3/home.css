@@ -2065,17 +2065,9 @@
   height: 14px;
   color: var(--tt-on-night-2);
 }
-/* YouTube, picked by default — same selected language `.mk-tile.is-on`
-   uses for Style/Format, so "selected" reads the same way everywhere in
-   this mock. */
-.tt-home--v3 .mk-dest.is-on {
-  background: var(--tt-primary-subtle);
-  border-color: var(--tt-primary-badge-border);
-  color: var(--tt-primary-ink);
-}
-.tt-home--v3 .mk-dest.is-on svg {
-  color: var(--tt-primary-ink);
-}
+/* YouTube, picked by default — the box itself stays identical to every
+   other destination; only the corner badge (orange fill, white check,
+   from `.mk-tile-check`) marks it as selected. */
 .tt-home--v3 .mk-dest .mk-dest-check {
   top: 2px;
   right: 2px;
@@ -2189,8 +2181,8 @@
   width: 70%;
   height: auto;
   aspect-ratio: 16 / 9;
-  background: #1c1c1c;
-  border: 0;
+  background: #fff;
+  border: 1px solid var(--tt-neutral-200);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -2340,10 +2332,12 @@
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
   border: 2px solid #fff;
 }
-.tt-home--v3 .sd-avatar svg {
+.tt-home--v3 .sd-avatar svg,
+.tt-home--v3 .sd-avatar-video {
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .tt-home--v3 .sd-wave {
   display: flex;
@@ -2595,7 +2589,7 @@
 }
 .tt-home--v3 .art-sq.is-light .mk-drop {
   border-color: var(--tt-neutral-200);
-  background: color-mix(in srgb, var(--tt-text-primary) 3%, transparent);
+  background: var(--tt-canvas);
 }
 .tt-home--v3 .art-sq.is-light .mk-drop-files svg {
   color: var(--tt-text-secondary);
@@ -2640,17 +2634,6 @@
 }
 .tt-home--v3 .art-sq.is-light .mk-dest svg {
   color: var(--tt-text-secondary);
-}
-/* Out-specificities the plain `.is-light .mk-dest` above, so the selected
-   YouTube tile keeps its brand tint instead of the light variant's neutral
-   one. */
-.tt-home--v3 .art-sq.is-light .mk-dest.is-on,
-.tt-home--v3 .art-sq.is-light .mk-dest.is-on svg {
-  color: var(--tt-primary-ink);
-}
-.tt-home--v3 .art-sq.is-light .mk-dest.is-on {
-  background: var(--tt-primary-subtle);
-  border-color: var(--tt-primary-badge-border);
 }
 .tt-home--v3 .art-sq.is-light .mk-tile {
   border-color: var(--tt-neutral-200);
