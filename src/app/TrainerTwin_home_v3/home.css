@@ -1798,14 +1798,12 @@
   width: 13px;
   height: 13px;
   color: var(--tt-on-night);
-  /* North-west, the way a pointer points. */
-  transform: rotate(-135deg);
 }
 .tt-home--v3 .mk-hand-tag {
   padding: 1px 6px;
   border-radius: var(--tt-radius-pill);
   background: var(--tt-available);
-  color: var(--tt-night);
+  color: var(--tt-canvas);
   font-family: var(--tt-font-ui);
   font-size: 9px;
   line-height: 14px;
