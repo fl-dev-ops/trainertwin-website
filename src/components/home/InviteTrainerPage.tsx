@@ -41,21 +41,9 @@ const HERO_VIDEO_SRC = "/home-v3/interactive-twin/twin_video_2.mp4";
     treatment the v3 home's hero wore before it went back to its own
     cards-with-a-cycling-illustration. */
 const HERO_FACTS = [
-  {
-    key: "intelligence",
-    title: "Your Intelligence",
-    body: "Notes, recorded sessions, voice recording, docs from any channels.",
-  },
-  {
-    key: "dna",
-    title: "Your training DNA",
-    body: "We extract your patterns and how you explain, hints and assess.",
-  },
-  {
-    key: "presence",
-    title: "Your Presence",
-    body: "A few minutes of your voice: pace, tone and pauses.",
-  },
+  { key: "intelligence", title: "Your Intelligence" },
+  { key: "dna", title: "Your training DNA" },
+  { key: "presence", title: "Your Presence" },
 ] as const;
 
 /**
@@ -162,7 +150,6 @@ function Hero() {
                 className={`hero-v3-float hero-v3-float--${fact.key}`}
               >
                 <h3>{fact.title}</h3>
-                <p>{fact.body}</p>
               </article>
             ))}
           </div>

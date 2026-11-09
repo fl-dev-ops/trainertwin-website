@@ -11,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "The default container — almost every product screen is cards in a grid. Padding lives on the sections rather than the Card, so a card can hold a full-bleed image or an edge-to-edge table without fighting a padding it never asked for. Radius is 12, one step above the 8 used by the controls inside it.",
+          "The default container — almost every product screen is cards in a grid. Padding lives on the sections rather than the Card, so a card can hold a full-bleed image or an edge-to-edge table without fighting a padding it never asked for. Radius is 16 for a page-level card; tiles and rows inside it take 12.",
       },
     },
   },
@@ -29,7 +29,7 @@ export const Default: Story = {
     <Card {...args} className="max-w-[380px]">
       <CardHeader>
         <CardTitle>System Design — week 3</CardTitle>
-        <span className="font-mono text-[11px] text-ink-tertiary">14 pages</span>
+        <span className="text-[11px] text-ink-tertiary">14 pages</span>
       </CardHeader>
       <CardBody>
         <p className="text-[14px] leading-relaxed text-ink-secondary">
@@ -44,7 +44,7 @@ export const Default: Story = {
         <Button variant="ghost" size="sm">
           Remove
         </Button>
-        <Button variant="strong" size="sm">
+        <Button variant="secondary" size="sm">
           Open source
         </Button>
       </CardFooter>
@@ -101,10 +101,10 @@ export const InAGrid: Story = {
         <Card key={title} variant="interactive">
           <CardBody>
             <div className="mb-2 flex items-center justify-between gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-ink-tertiary">
+              <span className="text-[10px] uppercase tracking-wider text-ink-tertiary">
                 {kind}
               </span>
-              <span className="font-mono text-[11px] text-ink-tertiary">{meta_}</span>
+              <span className="text-[11px] text-ink-tertiary">{meta_}</span>
             </div>
             <CardTitle>{title}</CardTitle>
           </CardBody>
@@ -126,7 +126,7 @@ export const FullBleed: Story = {
   render: () => (
     <Card className="max-w-[380px]">
       <div className="grid h-[120px] place-items-center bg-primary-subtle">
-        <span className="font-mono text-[11px] text-primary-ink">full-bleed media</span>
+        <span className="text-[11px] text-primary-ink">full-bleed media</span>
       </div>
       <CardBody>
         <CardTitle className="mb-1">Cover art</CardTitle>
@@ -134,6 +134,31 @@ export const FullBleed: Story = {
           Flush to the edge, clipped by the card&rsquo;s own radius.
         </p>
       </CardBody>
+    </Card>
+  ),
+};
+
+export const Setup: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The full-page onboarding card — Build my twin, Voice library, \"Olga's twin is ready\". Radius `--tt-radius-xl` (24), no border, elevation-2, 32px padding on the card itself. Centred at the width its content needs: 480 for a form or a choice, 640 for a result, 680 for a list. It is the only card that pads itself and the only one without a border; do not use it for anything that sits in a grid.",
+      },
+    },
+  },
+  render: () => (
+    <Card variant="setup" className="mx-auto max-w-[480px] gap-4">
+      <h2 className="text-[20px] leading-7 font-title text-ink">Add your voice</h2>
+      <p className="text-[14px] leading-5 text-ink-secondary">
+        Record a short clip so your twin sounds like you, or pick a voice from the library.
+      </p>
+      <Button variant="secondary" fullWidth>
+        Record your voice
+      </Button>
+      <Button variant="secondary" fullWidth>
+        Select voice
+      </Button>
     </Card>
   ),
 };

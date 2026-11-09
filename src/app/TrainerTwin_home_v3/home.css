@@ -1054,6 +1054,42 @@
 
 /* =================================================================== SECTIONS */
 
+/* Scroll reveal: `ScrollEffects` (mounted once on the page) adds `.l-reveal`
+   to every `[data-reveal]` element on mount, then `.is-in` the first time it
+   crosses into view — same mechanism `landing2` already runs, just not yet
+   styled in this stylesheet. `.is-done` drops the compositor hint once the
+   transition finishes, and reduced motion / no-JS both land the section in
+   its resting state instead of stuck at opacity 0. */
+.tt-home--v3 .l-reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--l-reveal-y, 30px), 0);
+  transition:
+    opacity 780ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 780ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--l-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.tt-home--v3 .l-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+.tt-home--v3 .l-reveal.is-done {
+  will-change: auto;
+}
+@media (scripting: none) {
+  .tt-home--v3 .l-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-home--v3 .l-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .tt-home .sec {
   padding: var(--tt-space-24) 0;
 }
@@ -1183,6 +1219,34 @@
 .tt-home .sec--aurora > .wrap {
   position: relative;
 }
+/* v3 only: a plain CSS gradient in place of the `Aurora` canvas wash — two
+   corner glows (orange top-left, cyan top-right) and a soft warm-grey glow
+   between them, anchored to the section's top edge (where it meets the dark
+   hero) rather than its bottom, over white rather than the near-black
+   `#050505` this recipe was written against. Scoped to `.tt-home--v3` since
+   `.sec--aurora` is shared with `/TrainerTwin_home` and `_v1`, which keep
+   the plain white this section already had. */
+.tt-home--v3 .sec--aurora {
+  background:
+    radial-gradient(
+      ellipse 45% 35% at 5% 0%,
+      rgba(255, 157, 61, 0.85) 0%,
+      rgba(255, 157, 61, 0.35) 35%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 100% 0%,
+      rgba(0, 169, 221, 0.9) 0%,
+      rgba(0, 130, 175, 0.45) 35%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 50% 25% at 50% 0%,
+      rgba(120, 100, 105, 0.35) 0%,
+      transparent 75%
+    ),
+    #fff;
+}
 .tt-home .sec--sunken {
   background: var(--tt-surface-sunken);
   border-top: var(--tt-border-thin) solid var(--tt-border);
@@ -1218,6 +1282,11 @@
 .tt-home .head h2 {
   font-size: 44px; /* marketing/section */
   line-height: 1.14;
+}
+/* This one heading only — the shared `.head h2` rule above still wraps
+   normally everywhere else on the page. */
+.tt-home--v3 #build-h {
+  white-space: nowrap;
 }
 .tt-home .head p {
   margin-top: var(--tt-space-4);
@@ -1344,11 +1413,69 @@
   box-shadow: var(--tt-elevation-1);
   transform: none;
 }
+/* Border shine: a conic gradient ring (orange → gold → blue → back to
+   orange) rotates once around the pill, then holds for a two-second beat
+   before the next pass — `@property` is what makes the angle animatable at
+   all; a plain custom property can only ever jump between keyframe values.
+   `::before` is already claimed (cleared to `content: none` above, but
+   still this rule's own slot), so the ring uses `::after`. */
+@property --tt-way-cta-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.tt-home--v3 a.hdr-cta.way-cta::after {
+  content: "";
+  position: absolute;
+  inset: -0.5px;
+  border-radius: inherit;
+  padding: 0.5px;
+  background: conic-gradient(
+    from var(--tt-way-cta-angle),
+    var(--tt-primary),
+    var(--tt-gold-300),
+    var(--tt-blue-600),
+    var(--tt-primary)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: tt-v3-way-cta-shine 3.4s linear infinite;
+}
+@keyframes tt-v3-way-cta-shine {
+  0% {
+    --tt-way-cta-angle: 0deg;
+  }
+  41% {
+    --tt-way-cta-angle: 360deg;
+  }
+  100% {
+    --tt-way-cta-angle: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-home--v3 a.hdr-cta.way-cta::after {
+    animation: none;
+  }
+}
 .tt-home .way-copy .kicker {
   font-size: 14px;
   line-height: 20px;
   font-weight: var(--tt-weight-label);
   color: var(--tt-primary-ink);
+}
+/* v3 only: reads as the section's own `.eyebrow` — mono, uppercase, muted
+   grey — rather than the orange label the shared rule above gives it. */
+.tt-home--v3 .way-copy .kicker {
+  font-family: var(--tt-font-mono);
+  font-size: 10px;
+  line-height: 1.56;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--tt-text-muted);
 }
 .tt-home .way-copy h3 {
   font-family: var(--tt-font-ui);
@@ -2562,7 +2689,7 @@
    player frame reads dark on any page, light or dark, the same way a
    YouTube thumbnail does. */
 .tt-home--v3 .art-sq.is-light .border-glow-inner {
-  background: #fff;
+  background: var(--tt-canvas);
 }
 .tt-home--v3 .art-sq.is-light .mk--v3 .mk-rail {
   background: color-mix(in srgb, var(--tt-text-primary) 6%, transparent);
@@ -2626,7 +2753,7 @@
   stroke: color-mix(in srgb, var(--tt-text-primary) 45%, transparent);
 }
 .tt-home--v3 .art-sq.is-light .mk-dest {
-  background: color-mix(in srgb, var(--tt-text-primary) 5%, transparent);
+  background: var(--tt-canvas);
   border-color: var(--tt-neutral-200);
   color: var(--tt-text-tertiary);
 }
@@ -2757,6 +2884,10 @@
   background: var(--tt-night);
   border: var(--tt-border-thin) solid var(--tt-line-night);
   color: var(--tt-on-night);
+}
+/* v3 only: the agent's own reply reads off its fill alone, no hairline. */
+.tt-home--v3 .bubble--twin {
+  border: none;
 }
 .tt-home .source {
   align-self: flex-start;
@@ -5457,17 +5588,23 @@
   align-items: center;
 }
 .tt-home--v3 .who-acc-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tt-space-2);
   min-width: 0;
-  border-top: var(--tt-border-thin) solid var(--tt-line-night);
 }
 .tt-home--v3 .who-acc-item {
-  border-bottom: var(--tt-border-thin) solid var(--tt-line-night);
+  border-radius: var(--tt-radius-md);
+  padding: 0 var(--tt-space-4);
+}
+.tt-home--v3 .who-acc-item.is-open {
+  background: color-mix(in srgb, var(--tt-on-night) 6%, transparent);
 }
 .tt-home--v3 .who-acc-trigger {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--tt-space-4);
+  justify-content: flex-start;
+  gap: var(--tt-space-3);
   width: 100%;
   margin: 0;
   padding: var(--tt-space-5) 0;
@@ -5477,6 +5614,22 @@
   text-align: left;
   cursor: pointer;
   font: inherit;
+}
+.tt-home--v3 .who-acc-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  color: var(--tt-on-night-2);
+}
+.tt-home--v3 .who-acc-icon svg {
+  width: var(--tt-icon-sm);
+  height: var(--tt-icon-sm);
+}
+.tt-home--v3 .who-acc-item.is-open .who-acc-icon {
+  color: var(--tt-on-night);
 }
 /* `product/title-m` off the type scale: Figtree 600, 20/26 — the step below
    the serif floor. Was the marketing `marketing/section`-ish 28px Noto Serif;
@@ -5494,34 +5647,6 @@
 }
 .tt-home--v3 .who-acc-item:not(.is-open) .who-acc-kicker {
   color: var(--tt-on-night-2);
-}
-.tt-home--v3 .who-acc-mark {
-  position: relative;
-  flex: none;
-  width: 18px;
-  height: 18px;
-  color: var(--tt-on-night-2);
-}
-.tt-home--v3 .who-acc-mark-h,
-.tt-home--v3 .who-acc-mark-v {
-  position: absolute;
-  background: currentColor;
-  border-radius: 1px;
-}
-.tt-home--v3 .who-acc-mark-h {
-  top: 8px;
-  left: 2px;
-  width: 14px;
-  height: 1.5px;
-}
-.tt-home--v3 .who-acc-mark-v {
-  top: 2px;
-  left: 8px;
-  width: 1.5px;
-  height: 14px;
-}
-.tt-home--v3 .who-acc-item.is-open .who-acc-mark-v {
-  opacity: 0;
 }
 /* The 0fr/1fr grid-track trick: a track sized in `fr` can be transitioned like
    any other length, so the panel animates open and shut without ever knowing
@@ -5561,16 +5686,6 @@
   .tt-home--v3 .who-acc-panel {
     transition: none;
   }
-}
-.tt-home--v3 .who-acc-title {
-  margin: 0;
-  max-width: 40ch;
-  font-family: var(--tt-font-ui);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: var(--tt-weight-semibold);
-  text-transform: uppercase;
-  color: var(--tt-on-night-3);
 }
 .tt-home--v3 .who-acc-body {
   margin: 0;
@@ -5725,6 +5840,7 @@
   margin-top: 0;
 }
 
+
 /* The scenes were drawn for a card, so they get a card to sit in. Height:100%
    is what makes this square rather than a short strip — without it the panel
    only grew as tall as its own content and sat centred inside a stage that
@@ -5764,6 +5880,7 @@
   width: 60%;
   height: 70%;
   background: color-mix(in srgb, var(--tt-night-panel) 55%, var(--tt-night));
+  border: none;
   box-shadow: var(--tt-elevation-2);
   opacity: 0.75;
   -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%);
@@ -5775,6 +5892,7 @@
   right: -26px;
   bottom: -26px;
   background: var(--tt-night-panel);
+  border: none;
   box-shadow: var(--tt-elevation-3);
   -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 14%);
   mask-image: linear-gradient(to left, transparent 0%, #000 14%);
@@ -5782,6 +5900,11 @@
 .tt-home--v3 .wsa-tip {
   left: 5%;
   bottom: 5%;
+}
+.tt-home--v3 .wsa-back .cmp-pane-bar,
+.tt-home--v3 .wsa-front .cmp-pane-bar {
+  background: color-mix(in srgb, var(--tt-on-night) 6%, transparent);
+  border-bottom: none;
 }
 
 /* Everything here is read at arm's length in a large square, so the scene
@@ -5861,7 +5984,7 @@
   font-size: 30px;
   line-height: 34px;
   font-weight: var(--tt-weight-semibold);
-  color: var(--tt-primary);
+  color: var(--tt-on-night-2);
 }
 
 .tt-home--v3 .wsa-code {
@@ -5875,34 +5998,6 @@
 }
 .tt-home--v3 .wsa-code .is-err {
   color: var(--tt-danger);
-}
-
-.tt-home--v3 .wsa-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.tt-home--v3 .wsa-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: var(--tt-pad-pill-sm);
-  border-radius: var(--tt-radius-pill);
-  border: var(--tt-border-thin) solid var(--tt-line-night);
-  background: color-mix(in srgb, var(--tt-on-night) 7%, transparent);
-  font-size: 11.5px;
-  line-height: 16px;
-  color: var(--tt-on-night-2);
-}
-.tt-home--v3 .wsa-chip.is-on {
-  border-color: var(--tt-primary-border);
-  color: var(--tt-on-night);
-}
-.tt-home--v3 .wsa-chip svg {
-  width: 12px;
-  height: 12px;
-  flex: none;
-  color: var(--tt-success);
 }
 
 .tt-home--v3 .wsa-meter {
@@ -6080,31 +6175,20 @@
   flex-direction: column;
   overflow: hidden;
   border-radius: var(--tt-radius-md);
-  border: var(--tt-border-thin) solid var(--tt-line-night);
+  border: none;
 }
-.tt-home--v3 .cmp-pane--back {
-  top: var(--tt-space-4);
-  left: calc(var(--tt-space-4) * -1);
-  width: 60%;
-  height: 132px;
-  background: color-mix(in srgb, var(--tt-night-panel) 55%, var(--tt-night));
-  box-shadow: var(--tt-elevation-2);
-  opacity: 0.75;
-}
+/* Each column is a single centered pane now — no back plane behind it — with
+   the shadow pulled to 40% of e3's own alpha, lighter than a stacked-plane
+   card needs. */
 .tt-home--v3 .cmp-pane--front {
   top: 34px;
-  left: 28%;
-  right: -26px;
+  left: 8%;
+  right: 8%;
   bottom: -26px;
   background: var(--tt-night-panel);
-  box-shadow: var(--tt-elevation-3);
-}
-/* The panel is cropped by the card edge; its contents are not. Without this
-   the crop lands mid-word and reads as broken text rather than a screenshot
-   that carries on past the frame. */
-.tt-home--v3 .cmp-pane--front .cmp-pane-bar,
-.tt-home--v3 .cmp-pane--front .cmp-pane-body {
-  padding-right: 34px;
+  box-shadow:
+    0 0 0 1px rgb(253 251 247 / 0.036),
+    0 12px 32px rgb(0 0 0 / 0.24);
 }
 
 .tt-home--v3 .cmp-pane-bar {
@@ -6113,7 +6197,8 @@
   align-items: center;
   gap: var(--tt-space-2);
   padding: 9px var(--tt-space-3);
-  border-bottom: var(--tt-border-thin) solid var(--tt-line-night);
+  background: color-mix(in srgb, var(--tt-on-night) 8%, transparent);
+  border-bottom: none;
   font-size: 11.5px;
   line-height: 16px;
   font-weight: var(--tt-weight-label);
@@ -6457,8 +6542,9 @@
 }
 .tt-home--v3 .cmp-card-head {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--tt-space-2);
 }
 /* CardHeader's product hairline sits under the title + badge. These three
@@ -6581,6 +6667,9 @@
 .tt-home--v3 .cmp .can .is-miss svg {
   color: var(--tt-danger);
 }
+.tt-home--v3 .cmp .can li {
+  color: var(--tt-text-secondary);
+}
 
 /* --------------------------------------------- build your twin, three steps */
 
@@ -6593,11 +6682,12 @@
 .tt-home--v3 .steps-card {
   height: 100%;
   border-radius: 20px;
-  /* Same e3 offsets/blurs as the token, with the alpha pulled down so the
-     three cards lift off the sunken band without a heavy grey halo. */
+  /* Same e3 offsets/blurs as the token, with the alpha pulled down to 30% of
+     that so the three cards lift off the sunken band without a heavy grey
+     halo. */
   box-shadow:
-    0 4px 8px rgb(30 28 25 / 0.04),
-    0 16px 40px rgb(30 28 25 / 0.06);
+    0 4px 8px rgb(30 28 25 / 0.012),
+    0 16px 40px rgb(30 28 25 / 0.018);
 }
 /* Same three-plane illustration as the comparison cards, in light tokens —
    this band is `sec--sunken`, not a night scope. Light elevates with shadow
@@ -6608,7 +6698,7 @@
   height: 224px;
   flex: none;
   overflow: hidden;
-  background: var(--tt-surface-sunken);
+  background: var(--tt-canvas);
 }
 .tt-home--v3 .steps-planes {
   position: absolute;
@@ -6701,10 +6791,10 @@
 .tt-home--v3 .st-pip {
   position: absolute;
   z-index: 2;
-  right: 7%;
+  right: 2%;
   bottom: 14px;
-  width: 44%;
-  max-width: 200px;
+  width: 22%;
+  max-width: 100px;
   aspect-ratio: 1 / 1;
   border-radius: 16px;
   overflow: hidden;
@@ -6904,9 +6994,9 @@
   height: auto;
   overflow: visible;
   border-radius: var(--tt-radius-pill);
-  background: var(--tt-neutral-600);
+  background: var(--tt-canvas);
   border: none;
-  color: var(--tt-on-night);
+  color: var(--tt-text-secondary);
   font-size: 12px;
   line-height: 16px;
   font-weight: var(--tt-weight-label);
@@ -7162,9 +7252,18 @@
   line-height: 14px;
 }
 .tt-home--v3 .itwin-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   margin: 0;
   font-size: 11.5px;
   line-height: 16px;
+}
+.tt-home--v3 .itwin-text-line {
+  display: block;
+  height: 8px;
+  border-radius: var(--tt-radius-pill);
+  background: color-mix(in srgb, currentColor 9%, transparent);
 }
 .tt-home--v3 .itwin-turn--learner .itwin-bubble {
   margin-right: auto;
@@ -7827,13 +7926,15 @@
   }
 }
 .tt-home--v3 .found-set > li {
-  flex: 0 0 min(510px, 42vw);
+  flex: 0 0 min(357px, 29.4vw);
   min-width: 0;
   display: flex;
 }
 .tt-home--v3 .found-card {
+  position: relative;
+  isolation: isolate;
   flex: 1;
-  flex-direction: row;
+  overflow: hidden;
   align-items: stretch;
   height: 360px;
   border-radius: 20px;
@@ -7848,27 +7949,39 @@
   min-width: 0;
   padding: var(--tt-space-8) var(--tt-space-6);
 }
+/* Name, role and the LinkedIn mark sit in one corner over the photo now,
+   lifted onto a bottom scrim instead of a copy column beside it. */
+.tt-home--v3 .found-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--tt-space-2);
+  padding: var(--tt-space-6);
+}
 .tt-home--v3 .found-name {
-  font-size: 28px;
-  line-height: 34px;
+  font-size: 24px;
+  line-height: 30px;
+  color: var(--tt-on-night);
 }
 .tt-home--v3 .found-in {
   display: grid;
   place-items: center;
   width: 24px;
   height: 24px;
-  margin: 0 0 var(--tt-space-2);
-  color: var(--tt-primary-ink);
+  color: var(--tt-on-night);
   text-decoration: none;
 }
 .tt-home--v3 .found-in:hover {
-  color: var(--tt-primary);
+  color: var(--tt-on-night-2);
 }
 .tt-home--v3 .found-domain {
-  margin: 0 0 var(--tt-space-2);
+  margin: 0;
   font-size: 13px;
   line-height: 20px;
-  color: var(--tt-text-secondary);
+  color: var(--tt-on-night-2);
 }
 .tt-home--v3 .found-label {
   margin: var(--tt-space-2) 0 0;
@@ -7881,10 +7994,11 @@
   color: var(--tt-text-muted);
 }
 .tt-home--v3 .found-copy {
-  margin: 0;
-  font-size: 15px;
-  line-height: 23px;
-  color: var(--tt-text-secondary);
+  margin: var(--tt-space-1) 0 0;
+  max-width: 34ch;
+  font-size: 13px;
+  line-height: 19px;
+  color: var(--tt-on-night-2);
 }
 .tt-home--v3 .found-card--others {
   position: relative;
@@ -7976,10 +8090,8 @@
   margin-top: var(--tt-space-2);
 }
 .tt-home--v3 .found-media {
-  position: relative;
-  flex: 0 0 42%;
-  min-width: 180px;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
   background: var(--tt-fill-soft);
 }
 .tt-home--v3 .found-photo {
@@ -7988,6 +8100,18 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
+}
+/* Bottom-anchored, so the name/role/LinkedIn overlay always lands on a dark
+   enough ground to read white, whatever the photo looks like underneath. */
+.tt-home--v3 .found-photo-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.5) 55%,
+    transparent 85%
+  );
 }
 .tt-home--v3 a.found-cta {
   height: 46px;
@@ -8000,8 +8124,10 @@
   .tt-home--v3 .found-set > li {
     flex-basis: min(240px, 61.5vw);
   }
-  .tt-home--v3 .found-card {
-    flex-direction: column;
+  /* Founder cards keep a fixed height — the photo fills it at any viewport,
+     `.found-media` being absolutely positioned. Only the Others card, whose
+     content is just a heading and a button, shrinks to fit. */
+  .tt-home--v3 .found-card--others {
     height: auto;
     min-height: 0;
   }
@@ -8011,13 +8137,6 @@
   .tt-home--v3 .found-name {
     font-size: 22px;
     line-height: 28px;
-  }
-  .tt-home--v3 .found-media {
-    flex: none;
-    width: 100%;
-    min-width: 0;
-    height: 200px;
-    order: -1;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -8425,5 +8544,144 @@
 @media (max-width: 860px) {
   .tt-home--v3 .invite-layers {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------- the page loader
+   One-time splash, `SiteLoader`: a word/icon cycles (AI, Avatar, Voice, Real
+   time conversation), settles on the wordmark, then a grid of tiles dissolves
+   outward from the centre to reveal the page underneath. `html.tt-loading`
+   (set for the loader's own lifetime) holds the page still so it isn't
+   mid-scroll-reveal-animation when the cover lifts.
+
+   The outer `.tt-loader` itself carries no fill — the tile grid is the only
+   opaque surface. That is what lets each tile's own disappearance actually
+   reveal the page under it, rather than a still-solid layer sitting behind
+   the grid the whole time. */
+html.tt-loading {
+  overflow: hidden;
+}
+.tt-home--v3 .tt-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.tt-home--v3 .tt-loader-wash {
+  position: absolute;
+  inset: -30%;
+  z-index: 0;
+  background: linear-gradient(
+    120deg,
+    rgb(95 104 132) 0%,
+    rgb(19 19 37) 20%,
+    rgb(18 11 18) 35%,
+    rgb(14 17 23) 70%,
+    rgb(59 61 67) 100%
+  );
+  filter: blur(60px);
+  opacity: 0.9;
+  transition: opacity 280ms ease;
+}
+.tt-home--v3 .tt-loader-wash.is-closing {
+  opacity: 0;
+}
+.tt-home--v3 .tt-loader-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--tt-space-2);
+  animation: tt-loader-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: opacity 220ms ease;
+}
+.tt-home--v3 .tt-loader-step.is-closing {
+  opacity: 0;
+}
+/* A plain fade-in every time `SiteLoader` swaps in a new icon — remounted by
+   its `key={step}`, so the animation restarts on each change. */
+.tt-home--v3 .tt-loader-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--tt-on-night);
+  animation: tt-loader-icon-in 320ms ease both;
+}
+.tt-home--v3 .tt-loader-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.tt-home--v3 .tt-loader-label {
+  font-family: var(--tt-font-ui);
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: var(--tt-weight-semibold);
+  letter-spacing: -0.01em;
+  color: var(--tt-on-night);
+  white-space: nowrap;
+}
+/* The dissolving cover: an 8×5 grid of tiles, each the same near-black as the
+   wash underneath, sitting above it so the page is fully hidden until a tile
+   is told to go. `--tt-tile-delay` (its distance from the grid's centre) is
+   set inline per tile by `SiteLoader`. */
+.tt-home--v3 .tt-loader-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+.tt-home--v3 .tt-loader-tile {
+  background: #0a0910;
+}
+.tt-home--v3 .tt-loader-grid.is-closing {
+  pointer-events: none;
+}
+.tt-home--v3 .tt-loader-grid.is-closing .tt-loader-tile {
+  animation: tt-loader-tile-out 420ms ease forwards;
+  animation-delay: var(--tt-tile-delay, 0ms);
+}
+@keyframes tt-loader-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tt-loader-icon-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tt-loader-tile-out {
+  to {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-home--v3 .tt-loader {
+    display: none;
+  }
+}
+/* With JavaScript off, `SiteLoader` never mounts, so `html.tt-loading` never
+   lands either — nothing here depends on `[data-x]` markers left over from a
+   script that did not run. */
+@media (scripting: none) {
+  .tt-home--v3 .tt-loader {
+    display: none;
   }
 }

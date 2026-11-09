@@ -4,6 +4,7 @@ import { FoundingTrainers } from "@/components/home/FoundingTrainers";
 import { HeroV3 } from "@/components/home/HeroV3";
 import { PageFooter } from "@/components/home/PageFooter";
 import { SiteHeader } from "@/components/home/SiteHeader";
+import { SiteLoader } from "@/components/home/SiteLoader";
 import { ThreeWays } from "@/components/home/ThreeWays";
 import { CompareTwin } from "@/components/home/CompareTwin";
 import { WhoItsFor } from "@/components/home/WhoItsFor";
@@ -17,6 +18,7 @@ import { ScrollEffects } from "@/components/landing2/ScrollEffects";
 export default function TrainerTwinHomeV3() {
   return (
     <>
+      <SiteLoader />
       <SiteHeader nav={NAV_V3} mobileMenu ctaLabel="Request a demo" />
       <main id="top">
         <HeroV3 />
@@ -25,7 +27,7 @@ export default function TrainerTwinHomeV3() {
           art="v3"
           interactive={{
             title: "Learn with you. Practise with you. Talk to you.",
-            body: "Even when you’re not there. Your Twin thinks, responds and interacts the way you do, so your audience can learn, practise, explore and act on what you teach.",
+            body: "Your Twin teaches, practises, and answers questions just like you.",
             points: [
               "Role-play - Real world conversation",
               "1:1 conversation - Clear doubts",
@@ -33,8 +35,14 @@ export default function TrainerTwinHomeV3() {
             ],
           }}
           explainer={{
-            title: "Create videos without being on camera.",
-            body: "Your Twin turns what you know into video: from promos and social clips to explainers and full lessons. Your face, your voice, your way of putting things.",
+            title: (
+              <>
+                Create videos without
+                <br />
+                being on camera.
+              </>
+            ),
+            body: "Turn your knowledge into engaging videos without being on camera.",
             points: [
               "Animated explainers video",
               "Personalised demo video",

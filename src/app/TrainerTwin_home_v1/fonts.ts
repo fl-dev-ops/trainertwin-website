@@ -3,9 +3,10 @@ import { IBM_Plex_Sans, Hanken_Grotesk } from "next/font/google";
 /**
  * The two marketing-only faces (§3), scoped to this route.
  *
- * The product's type system is three roles wide — Noto Serif / Figtree /
- * JetBrains Mono, loaded in src/styles/fonts.ts — and these two never appear in
- * product UI, so they are loaded per marketing route rather than at the root:
+ * The product's type system is TWO families — Noto Serif / Figtree, loaded in
+ * src/styles/fonts.ts (JetBrains Mono was removed 29 Sep 2026) — and these two
+ * never appear in product UI, so they are loaded per marketing route rather
+ * than at the root:
  *
  *   plex   — the oversized footer watermark.
  *   hanken — the footer's own tighter scale, never above the footer boundary.

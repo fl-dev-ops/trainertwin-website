@@ -84,7 +84,7 @@
   pointer-events: none;
   background: radial-gradient(
     ellipse at 50% 0%,
-    color-mix(in srgb, var(--tt-blue-300) 70%, transparent),
+    color-mix(in srgb, var(--tt-on-night-3) 70%, transparent),
     transparent 72%
   );
   filter: blur(7px);
@@ -95,20 +95,19 @@
   width: 72px;
   height: 72px;
   filter: drop-shadow(
-    0 10px 14px color-mix(in srgb, var(--tt-blue-500) 35%, transparent)
+    0 10px 14px color-mix(in srgb, var(--tt-night) 17.5%, transparent)
   );
 }
 .ea-badge-fill {
-  fill: var(--tt-night-panel);
+  fill: var(--tt-canvas);
 }
 .ea-badge-ring {
   fill: none;
-  stroke: color-mix(in srgb, var(--tt-on-night-3) 55%, var(--tt-blue-300));
-  stroke-width: 1;
+  stroke: none;
 }
 .ea-badge-stroke {
   fill: none;
-  stroke: var(--tt-on-night-2);
+  stroke: var(--tt-text-secondary);
   stroke-width: 1.4;
   stroke-linejoin: round;
 }

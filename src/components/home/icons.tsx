@@ -26,7 +26,8 @@ export type IconName =
   | "folder"
   | "cloud"
   | "chat"
-  | "chevron";
+  | "chevron"
+  | "sparkles";
 
 const stroke = {
   fill: "none",
@@ -125,6 +126,14 @@ const PATHS: Record<IconName, React.ReactElement> = {
       {...stroke}
       strokeLinecap="round"
       strokeLinejoin="round"
+    />
+  ),
+  /* Filled, like `face` — a sparkle is a shape, not an outline, and a stroke
+     on points this small just disappears. */
+  sparkles: (
+    <path
+      d="M7 1c.3 2.6 1.4 3.7 4 4-2.6.3-3.7 1.4-4 4-.3-2.6-1.4-3.7-4-4 2.6-.3 3.7-1.4 4-4ZM12.5 9c.15 1.1.55 1.5 1.5 1.75-.95.25-1.35.65-1.5 1.75-.15-1.1-.55-1.5-1.5-1.75.95-.25 1.35-.65 1.5-1.75Z"
+      fill="currentColor"
     />
   ),
 };

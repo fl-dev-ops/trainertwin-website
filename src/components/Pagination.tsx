@@ -43,7 +43,11 @@ export function Pagination({
           a silent content swap. */}
       <span
         aria-live="polite"
-        className="font-mono text-[11.5px] tabular-nums text-ink-tertiary"
+        // Figtree, not mono — 29 Sep 2026. `tabular-nums` is load-bearing
+        // here, not decoration: Figtree's default figures are proportional
+        // and measure 99px vs 154px for "111111" vs "000000" at 40px, so
+        // the page counter would visibly jitter as it advanced without it.
+        className="text-[11.5px] tabular-nums text-ink-tertiary"
       >
         Page {page} of {total}
       </span>

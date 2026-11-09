@@ -58,14 +58,9 @@ export function TwinTestIllustration({
         </div>
       </div>
       <span className="st-overlay">
-        <span className="steps-tip">
-          <Icon name="check" />
-          Sounds like you
-        </span>
-
         {/* The twin, live on camera — on the overlay rather than inside the
-            pane, so it shares the tip's own coordinate space and can be set
-            to the tip's own bottom offset: same row, opposite side. */}
+            pane, so it sits above the fade mask on the stage's own bottom
+            edge. */}
         <span className="st-pip">
           <MutedClip src="/tt/presenter.mp4" className="st-pip-video" />
           <span className="st-pip-wave" aria-hidden="true">

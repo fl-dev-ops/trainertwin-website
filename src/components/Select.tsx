@@ -82,7 +82,7 @@ export function Select({
 
   return (
     <div className="flex w-full flex-col gap-1.5" ref={rootRef}>
-      <span id={labelId} className="font-ui text-[13px] font-semibold text-ink">
+      <span id={labelId} className="font-ui text-[13px] font-label text-ink">
         {label}
       </span>
 
@@ -101,7 +101,7 @@ export function Select({
           className={cn(
             "tt-lb-field",
             "flex w-full items-center justify-between gap-2",
-            "min-h-10 rounded-sm bg-surface px-3 py-1.5",
+            "min-h-9 rounded-sm bg-surface px-3 py-1.5",
             "font-ui text-left text-[14px]",
             "border-[length:var(--tt-border-form)] border-solid",
             "transition-colors duration-150 ease-standard",
@@ -164,7 +164,9 @@ export function Select({
                 <svg
                   viewBox="0 0 16 16"
                   className={cn(
-                    "size-4 shrink-0 text-primary",
+                    // text-ink, not text-primary — changed 29 Sep 2026. The
+                    // tick marking the chosen row is selection, not a CTA.
+                    "size-4 shrink-0 text-ink",
                     !isSelected && "invisible",
                   )}
                   fill="none"

@@ -104,7 +104,7 @@ export function MultiSelect({
     <div className="flex w-full flex-col gap-1.5" ref={rootRef}>
       <span
         id={labelId}
-        className="font-ui text-[13px] font-semibold text-ink"
+        className="font-ui text-[13px] font-label text-ink"
       >
         {label}
       </span>
@@ -114,9 +114,9 @@ export function MultiSelect({
           className={cn(
             "tt-lb-field",
             "flex w-full flex-wrap items-center gap-1.5 rounded-sm bg-surface",
-            // Matches the text field: 40px at rest, but min-height so the field
+            // Matches the text field: 36px at rest, but min-height so the field
             // grows down as chips wrap instead of clipping them.
-            "min-h-10 px-2 py-1.5",
+            "min-h-9 px-2 py-1",
             "border-[length:var(--tt-border-form)] border-solid",
             "transition-colors duration-150 ease-standard",
             error
@@ -238,7 +238,9 @@ export function MultiSelect({
                 <svg
                   viewBox="0 0 16 16"
                   className={cn(
-                    "size-4 shrink-0 text-primary",
+                    // text-ink, not text-primary — changed 29 Sep 2026. The
+                    // tick marking the chosen row is selection, not a CTA.
+                    "size-4 shrink-0 text-ink",
                     !isSelected && "invisible",
                   )}
                   fill="none"

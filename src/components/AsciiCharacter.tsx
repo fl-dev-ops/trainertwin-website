@@ -128,7 +128,10 @@ export function AsciiCharacter({
   rotationSpeed = 1,
   color,
   marks = "pixel",
-  fontFamily = 'ui-monospace, SFMono-Regular, Menlo, "JetBrains Mono", monospace',
+  // The OS monospace. "JetBrains Mono" was dropped from this stack 29 Sep 2026
+  // along with the webfont itself — it sat fourth and was never reached anyway,
+  // and naming a family the app no longer loads is a lie in the source.
+  fontFamily = "ui-monospace, SFMono-Regular, Menlo, monospace",
   interactive = true,
   className,
   style,

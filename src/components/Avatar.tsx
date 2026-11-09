@@ -50,7 +50,16 @@ export function Avatar({ src, alt, size = "md", className, ...rest }: AvatarProp
         title={alt}
         className={cn(
           base,
-          "grid place-items-center bg-primary-ink font-ui font-semibold text-surface",
+          // Stays semibold, not medium — a two-letter monogram at 9.5-15px needs
+          // every bit of weight it can get to stay legible, unlike a title.
+          //
+          // Neutral ground, not bg-primary-ink — changed 29 Sep 2026. Avatars
+          // repeat: a ten-person list was ten orange discs, which is identity
+          // competing with the call to action and winning on count alone. Who
+          // someone is has never been a thing to press. fill-soft/ink-secondary
+          // both flip with the token layer, so the monogram keeps its contrast
+          // in either theme.
+          "grid place-items-center bg-fill-soft font-ui font-semibold text-ink-secondary",
         )}
       >
         <span aria-hidden="true">{initials(alt)}</span>

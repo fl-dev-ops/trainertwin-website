@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Card, CardBody, CardHeader, CardTitle } from "@/components/Card";
 import { LogoSymbol } from "@/components/Logo";
 import { MutedClip } from "@/components/landing2/MutedClip";
-import { CardStroke } from "./CardStroke";
 import { TwinArt } from "./CompareTwinArt";
 import { Icon, type IconName } from "./icons";
 
@@ -18,7 +17,7 @@ const COLUMNS = [
     rows: [
       { ok: true, label: "Uses your content" },
       { ok: true, label: "Answers questions" },
-      { ok: false, label: "Generic teaching style" },
+      { ok: false, label: "Teaching style" },
       { ok: false, label: "Video creation" },
       { ok: false, label: "Your presence" },
     ],
@@ -71,16 +70,12 @@ export function CompareTwin() {
       className="sec sec--line tt-night cmp"
       id="compare"
       aria-labelledby="compare-h"
+      data-reveal
     >
       <div className="wrap">
         <div className="head">
           <span className="eyebrow">More than content or an avatar</span>
           <h2 id="compare-h">Same content. Different experience.</h2>
-          <p>
-            Anyone can replicate your content. An avatar can look and sound like
-            you. A chatbot can answer questions from your material. But neither
-            can <strong>teach like YOU.</strong>
-          </p>
         </div>
 
         <div className="cmp-grid">
@@ -99,9 +94,6 @@ export function CompareTwin() {
                   col.featured ? "cmp-card cmp-card--twin" : "cmp-card"
                 }
               >
-                {/* Not on the featured column — that one already wears its own
-                    animated ring, and two edges on one card is one too many. */}
-                {col.featured ? null : <CardStroke radius={20} />}
                 <div className="cmp-art" aria-hidden="true">
                   <CompareArt columnKey={col.key} />
                 </div>
@@ -109,13 +101,11 @@ export function CompareTwin() {
                 <CardHeader>
                   <div className="cmp-card-head">
                     <div className="cmp-card-name">
-                      <span className="cmp-card-icon">
-                        {col.key === "twin" ? (
+                      {col.key === "twin" ? (
+                        <span className="cmp-card-icon">
                           <LogoSymbol size={16} />
-                        ) : (
-                          <Icon name={col.icon} />
-                        )}
-                      </span>
+                        </span>
+                      ) : null}
                       <CardTitle>{col.title}</CardTitle>
                     </div>
                     <span className="cmp-tag">{col.tag}</span>
@@ -161,13 +151,6 @@ function CompareArt({ columnKey }: { columnKey: (typeof COLUMNS)[number]["key"] 
   if (columnKey === "avatar") {
     return (
       <div className="cmp-planes">
-        <div className="cmp-pane cmp-pane--back">
-          <div className="cmp-pane-bar">
-            <Icon name="folder" />
-            Renders
-          </div>
-        </div>
-
         <div className="cmp-pane cmp-pane--front">
           <div className="cmp-pane-bar">
             <Icon name="video" />
@@ -194,13 +177,6 @@ function CompareArt({ columnKey }: { columnKey: (typeof COLUMNS)[number]["key"] 
 
   return (
     <div className="cmp-planes">
-      <div className="cmp-pane cmp-pane--back">
-        <div className="cmp-pane-bar">
-          <Icon name="doc" />
-          Uploaded material
-        </div>
-      </div>
-
       <div className="cmp-pane cmp-pane--front">
         <div className="cmp-pane-bar">
           <Icon name="chat" />

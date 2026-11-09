@@ -172,7 +172,7 @@ export function CoachingScene() {
           </span>
           <span
             data-anim="skill-pct"
-            className="font-mono ml-auto shrink-0 text-right text-[#5a6069] tabular-nums"
+            className="ml-auto shrink-0 text-right text-[#5a6069] tabular-nums"
             style={{ fontSize: u(11) }}
           >
             {Math.round(skill.pct * 100)}%

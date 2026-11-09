@@ -93,7 +93,7 @@ export function SiteFooter() {
             </p>
             <span className="inline-flex items-center gap-2 rounded-full border border-[var(--l-line-footer)] bg-[#2a2a2a] px-[13px] py-[7px]">
               <span className="h-2 w-2 rounded-full bg-[var(--l-live)]" />
-              <span className="font-mono text-[12px] leading-[16px] font-medium text-[#858585]">
+              <span className="text-[12px] leading-[16px] font-medium text-[#858585]">
                 All systems operational
               </span>
             </span>

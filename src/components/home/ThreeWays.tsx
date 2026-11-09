@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Aurora } from "@/components/Aurora";
 import { CtaLink } from "./CtaLink";
 import { GlowCard } from "./GlowCard";
 import { Icon } from "./icons";
@@ -25,13 +24,13 @@ export function ThreeWays({
   art = "default",
 }: {
   explainer?: {
-    title: string;
-    body: string;
+    title: ReactNode;
+    body?: string;
     points: string[];
   };
   interactive?: {
-    title: string;
-    body: string;
+    title: ReactNode;
+    body?: string;
     points: string[];
   };
   /** v3: Explainer videos above Interactive twin. */
@@ -58,8 +57,9 @@ export function ThreeWays({
               "A version of you your students can reach anytime"
             }
             body={
-              interactiveCopy?.body ??
-              "It looks like you, sounds like you and teaches the way you do. With it, you can offer your students:"
+              interactiveCopy
+                ? interactiveCopy.body
+                : "It looks like you, sounds like you and teaches the way you do. With it, you can offer your students:"
             }
             points={
               interactiveCopy?.points ?? [
@@ -84,8 +84,9 @@ export function ThreeWays({
               "Explainers for the lessons you repeat every batch"
             }
             body={
-              explainer?.body ??
-              "Short animated videos in your voice and your style, for the concepts you explain again and again. Students can rewatch them as often as they need."
+              explainer
+                ? explainer.body
+                : "Short animated videos in your voice and your style, for the concepts you explain again and again. Students can rewatch them as often as they need."
             }
             points={explainer?.points}
             art={
@@ -105,18 +106,12 @@ export function ThreeWays({
   );
 
   return (
-    <section className="sec sec--aurora" id="can-do" aria-labelledby="can-do-h">
-      {/* The seam between the fold and the page proper: a slow wash across the
-          top of this section, in three tokens rather than three hexes. Light
-          enough to be noticed only on the way past. */}
-      <Aurora
-        className="sec-aurora"
-        colorStops={["--tt-blue-300", "--tt-primary-subtle", "--tt-primary"]}
-        blend={0.78}
-        amplitude={0.65}
-        speed={0.32}
-        lightMode
-      />
+    <section
+      className="sec sec--aurora"
+      id="can-do"
+      aria-labelledby="can-do-h"
+      data-reveal
+    >
       <div className="wrap">
         <div className="head">
           <span className="eyebrow">What your twin can do</span>
@@ -159,8 +154,8 @@ function Way({
   /** Anchor the nav menu points at, so a card there lands on the right row. */
   id: string;
   kicker: string;
-  title: string;
-  body: string;
+  title: ReactNode;
+  body?: string;
   points?: string[];
   art: ReactNode;
   /** Which of the three meshes sits behind the illustration (see home.css). */
@@ -186,7 +181,7 @@ function Way({
         <div className="way-copy-inner">
           <span className="kicker">{kicker}</span>
           <h3>{title}</h3>
-          <p>{body}</p>
+          {body ? <p>{body}</p> : null}
           {points ? (
             <ul className="can">
               {points.map((item) => (

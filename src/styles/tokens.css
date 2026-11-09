@@ -81,20 +81,50 @@
   --tt-gold-700: #7F5F00;
   --tt-gold-900: #3A2A00;
 
-  /* Type weight — TWO STEPS, added 10 Sep 2026.
-     This scale did not exist until now, and its absence was the bug: families
+  /* Type weight — THREE STEPS, revised 25 Sep 2026 (was two, added 10 Sep).
+     This scale did not exist until 10 Sep, and its absence was the bug: families
      were tokenised but weight never was, so every component picked its own
      literal and the system drifted to four of them (800 wordmark / 800 metrics,
-     700 buttons and labels, 600 titles, 500 mono meta). Screens built from the
-     system came out heavier than the system intended, because nothing in the
-     system stated an intent.
+     700 buttons and labels, 600 titles, 500 mono meta). The fix at the time was
+     to collapse everything to two steps, 400 and 600.
 
-     Two steps, and only two. Figtree at 600 already separates cleanly from 400
-     at 13px, so a third step buys nothing and gives drift somewhere to hide.
-     700 is now OUT OF THE SCALE — at 13-15px it thickens the stems enough to
-     close up Figtree's counters without reading as more important than 600. */
+     That overshot: 600 on every title and every <b>/<strong> reads as too heavy
+     in the product (Bhuvan's call, referencing Town.com's restraint — titles and
+     inline emphasis there carry hierarchy through size and colour, not through
+     maximum available weight). 700 is still OUT OF THE SCALE for the reason
+     given at the time — it closes up Figtree's counters. But a single "570 for
+     everything that isn't body text" was never fine-grained enough to tell a
+     title from a button.
+
+     So: 400 body, 500 for anything that needs to read as slightly more
+     important (labels, badges, inline emphasis), 600 for the places that
+     should stand apart from their own content — titles AND the button/CTA
+     label. Titles moved back to 600 on 29 Sep 2026, reversing the paragraph
+     above for titles specifically: 500 flattened a card's heading against its
+     own body text, with no step left between them. See the role aliases below;
+     they are what changed, not the primitives. */
   --tt-weight-regular:  400;
+  --tt-weight-medium:   500;
   --tt-weight-semibold: 600;
+
+  /* Font family — THE BRAND IS TWO FAMILIES: Figtree and Noto Serif. Both are
+     loaded by next/font (src/styles/fonts.ts), which supplies --tt-font-ui and
+     --tt-font-display; neither is declared here, because a token file cannot
+     name a hashed webfont.
+
+     --tt-font-mono is different, and it is declared here BECAUSE it is no longer
+     a webfont. JetBrains Mono was removed entirely 29 Sep 2026 — nothing third
+     is downloaded or shipped. But 41 declarations across the marketing CSS say
+     `font-family: var(--tt-font-mono);` with NO fallback, and an undefined
+     custom property makes the whole declaration invalid, so deleting the name
+     would have silently dropped fixed-width from every code mock and terminal
+     on the landing page. It now resolves to the reader's own operating-system
+     monospace: no request, no licence, not a brand family.
+
+     Use it ONLY where characters must be fixed-width to stay aligned — the
+     simulated code panels and terminals. Never in product UI. Never for
+     numbers: those are Figtree with `font-variant-numeric: tabular-nums`. */
+  --tt-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Space — 4pt base */
   --tt-space-1: 4px;   --tt-space-2: 8px;   --tt-space-3: 12px;
@@ -118,14 +148,27 @@
 
   /* Shape — radii step with the element. A chip inside a card takes the radius
      one step below the card's: never the same, never larger. */
-  /* The 4px step was retired 9 Sep 2026 — 8px is the floor across the system.
-     `xs` is kept as an alias so existing usages keep working, but it is no longer
-     a distinct step: the scale is effectively 8 / 12 / 16 / pill. That means the
-     "a chip takes one radius step below its card" rule now starts at 8 inside 12. */
-  --tt-radius-xs: 8px;    /* alias of sm — chips, inputs, source citations */
+  /* REVERSED 29 Sep 2026 — the 4px step is back, and the scale starts there.
+     It was retired 9 Sep 2026 in favour of "8px is the floor across the system",
+     which left `xs` as a dead alias of `sm` and the scale effectively 8/12/16.
+     The cost showed up on the smallest controls: an 18px checkbox at 8px radius
+     is rounding 44% of its own half-width, which reads as a lozenge rather than
+     a square with softened corners. A radius has to step with the element, and
+     with no step below 8 there was nothing for an 18px control to take.
+     The scale is 4 / 8 / 12 / 16 / 24 / pill (24 added 30 Sep 2026, see below),
+     and "a chip takes one step below its card" starts at 4 inside 8 again. */
+  --tt-radius-xs: 4px;    /* checkboxes, radios, and anything at or under ~20px */
   --tt-radius-sm: 8px;    /* buttons, small cards, form fields */
   --tt-radius-md: 12px;   /* panels, Studio source cards */
   --tt-radius-lg: 16px;   /* modals, the session frame */
+  /* Added 30 Sep 2026, one step above `lg` — the onboarding flow's full-page
+     setup card, the sign-up modal, and the empty-state "gate" card (Home,
+     Analytics, Role play before a twin exists) all measured at 24px, not 16.
+     Reserved for the LARGEST elevated surfaces only — a full-screen flow's own
+     card, an auth modal, a gated empty state. `lg` stays correct for an
+     ordinary modal or the session frame; this is one tier above that, not a
+     replacement for it. */
+  --tt-radius-xl: 24px;   /* full-page setup cards, auth modals, empty-state gates */
   --tt-radius-pill: 999px;
 
   /* Border widths. Forms take the hairline: on a 2x display 0.5px renders as a
@@ -239,6 +282,12 @@
   --tt-fill-soft-hover: #E9E9E9;   /* neutral-200 */
 
   --tt-border:             #E9E9E9;  /* decorative only, no contrast requirement */
+  /* Card gets its own, lighter border — added 25 Sep 2026. --tt-border is the
+     general divider (table rows, card headers/footers, dropdowns); a card's own
+     outer edge sits next to open canvas on every side and reads as heavier than
+     an internal divider at the same value. One step lighter on the neutral ramp
+     (neutral-100, not neutral-200). */
+  --tt-card-border:        #F0F0F0;
   --tt-border-interactive: #828282;  /* 3.99:1 light / 4.50:1 dark — one value, both themes */
   --tt-border-field:       #C4C4C4;  /* neutral-300. DELIBERATE DECISION, 9 Sep 2026.
                                         Form fields and the secondary button, at rest.
@@ -299,30 +348,47 @@
      the fill, never by the border alone (SC 1.4.1). Do not "fix" these back. */
   --tt-primary-border: #FFA36B;
   --tt-success-border: #7FD1A0;
+  /* MARKETING BADGE BORDER — the lone survivor of the --tt-*-badge-border family.
+     The other four were culled 25 Sep 2026 when Badge/SourceChip dropped their
+     borders. That cull checked the React components and NOT the marketing CSS,
+     where nine call sites across TrainerTwin_home{,_v1,_v3}/home.css still point
+     here — one of them inside a `border:` shorthand, which an undefined var makes
+     invalid outright, removing the border entirely. Restored 29 Sep 2026 at its
+     original value; it is a lighter step than --tt-primary-border on purpose
+     (55% toward the badge's own subtle fill), so a repeated badge edge stays
+     barely-there. Marketing only — product badges have no border at all. */
+  --tt-primary-badge-border: #FFD0B2;
   --tt-info-border:    #8FB6F5;
   --tt-caution-border: #E9C86A;
   --tt-danger-border:  #F58F93;
 
-  /* BADGE borders — added 11 Sep 2026. A badge is a small pill, usually several
-     to a row (a table cell, a filter list); the alert-strength border at
-     ~1.5-2.1:1 that is correct on a full-width alert reads as heavy at that
-     scale, repeated. This is the same idea taken one step further: 55% toward
-     the badge's own subtle fill rather than the fill's neighbour in the ramp,
-     so severity keeps riding on the icon, fill and text (SC 1.4.1), and the
-     border is barely there rather than merely soft. */
-  --tt-primary-badge-border: #FFD0B2;
-  --tt-success-badge-border: #BCE7CD;
-  --tt-info-badge-border:    #C3D8FA;
-  --tt-caution-badge-border: #F4E1AD;
-  --tt-danger-badge-border:  #FAC5C7;
+  /* BADGE borders — added 11 Sep 2026, REMOVED 25 Sep 2026. A filled badge lost
+     its border entirely (the fill alone reads as a shape; the two together were
+     doubling up), so this whole family went from "the alert border, but even
+     lighter" to unused in one step. Left as a note rather than silently
+     deleted: if a filled badge ever needs a border again, this is where the
+     lighter-than-alert step used to live, not --tt-*-border. */
 
   /* Weight by role. These are what components should reference — the role names
-     are the rule, so "labels are semibold" is one line to change rather than a
-     grep. All four resolve to two values; that is the point. */
+     are the rule, so "titles are medium, buttons stay semibold" is one line to
+     change rather than a grep. It wasn't followed until 25 Sep 2026: every
+     product component referenced Tailwind's own font-semibold directly instead
+     of these, so when the weight needed to change it meant editing thirteen
+     files, not one. That is fixed now — see src/components/*. */
   --tt-weight-body:  var(--tt-weight-regular);   /* body, help text, table cells */
-  --tt-weight-title: var(--tt-weight-semibold);  /* every heading, display or ui */
-  --tt-weight-label: var(--tt-weight-semibold);  /* field labels, eyebrows, badges */
-  --tt-weight-cta:   var(--tt-weight-semibold);  /* every button label */
+  /* REVERSED 29 Sep 2026 — titles are semibold again.
+     They were moved 600 -> 500 on 25 Sep ("too much font weight for titles and
+     bold texts"). That pass overshot in the other direction: with titles, labels
+     and inline emphasis all sitting at 500, a table or card had no weight
+     contrast left between its heading and its own content, and the result read
+     flat. 600 is back on TITLES ONLY — labels stay 500 and `b`/`strong` stay
+     500, so the original complaint about heavy bold text is not re-created.
+     The scale still has three steps; what changed is which step titles take. */
+  --tt-weight-title: var(--tt-weight-semibold);  /* headings, card/modal/page titles, row names */
+  --tt-weight-label: var(--tt-weight-medium);    /* field labels, table headers, badges */
+  --tt-weight-cta:   var(--tt-weight-semibold);  /* button labels only — stays heavier
+                                                     on purpose; a button is the one
+                                                     thing on screen meant to be pressed */
 
   /* Light elevates with shadow. */
   /* Each step roughly doubles the ambient layer's offset, blur and alpha, so the
@@ -332,6 +398,34 @@
   --tt-elevation-1: 0 1px 2px rgba(30, 28, 25, .06);
   --tt-elevation-2: 0 2px 4px rgb(30 28 25 / 0.07), 0 8px 20px rgb(30 28 25 / 0.11);
   --tt-elevation-3: 0 4px 8px rgb(30 28 25 / 0.09), 0 16px 40px rgb(30 28 25 / 0.16);
+
+  /* Card's own resting shadow, lighter than elevation-1 — added 25 Sep 2026,
+     same reasoning as the border above: a card sits on open canvas, not inside
+     another surface, so it doesn't need as much lift to read as an object.
+     Raised/hover states still escalate through elevation-2/3 unchanged. */
+  --tt-card-shadow: 0 1px 2px rgba(30, 28, 25, .04);
+
+  /* Secondary/outline button shadow — added 30 Sep 2026, from the onboarding
+     flow's "Connect Google Drive"/"Connect Notion" buttons (confirmed on
+     three separate buttons there, not a one-off). `strong` and `primary`
+     read as buttons through their fill; `secondary` has no fill to speak of
+     (`--tt-fill-soft` is a near-invisible step off the surface), so it gets a
+     touch of lift instead — proportionate to a small pill, not a full
+     elevation step.
+
+     CORRECTED 2 Oct 2026: the original light-theme value above was a derived
+     guess, never measured — that prototype session was dark-only, and the
+     comment said so at the time. This pass caught the prototype running in
+     light theme too, and measured its actual secondary-button shadow on four
+     separate instances across three screens ("Connect", "Sign up" ×2, "Sign
+     up with Google"): a near-black three-layer recipe, not this file's usual
+     warm-dark single-layer idiom. The three layers do three different jobs —
+     a 1px near-opaque hairline that reads as a crisp edge at any zoom, a 1px
+     contact shadow, and a soft 4px spread for lift — which is why one flatter
+     layer never quite matched. Dark-theme's value (below, in both dark
+     blocks) WAS measured live at the time and is unchanged here; it already
+     matched exactly. */
+  --tt-shadow-secondary: 0 0 1px rgba(0, 0, 0, .4), 0 1px 1px rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .04);
 }
 
 /* The two dark blocks below are intentionally duplicated rather than combined in a
@@ -365,10 +459,8 @@
     --tt-fill-soft:       #2B2B2B;   /* neutral-800 — lighter than the surface */
     --tt-fill-soft-hover: #4A4A4A;   /* neutral-700 */
 
-    --tt-fill-soft:       #2B2B2B;   /* neutral-800 — lighter than the surface */
-  --tt-fill-soft-hover: #4A4A4A;   /* neutral-700 */
-
   --tt-border:             #2B2B2B;
+  --tt-card-border:        #242323;  /* blend toward the dark surface, half-way to -900 */
     --tt-border-interactive: #828282;
     --tt-border-field:       #4A4A4A;  /* neutral-700 — mirrors the light relationship */
     --tt-focus:              #FF5A00;
@@ -387,23 +479,23 @@
      edge is felt without competing with the -300 text sitting on it. */
   --tt-primary-border: #B83E00;
   --tt-success-border: #1A6739;
+  /* Marketing badge border, dark — see the light block above. */
+  --tt-primary-badge-border: #732600;
   --tt-info-border:    #1F4C9B;
   --tt-caution-border: #7F5F00;
   --tt-danger-border:  #A81F26;
 
-  --tt-primary-badge-border: #732600;
-  --tt-success-badge-border: #13502C;
-  --tt-info-badge-border:    #183D7A;
-  --tt-caution-badge-border: #594200;
-  --tt-danger-badge-border:  #86181D;
   --tt-available: #7FD1A0;      /* green-300, 10.12:1 on the dark canvas */
 
     /* Dark elevates with LIGHTNESS, not shadow. Shadows on a near-black canvas
        are invisible; a hairline plus a step up the neutral ramp is the only
        signal that reads. */
     --tt-elevation-1: 0 0 0 1px rgb(253 251 247 / 0.05);
+    --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
     --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
     --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
+    /* Measured directly off the onboarding prototype's secondary buttons. */
+    --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
   }
 }
 
@@ -429,7 +521,19 @@
   --tt-cta-strong-hover: #F0F0F0;   /* neutral-100 — dims slightly on hover */
   --tt-on-cta-strong:    #0A0A0A;
 
+  /* Found missing 30 Sep 2026 while checking a live Storybook against an
+     onboarding prototype's secondary-button colour. This pair existed in the
+     SYSTEM-dark block above but was never copied here — so an explicit
+     data-theme="dark" (Storybook's toolbar, or any visitor without a dark OS)
+     fell through to the light value, #F0F0F0, and `secondary` rendered as a
+     light-grey patch on a near-black canvas. The two dark blocks are supposed
+     to be identical (see the note at the top of this file); this is exactly
+     the silent-drift failure that note warns about. */
+  --tt-fill-soft:       #2B2B2B;   /* neutral-800 — lighter than the surface */
+  --tt-fill-soft-hover: #4A4A4A;   /* neutral-700 */
+
   --tt-border:             #2B2B2B;
+  --tt-card-border:        #242323;  /* blend toward the dark surface, half-way to -900 */
   --tt-border-interactive: #828282;
   --tt-border-field:       #4A4A4A;  /* neutral-700 — mirrors the light relationship */
   --tt-focus:              #FF5A00;
@@ -448,18 +552,17 @@
      edge is felt without competing with the -300 text sitting on it. */
   --tt-primary-border: #B83E00;
   --tt-success-border: #1A6739;
+  /* Marketing badge border, dark — see the light block above. */
+  --tt-primary-badge-border: #732600;
   --tt-info-border:    #1F4C9B;
   --tt-caution-border: #7F5F00;
   --tt-danger-border:  #A81F26;
 
-  --tt-primary-badge-border: #732600;
-  --tt-success-badge-border: #13502C;
-  --tt-info-badge-border:    #183D7A;
-  --tt-caution-badge-border: #594200;
-  --tt-danger-badge-border:  #86181D;
   --tt-available: #7FD1A0;      /* green-300, 10.12:1 on the dark canvas */
 
   --tt-elevation-1: 0 0 0 1px rgb(253 251 247 / 0.05);
+  --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
   --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
   --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
+  --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
 }

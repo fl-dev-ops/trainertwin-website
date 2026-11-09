@@ -16,21 +16,27 @@ const COPY: Record<SourceConfidence, string> = {
 };
 
 const STYLES: Record<SourceConfidence, { chip: string; dot: string }> = {
+  /**
+   * Fill, not border, as of 25 Sep 2026 — matches Badge. bg-surface + a border
+   * was the old shape; on a white card bg-surface alone is invisible, so the
+   * fill moved to bg-fill-soft rather than just deleting the border outright.
+   */
   grounded: {
-    chip: "bg-surface border-line text-ink-secondary",
+    chip: "bg-fill-soft text-ink-secondary",
     dot: "bg-success",
   },
   inferred: {
-    chip: "bg-surface border-line text-ink-secondary",
+    chip: "bg-fill-soft text-ink-secondary",
     dot: "bg-info",
   },
   /**
-   * The only state that gets caution colour and a visible border, because it is
-   * the only one where the trainer's name is attached to something that isn't
-   * theirs. Everything else stays neutral so this reads as the exception.
+   * KEPT its border on purpose, unlike the other two — this is the only state
+   * that gets caution colour and a visible edge, because it is the only one
+   * where the trainer's name is attached to something that isn't theirs.
+   * Removing the border here would erase that signal, not just declutter it.
    */
   outside: {
-    chip: "bg-caution-subtle border-caution text-caution font-semibold",
+    chip: "border bg-caution-subtle border-caution text-caution font-medium",
     dot: "bg-caution",
   },
 };
@@ -48,7 +54,7 @@ export function SourceChip({ confidence, source, className }: SourceChipProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-xs border px-2.5 py-1",
+        "inline-flex items-center gap-1.5 rounded-xs px-2.5 py-1",
         "font-ui text-[11.5px] leading-none",
         style.chip,
         className,
@@ -63,7 +69,7 @@ export function SourceChip({ confidence, source, className }: SourceChipProps) {
         {confidence === "grounded" && source ? (
           <>
             {" · "}
-            <b className="font-semibold text-ink">{source}</b>
+            <b className="font-medium text-ink">{source}</b>
           </>
         ) : null}
       </span>

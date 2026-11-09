@@ -41,6 +41,14 @@ const SCROLL_ART = {
   other: SubjectsScene,
 } as const;
 
+/** One icon per persona, ahead of the accordion trigger's own title. */
+const WHO_ACC_ICON: Record<keyof typeof PROFILE_ART, IconName> = {
+  experts: "mic",
+  tech: "doc",
+  sales: "chat",
+  other: "info",
+};
+
 export type WhoProfileCard = {
   key: string;
   kicker: string;
@@ -210,6 +218,7 @@ function WhoScroll({ profiles }: { profiles: WhoProfileCard[] }) {
       className="sec sec--line tt-night who-scroll"
       id="who"
       aria-labelledby="who-h"
+      data-reveal
     >
       <div className="wrap">
         <div className="head">
@@ -247,12 +256,11 @@ function WhoScroll({ profiles }: { profiles: WhoProfileCard[] }) {
                     aria-controls={panelId}
                     onClick={() => setOpen(i)}
                   >
+                    <span className="who-acc-icon" aria-hidden="true">
+                      <Icon name={WHO_ACC_ICON[card.art]} />
+                    </span>
                     <span className="who-acc-kicker">
                       {card.kicker || card.title}
-                    </span>
-                    <span className="who-acc-mark" aria-hidden="true">
-                      <span className="who-acc-mark-h" />
-                      <span className="who-acc-mark-v" />
                     </span>
                   </button>
                   <div
@@ -269,7 +277,6 @@ function WhoScroll({ profiles }: { profiles: WhoProfileCard[] }) {
                     }
                   >
                     <div className="who-acc-panel-inner">
-                      <p className="who-acc-title">{card.title}</p>
                       <p className="who-acc-body">{card.body}</p>
                       {card.points && card.points.length > 0 ? (
                         <ul className="can">
@@ -342,11 +349,6 @@ function BackPlane({ icon, label }: { icon: IconName; label: string }) {
       <div className="cmp-pane-bar">
         <Icon name={icon} />
         {label}
-      </div>
-      <div className="cmp-pane-body">
-        <span className="cmp-line cmp-line--80" />
-        <span className="cmp-line cmp-line--60" />
-        <span className="cmp-line cmp-line--40" />
       </div>
     </div>
   );
@@ -453,17 +455,6 @@ function RoleplayScene() {
             <p className="bubble bubble--twin">
               What would it need to be worth to sign this quarter?
             </p>
-            <span className="wsa-chips">
-              <span className="wsa-chip is-on">
-                <Icon name="check" />
-                Price
-              </span>
-              <span className="wsa-chip is-on">
-                <Icon name="check" />
-                Timing
-              </span>
-              <span className="wsa-chip">Trust</span>
-            </span>
             <span className="wsa-stat">
               <b>78%</b>
               objections handled

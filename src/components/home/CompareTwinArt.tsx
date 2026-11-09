@@ -87,13 +87,6 @@ export function TwinArt() {
 
   return (
     <div className="cmp-planes" ref={ref}>
-      <div className="cmp-pane cmp-pane--back">
-        <div className="cmp-pane-bar">
-          <Icon name="folder" />
-          Renders
-        </div>
-      </div>
-
       <div
         className={cn(
           "cmp-pane cmp-pane--front cmp-twin-card cmp-twin-card--dna",
@@ -117,7 +110,7 @@ export function TwinArt() {
       >
         <div className="cmp-pane-bar">
           <LogoSymbol size={13} />
-          Your twin
+          Interactive Twin
         </div>
         <div className="cmp-pane-body">
           {TURNS.map((turn, idx) => (

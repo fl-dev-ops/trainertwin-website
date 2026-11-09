@@ -67,7 +67,7 @@ export function Hero() {
           <p
             data-reveal
             data-reveal-y="16"
-            className="font-mono l-gradient-ink l-gradient-ink--eyebrow text-[11px] leading-[1.14] font-semibold"
+            className="l-gradient-ink l-gradient-ink--eyebrow text-[11px] leading-[1.14] font-semibold"
           >
             Twin for Tech Trainers
           </p>

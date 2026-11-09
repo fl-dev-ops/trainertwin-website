@@ -33,23 +33,34 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 /**
- * Borders take the --tt-*-badge-border family, one step lighter than the
- * --tt-*-border alerts use. A badge is a small pill, often several to a row —
- * the alert-strength border reads as heavy repeated at that scale. Severity
- * still rides on the icon, fill and text (SC 1.4.1), never the border alone.
+ * No border on a filled tone as of 25 Sep 2026 — the fill alone is enough to
+ * read as a shape; a border on top of a fill was doubling up. Severity still
+ * rides on the icon, fill and text (SC 1.4.1), never the border alone.
+ *
+ * `live`/`available` are the exception, unchanged: their background is
+ * transparent, so their border is the only thing defining the pill at all.
+ * Removing it there wouldn't lighten the badge, it would delete it.
  */
 const tones: Record<BadgeTone, string> = {
-  neutral: "bg-surface-sunken text-ink-secondary border-line",
-  brand: "bg-primary-subtle text-primary-ink border-primary-badge-border",
-  success: "bg-success-subtle text-success border-success-badge-border",
-  info: "bg-info-subtle text-info border-info-badge-border",
-  caution: "bg-caution-subtle text-caution border-caution-badge-border",
-  danger: "bg-danger-subtle text-danger border-danger-badge-border",
-  /** Transparent fill, so this one keeps a full-strength border — it is the
-   *  only thing defining the pill. Recording is a warning; it stays red. */
-  live: "bg-transparent text-live border-live",
-  /** Availability is reassurance, not success. Different token, same green. */
-  available: "bg-transparent text-available border-available",
+  neutral: "bg-surface-sunken text-ink-secondary",
+  /**
+   * `brand` is the RECOMMENDED marker, and nothing else — narrowed 29 Sep 2026.
+   *
+   * Use it on the one option the product is steering toward, paired with a
+   * `primary` select button on that same card. It is not a category label and
+   * not a "this is ours" decoration: a grid where every card carries a brand
+   * badge is the exact failure the 29 Sep pass exists to undo — six orange
+   * pills on six cards, and no recommendation legible among them.
+   *
+   * For a category or a type, reach for `neutral`.
+   */
+  brand: "bg-primary-subtle text-primary-ink",
+  success: "bg-success-subtle text-success",
+  info: "bg-info-subtle text-info",
+  caution: "bg-caution-subtle text-caution",
+  danger: "bg-danger-subtle text-danger",
+  live: "border bg-transparent text-live border-live",
+  available: "border bg-transparent text-available border-available",
 };
 
 const sizes: Record<BadgeSize, string> = {
@@ -68,8 +79,8 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border",
-        "font-ui font-semibold",
+        "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full",
+        "font-ui font-label",
         tones[tone],
         sizes[size],
         className,

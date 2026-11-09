@@ -37,6 +37,7 @@
   --color-line: var(--tt-border);
   --color-line-interactive: var(--tt-border-interactive);
   --color-line-field: var(--tt-border-field);
+  --color-line-card: var(--tt-card-border);
   --color-focus: var(--tt-focus);
 
   --color-danger: var(--tt-danger);
@@ -57,13 +58,6 @@
   --color-caution-border: var(--tt-caution-border);
   --color-danger-border: var(--tt-danger-border);
 
-  /* Badge-specific — lighter than the alert/status border family above. */
-  --color-primary-badge-border: var(--tt-primary-badge-border);
-  --color-success-badge-border: var(--tt-success-badge-border);
-  --color-info-badge-border: var(--tt-info-badge-border);
-  --color-caution-badge-border: var(--tt-caution-badge-border);
-  --color-danger-badge-border: var(--tt-danger-badge-border);
-
   /* Marketing surfaces — night bands and the availability green. */
   --color-night: var(--tt-night);
   --color-night-deep: var(--tt-night-deep);
@@ -76,20 +70,47 @@
 
   --font-display: var(--tt-font-display), Georgia, "Times New Roman", serif;
   --font-ui: var(--tt-font-ui), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: var(--tt-font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* The OS's own monospace — 29 Sep 2026, was var(--tt-font-mono) in front.
+     JetBrains Mono is gone; the brand is Figtree and Noto Serif, full stop.
+     This alias survives ONLY for the landing page's simulated code panels and
+     terminal mocks, where characters have to be fixed-width to stay aligned.
+     No webfont is loaded for it. Never use it in product UI, and never for
+     numbers — those are Figtree with tabular-nums. */
+  --font-mono: var(--tt-font-mono);
   --font-sans: var(--tt-font-ui), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Weight. `font-normal` and `font-semibold` are the only two the product uses.
-     They are aliased rather than left at Tailwind's defaults so the scale has a
-     single source: changing --tt-weight-semibold moves every label at once.
+  /* Weight. `font-normal`, `font-medium`, and `font-semibold` are the three the
+     product uses — see the role tokens in tokens.css. All three aliased rather
+     than left at Tailwind's defaults, so the scale has one source: changing
+     --tt-weight-medium moves every title and label at once.
 
-     font-medium / font-bold / font-extrabold are deliberately NOT aliased. They
-     still resolve to Tailwind's 500 / 700 / 800, which keeps them honest — but
-     they are outside the product scale, and a product component using one is a
-     bug. They stay reachable because src/components/landing/ is a separately
-     designed marketing surface that does use 700. */
+     `font-medium` was added 25 Sep 2026 — titles and inline emphasis were all
+     riding font-semibold, which read as too heavy (Bhuvan's call). It happens
+     to still equal Tailwind's own default 500, but it is now sourced from the
+     token rather than coincidentally matching it, so a future change to
+     --tt-weight-medium actually takes effect here.
+
+     font-bold / font-extrabold are deliberately NOT aliased. They still resolve
+     to Tailwind's 700 / 800, which keeps them honest — but they are outside the
+     product scale, and a product component using one is a bug. They stay
+     reachable because src/components/landing/ is a separately designed
+     marketing surface that does use 700. */
   --font-weight-normal: var(--tt-weight-regular);
+  --font-weight-medium: var(--tt-weight-medium);
   --font-weight-semibold: var(--tt-weight-semibold);
+
+  /* ROLE aliases — added 29 Sep 2026, and they are the ones components should
+     reach for. `--tt-weight-title` and friends existed since 25 Sep and were
+     documented as making a weight change "one line to change", but NOTHING
+     consumed them: every component wrote `font-medium`, the primitive, so the
+     29 Sep reversal of title weight would have been a fourteen-file sweep
+     instead. Aliasing them here generates `font-title` / `font-label` /
+     `font-cta` / `font-body`, so the role names become real and the promise
+     holds. Use `font-title` on a heading, never `font-semibold`. */
+  --font-weight-title: var(--tt-weight-title);
+  --font-weight-label: var(--tt-weight-label);
+  --font-weight-cta: var(--tt-weight-cta);
+  --font-weight-body: var(--tt-weight-body);
 
   /* Breakpoints must live in @theme — Tailwind reads them at build time to
      generate sm:/md:/lg:/xl: variants. Values match Tailwind's defaults on purpose. */
@@ -111,10 +132,13 @@
   --radius-sm: var(--tt-radius-sm);
   --radius-md: var(--tt-radius-md);
   --radius-lg: var(--tt-radius-lg);
+  --radius-xl: var(--tt-radius-xl);
 
   --shadow-e1: var(--tt-elevation-1);
   --shadow-e2: var(--tt-elevation-2);
   --shadow-e3: var(--tt-elevation-3);
+  --shadow-card: var(--tt-card-shadow);
+  --shadow-secondary: var(--tt-shadow-secondary);
 
   --ease-standard: var(--tt-ease-standard);
   --ease-enter: var(--tt-ease-enter);
@@ -125,6 +149,12 @@ body {
   background: var(--tt-canvas);
   color: var(--tt-text-primary);
   font-family: var(--tt-font-ui), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Found 25 Sep 2026: this line was missing. Every subtext/body element in
+     the product computed to 400 anyway — the browser's own UA default for
+     body text — but by accident, not because this token said so. The §4b
+     base stylesheet in the MD has always shown this line; the real app never
+     had it. Explicit now, so it stops being a coincidence. */
+  font-weight: var(--tt-weight-regular);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -182,10 +212,28 @@ body {
    system. Nothing overrode it, so every emphasised run, every <strong> value in
    a stat row and every <b> in a twin's answer rendered 700 no matter how
    carefully the surrounding component was specified. Emphasis is semantic;
-   700 was never the intent. */
+   700 was never the intent.
+
+   Set to --tt-weight-medium, not -semibold, as of 25 Sep 2026: inline emphasis
+   inside a sentence — "AI twin of **Priya Raman**" — only needs to read as
+   slightly more important than the words around it, not as loud as a button.
+   A product component that wants heavier emphasis than this sets font-semibold
+   explicitly on the element (Button does, for its own label); this default is
+   for prose. Marketing (src/components/landing/, src/components/home/) styles
+   its own bold runs explicitly and is unaffected either way. */
 b,
 strong {
-  font-weight: var(--tt-weight-semibold);
+  font-weight: var(--tt-weight-medium);
+}
+
+/* Same bug, different element, found 25 Sep 2026 while verifying the fix above:
+   the UA stylesheet also bolds <th> by default. Table.tsx's own header cells
+   already set an explicit weight, so this was invisible everywhere text was
+   present — it only showed up on the empty select-all checkbox column, which
+   had no font-weight class at all and was silently rendering at 700. Reset
+   once here rather than trust every table to override it correctly. */
+th {
+  font-weight: var(--tt-weight-label);
 }
 
 /* One focus treatment, everywhere. Brand orange clears 3:1 in both themes, but
@@ -193,6 +241,35 @@ strong {
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--tt-focus);
   outline-offset: 2px;
+}
+
+/* The loading mark — added 25 Sep 2026 from Figma node 885:274 ("loader gif
+   animation and button loader place"). It's the brand mark's own 3x3 grid
+   (Logo.tsx), decomposed into its nine cells so a brightness sweep can chase
+   around them, instead of a generic spinner. Component: Spinner.tsx.
+
+   Nine keyframe blocks, one per cell, because the chase pattern isn't a
+   uniform rotation — the reference dips through the centre cell once per
+   cycle, which a single delayed-copy animation can't reproduce without
+   getting that dip wrong. Generated from the FRAMES table in Spinner.tsx;
+   regenerate both together if the pattern ever changes, never hand-edit one
+   without the other. */
+@keyframes tt-spin-0 { 0.0% { opacity: 1.0; } 12.5% { opacity: 0.15; } 25.0% { opacity: 0.15; } 37.5% { opacity: 0.15; } 50.0% { opacity: 0.15; } 62.5% { opacity: 0.15; } 75.0% { opacity: 0.4; } 87.5% { opacity: 0.7; } 100% { opacity: 1.0; } }
+@keyframes tt-spin-1 { 0.0% { opacity: 0.7; } 12.5% { opacity: 1.0; } 25.0% { opacity: 0.15; } 37.5% { opacity: 0.15; } 50.0% { opacity: 0.15; } 62.5% { opacity: 0.15; } 75.0% { opacity: 0.15; } 87.5% { opacity: 0.4; } 100% { opacity: 0.7; } }
+@keyframes tt-spin-2 { 0.0% { opacity: 0.15; } 12.5% { opacity: 0.7; } 25.0% { opacity: 1.0; } 37.5% { opacity: 0.15; } 50.0% { opacity: 0.15; } 62.5% { opacity: 0.15; } 75.0% { opacity: 0.15; } 87.5% { opacity: 0.15; } 100% { opacity: 0.15; } }
+@keyframes tt-spin-3 { 0.0% { opacity: 0.15; } 12.5% { opacity: 0.15; } 25.0% { opacity: 0.15; } 37.5% { opacity: 0.15; } 50.0% { opacity: 0.15; } 62.5% { opacity: 0.4; } 75.0% { opacity: 0.7; } 87.5% { opacity: 1.0; } 100% { opacity: 0.15; } }
+@keyframes tt-spin-4 { 0.0% { opacity: 0.4; } 12.5% { opacity: 0.15; } 25.0% { opacity: 0.15; } 37.5% { opacity: 0.15; } 50.0% { opacity: 0.15; } 62.5% { opacity: 0.15; } 75.0% { opacity: 0.15; } 87.5% { opacity: 0.15; } 100% { opacity: 0.4; } }
+@keyframes tt-spin-5 { 0.0% { opacity: 0.15; } 12.5% { opacity: 0.4; } 25.0% { opacity: 0.7; } 37.5% { opacity: 1.0; } 50.0% { opacity: 0.15; } 62.5% { opacity: 0.15; } 75.0% { opacity: 0.15; } 87.5% { opacity: 0.15; } 100% { opacity: 0.15; } }
+@keyframes tt-spin-6 { 0.0% { opacity: 0.15; } 12.5% { opacity: 0.15; } 25.0% { opacity: 0.15; } 37.5% { opacity: 0.15; } 50.0% { opacity: 0.4; } 62.5% { opacity: 0.7; } 75.0% { opacity: 1.0; } 87.5% { opacity: 0.15; } 100% { opacity: 0.15; } }
+@keyframes tt-spin-7 { 0.0% { opacity: 0.15; } 12.5% { opacity: 0.15; } 25.0% { opacity: 0.15; } 37.5% { opacity: 0.4; } 50.0% { opacity: 0.7; } 62.5% { opacity: 1.0; } 75.0% { opacity: 0.15; } 87.5% { opacity: 0.15; } 100% { opacity: 0.15; } }
+@keyframes tt-spin-8 { 0.0% { opacity: 0.15; } 12.5% { opacity: 0.15; } 25.0% { opacity: 0.4; } 37.5% { opacity: 0.7; } 50.0% { opacity: 1.0; } 62.5% { opacity: 0.15; } 75.0% { opacity: 0.15; } 87.5% { opacity: 0.15; } 100% { opacity: 0.15; } }
+
+.tt-spinner-cell {
+  animation-name: var(--tt-spin-name);
+  animation-duration: 960ms;   /* deliberately outside --tt-duration-* — those
+                                   are for interaction response, this loops */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

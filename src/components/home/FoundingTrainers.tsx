@@ -9,7 +9,8 @@ type Founder = {
   name: string;
   href: string;
   domain: string;
-  /** Bhuvan’s note as-is — one or more lines, never invented extras. */
+  /** Paraphrased from each trainer's own interest note, varied so six cards
+      in a row don't all open with the same sentence. */
   notes: string[];
   photo: string;
 };
@@ -27,7 +28,7 @@ const FOUNDERS: Founder[] = [
     href: "https://www.linkedin.com/in/ranjith-ar-41343879/",
     domain: "Speaker / educator",
     notes: [
-      "Interested in exploring how my Twin carries my teaching style beyond the textbook and into bite-sized learning.",
+      "Wants his Twin to carry his teaching style beyond the textbook, into bite-sized learning.",
     ],
     photo: "/home-v3/founders/ranjith-ar.png",
   },
@@ -36,7 +37,7 @@ const FOUNDERS: Founder[] = [
     href: "https://www.linkedin.com/in/shubhamlondhe1996/",
     domain: "Tech trainer",
     notes: [
-      "Interested in exploring how my Twin carries my teaching beyond live sessions and keeps learners engaged between classes.",
+      "Wants a Twin that keeps learners engaged between classes, not just during live sessions.",
     ],
     photo: "/home-v3/founders/shubham-londhe.png",
   },
@@ -45,7 +46,7 @@ const FOUNDERS: Founder[] = [
     href: "https://www.linkedin.com/in/surensainisalesandleadershiparchitect/",
     domain: "Sales & leadership",
     notes: [
-      "Interested in exploring how my Twin carries my sales framework, coaching style and role plays beyond the workshop.",
+      "Curious whether his Twin can run his sales framework and role-plays long after the workshop ends.",
     ],
     photo: "/home-v3/founders/suren-saini.png",
   },
@@ -54,7 +55,7 @@ const FOUNDERS: Founder[] = [
     href: "https://www.linkedin.com/in/gamaliel-das/",
     domain: "Coach / consultant",
     notes: [
-      "Interested in exploring how my Twin carries my expertise into video lessons, without me having to be on camera every time.",
+      "Wants to turn his expertise into video lessons without being on camera every time.",
     ],
     photo: "/home-v3/founders/gamaliel-das.png",
   },
@@ -63,7 +64,7 @@ const FOUNDERS: Founder[] = [
     href: "https://www.linkedin.com/in/uwaisaa/",
     domain: "Leadership & Communication trainer",
     notes: [
-      "Interested in exploring how my Twin carries my delivery into UPSC practice, role plays and mock interviews.",
+      "Exploring a Twin that handles UPSC practice, role-plays and mock interviews in his voice.",
     ],
     photo: "/home-v3/founders/uswai_aa.png",
   },
@@ -95,6 +96,7 @@ export function FoundingTrainers() {
       className="sec sec--aurora found"
       id="founders"
       aria-labelledby="found-h"
+      data-reveal
     >
       {/* The same wash that opens "What your twin can do", on the same three
           tokens — the two light sections either side of the dark band read as
@@ -148,27 +150,6 @@ function FounderCard({
   return (
     <li>
       <Card className="found-card">
-        <CardBody className="found-copycol">
-          <CardTitle display className="found-name">
-            {founder.name}
-          </CardTitle>
-          <p className="found-domain">{founder.domain}</p>
-          <a
-            className="found-in"
-            href={founder.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={duplicate ? -1 : undefined}
-            aria-label={`${founder.name} on LinkedIn`}
-          >
-            <LinkedInMark />
-          </a>
-          {founder.notes.map((line) => (
-            <p key={line} className="found-copy">
-              {line}
-            </p>
-          ))}
-        </CardBody>
         <div className="found-media">
           <img
             className="found-photo"
@@ -177,6 +158,28 @@ function FounderCard({
             width={800}
             height={800}
           />
+          <div className="found-photo-scrim" aria-hidden="true" />
+          <div className="found-overlay">
+            <CardTitle display className="found-name">
+              {founder.name}
+            </CardTitle>
+            <p className="found-domain">{founder.domain}</p>
+            <a
+              className="found-in"
+              href={founder.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={duplicate ? -1 : undefined}
+              aria-label={`${founder.name} on LinkedIn`}
+            >
+              <LinkedInMark />
+            </a>
+            {founder.notes.map((line) => (
+              <p key={line} className="found-copy">
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
       </Card>
     </li>

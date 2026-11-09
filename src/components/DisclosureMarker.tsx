@@ -67,13 +67,14 @@ export function DisclosureMarker({
       ) : (
         <span
           aria-hidden="true"
+          // Stays semibold — a monogram at 9px, same reasoning as Avatar.
           className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary-ink text-[9px] font-semibold text-surface"
         >
           {avatarInitials}
         </span>
       )}
       <span className="whitespace-nowrap">
-        AI twin of <b className="font-semibold text-ink">{trainerName}</b>{" "}
+        AI twin of <b className="font-medium text-ink">{trainerName}</b>{" "}
         <span className="text-ink-tertiary">· not {firstName}</span>
       </span>
     </div>

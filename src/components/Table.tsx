@@ -92,13 +92,28 @@ function SelectBox({
         "grid h-[18px] w-[18px] shrink-0 cursor-pointer appearance-none place-content-center",
         "rounded-xs border-[length:var(--tt-border-form)] border-line-field bg-surface",
         "transition-colors duration-150 ease-standard",
-        "checked:border-primary checked:bg-primary",
-        "indeterminate:border-primary indeterminate:bg-primary",
-        "checked:after:h-[11px] checked:after:w-[11px] checked:after:bg-on-primary",
-        "checked:after:[clip-path:polygon(14%_44%,0_60%,39%_100%,100%_22%,84%_6%,39%_68%)]",
-        "checked:after:content-['']",
-        "indeterminate:after:h-[2px] indeterminate:after:w-[9px] indeterminate:after:rounded-full",
-        "indeterminate:after:bg-on-primary indeterminate:after:content-['']",
+        // Checked fills with `strong`, not `primary` — changed 29 Sep 2026.
+        // A checkbox column is the single most-repeated control on a table
+        // screen: ticking twelve rows used to paint twelve orange squares,
+        // which is selection shouting louder than the action the selection is
+        // for. `strong` is 19.78:1 against its own label in both themes, so
+        // this is also the more legible of the two.
+        "checked:border-strong checked:bg-strong",
+        "indeterminate:border-strong indeterminate:bg-strong",
+        // A 1px STROKE, not a filled glyph — changed 29 Sep 2026. This was a
+        // clip-path polygon, where the stroke weight is implied by the outline's
+        // geometry and worked out around 2px: heavy against a hairline field
+        // border, and impossible to specify. Two borders on a rotated box give
+        // an exact, stated 1px that cannot drift. The translate re-centres it —
+        // rotating a 5x9 box moves its optical centre down and left of the
+        // bounding box the grid is centring.
+        "checked:after:h-[9px] checked:after:w-[5px] checked:after:content-['']",
+        "checked:after:border-r checked:after:border-b checked:after:border-on-strong",
+        "checked:after:rotate-45 checked:after:-translate-y-[1px] checked:after:translate-x-[1px]",
+        // The indeterminate dash matches that 1px so the two states read as one
+        // control drawn with one pen.
+        "indeterminate:after:h-[1px] indeterminate:after:w-[9px]",
+        "indeterminate:after:bg-on-strong indeterminate:after:content-['']",
       )}
     />
   );
@@ -230,7 +245,7 @@ Table.Head = function TableHead({
   const base = cn(
     "whitespace-nowrap bg-surface-sunken px-4 py-3 text-left align-middle",
     "border-b border-line",
-    "font-ui text-[10px] font-semibold tracking-[0.09em] uppercase text-ink-tertiary",
+    "font-ui text-[10px] font-label tracking-[0.09em] uppercase text-ink-tertiary",
     className,
   );
 
@@ -259,7 +274,7 @@ Table.Head = function TableHead({
         }
         className={cn(
           "inline-flex items-center gap-1 rounded-xs",
-          "font-ui text-[10px] font-semibold tracking-[0.09em] uppercase",
+          "font-ui text-[10px] font-label tracking-[0.09em] uppercase",
           "transition-colors duration-150 ease-standard",
           active ? "text-ink" : "text-ink-tertiary hover:text-ink",
         )}
@@ -320,7 +335,12 @@ Table.Row = function TableRow({ id, className, children, ...rest }: TableRowProp
       aria-selected={selectionMode === "multiple" ? isSelected : undefined}
       className={cn(
         "group transition-colors duration-150 ease-standard",
-        isSelected ? "bg-primary-subtle" : "bg-surface hover:bg-surface-sunken",
+        // Selected is a NEUTRAL fill, not an orange tint — changed 29 Sep 2026.
+        // Selection is a state, not a destination; it should be legible at a
+        // glance without spending the one colour that means "press this". The
+        // checkbox beside it already carries the signal in a second channel,
+        // so this satisfies SC 1.4.1 without colour doing the work alone.
+        isSelected ? "bg-fill-soft" : "bg-surface hover:bg-surface-sunken",
         className,
       )}
       {...rest}
@@ -359,7 +379,10 @@ Table.Cell = function TableCell({
       className={cn(
         "border-b border-line px-4 py-3 align-middle",
         strong ? "text-ink" : "text-ink-secondary",
-        numeric && "text-right font-mono tabular-nums whitespace-nowrap",
+        // Figtree, not mono — 29 Sep 2026. `tabular-nums` is what aligns the
+        // column now that the monospace face is gone; drop it and the digits
+        // go proportional and the right edge ragged.
+        numeric && "text-right tabular-nums whitespace-nowrap",
         className,
       )}
       {...rest}

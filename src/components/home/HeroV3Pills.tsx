@@ -63,24 +63,11 @@ function KnowledgeArtV3() {
 
 const PILLS: Array<{
   title: string;
-  body: string;
   Art: ComponentType;
 }> = [
-  {
-    title: "Your Intelligence",
-    body: "Notes, recorded sessions, voice recording, docs from any channels.",
-    Art: KnowledgeArtV3,
-  },
-  {
-    title: "Your Presence",
-    body: "A few minutes of your voice : pace, tone and pauses",
-    Art: PersonaArt,
-  },
-  {
-    title: "Your training DNA",
-    body: "We extract your patterns and how you explain, hints and assess.",
-    Art: DnaArt,
-  },
+  { title: "Your Intelligence", Art: KnowledgeArtV3 },
+  { title: "Your Presence", Art: PersonaArt },
+  { title: "Your training DNA", Art: DnaArt },
 ];
 
 /** Dwell while expanded — matches the knowledge / persona illustration cycle. */
@@ -121,7 +108,6 @@ export function HeroV3Pills() {
                   </div>
                 </div>
                 <h2>{pill.title}</h2>
-                <p>{pill.body}</p>
               </article>
             </div>
           );

@@ -16,7 +16,7 @@ export function TableCardRoot({
   return (
     <div
       className={cn(
-        "flex flex-col overflow-hidden rounded-md border border-line bg-surface shadow-e1",
+        "flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-e1",
         className,
       )}
       {...rest}
@@ -53,11 +53,11 @@ export function TableCardHeader({
     >
       <div className="min-w-0">
         <div className="flex items-center gap-2">
-          <h3 className="font-ui text-[15px] font-semibold text-ink">{title}</h3>
+          <h3 className="font-ui text-[15px] font-title text-ink">{title}</h3>
           {badge ? <Badge tone="neutral">{badge}</Badge> : null}
         </div>
         {description ? (
-          <p className="mt-1 text-[13px] text-ink-tertiary">{description}</p>
+          <p className="mt-1 text-[13px] font-normal text-ink-tertiary">{description}</p>
         ) : null}
       </div>
       {contentTrailing ? (

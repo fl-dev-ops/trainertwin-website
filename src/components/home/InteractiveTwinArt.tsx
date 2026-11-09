@@ -31,22 +31,22 @@ const THREAD = [
   {
     who: "Arjun",
     side: "learner" as const,
-    text: "When do I use this formula?",
+    lines: ["70%"],
   },
   {
     who: "Trainer’s Twin",
     side: "twin" as const,
-    text: "Try a real example first - what clues tell you it applies?",
+    lines: ["100%", "60%"],
   },
   {
     who: "Arjun",
     side: "learner" as const,
-    text: "The problem mentions a rate of change - is that the clue?",
+    lines: ["100%", "45%"],
   },
   {
     who: "Trainer’s Twin",
     side: "twin" as const,
-    text: "Yes. When you see a rate, start with the derivative form - then check units.",
+    lines: ["100%", "70%"],
   },
 ] as const;
 
@@ -58,7 +58,7 @@ export function InteractiveTwinArt() {
       ref={ref}
       className={inView ? "art-sq itwin is-inview" : "art-sq itwin"}
       role="img"
-      aria-label="Trainer’s Twin speaking in a 1:1 coaching session. Arjun asks when to use a formula; the twin hints, then confirms that a rate of change means starting from the derivative."
+      aria-label="Trainer’s Twin speaking in a 1:1 coaching session, messages loading in a chat thread with Arjun."
     >
       <ul className="itwin-pills">
         <li>
@@ -94,7 +94,15 @@ export function InteractiveTwinArt() {
                 <span className="itwin-who">{turn.who}</span>
                 <time dateTime="10:15">10:15 AM</time>
               </div>
-              <p className="itwin-text">{turn.text}</p>
+              <p className="itwin-text" aria-hidden="true">
+                {turn.lines.map((width, li) => (
+                  <span
+                    key={li}
+                    className="itwin-text-line"
+                    style={{ width }}
+                  />
+                ))}
+              </p>
             </div>
           </div>
         ))}

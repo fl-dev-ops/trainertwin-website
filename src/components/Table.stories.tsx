@@ -85,8 +85,8 @@ function TeamMembersTable() {
                 <div className="flex items-center gap-3">
                   <Avatar alt={item.name} size="md" />
                   <div className="whitespace-nowrap">
-                    <p className="text-[13.5px] font-semibold text-ink">{item.name}</p>
-                    <p className="text-[12px] text-ink-tertiary">{item.username}</p>
+                    <p className="text-[13.5px] font-title text-ink">{item.name}</p>
+                    <p className="text-[12px] font-normal text-ink-tertiary">{item.username}</p>
                   </div>
                 </div>
               </Table.Cell>

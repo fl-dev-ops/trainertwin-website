@@ -43,7 +43,7 @@ export const MinimumSizes: Story = {
       {[20, 24, 32, 48].map((s) => (
         <div key={s} className="flex flex-col items-center gap-2">
           <LogoSymbol size={s} className="text-primary" title="TrainerTwin" />
-          <span className="font-mono text-[10px] text-ink-tertiary">{s}px</span>
+          <span className="text-[10px] text-ink-tertiary">{s}px</span>
         </div>
       ))}
     </div>
