@@ -822,6 +822,7 @@ function render() {
   mountTwinHello();
   const menuWantsFocus = state.roleMenuFocus;
   placeRoleMenu();
+  placeRailUserMenu();
   if (focusId && !menuWantsFocus) {
     const next = document.getElementById(focusId);
     if (next) {
@@ -860,6 +861,7 @@ function view() {
       <main class="main${(activeNav() === "home" || activeNav() === "analytics") && !showingGate() ? " is-home" : ""}${boxedSetup() ? " is-find" : ""}${state.talkOpen && state.obCall ? " v2-call" : ""}">${main()}</main>
     </div>
     ${bar}
+    ${state.userMenu ? userMenu() : ""}
     ${state.drawer ? drawer() : ""}
     ${state.builtFromOpen ? builtFromPanel() : ""}
     ${state.botReassign ? botReassignDialog() : ""}
@@ -1075,7 +1077,6 @@ function rail() {
             ${navItem("settings", "Settings", "settings")}
           </div>
           <div class="rail-user-wrap">
-            ${state.userMenu ? userMenu() : ""}
             <button class="rail-user" type="button" data-action="user-menu-toggle" aria-haspopup="menu" aria-expanded="${state.userMenu}"${collapsed ? ' data-rail-tip="Olga Sinenko"' : ""}>
               <img class="rail-user-photo" src="${esc(presenceSrc())}" alt="">
               <span class="rail-user-name">Olga Sinenko</span>
@@ -3989,7 +3990,7 @@ function userMenu() {
     <div class="menu rail-user-menu" role="menu" aria-label="Account">
       <p class="rum-email">${USER_EMAIL}</p>
       <div class="rum-list">
-        ${go("profile", "Profile")}${go("voices", "Voices")}${go("team", "Team")}${go("devapi", "Developer API")}
+        ${go("profile", "Profile settings")}${go("voices", "Voices")}${go("team", "Team")}${go("devapi", "Developer API")}
         <button type="button" role="menuitem" data-action="user-docs">${umIcon("docs")}<span>Docs</span></button>
       </div>
       <div class="rum-sep"></div>
@@ -5159,6 +5160,24 @@ function showRoleTip(host) {
   if (left < 8) left = 8;
   tip.style.top = top + "px";
   tip.style.left = left + "px";
+}
+
+function placeRailUserMenu() {
+  const menu = document.querySelector(".rail-user-menu");
+  if (!menu || !state.userMenu) return;
+  const btn = document.querySelector(".rail-user");
+  if (!btn) return;
+  const r = btn.getBoundingClientRect();
+  const gap = 8;
+  const w = menu.offsetWidth;
+  const h = menu.offsetHeight;
+  let left = r.left;
+  if (left + w > window.innerWidth - 8) left = Math.max(8, window.innerWidth - w - 8);
+  if (left < 8) left = 8;
+  let top = r.top - gap - h;
+  if (top < 8) top = Math.min(window.innerHeight - h - 8, r.bottom + gap);
+  menu.style.left = left + "px";
+  menu.style.top = top + "px";
 }
 
 function roleTipHost(node) {
@@ -16782,7 +16801,7 @@ document.addEventListener("click", (e) => {
     render();
     if (!el || el.disabled) return;
   }
-  if (state.userMenu && !e.target.closest(".rail-user-wrap")) {
+  if (state.userMenu && !e.target.closest(".rail-user-wrap") && !e.target.closest(".rail-user-menu")) {
     state.userMenu = false;
     render();
     if (!el || el.disabled) return;
@@ -17083,6 +17102,7 @@ document.addEventListener("mouseout", (e) => {
 
 document.addEventListener("scroll", () => {
   if (state.roleMenuId) placeRoleMenu();
+  if (state.userMenu) placeRailUserMenu();
   hideRoleTip();
   hideRailTip();
 }, true);
