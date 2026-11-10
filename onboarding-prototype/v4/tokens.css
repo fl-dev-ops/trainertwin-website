@@ -1,0 +1,591 @@
+/* Font families for pages outside the Next.js app. Weight stays in the token layer. */
+:root {
+  --tt-font-display: "Noto Serif", Georgia, "Times New Roman", serif;
+  --tt-font-ui: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+
+/* ---------------------------------------------------------------- 1. PRIMITIVES */
+:root {
+  /* Brand. 500 is the mark. */
+  --tt-orange-50:  #FFF4EC;
+  --tt-orange-100: #FFE3D1;
+  --tt-orange-200: #FFC5A3;
+  --tt-orange-300: #FFA36B;
+  --tt-orange-400: #FF7E33;
+  --tt-orange-500: #FF5A00;
+  --tt-orange-600: #E04D00;
+  --tt-orange-700: #B83E00;
+  --tt-orange-800: #8E3000;
+  --tt-orange-900: #6B2400;
+  --tt-orange-950: #3A1300;
+
+  /* Cool neutrals. REVERSED 10 Sep 2026 — this ramp was warm olive-brown until the
+     roleplay-library Figma was measured and found to use near-neutral greys. The
+     anchors marked below are sampled from that render, so screens built from the
+     Figma match by construction rather than by eye. The mid-tones were then tuned
+     to hold the contrast margins the warm ramp had: text-tertiary moved 5.83 ->
+     5.78:1, border-interactive 3.99 -> 3.81:1. */
+  --tt-neutral-0:    #FFFFFF;
+  --tt-neutral-25:   #FEFEFF;   /* page canvas          (from Figma) */
+  --tt-neutral-50:   #F7F7F7;   /* sidebar, sunken      (from Figma) */
+  --tt-neutral-100:  #F0F0F0;
+  --tt-neutral-200:  #E9E9E9;   /* borders              (from Figma) */
+  --tt-neutral-300:  #C4C4C4;
+  --tt-neutral-400:  #A3A3A3;
+  --tt-neutral-500:  #828282;
+  --tt-neutral-600:  #656565;
+  --tt-neutral-700:  #4A4A4A;
+  --tt-neutral-800:  #2B2B2B;   /* the dark CTA         (from Figma) */
+  --tt-neutral-900:  #1C1B1B;   /* body text            (from Figma) */
+  --tt-neutral-950:  #141414;
+  --tt-neutral-1000: #0A0A0A;
+
+  --tt-red-50:  #FFF1F1;
+  --tt-red-100: #FFE0E1;
+  --tt-red-300: #F58F93;
+  --tt-red-500: #E5484D;
+  --tt-red-600: #CE2C33;
+  --tt-red-700: #A81F26;
+  --tt-red-900: #6B1216;
+
+  --tt-green-50:  #EDF9F1;
+  --tt-green-100: #D3F0DE;
+  --tt-green-300: #7FD1A0;
+  --tt-green-500: #2E9E5B;
+  --tt-green-600: #23834A;
+  --tt-green-700: #1A6739;
+  --tt-green-900: #0E3E22;
+
+  --tt-blue-50:  #EEF4FF;
+  --tt-blue-100: #DBE7FF;
+  --tt-blue-300: #8FB6F5;
+  --tt-blue-500: #3B7DE8;
+  --tt-blue-600: #2A63C4;
+  --tt-blue-700: #1F4C9B;
+  --tt-blue-900: #12305F;
+
+  /* Gold, not amber. Amber sits ~25deg from the brand and reads as a broken
+     brand colour rather than a warning. Never within 8px of a primary action. */
+  --tt-gold-50:  #FDF6E3;
+  --tt-gold-100: #F8EAC0;
+  --tt-gold-300: #E9C86A;
+  --tt-gold-500: #C99A08;
+  --tt-gold-600: #A87E00;
+  --tt-gold-700: #7F5F00;
+  --tt-gold-900: #3A2A00;
+
+  /* Type weight — THREE STEPS, revised 25 Sep 2026 (was two, added 10 Sep).
+     This scale did not exist until 10 Sep, and its absence was the bug: families
+     were tokenised but weight never was, so every component picked its own
+     literal and the system drifted to four of them (800 wordmark / 800 metrics,
+     700 buttons and labels, 600 titles, 500 mono meta). The fix at the time was
+     to collapse everything to two steps, 400 and 600.
+
+     That overshot: 600 on every title and every <b>/<strong> reads as too heavy
+     in the product (Bhuvan's call, referencing Town.com's restraint — titles and
+     inline emphasis there carry hierarchy through size and colour, not through
+     maximum available weight). 700 is still OUT OF THE SCALE for the reason
+     given at the time — it closes up Figtree's counters. But a single "570 for
+     everything that isn't body text" was never fine-grained enough to tell a
+     title from a button.
+
+     So: 400 body, 500 for anything that needs to read as slightly more
+     important (titles, labels, inline emphasis), 600 held in reserve for the
+     one place that should still shout — the button/CTA label, which is the
+     thing on screen someone is meant to press. See the role aliases below;
+     they are what changed, not the primitives. */
+  --tt-weight-regular:  400;
+  --tt-weight-medium:   500;
+  --tt-weight-semibold: 600;
+
+  /* Product titles. 24px read too large in the app, so page titles, setup
+     titles, and dialog titles share one step. */
+  --tt-size-title: 18px;
+  --tt-leading-title: 24px;
+  /* Setup-step headings inside the card. A step up from the page title. */
+  --tt-size-heading: 20px;
+  --tt-leading-heading: 28px;
+
+  /* Font family — THE BRAND IS TWO FAMILIES: Figtree and Noto Serif. Both are
+     loaded by next/font (src/styles/fonts.ts), which supplies --tt-font-ui and
+     --tt-font-display; neither is declared here, because a token file cannot
+     name a hashed webfont.
+
+     --tt-font-mono is different, and it is declared here BECAUSE it is no longer
+     a webfont. JetBrains Mono was removed entirely 29 Sep 2026 — nothing third
+     is downloaded or shipped. But 41 declarations across the marketing CSS say
+     `font-family: var(--tt-font-mono);` with NO fallback, and an undefined
+     custom property makes the whole declaration invalid, so deleting the name
+     would have silently dropped fixed-width from every code mock and terminal
+     on the landing page. It now resolves to the reader's own operating-system
+     monospace: no request, no licence, not a brand family.
+
+     Use it ONLY where characters must be fixed-width to stay aligned — the
+     simulated code panels and terminals. Never in product UI. Never for
+     numbers: those are Figtree with `font-variant-numeric: tabular-nums`. */
+  --tt-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Space — 4pt base */
+  --tt-space-1: 4px;   --tt-space-2: 8px;   --tt-space-3: 12px;
+  --tt-space-4: 16px;  --tt-space-5: 20px;  --tt-space-6: 24px;
+  --tt-space-8: 32px;  --tt-space-10: 40px; --tt-space-12: 48px;
+  --tt-space-16: 64px; --tt-space-20: 80px; --tt-space-24: 96px;
+
+  /* Pill padding — added 10 Sep 2026, same reason the weight scale was.
+     Padding was never tokenised either, so badges and tags each invented their
+     own: the system's own .c-badge sat at 9px (not even a step on the 4pt
+     scale), and screens built from it drifted to 8 / 10 / 11 / 13.
+
+     A pill is radius-999, and a rounded end optically eats roughly half a stem
+     of space at each edge — so a pill needs MORE horizontal padding than the
+     equivalent rectangular control, not the same. Hence 3x the vertical here,
+     where a rounded-rect button is comfortable at 2x. 12px is the floor for
+     anything carrying more than two words. */
+  --tt-pad-pill-sm: 2px 8px;    /* counts, status dots, inline flags */
+  --tt-pad-pill-md: 4px 12px;   /* badges, tags, eyebrow labels — the default */
+  --tt-pad-pill-lg: 6px 16px;   /* filter chips, stat pills, anything clickable */
+
+  /* Shape — radii step with the element. A chip inside a card takes the radius
+     one step below the card's: never the same, never larger. */
+  /* REVERSED 29 Sep 2026 — the 4px step is back, and the scale starts there.
+     It was retired 9 Sep 2026 in favour of "8px is the floor across the system",
+     which left `xs` as a dead alias of `sm` and the scale effectively 8/12/16.
+     The cost showed up on the smallest controls: an 18px checkbox at 8px radius
+     is rounding 44% of its own half-width, which reads as a lozenge rather than
+     a square with softened corners. A radius has to step with the element, and
+     with no step below 8 there was nothing for an 18px control to take.
+     The scale is 4 / 8 / 12 / 16 / pill, and "a chip takes one step below its
+     card" starts at 4 inside 8 again. */
+  --tt-radius-xs: 4px;    /* checkboxes, radios, and anything at or under ~20px */
+  --tt-radius-sm: 8px;    /* buttons, small cards, form fields */
+  --tt-radius-md: 12px;   /* panels, Studio source cards */
+  --tt-radius-lg: 16px;   /* modals, the session frame */
+  --tt-radius-pill: 999px;
+
+  /* Border widths. Forms take the hairline: on a 2x display 0.5px renders as a
+     true one-device-pixel rule, which is the point. On a 1x display browsers
+     round it up to 1px rather than dropping it, so the boundary never vanishes.
+     Thinness does not lower the contrast bar — --tt-border-interactive still
+     clears the 3:1 that WCAG 1.4.11 requires of an interactive boundary. */
+  --tt-border-form: 0.5px;      /* inputs, selects, textareas, checkboxes */
+  --tt-border-thin: 1px;        /* cards, panels, dividers */
+  --tt-border-focus: 2px;       /* focus ring, at 2px offset */
+
+  /* Layout — page-level max-widths. These are `max-width` values, not breakpoints:
+     a container caps how wide content grows, a breakpoint decides when the layout
+     changes shape. Most pages want `lg`; long-form reading wants `prose`. */
+  --tt-container-prose: 65ch;   /* running text — the reading-measure cap */
+  --tt-container-sm: 640px;     /* auth, single-column forms, focused tasks */
+  --tt-container-md: 900px;     /* articles, settings, the Studio's detail panes */
+  --tt-container-lg: 1200px;    /* default app content width */
+  --tt-container-xl: 1440px;    /* wide marketing sections */
+
+  /* Breakpoints. Declared here for reference only — CSS cannot read a custom
+     property inside a media query, so these values are also set in globals.css
+     under Tailwind's @theme, which is what actually generates sm:/md:/lg: variants.
+     Values match Tailwind's defaults deliberately: there is no reason to invent our
+     own, and diverging would surprise anyone who has used Tailwind before.
+       sm 640px · md 768px · lg 1024px · xl 1280px · 2xl 1536px            */
+
+  /* Layering. A single ordered scale, so no component ever picks a number.
+     Two deliberate choices worth knowing:
+       - toast sits ABOVE modal, because a toast confirming a modal's action has to
+         be visible while the modal is still open.
+       - tooltip is highest; it is never blocking, so it can never trap anything.
+     Native <dialog> opened with showModal() renders in the browser's top layer and
+     ignores z-index entirely — do not try to stack against it. */
+  --tt-z-base: 0;
+  --tt-z-raised: 10;      /* cards lifted on hover, sticky section headers */
+  --tt-z-sticky: 20;      /* sticky table headers, the app sidebar */
+  --tt-z-dropdown: 30;    /* menus, popovers, select panels */
+  --tt-z-overlay: 40;     /* scrims and backdrops */
+  --tt-z-modal: 50;       /* dialogs, drawers */
+  --tt-z-toast: 60;       /* above modal, on purpose */
+  --tt-z-tooltip: 70;     /* always last */
+
+  /* Icon sizes. Four steps, and icons take one of them — nothing in between.
+     Before this scale existed the library had shipped twelve different sizes. */
+  --tt-icon-xs: 12px;   /* inside chips and 11-12px labels */
+  --tt-icon-sm: 16px;   /* DEFAULT — buttons, inputs, menu items, close controls */
+  --tt-icon-md: 20px;   /* alerts, section headers */
+  --tt-icon-lg: 24px;   /* empty states, feature marks */
+
+  /* Minimum hit area for anything clickable, per WCAG 2.2 SC 2.5.8. An icon may be
+     16px, but the control around it is never smaller than this. Where a control is
+     wrapped in a <label>, the label counts toward the target. */
+  --tt-target-min: 24px;
+
+  /* Motion — PROVISIONAL, held at "purposeful" pending review.
+     Licensed cases only: thinking, streaming, turn handoff, score reveal,
+     ingest progress. */
+  --tt-duration-instant: 80ms;
+  --tt-duration-quick: 140ms;
+  --tt-duration-base: 200ms;
+  --tt-duration-slow: 320ms;
+  --tt-duration-deliberate: 480ms;
+  --tt-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --tt-ease-enter: cubic-bezier(0, 0, 0, 1);
+  --tt-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+}
+
+/* ---------------------------------------------------- 2. SEMANTIC — LIGHT (base)
+   The bare :root block is the COMPLETE light palette. Every token that exists in
+   dark must exist here, or the un-stamped system-default state renders one
+   theme's text on the other theme's ground. */
+:root {
+  --tt-canvas:         #FEFEFF;
+  --tt-surface:        #FFFFFF;
+  --tt-surface-raised: #FFFFFF;
+  --tt-surface-sunken: #F7F7F7;
+
+  --tt-text-primary:   #1C1B1B;  /* 16.45:1 on canvas — AAA */
+  --tt-text-secondary: #4A4A4A;  /*  9.09:1 — AAA */
+  --tt-text-tertiary:  #656565;  /*  5.83:1 — AA  */
+  --tt-text-muted:     #828282;  /*  3.99:1 — FAILS AA for normal text. Legal uses:
+                                       placeholder text and disabled controls only,
+                                       both exempt from WCAG 1.4.3. Anything a user
+                                       is meant to READ takes --tt-text-tertiary. */
+
+  --tt-primary:        #FF5A00;
+  --tt-primary-hover:  #E04D00;
+  --tt-primary-ink:    #B83E00;  /* brand as TEXT on canvas — 5.45:1 */
+  --tt-primary-subtle: #FFF4EC;
+  --tt-on-primary:     #FFFFFF;  /* DELIBERATE BRAND DECISION, 9 Sep 2026.
+                                    White on #FF5A00 is 3.13:1 and FAILS WCAG AA for normal
+                                    text. It passes AA only at large sizes (>=18.66px bold
+                                    or >=24px). Near-black (#0A0A0A) would be 6.33:1.
+                                    Signed off by Bhuvan; do not silently 'fix' this. */
+
+  /* The neutral CTA. Renders BLACK in light theme and WHITE in dark theme — one
+     variant, flipped by the token layer, so it is always the opposite polarity of
+     its canvas and can never be shipped invisible. 19.78:1 in both themes (AAA).
+     Used for the ordinary, always-present actions that would fight each other if
+     they were all brand orange. See Button variant="strong". */
+  --tt-cta-strong:       #2B2B2B;   /* neutral-1000 */
+  --tt-cta-strong-hover: #4A4A4A;   /* neutral-900 — lifts slightly on hover */
+  --tt-on-cta-strong:    #FFFFFF;
+
+  /* Soft fill — the grey-button surface. NOT --tt-surface-sunken: in dark theme
+     sunken is *darker* than the card it sits on, so a button using it would read as
+     a hole rather than a control. This steps away from the surface in whichever
+     direction the theme requires. */
+  --tt-fill-soft:       #F0F0F0;   /* neutral-100 */
+  --tt-fill-soft-hover: #E9E9E9;   /* neutral-200 */
+
+  --tt-border:             #E9E9E9;  /* decorative only, no contrast requirement */
+  /* Card gets its own, lighter border — added 25 Sep 2026. --tt-border is the
+     general divider (table rows, card headers/footers, dropdowns); a card's own
+     outer edge sits next to open canvas on every side and reads as heavier than
+     an internal divider at the same value. One step lighter on the neutral ramp
+     (neutral-100, not neutral-200). */
+  --tt-card-border:        #F0F0F0;
+  --tt-border-interactive: #828282;  /* 3.99:1 light / 4.50:1 dark — one value, both themes */
+  --tt-border-field:       #C4C4C4;  /* neutral-300. DELIBERATE DECISION, 9 Sep 2026.
+                                        Form fields and the secondary button, at rest.
+                                        1.79:1 on surface — FAILS the 3:1 that WCAG 1.4.11
+                                        asks of an interactive boundary. #828282 (3.84:1) is
+                                        the only step in this ramp that passes, so "lighter"
+                                        and "compliant" cannot both hold. Mitigated by firming
+                                        the border to --tt-border-interactive on hover/focus.
+                                        Signed off by Bhuvan; do not silently revert. */
+  --tt-focus:              #FF5A00;  /* 3.03:1 light — clears 3:1 only just, hence 2px + 2px offset */
+
+  --tt-danger:         #CE2C33;
+  --tt-danger-subtle:  #FFF1F1;
+  --tt-live:           #CE2C33;  /* recording / live session ONLY — never --tt-primary */
+  --tt-success:        #1A6739;  /* green-700, not -600: -600 was 4.40:1 on success-subtle */
+  --tt-success-subtle: #EDF9F1;
+  --tt-info:           #2A63C4;
+  --tt-info-subtle:    #EEF4FF;
+  --tt-caution:        #7F5F00;
+  --tt-caution-subtle: #FDF6E3;
+
+  /* NIGHT SURFACES — adopted from the marketing page 10 Sep 2026.
+     An editorial dark section inside an otherwise light page. This is not dark
+     THEME: it is a band of night that stays night in both themes, which is why
+     these are declared once and never redefined below. The product had no such
+     concept; the landing page had a good one, so it was taken rather than
+     reinvented.
+
+     Values are the landing's (--l-night, --l-night-deep, --l-hero-panel), with
+     one correction: its tertiary was #7A7E86, which measures 4.41:1 on --tt-night
+     and fails AA by a hair. Rather than invent a value, this uses neutral-500,
+     already in the ramp, at 4.67:1. */
+  --tt-night:        #111215;   /* the editorial dark section — darkened 11 Sep 2026 per Bhuvan */
+  --tt-night-deep:   #0F0F0F;   /* footer, one step deeper */
+  --tt-night-panel:  #241C1B;   /* warm near-black behind hero artwork */
+  --tt-on-night:     #FFFFFF;   /* 17.96:1 */
+  --tt-on-night-2:   #B6B6B6;   /*  8.86:1 — secondary copy */
+  --tt-on-night-3:   #828282;   /*  4.67:1 — was #7A7E86 at 4.41:1, FIXED */
+  --tt-line-night:   #373737;   /* 1.51:1, decorative hairline — same accepted
+                                   basis as the status borders; not a boundary */
+
+  /* Availability — the MARKETING green. Split from --tt-live 10 Sep 2026 because
+     they are opposite messages wearing the same word: --tt-live is red because
+     recording is a warning (you are being captured); --tt-available is green
+     because it is reassurance (this trainer can be reached now). Never
+     interchange them. The landing's #22C55E is 2.28:1 on white and can only ever
+     be a dot; this value carries a label. */
+  --tt-available: #23834A;      /* green-600, 4.75:1 on white */
+
+  /* Status BORDERS — added 10 Sep 2026. Alerts and badges used to draw their
+     edge in the full-strength status colour, which measured 4.7-6.4:1 against
+     their own fill: text-level contrast spent on a decorative line, which is
+     exactly why they read as heavy. These sit at the 300 step, ~1.5-2.1:1 on
+     the fill — present, but no longer shouting.
+
+     Deliberately below the 3:1 of SC 1.4.11, and that is correct here: an alert
+     is not a control, and its severity is carried by the icon, the heading and
+     the fill, never by the border alone (SC 1.4.1). Do not "fix" these back. */
+  --tt-primary-border: #FFA36B;
+  --tt-success-border: #7FD1A0;
+  /* MARKETING BADGE BORDER — the lone survivor of the --tt-*-badge-border family.
+     The other four were culled 25 Sep 2026 when Badge/SourceChip dropped their
+     borders. That cull checked the React components and NOT the marketing CSS,
+     where nine call sites across TrainerTwin_home{,_v1,_v3}/home.css still point
+     here — one of them inside a `border:` shorthand, which an undefined var makes
+     invalid outright, removing the border entirely. Restored 29 Sep 2026 at its
+     original value; it is a lighter step than --tt-primary-border on purpose
+     (55% toward the badge's own subtle fill), so a repeated badge edge stays
+     barely-there. Marketing only — product badges have no border at all. */
+  --tt-primary-badge-border: #FFD0B2;
+  --tt-info-border:    #8FB6F5;
+  --tt-caution-border: #E9C86A;
+  --tt-danger-border:  #F58F93;
+
+  /* BADGE borders — added 11 Sep 2026, REMOVED 25 Sep 2026. A filled badge lost
+     its border entirely (the fill alone reads as a shape; the two together were
+     doubling up), so this whole family went from "the alert border, but even
+     lighter" to unused in one step. Left as a note rather than silently
+     deleted: if a filled badge ever needs a border again, this is where the
+     lighter-than-alert step used to live, not --tt-*-border. */
+
+  /* Weight by role. These are what components should reference — the role names
+     are the rule, so "titles are medium, buttons stay semibold" is one line to
+     change rather than a grep. It wasn't followed until 25 Sep 2026: every
+     product component referenced Tailwind's own font-semibold directly instead
+     of these, so when the weight needed to change it meant editing thirteen
+     files, not one. That is fixed now — see src/components/*. */
+  --tt-weight-body:  var(--tt-weight-regular);   /* body, help text, table cells */
+  /* REVERSED 29 Sep 2026 — titles are semibold again.
+     They were moved 600 -> 500 on 25 Sep ("too much font weight for titles and
+     bold texts"). That pass overshot in the other direction: with titles, labels
+     and inline emphasis all sitting at 500, a table or card had no weight
+     contrast left between its heading and its own content, and the result read
+     flat. 600 is back on TITLES ONLY — labels stay 500 and `b`/`strong` stay
+     500, so the original complaint about heavy bold text is not re-created.
+     The scale still has three steps; what changed is which step titles take. */
+  --tt-weight-title: var(--tt-weight-semibold);  /* headings, card/modal/page titles, row names */
+  --tt-weight-label: var(--tt-weight-medium);    /* field labels, table headers, badges */
+  --tt-weight-cta:   var(--tt-weight-semibold);  /* button labels only — stays heavier
+                                                     on purpose; a button is the one
+                                                     thing on screen meant to be pressed */
+
+  /* Light elevates with shadow. */
+  /* Each step roughly doubles the ambient layer's offset, blur and alpha, so the
+     jump between two levels is actually perceptible. The first version of this
+     scale moved 5% -> 7% alpha between 1 and 2, which is a step on paper and
+     invisible on a cream canvas — a card lifting on hover did nothing at all. */
+  --tt-elevation-1: 0 1px 2px rgba(30, 28, 25, .06);
+  --tt-elevation-2: 0 2px 4px rgb(30 28 25 / 0.07), 0 8px 20px rgb(30 28 25 / 0.11);
+  --tt-elevation-3: 0 4px 8px rgb(30 28 25 / 0.09), 0 16px 40px rgb(30 28 25 / 0.16);
+
+  /* Card's own resting shadow, lighter than elevation-1 — added 25 Sep 2026,
+     same reasoning as the border above: a card sits on open canvas, not inside
+     another surface, so it doesn't need as much lift to read as an object.
+     Raised/hover states still escalate through elevation-2/3 unchanged. */
+  --tt-card-shadow: 0 1px 2px rgba(30, 28, 25, .04);
+}
+
+/* The two dark blocks below are intentionally duplicated rather than combined in a
+   selector list: `:root:not([data-theme="light"])` must stay inside the media query
+   (system dark), while `:root[data-theme="dark"]` must stay outside it (explicit
+   choice beating a light OS). Grouping them would break one of the two cases. */
+
+/* System dark — guarded so an explicit light choice beats a dark OS. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tt-canvas:         #141414;
+    --tt-surface:        #1C1B1B;
+    --tt-surface-raised: #2B2B2B;
+    --tt-surface-sunken: #0A0A0A;
+
+    --tt-text-primary:   #FEFEFF;  /* 17.97:1 — AAA */
+    --tt-text-secondary: #C4C4C4;  /* 10.39:1 — AAA */
+    --tt-text-tertiary:  #A3A3A3;  /*  6.93:1 — AA  */
+    --tt-text-muted:     #828282;  /*  4.50:1 — AA  */
+
+    --tt-primary:        #FF5A00;
+    --tt-primary-hover:  #FF7E33;
+    --tt-primary-ink:    #FF7E33;
+    --tt-primary-subtle: #3A1300;
+    --tt-on-primary:     #FFFFFF;  /* identical to light — the button is theme-invariant */
+
+    --tt-cta-strong:       #FFFFFF;   /* neutral-0 — the mirror of light's near-black */
+    --tt-cta-strong-hover: #F0F0F0;   /* neutral-100 — dims slightly on hover */
+    --tt-on-cta-strong:    #0A0A0A;
+
+    --tt-fill-soft:       #2B2B2B;   /* neutral-800 — lighter than the surface */
+    --tt-fill-soft-hover: #4A4A4A;   /* neutral-700 */
+
+    --tt-fill-soft:       #2B2B2B;   /* neutral-800 — lighter than the surface */
+  --tt-fill-soft-hover: #4A4A4A;   /* neutral-700 */
+
+  --tt-border:             #2B2B2B;
+  --tt-card-border:        #242323;  /* blend toward the dark surface, half-way to -900 */
+    --tt-border-interactive: #828282;
+    --tt-border-field:       #4A4A4A;  /* neutral-700 — mirrors the light relationship */
+    --tt-focus:              #FF5A00;
+
+    --tt-danger:         #F58F93;
+    --tt-danger-subtle:  #6B1216;
+    --tt-live:           #E5484D;
+    --tt-success:        #7FD1A0;
+    --tt-success-subtle: #0E3E22;
+    --tt-info:           #8FB6F5;
+    --tt-info-subtle:    #12305F;
+    --tt-caution:        #E9C86A;
+    --tt-caution-subtle: #3A2A00;  /* gold-900: gold-700 was 3.65:1 under caution text */
+
+  /* Status borders, dark. The 700 step — one rung above the -900 fill, so the
+     edge is felt without competing with the -300 text sitting on it. */
+  --tt-primary-border: #B83E00;
+  --tt-success-border: #1A6739;
+  /* Marketing badge border, dark — see the light block above. */
+  --tt-primary-badge-border: #732600;
+  --tt-info-border:    #1F4C9B;
+  --tt-caution-border: #7F5F00;
+  --tt-danger-border:  #A81F26;
+
+  --tt-available: #7FD1A0;      /* green-300, 10.12:1 on the dark canvas */
+
+    /* Dark elevates with LIGHTNESS, not shadow. Shadows on a near-black canvas
+       are invisible; a hairline plus a step up the neutral ramp is the only
+       signal that reads. */
+    --tt-elevation-1: 0 0 0 1px rgb(253 251 247 / 0.05);
+    --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
+    --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
+    --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
+  }
+}
+
+/* Explicit dark — beats a light OS. */
+:root[data-theme="dark"] {
+  --tt-canvas:         #141414;
+  --tt-surface:        #1C1B1B;
+  --tt-surface-raised: #2B2B2B;
+  --tt-surface-sunken: #0A0A0A;
+
+  --tt-text-primary:   #FEFEFF;
+  --tt-text-secondary: #C4C4C4;
+  --tt-text-tertiary:  #A3A3A3;
+  --tt-text-muted:     #828282;
+
+  --tt-primary:        #FF5A00;
+  --tt-primary-hover:  #FF7E33;
+  --tt-primary-ink:    #FF7E33;
+  --tt-primary-subtle: #3A1300;
+  --tt-on-primary:     #FFFFFF;
+
+  --tt-cta-strong:       #FFFFFF;   /* neutral-0 — the mirror of light's near-black */
+  --tt-cta-strong-hover: #F0F0F0;   /* neutral-100 — dims slightly on hover */
+  --tt-on-cta-strong:    #0A0A0A;
+
+  --tt-fill-soft:       #2B2B2B;
+  --tt-fill-soft-hover: #4A4A4A;
+
+  --tt-border:             #2B2B2B;
+  --tt-card-border:        #242323;  /* blend toward the dark surface, half-way to -900 */
+  --tt-border-interactive: #828282;
+  --tt-border-field:       #4A4A4A;  /* neutral-700 — mirrors the light relationship */
+  --tt-focus:              #FF5A00;
+
+  --tt-danger:         #F58F93;
+  --tt-danger-subtle:  #6B1216;
+  --tt-live:           #E5484D;
+  --tt-success:        #7FD1A0;
+  --tt-success-subtle: #0E3E22;
+  --tt-info:           #8FB6F5;
+  --tt-info-subtle:    #12305F;
+  --tt-caution:        #E9C86A;
+  --tt-caution-subtle: #3A2A00;  /* gold-900: gold-700 was 3.65:1 under caution text */
+
+  /* Status borders, dark. The 700 step — one rung above the -900 fill, so the
+     edge is felt without competing with the -300 text sitting on it. */
+  --tt-primary-border: #B83E00;
+  --tt-success-border: #1A6739;
+  /* Marketing badge border, dark — see the light block above. */
+  --tt-primary-badge-border: #732600;
+  --tt-info-border:    #1F4C9B;
+  --tt-caution-border: #7F5F00;
+  --tt-danger-border:  #A81F26;
+
+  --tt-available: #7FD1A0;      /* green-300, 10.12:1 on the dark canvas */
+
+  --tt-elevation-1: 0 0 0 1px rgb(253 251 247 / 0.05);
+  --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
+  --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
+  --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
+}
+
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--tt-canvas);
+  color: var(--tt-text-primary);
+  font-family: var(--tt-font-ui), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 23px;
+  font-weight: var(--tt-weight-regular);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* REQUIRED — not optional, not a nicety.
+   Every user-agent stylesheet sets b/strong to `bold` = 700, which is outside this
+   system's scale. Emphasis in *content* therefore bypasses every correctly-specified
+   component and renders 700 regardless. Omit this line and the page will look heavy
+   in exactly the places you did not style. Medium, not semibold, as of 25 Sep 2026 —
+   inline emphasis only needs to read as slightly more important than the words
+   around it, not as loud as a button. */
+b, strong { font-weight: var(--tt-weight-medium); }
+
+/* Same UA-default bug, different element: th is bold by default too. Every table's
+   own header styling overrides this already, so it only ever shows on an empty
+   header cell (a select-all checkbox column, say) with no weight class of its own. */
+th { font-weight: var(--tt-weight-medium); }
+
+/* Headings are medium, never semibold — semibold is reserved for buttons. Serif
+   only above 20px, and marketing-only even then (see §1, §3). */
+h1, h2, h3, h4, h5, h6 { font-weight: var(--tt-weight-medium); margin: 0; }
+/* Figtree by default — this base sheet is pasted into product screens most
+   often, and product never uses the serif face. A marketing page that wants
+   Noto Serif on its own h1/h2 applies it explicitly (see §3), the way the
+   landing site's own stylesheets already do; it never inherits it from here. */
+h1, h2 { font-family: var(--tt-font-ui), -apple-system, sans-serif; letter-spacing: -.015em; }
+
+/* One focus treatment everywhere. Brand orange clears 3:1 in both themes, but only
+   just in light — so 2px ring at 2px offset, never 1px flush. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: var(--tt-border-focus) solid var(--tt-focus);
+  outline-offset: 2px;
+  border-radius: var(--tt-radius-xs);
+}
+
+/* Anything counted takes Figtree + tabular figures — 29 Sep 2026, was mono.
+   `tabular-nums` is load-bearing here, not a nicety: Figtree's default figures
+   are proportional and measured 99px vs 154px for "111111" vs "000000" at 40px.
+   Drop the property and every counter jitters as its digits change. */
+.tabular { font-family: var(--tt-font-ui), sans-serif; font-variant-numeric: tabular-nums; }
+
+img { max-width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
