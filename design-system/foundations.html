@@ -2029,7 +2029,7 @@ footer { padding-top: var(--space-6); }
     .tc-all-meta { margin:0; display:flex; align-items:center; gap:4px; font-size:15px; line-height:20px; color:var(--color-text-secondary); }
     .tc-all .tc-more { background:var(--color-fill-soft); }
     @media (prefers-reduced-motion: reduce) { .tc-bubble, .tc-bubble.is-tilting { transition:none; } }
-/* tt:generated:start — written by scripts/sync-tokens.mjs from src/styles/tokens.css (b6d027fd).
+/* tt:generated:start — written by scripts/sync-tokens.mjs from src/styles/tokens.css (80702961).
    Every --tt-* token this page does not define by hand. Do not edit. */
 :root {
   --tt-weight-regular: 400;
@@ -2122,7 +2122,7 @@ footer { padding-top: var(--space-6); }
     --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
     --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
     --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
-    --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+    --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
     --tt-ink-faint: rgb(253 251 247 / 0.06);
     --tt-ink-soft: rgb(253 251 247 / 0.12);
     --tt-ink-strong: rgb(253 251 247 / 0.20);
@@ -2133,7 +2133,7 @@ footer { padding-top: var(--space-6); }
   --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
   --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
   --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
-  --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+  --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
   --tt-ink-faint: rgb(253 251 247 / 0.06);
   --tt-ink-soft: rgb(253 251 247 / 0.12);
   --tt-ink-strong: rgb(253 251 247 / 0.20);
@@ -2210,10 +2210,14 @@ footer { padding-top: var(--space-6); }
         <p>These came out of the brief and are treated as fixed. Everything downstream derives from them, so changing one of these is a system-level change, not a tweak.</p>
       </div>
       <div class="c-seg dec-tabs" role="tablist" aria-label="Decision status">
-        <button type="button" role="tab" aria-selected="true" data-dec-tab="locked">Locked <span class="c-segbadge">49</span></button>
+        <button type="button" role="tab" aria-selected="true" data-dec-tab="locked">Locked <span class="c-segbadge">50</span></button>
         <button type="button" role="tab" aria-selected="false" data-dec-tab="reversed">Reversed <span class="c-segbadge">4</span></button>
       </div>
       <div class="status">
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>The strict re-audit: sizes, gaps and borders checked with no filters, 17 Nov 2026</b> After the rail miss (D125), <code>npm run compare:prototype -- "" light,dark --strict</code> re-ran all 45 cases in light and dark with the noise filter and the per-case ignore lists off, and added each element's rendered width and height. Of 633 raw differences, almost all were harness noise (the prototype's root is 15px and Storybook's 16, test copy of different length, non-text elements, selectors that hit a wrapper in one and a label in the other). Real ones fixed: the gate card's subtitle is 13px with a 2px top margin (was 14 and 8); the card ⋮ buttons on the agent card and the Twin-for-all card are the shared ghost icon <code>Button</code> (they were hand-built, and the Twin-for-all one keeps the prototype's soft fill); the Twin-for-all meta line is a flex row with a 4px gap, as the prototype's; the dark <code>--tt-shadow-secondary</code> halo mixes from <code>--tt-text-primary</code> (cool white) instead of a warm white. Nothing else differed once the content was equal. Not comparable by this method: pieces with no prototype twin (Tooltip, Tabs, Waveform, Table, Pagination, Alert, Spinner).</p>
+        </div>
         <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The rail follows the prototype exactly: 214px wide, an orange dot instead of a count, 17 Nov 2026</b> Bhuvan: "Prototype nav rail is final." Measured against the live prototype, the Storybook <code>NavRail</code> was wrong in several places and D120 had recorded two of them wrongly. <b>Width:</b> 214px (72 collapsed), not 248: the prototype's last <code>.rail</code> rule wins; 248 was an earlier rule. <b>Count:</b> a plain 8px orange dot at the end of the row, no number (<code>.nav-badge</code>); collapsed, the dot sits on the icon's corner with a 2px ring in the rail colour. The orange count pill of D120 is retired, <code>NavItem</code> takes <code>alert</code> instead of <code>count</code>. <b>Brand row:</b> a 20px orange mark with a 16px wordmark (600, -0.02em, 6px gap) as the button that collapses the rail, and a 32px theme switch (<code>RailAction</code>); collapsed, the row stacks and the mark swaps to an expand icon on hover. <b>Items:</b> 32px tall, 20px icons, 8px between items, a quiet <code>meta</code> value at the end of a row (13/18 secondary, e.g. minutes left). Group labels sit 12px below the previous item, 4px from the top. Collapsed items are 40px squares and a group label becomes a 1px divider. <b>Foot:</b> the items (Usage, Billing, Support, Settings) sit above the user card: photo 32, name 14/20 medium, 1px card border, radius 12, two soft shadows (<code>footerNav</code> and <code>footer</code>). Measured equal to the live prototype: rail 214, brand 32, item 32, icon 20, user card 50.</p>

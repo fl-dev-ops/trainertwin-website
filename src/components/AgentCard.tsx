@@ -4,6 +4,7 @@ import { useRef, type PointerEvent, type ReactNode } from "react";
 import { cn } from "./cn";
 import { Avatar } from "./Avatar";
 import { LearnerStack, type Learner } from "./LearnerStack";
+import { Button } from "./Button";
 import { MoreVerticalIcon } from "./UiIcons";
 import "./AgentCard.css";
 
@@ -204,15 +205,9 @@ export function AgentCard({
 
       <div className="mt-auto flex items-center justify-between gap-2 p-4">
         <LearnerStack learners={learners} max={maxLearners} />
-        <button
-          type="button"
-          aria-label={`Actions for ${title}`}
-          aria-haspopup="menu"
-          onClick={onMore}
-          className="relative z-[2] grid h-8 w-8 place-items-center rounded-full text-ink-secondary hover:bg-fill-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+        <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${title}`} aria-haspopup="menu" onClick={onMore} className="relative z-[2]">
           <MoreVerticalIcon />
-        </button>
+        </Button>
       </div>
       {menu}
     </article>

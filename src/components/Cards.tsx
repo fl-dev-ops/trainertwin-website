@@ -6,6 +6,7 @@ import { Avatar } from "./Avatar";
 import { Checkbox } from "./Checkbox";
 import { StatPill } from "./StatPill";
 import { LearnerStack, type Learner } from "./LearnerStack";
+import { Button } from "./Button";
 import { MoreVerticalIcon } from "./UiIcons";
 
 /**
@@ -134,18 +135,12 @@ export function TwinAllCard({ name, meta, photoSrc, learners = [], href, onOpen,
             {name}
           </button>
         )}
-        <p className="m-0 font-ui text-[15px] leading-5 text-ink-secondary">{meta}</p>
+        <p className="m-0 flex items-center gap-1 font-ui text-[15px] leading-5 text-ink-secondary">{meta}</p>
         {learners.length ? <LearnerStack learners={learners} /> : null}
       </div>
-      <button
-        type="button"
-        aria-label={`Actions for ${name}`}
-        aria-haspopup="menu"
-        onClick={onMore}
-        className="relative z-[2] grid h-8 w-8 flex-none place-items-center rounded-full bg-fill-soft text-ink-secondary hover:bg-fill-soft-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
+      <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${name}`} aria-haspopup="menu" onClick={onMore} className="relative z-[2] flex-none bg-fill-soft! hover:bg-fill-soft-hover!">
         <MoreVerticalIcon />
-      </button>
+      </Button>
     </article>
   );
 }

@@ -32,6 +32,7 @@ const SNAP_SRC = `(args) => {
     const cs = getComputedStyle(el);
     const o = {};
     for (const p of PROPS) { if (opts.skipSize && (p === 'width' || p === 'height')) continue; o[p] = cs[p]; }
+    const rc = el.getBoundingClientRect(); o.rw = Math.round(rc.width * 2) / 2 + 'px'; o.rh = Math.round(rc.height * 2) / 2 + 'px';
     out[label] = o;
   }
   return out;
@@ -91,7 +92,7 @@ export async function run(cases, { themes = ['light', 'dark'], only } = {}) {
 const isZeroShadow = (t) => /^rgb\(0,0,0,0(\.00)?\) 0px 0px 0px 0px$/.test(t.trim());
 const cleanShadow = (v) => { if (v == null || v === 'none') return 'none'; const parts = []; let depth = 0, cur = ''; for (const ch of String(v)) { if (ch === '(') depth++; if (ch === ')') depth--; if (ch === ',' && depth === 0) { parts.push(cur.trim()); cur = ''; } else cur += ch; } parts.push(cur.trim()); const out = parts.filter(p => !isZeroShadow(p)); return out.length ? out.join(' | ') : 'none'; };
 const px = (v) => parseFloat(v);
-export function diff(results, { widths = false } = {}) {
+export function diff(results, { widths = false, strict = false } = {}) {
   const lines = [];
   for (const r of results) {
     if (r.proto.__err || r.sb.__err) { lines.push(`!! ${r.name} [${r.theme}] error: ${r.proto.__err || r.sb.__err}`); continue; }
@@ -99,8 +100,10 @@ export function diff(results, { widths = false } = {}) {
       const a = r.proto[label], b = r.sb[label];
       if (!a || !b) { lines.push(`?? ${r.name} [${r.theme}] ${label}: ${!a ? 'prototype' : 'storybook'} element not found`); continue; }
       const bw0 = px(a.borderTopWidth) === 0 && px(b.borderTopWidth) === 0;
+      if (strict) for (const k of ['rw', 'rh']) { if (Math.abs(px(a[k]) - px(b[k])) > 1) lines.push(`${r.name} [${r.theme}] ${label}.RENDERED_${k === 'rw' ? 'WIDTH' : 'HEIGHT'}: prototype=${a[k]} | storybook=${b[k]}`); }
       for (const p of PROPS) {
-        if (r.ignore.includes(p) || r.ignore.includes(label + '.' + p)) continue;
+        if (!strict && (r.ignore.includes(p) || r.ignore.includes(label + '.' + p))) continue;
+        if ((p === 'width' || p === 'height') && strict) continue;
         if (p === 'width' && !widths) continue;
         if (p === 'display') continue;
         if (bw0 && /^border(Top|Bottom)(Style|Color)$/.test(p)) continue;

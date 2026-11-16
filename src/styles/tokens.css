@@ -575,7 +575,7 @@
     --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
     --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
     /* Measured directly off the onboarding prototype's secondary buttons. */
-    --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+    --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
 
     --tt-ink-faint:  rgb(253 251 247 / 0.06);
     --tt-ink-soft:   rgb(253 251 247 / 0.12);
@@ -648,7 +648,7 @@
   --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
   --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
   --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
-  --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+  --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
 
   --tt-ink-faint:  rgb(253 251 247 / 0.06);
   --tt-ink-soft:   rgb(253 251 247 / 0.12);

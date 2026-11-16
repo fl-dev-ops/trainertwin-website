@@ -590,7 +590,7 @@ img { max-width: 100%; }
   }
 }
 
-/* tt:generated:start — written by scripts/sync-tokens.mjs from src/styles/tokens.css (b6d027fd).
+/* tt:generated:start — written by scripts/sync-tokens.mjs from src/styles/tokens.css (80702961).
    Every token this file does not define by hand. Do not edit. */
 :root {
   --tt-radius-xl: 24px;
@@ -636,14 +636,14 @@ img { max-width: 100%; }
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+    --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
     --tt-ink-faint: rgb(253 251 247 / 0.06);
     --tt-ink-soft: rgb(253 251 247 / 0.12);
     --tt-ink-strong: rgb(253 251 247 / 0.20);
   }
 }
 :root[data-theme="dark"] {
-  --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+  --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
   --tt-ink-faint: rgb(253 251 247 / 0.06);
   --tt-ink-soft: rgb(253 251 247 / 0.12);
   --tt-ink-strong: rgb(253 251 247 / 0.20);

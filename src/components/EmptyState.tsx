@@ -60,7 +60,7 @@ export function GateCard({ illustration, title, description, actions, className 
       </div>
       <div className="p-6">
         <h2 className="m-0 text-[16px] leading-[22px] font-title text-ink">{title}</h2>
-        <p className="mt-2 mb-0 text-[14px] leading-5 text-ink-tertiary">{description}</p>
+        <p className="mt-[2px] mb-0 text-[13px] leading-5 text-ink-tertiary">{description}</p>
         <div className="mt-5 flex flex-wrap justify-center gap-2">{actions}</div>
       </div>
     </div>
