@@ -7,6 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "tokens:sync": "node scripts/sync-tokens.mjs",
+    "tokens:check": "node scripts/sync-tokens.mjs --check",
+    "compare:prototype": "node scripts/compare-prototype/run.mjs",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
