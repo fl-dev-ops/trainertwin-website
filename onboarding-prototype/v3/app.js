@@ -117,6 +117,7 @@ const state = {
   profileTz: "Asia/Dubai",
   profileLang: "English",
   botReassign: null,
+  obEditAsk: false,
   accCohort: "all",
   accRole: "all",
   accTab: "twin",
@@ -802,6 +803,8 @@ function render() {
   mountRespondDialog();
   mountRpsRemoveDialog();
   mountBotReassignDialog();
+  mountObEditDialog();
+  mountObLink();
   mountStudioFocus();
   mountLetterGlitch();
   mountObFound();
@@ -847,6 +850,9 @@ function showingGate() {
 }
 
 function view() {
+  if (state.authStart && state.auth) {
+    return `${authDialog()}${toastHtml()}`;
+  }
   if (state.demoTaskId) {
     return `
       ${pageTwinDemo()}
@@ -865,6 +871,7 @@ function view() {
     ${state.drawer ? drawer() : ""}
     ${state.builtFromOpen ? builtFromPanel() : ""}
     ${state.botReassign ? botReassignDialog() : ""}
+    ${state.obEditAsk ? obEditConfirm() : ""}
     ${state.auth ? authDialog() : ""}
     ${state.addKnowledgeOpen ? addKnowledgeDialog() : ""}
     ${state.voiceDialog ? voiceDialog() : ""}
@@ -1463,7 +1470,7 @@ const OB_SCRIPT = "“I’m recording this so my learners can practise with my t
 const OB_PAGE_STEP = { link: 1, found: 2, persona: 3, voices: 3, ready: 3, recording: 3, recorded: 3 };
 let obTimer = 0;
 let obWordTimer = 0;
-// While recording, the script is read along: a word turns bold every obWordMs, and Stop stays off until OB_MIN_WORDS are done.
+// While recording, the script is read along: a word turns bold every obWordMs. Stop is on from the start.
 const OB_WORDS = OB_SCRIPT.split(" ");
 const OB_MIN_WORDS = 20;
 let obWordMs = 400;
@@ -1533,6 +1540,26 @@ function pageOb() {
   if (page === "recording") return obRecording();
   if (page === "recorded") return obRecorded();
   return obLink();
+}
+
+// The Your-link form opens empty and fills itself after two seconds, so the demo can go straight to Next.
+let obAutoTimer = 0;
+function mountObLink() {
+  const o = state.ob;
+  if (!o || o.page !== "link" || o.autoFilled || o.searching) { clearTimeout(obAutoTimer); return; }
+  if (obAutoTimer) return;
+  obAutoTimer = setTimeout(() => {
+    obAutoTimer = 0;
+    const cur = state.ob;
+    if (!cur || cur.page !== "link" || cur.autoFilled) return;
+    cur.autoFilled = true;
+    if (!cur.link) cur.link = "https://www.linkedin.com/in/olgasinenko";
+    if (!cur.type) cur.type = OB_TYPES[0];
+    if (!cur.use.length) cur.use = [OB_USES[0][0]];
+    cur.linkErr = false;
+    cur.typeErr = false;
+    render();
+  }, 2000);
 }
 
 function obLink() {
@@ -1881,7 +1908,7 @@ function obRecording() {
     <p class="vs-script is-live">${OB_WORDS.map((w, i) => `<span class="vs-w${i < state.ob.words ? " is-read" : ""}" data-t="${esc(w)}">${esc(w)}</span>`).join(" ")}</p>
     ${obWave(true)}
     <p class="vs-timer" role="timer">Recording · <span id="ob-timer">${obClock(state.ob.recSecs)}</span></p>
-    <button class="btn btn--strong vs-full" type="button" data-action="ob-voice-stop"${state.ob.words >= OB_MIN_WORDS ? "" : " disabled"}>${obIco(OB_PATHS.stop)}Stop recording</button>
+    <button class="btn btn--strong vs-full" type="button" data-action="ob-voice-stop">${obIco(OB_PATHS.stop)}Stop recording</button>
     <button class="btn btn--ghost vs-after" type="button" data-action="ob-voice-retry">${obIco(OB_PATHS.retry)}Try again</button>
   `, "vs-card");
 }
@@ -11690,6 +11717,30 @@ function pageTwinTalk() {
   `;
 }
 
+function obEditConfirm() {
+  return `
+    <dialog class="issue-dialog upsell-dialog" id="ob-edit-dialog" aria-labelledby="ob-edit-title">
+      <div class="issue-card upsell-card upsell-card--end">
+        <span class="confirm-tile tt-tile-neutral talk-end-ico" aria-hidden="true"><span class="confirm-tile-in">${obIco(OB_PATHS.id)}</span></span>
+        <h2 class="issue-title upsell-title" id="ob-edit-title">Do you want to make changes?</h2>
+        <p class="upsell-sub">You’ll be disconnected from the call and taken to your twin’s knowledge base to update this information.</p>
+        <div class="upsell-actions talk-confirm-actions">
+          <button class="btn btn--secondary" type="button" data-action="ob-edit-cancel">Cancel</button>
+          <button class="btn btn--strong" type="button" data-action="ob-edit-yes">Yes, make changes</button>
+        </div>
+      </div>
+    </dialog>
+  `;
+}
+
+function mountObEditDialog() {
+  const dlg = document.getElementById("ob-edit-dialog");
+  if (!dlg) return;
+  if (typeof dlg.showModal === "function" && !dlg.open) dlg.showModal();
+  dlg.addEventListener("cancel", (ev) => { ev.preventDefault(); actions["ob-edit-cancel"](); });
+  dlg.addEventListener("click", (ev) => { if (ev.target === dlg) actions["ob-edit-cancel"](); });
+}
+
 function talkEndConfirm() {
   return `
     <dialog class="issue-dialog upsell-dialog" id="talk-end-dialog" aria-labelledby="talk-end-title">
@@ -12307,13 +12358,13 @@ function authDialog() {
     const to = state.authVia === "google"
       ? "your Google inbox"
       : esc(state.authEmail.trim());
-    return `
-      <dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-title">
+    const vwrap = (inner) => state.authStart ? `<div class="auth-page" id="auth-page">${inner}</div>` : `<dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-title">${inner}</dialog>`;
+    return vwrap(`
         <div class="auth-card auth-card--verify">
           <canvas class="auth-confetti" aria-hidden="true"></canvas>
-          <button class="btn btn--ghost btn--icon btn--sm auth-close" type="button" data-action="close-auth" aria-label="Close">
+          ${state.authStart ? "" : `<button class="btn btn--ghost btn--icon btn--sm auth-close" type="button" data-action="close-auth" aria-label="Close">
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5"/></svg>
-          </button>
+          </button>`}
           <div class="auth-copy">
             <span class="confirm-tile tt-tile-neutral auth-verify-ico" aria-hidden="true"><span class="confirm-tile-in">${obIco('<path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"/><path d="M3 7l9 6l9 -6"/>', 20)}</span></span>
             <h2 class="auth-title" id="auth-title">Check your email</h2>
@@ -12321,21 +12372,21 @@ function authDialog() {
             <button class="btn btn--strong auth-submit" id="auth-verified" type="button" data-action="confirm-email">I’ve verified</button>
           </div>
         </div>
-      </dialog>
-    `;
+      `);
   }
-  return `
-    <dialog class="auth-dialog auth-dialog--split" id="auth-dialog" aria-labelledby="auth-title">
+  const login = state.authMode === "login";
+  const google = '<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+  const card = `
       <div class="auth-card auth-card--split">
-        <button class="btn btn--ghost btn--icon btn--sm auth-close" type="button" data-action="close-auth" aria-label="Close">
+        ${state.authStart ? "" : `<button class="btn btn--ghost btn--icon btn--sm auth-close" type="button" data-action="close-auth" aria-label="Close">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
+        </button>`}
         <form class="auth-form-panel" id="auth-form">
-          <h2 class="auth-title" id="auth-title">Welcome to build your Twin</h2>
-          <p class="auth-sub">Sign up with your email.</p>
+          <h2 class="auth-title" id="auth-title">${login ? "Welcome back" : "Welcome to build your Twin"}</h2>
+          <p class="auth-sub">${login ? "Log in to your TrainerTwin account." : "Sign up with your email."}</p>
           <button class="btn btn--secondary auth-google" type="button" data-action="signup-google">
-            <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-            Sign up with Google
+            ${google}
+            ${login ? "Log in with Google" : "Sign up with Google"}
           </button>
           <div class="auth-or" role="separator"><span>or</span></div>
           <div class="auth-field">
@@ -12343,9 +12394,10 @@ function authDialog() {
             <input class="input auth-input" id="auth-email" type="email" value="${esc(state.authEmail)}" placeholder="m@example.com" autocomplete="email" aria-describedby="auth-error">
           </div>
           ${authPassField("auth-password", "Password", state.authPassword, state.authShowPassword)}
-          ${authPassField("auth-confirm", "Confirm password", state.authConfirm, state.authShowConfirm)}
+          ${login ? "" : authPassField("auth-confirm", "Confirm password", state.authConfirm, state.authShowConfirm)}
           <p class="error auth-error" id="auth-error" ${state.authError ? "" : "hidden"}>${esc(state.authError)}</p>
-          <button class="btn btn--secondary auth-submit" type="submit">Sign up</button>
+          <button class="btn btn--strong auth-submit" type="submit">${login ? "Log in" : "Sign up"}</button>
+          ${state.authStart ? `<p class="auth-switch">${login ? "New here?" : "Already have an account?"} <button class="auth-switch-btn" type="button" data-action="auth-mode" data-id="${login ? "signup" : "login"}">${login ? "Sign up" : "Log in"}</button></p>` : ""}
         </form>
         <div class="auth-illustration-panel">
           <div class="auth-side">
@@ -12354,7 +12406,10 @@ function authDialog() {
             <p class="auth-side-copy">A twin built from how you teach.<br>It practices and answers in your voice.</p>
           </div>
         </div>
-      </div>
+      </div>`;
+  if (state.authStart) return `<div class="auth-page" id="auth-page">${card}</div>`;
+  return `
+    <dialog class="auth-dialog auth-dialog--split" id="auth-dialog" aria-labelledby="auth-title">${card}
     </dialog>
   `;
 }
@@ -12363,6 +12418,21 @@ function closeAuth() {
   state.auth = null;
   state.authError = "";
   render();
+}
+
+function loginSubmit() {
+  const emailEl = document.getElementById("auth-email");
+  const passEl = document.getElementById("auth-password");
+  if (emailEl) state.authEmail = emailEl.value;
+  if (passEl) state.authPassword = passEl.value;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.authEmail.trim())) {
+    state.authError = "Enter a valid email address.";
+    state.afterFocus = "auth-email";
+    render();
+    return;
+  }
+  // A returning trainer goes straight to the signed-in app.
+  location.href = location.pathname + "?app=1";
 }
 
 function signupSubmit() {
@@ -13008,6 +13078,7 @@ let confettiFrame = 0;
 
 function mountAuth() {
   const dlg = document.getElementById("auth-dialog");
+  if (!dlg && state.authStart && state.auth === "verify") { mountConfetti(); return; }
   if (!dlg) {
     if (confettiFrame) cancelAnimationFrame(confettiFrame);
     confettiFrame = 0;
@@ -13363,9 +13434,9 @@ const actions = {
   },
   "ob-next"() {
     const o = state.ob;
-    o.linkErr = !validLink(o.link);
-    o.typeErr = !o.type;
-    if (o.linkErr || o.typeErr) { render(); return; }
+    clearTimeout(obAutoTimer);
+    o.linkErr = false;
+    o.typeErr = false;
     o.useOpen = false;
     o.typeOpen = false;
     o.searching = true;
@@ -13445,10 +13516,6 @@ const actions = {
       o.words += 1;
       const w = document.querySelectorAll(".vs-script .vs-w")[o.words - 1];
       if (w) w.classList.add("is-read");
-      if (o.words >= OB_MIN_WORDS) {
-        const stop = document.querySelector('[data-action="ob-voice-stop"]');
-        if (stop) stop.disabled = false;
-      }
     }, obWordMs);
     obTimer = setInterval(() => {
       const o = state.ob;
@@ -13510,6 +13577,15 @@ const actions = {
   },
   "talk-about-edit"(el) {
     if (obGate("talk-about-edit", el)) return;
+    state.obEditAsk = true;
+    render();
+  },
+  "ob-edit-cancel"() {
+    state.obEditAsk = false;
+    render();
+  },
+  "ob-edit-yes"() {
+    state.obEditAsk = false;
     obGoStyle();
   },
   "talk-chip"(el) {
@@ -13899,13 +13975,23 @@ const actions = {
   "close-auth"() {
     closeAuth();
   },
+  "auth-mode"(el) {
+    state.authMode = el.dataset.id === "login" ? "login" : "signup";
+    state.authError = "";
+    state.afterFocus = "auth-email";
+    render();
+  },
   "confirm-email"() {
     state.accountReady = true;
     state.auth = null;
+    state.authStart = false;
     state.authError = "";
     const pending = state.authPendingAction;
     state.authPendingAction = null;
-    if (pending === "ob-add-knowledge") {
+    if (pending === "ob-start") {
+      state.ob.page = "link";
+      render();
+    } else if (pending === "ob-add-knowledge") {
       obGoKnowledge();
     } else if (pending === "connect-drive") {
       state.drive = true;
@@ -17062,7 +17148,7 @@ document.addEventListener("submit", (e) => {
   }
   if (e.target.id === "auth-form") {
     e.preventDefault();
-    signupSubmit();
+    if (state.authMode === "login") loginSubmit(); else signupSubmit();
   }
 });
 
@@ -17481,6 +17567,15 @@ window.addEventListener("storage", (e) => {
   const keep = { theme: state.theme, railCollapsed: state.railCollapsed };
   Object.keys(state).forEach((key) => delete state[key]);
   Object.assign(state, structuredClone(INITIAL_STATE), keep);
+  // The flow opens on sign up / log in; sign up leads on to Build my twin.
+  state.auth = "signup";
+  state.authStart = true;
+  state.authMode = "signup";
+  state.authPendingAction = "ob-start";
+  // Demo values so the card can be submitted straight away.
+  state.authEmail = "olga@olgasiliveitup.com";
+  state.authPassword = "demo-password-1";
+  state.authConfirm = "demo-password-1";
 })();
 render();
 scheduleTeeteeNudge();
