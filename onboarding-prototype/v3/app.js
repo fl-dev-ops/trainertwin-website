@@ -118,6 +118,16 @@ const state = {
   profileLang: "English",
   botReassign: null,
   obEditAsk: false,
+  learnerId: "",
+  learnerTab: "sessions",
+  learnerExtra: {},
+  usageTab: "overview",
+  usageRange: "30d",
+  usageFilter: "all",
+  billMenu: false,
+  supportOpen: false,
+  supportSubject: "",
+  supportMsg: "",
   accCohort: "all",
   accRole: "all",
   accTab: "twin",
@@ -804,7 +814,9 @@ function render() {
   mountRpsRemoveDialog();
   mountBotReassignDialog();
   mountObEditDialog();
+  mountSupportDialog();
   mountObLink();
+  mountObWaves();
   mountStudioFocus();
   mountLetterGlitch();
   mountObFound();
@@ -872,6 +884,7 @@ function view() {
     ${state.builtFromOpen ? builtFromPanel() : ""}
     ${state.botReassign ? botReassignDialog() : ""}
     ${state.obEditAsk ? obEditConfirm() : ""}
+    ${state.supportOpen ? supportDialog() : ""}
     ${state.auth ? authDialog() : ""}
     ${state.addKnowledgeOpen ? addKnowledgeDialog() : ""}
     ${state.voiceDialog ? voiceDialog() : ""}
@@ -933,9 +946,12 @@ function icon(name) {
     settings: '<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     profile: '<circle cx="8" cy="5.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 13.3a5 5 0 0 1 10 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
     video: '<path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 8a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    credits: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6v10c0 .888 .772 1.45 2 2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 11c0 .888 .772 1.45 2 2"/>',
+    billing: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 7a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-10"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 10h18"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 15h.01"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M11 15h2"/>',
+    lifebuoy: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 15l3.35 3.35"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 15l-3.35 3.35"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5.65 5.65l3.35 3.35"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M18.35 5.65l-3.35 3.35"/>',
     back: '<path d="M5 12l14 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 -6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
   };
-  const viewBox = name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
+  const viewBox = name === "credits" || name === "billing" || name === "lifebuoy" || name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
   return `<svg viewBox="${viewBox}" aria-hidden="true">${paths[name]}</svg>`;
 }
 
@@ -947,10 +963,10 @@ function roleCheckIcon() {
   return `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 
-function navItem(id, label, glyph, badge) {
+function navItem(id, label, glyph, badge, meta) {
   const on = activeNav() === id || (id === "settings" && ["home", "videos", "cohorts", "acclearners", "team"].includes(activeNav()) && (state.accountReady || state.twinReady));
   const tip = state.railCollapsed ? ` data-rail-tip="${esc(label)}"` : "";
-  return `<button class="nav-item" type="button" data-action="nav" data-id="${id}" ${on ? 'aria-current="page"' : ""}${tip}>${icon(glyph)}<span>${label}</span>${badge ? `<b class="nav-badge" role="img" aria-label="${badge} waiting"></b>` : ""}</button>`;
+  return `<button class="nav-item" type="button" data-action="nav" data-id="${id}" ${on ? 'aria-current="page"' : ""}${tip}>${icon(glyph)}<span>${label}</span>${badge ? `<b class="nav-badge" role="img" aria-label="${badge} waiting"></b>` : ""}${meta ? `<em class="nav-meta">${esc(meta)}</em>` : ""}</button>`;
 }
 
 // Phone layout: the left rail turns into a slim header (logo, knowledge, theme, profile) and a
@@ -1071,6 +1087,7 @@ function rail() {
           <p class="rail-label rail-group">Twin</p>
           ${navItem("setup", "Twin agents", "setup")}
           ${navItem("calibrations", "Twin sessions", "messages")}
+          ${navItem("twinusers", "Twin users", "learners")}
           ${navItem("knowledge", "Twin’s brain", "brain")}` : ""}
           ${state.features.roleplay ? `
           <p class="rail-label rail-group">Roleplay</p>
@@ -1081,6 +1098,9 @@ function rail() {
         <div class="rail-foot">
           ${teeteeNudge()}
           <div class="rail-foot-nav">
+            ${navItem("usage", "Usage", "credits", "", USAGE_LEFT + " min")}
+            ${navItem("billing", "Billing", "billing")}
+            <button class="nav-item" type="button" data-action="support-open"${collapsed ? ' data-rail-tip="Support"' : ""}>${icon("lifebuoy")}<span>Support</span></button>
             ${navItem("settings", "Settings", "settings")}
           </div>
           <div class="rail-user-wrap">
@@ -1433,6 +1453,9 @@ function main() {
   if (state.sessionReportId) return pageSessionReport();
   if (state.calibId) return pageCalibration();
   if (state.botCreate) return pageBotCreate();
+  if (state.learnerId && (nav === "usage" || nav === "twinusers")) return pageLearnerDetail();
+  if (nav === "usage") return pageUsage();
+  if (nav === "billing") return pageBilling();
   if (nav === "settings") return pageSettings();
   if (nav === "inbox") return pageInbox();
   if (nav === "cohorts") return pageCohorts();
@@ -1440,6 +1463,7 @@ function main() {
   if (nav === "team") return pageTeam();
   if (nav === "knowledge") return pageStudioFlow();
   if (nav === "calibrations") return pageTwinSessions();
+  if (nav === "twinusers") return pageTwinUsers();
   if (nav === "learners") { state.accTab = "twin"; return pageAccLearners(); }
   if (nav === "roleusers") { state.accTab = "roleplay"; return pageAccLearners(); }
   if (nav === "sessions") return pageSessions();
@@ -1881,9 +1905,24 @@ function obVoices() {
 }
 
 function obWave(live) {
-  const heights = [12, 16, 8, 28, 20, 20, 12, 8, 8, 8, 20, 24, 16, 32, 32, 8, 12, 24, 24, 16, 16, 32, 12, 32, 8, 16];
-  const bars = Array.from({ length: 64 }, (_, i) => `<i style="height:${live ? heights[i % heights.length] : 12}px;animation-delay:${(i * 70) % 900}ms"></i>`).join("");
-  return `<div class="vs-wave${live ? " is-live" : ""}" aria-hidden="true">${bars}</div>`;
+  // Canvas waves from react-animated-waves (bundled in vendor-waves.js), mounted by mountObWaves().
+  return `<div class="vs-wave${live ? " is-live" : ""}" data-wave="${live ? "live" : "idle"}" aria-hidden="true"></div>`;
+}
+
+function mountObWaves() {
+  if (!window.TTWaves) return;
+  const primary = getComputedStyle(document.documentElement).getPropertyValue("--tt-primary").trim() || "#FF5A00";
+  document.querySelectorAll("[data-wave]").forEach((el) => {
+    const live = el.dataset.wave === "live";
+    window.TTWaves.mount(el, {
+      colors: [primary, "#FF8A4C", primary],
+      amplitude: live ? 30 : 12,
+      intensity: live ? 1 : 0.35,
+      speed: live ? 1.4 : 0.6,
+      height: "100%",
+      respectReducedMotion: false,
+    });
+  });
 }
 
 function obRecordReady() {
@@ -2065,6 +2104,13 @@ document.addEventListener("input", (e) => {
   if (lf) {
     const needle = lf.value.trim().toLowerCase();
     document.querySelectorAll(lf.dataset.liveFilter).forEach((it) => { it.hidden = !!needle && !(it.dataset.s || "").includes(needle); });
+    return;
+  }
+  const sp = e.target && e.target.closest ? e.target.closest("[data-support]") : null;
+  if (sp) {
+    state[sp.dataset.support === "subject" ? "supportSubject" : "supportMsg"] = sp.value;
+    const send = document.getElementById("support-send");
+    if (send) send.disabled = !(state.supportSubject.trim() && state.supportMsg.trim());
     return;
   }
   const dk = e.target && e.target.closest ? e.target.closest("[data-dev-key]") : null;
@@ -3921,6 +3967,46 @@ function pageCohorts() {
   `;
 }
 
+const TWIN_USERS = [
+  ["bechir.realestate", "bechir.realestate@gmail.com", 30], ["egoryakina", "egoryakina@gmail.com", 60], ["kjsofficemail", "kjsofficemail@gmail.com", 2],
+  ["mady24n", "mady24n@gmail.com", 0], ["mila.konsina", "mila.konsina@gmail.com", 0], ["safwankadri786786", "safwankadri786786@gmail.com", 3],
+  ["themehakbhutani", "themehakbhutani@gmail.com", 0]
+];
+
+function pageTwinUsers() {
+  return `
+    <div class="page page--library page--twin-profile">
+      <div class="lib-head">
+        <h1 class="lib-title"><span class="lib-mark">${icon("learners")}</span>Twin users</h1>
+      </div>
+      <div class="twin-bots-head twin-bots-head--stack">
+        <h2 class="page-title">All learners</h2>
+        <p class="home-meta">People who can learn from your twins</p>
+      </div>
+      <div class="an-table lr-table" role="table" aria-label="All learners">
+        <div class="an-row an-row--twinusers an-row--head" role="row">
+          <span role="columnheader">Learner</span><span role="columnheader" class="lr-email">Email</span><span role="columnheader">Assigned agents</span><span role="columnheader">Credits given</span><span role="columnheader">Until</span><span role="columnheader">Credits used</span>
+        </div>
+        ${TWIN_USERS.map(([name, email]) => {
+          const L = learnerInfo(name), used = L.used, given = L.given, left = L.left;
+          const pct = Math.max(used ? 3 : 0, Math.round((used / given) * 100));
+          return `
+        <div class="an-row an-row--twinusers us-link" role="row" tabindex="0" data-action="learner-open" data-id="${esc(name)}">
+          <span class="lr-name" role="cell"><span class="rp-avatar rp-avatar--${avIdx(name)}" aria-hidden="true">${esc(name.charAt(0).toUpperCase())}</span><span class="lr-name-ell">${esc(name)}</span></span>
+          <span class="lr-email an-muted" role="cell">${esc(email)}</span>
+          <span class="tabular" role="cell">1 <span class="an-muted">agents</span></span>
+          <span class="tabular" role="cell">${given} <span class="an-muted">min</span></span>
+          <span class="tabular" role="cell">Until 12 Dec 2026</span>
+          <span class="lr-usage" role="cell">
+            <span class="lr-bar${used >= given ? " is-high" : ""}" aria-hidden="true"><span style="width:${pct}%"></span></span>
+            <span class="lr-text tabular">${used} used · ${left} left${left === 0 ? ` <span class="badge badge--caution">Low</span>` : ""}</span>
+          </span>
+        </div>`;
+        }).join("")}
+      </div>
+    </div>`;
+}
+
 function pageAccLearners() {
   const f = state.accCohort;
   const tabs = [["twin", "Twin users", state.features.twin], ["roleplay", "Roleplay users", state.features.roleplay]].filter((t) => t[2]);
@@ -4040,6 +4126,206 @@ const MY_VOICES = [
   ["Olga Sinenko’s Voice V2", "Oct 29, 2026"], ["Ravi", "Oct 28, 2026"], ["Sara Voice", "Oct 28, 2026"], ["Ravi Voice", "Oct 28, 2026"],
   ["Peter Voice", "Oct 28, 2026"], ["Karim Voice", "Oct 28, 2026"], ["Farid Voice", "Oct 28, 2026"], ["Faisal Voice", "Oct 28, 2026"]
 ];
+
+// ── Usage, Billing and the Contact support dialog (left nav, above Settings) ──
+const USAGE_LEFT = 618;
+const USAGE_ADDED = 1270;
+const USAGE_CREDITS = [
+  ["From TrainerTwin", "11 Nov 2026", "Never", "+1,000"], ["From TrainerTwin", "11 Nov 2026", "Never", "+50"],
+  ["From TrainerTwin", "11 Nov 2026", "Never", "+100"], ["From TrainerTwin", "11 Nov 2026", "Never", "+30"],
+  ["From TrainerTwin", "10 Nov 2026", "11 Nov 2027", "+90"]
+];
+const USAGE_TWINS = [["Olga Sinenko's twin", "Twin", 45, "88 min", "112 min"], ["Objection Handling", "Twin", 1, "3 min", "0 min"]];
+const USAGE_TEAM = [["Olga Sinenko", 61, 0, 0, 61], ["Cathy Nivedha", 22, 19, 0, 41], ["Team", 0, 5, 0, 5], ["Bhuvan", 3, 2, 0, 4]];
+const USAGE_LOG = [
+  ["call", "kjsofficemail practised with Olga Sinenko's twin", "16 Nov, 14:34", "1.7 min"],
+  ["call", "egoryakina practised with Olga Sinenko's twin", "16 Nov, 14:19", "6.4 min"],
+  ["call", "egoryakina practised with Olga Sinenko's twin", "16 Nov, 14:10", "3.4 min"],
+  ["call", "t.nesa07 practised with Olga Sinenko's twin", "15 Nov, 11:52", "4.8 min"],
+  ["credit", "Credits added: From TrainerTwin", "11 Nov, 09:10", "+1,000 min"],
+  ["call", "Harini practised with Olga Sinenko's twin", "13 Nov, 16:21", "5.4 min"],
+  ["tried", "Cathy Nivedha tried Olga Sinenko's twin", "12 Nov, 14:04", "2.4 min"],
+  ["credit", "Credits added: From TrainerTwin", "11 Nov, 09:08", "+50 min"]
+];
+const USAGE_LEARNERS = [
+  ["egoryakina", "egoryakina@gmail.com", 60, "60", "0", "low"], ["t.nesa07", "t.nesa07@gmail.com", 20, "16.2", "3", "low"],
+  ["Harini", "harini@foreverlearning.in", 10, "5.4", "4", "low"], ["Dharshini", "dharshini@foreverlearning.in", 15, "0", "15", ""],
+  ["Lalith", "lalith@foreverlearning.in", 15, "0", "15", ""], ["harini+1", "harini+1@foreverlearning.in", 30, "0", "30", ""],
+  ["safwankadri786786", "safwankadri786786@gmail.com", 60, "2.6", "57", ""], ["kjsofficemail", "kjsofficemail@gmail.com", 60, "1.7", "58", ""],
+  ["bechir.realestate", "bechir.realestate@gmail.com", 60, "30", "30", ""]
+];
+const BILL_INVOICES = [["TrainerTwin Paid plan, 11 Nov 2026 – 10 Dec 2026", "11 Nov 2026", "$300.00"]];
+
+const LD_TOPICS = ["Client follow-up", "Re-engaging silent leads", "Follow-up messaging", "Client re-engagement", "Handling postponed calls", "Lead follow-up", "Video outreach strategy", "Handling message inquiries", "Qualifying client criteria", "Booking client calls", "Handling catalogue requests", "Call transition", "Voice note outreach"];
+const LD_SESSIONS_EGOR = [["Today, 14:12", 0, 6], ["Today, 14:07", 2, 3], ["Today, 0:38", 4, 10], ["Sat, 23:07", 5, 3], ["Sat, 22:34", 7, 3], ["Sat, 22:32", 9, 2], ["Sat, 22:23", 11, 4], ["Sat, 15:10", 1, 5], ["Fri, 18:42", 6, 2], ["Fri, 10:15", 8, 3]];
+
+function avIdx(name) { return (name.charCodeAt(0) % 5) + 1; }
+
+function learnerInfo(name) {
+  const u = USAGE_LEARNERS.find((r) => r[0] === name);
+  const t = TWIN_USERS.find((r) => r[0] === name);
+  const email = (u && u[1]) || (t && t[1]) || "";
+  const base = u ? u[2] : 60;
+  const used = u ? Number(u[3]) : (t ? t[2] : 0);
+  const given = base + (state.learnerExtra[name] || 0);
+  const left = Math.round((given - used) * 10) / 10;
+  return { name, email, given, used, left };
+}
+
+function learnerSessions(L) {
+  if (L.name === "egoryakina") return LD_SESSIONS_EGOR;
+  const seed = L.name.charCodeAt(0);
+  return LD_SESSIONS_EGOR.map(([when, , mins], i) => [when, (seed + i * 3) % 13, mins]);
+}
+
+function pageLearnerDetail() {
+  const L = learnerInfo(state.learnerId);
+  const pct = Math.round((L.used / L.given) * 100);
+  const tab = state.learnerTab;
+  const sessions = learnerSessions(L);
+  const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>';
+  const chips = (i) => [LD_TOPICS[i % LD_TOPICS.length], LD_TOPICS[(i + 1) % LD_TOPICS.length]].map((t) => `<span class="ld-chip">${esc(t)}</span>`).join("") + `<span class="ld-chip">+1</span>`;
+  const list = tab === "sessions" ? (sessions.length ? `
+      <div class="us-table" role="table" aria-label="Sessions">
+        <div class="us-row us-row--sessions us-row--head" role="row"><span role="columnheader">Learner</span><span role="columnheader">Topics</span><span role="columnheader">Duration</span><span role="columnheader">Helpfulness</span><span></span></div>
+        ${sessions.map(([when, ti, mins]) => `<div class="us-row us-row--sessions us-link" role="row" tabindex="0" data-action="learner-session">
+          <span class="us-who"><span class="rp-avatar rp-avatar--${avIdx(L.name)}" aria-hidden="true">${esc(L.name.charAt(0).toUpperCase())}</span><span class="set-row-text"><span class="set-row-name">${esc(L.name)}</span><span class="set-row-sub">${when}</span></span></span>
+          <span class="ld-chips">${chips(ti)}</span><span class="tabular">${mins} min</span><span class="us-muted">–</span><span class="ld-go">${arrow}</span></div>`).join("")}
+      </div>` : `<p class="ts-empty">No sessions yet.</p>`) : `
+      <div class="us-table" role="table" aria-label="Credits">
+        <div class="us-row us-row--credits us-row--head" role="row"><span role="columnheader">Note</span><span role="columnheader">Date</span><span role="columnheader">Until</span><span role="columnheader" class="us-num">Credits</span></div>
+        <div class="us-row us-row--credits" role="row"><span role="cell">Given when they joined</span><span role="cell" class="us-muted">11 Nov 2026</span><span role="cell" class="us-muted">12 Dec 2026</span><span role="cell" class="us-num"><b>+${L.given - (state.learnerExtra[L.name] || 0)}</b> min</span></div>
+        ${state.learnerExtra[L.name] ? `<div class="us-row us-row--credits" role="row"><span role="cell">Added by you</span><span role="cell" class="us-muted">Today</span><span role="cell" class="us-muted">12 Dec 2026</span><span role="cell" class="us-num"><b>+${state.learnerExtra[L.name]}</b> min</span></div>` : ""}
+      </div>`;
+  return `
+    <div class="page page--library page--twin-profile">
+      <button class="acc-back" type="button" data-action="learner-back">${icon("back")} Back</button>
+      <div class="ld-head">
+        <div class="ld-who"><span class="rp-avatar rp-avatar--${avIdx(L.name)} ld-avatar" aria-hidden="true">${esc(L.name.charAt(0).toUpperCase())}</span><div><h1 class="ld-name">${esc(L.name)}</h1><p class="ld-email">${esc(L.email)}</p></div></div>
+        <div class="card ld-credits">
+          <div class="ld-credits-body"><p class="ld-eyebrow">Credits left</p><p class="ld-left"><b>${L.left}</b> <span>min</span></p>
+            <div class="lr-bar${L.left <= 0 ? " is-high" : ""}" aria-hidden="true"><span style="width:${Math.min(100, pct)}%"></span></div>
+            <p class="ld-used">${L.used} of ${L.given} min used</p></div>
+          <button class="btn btn--strong" type="button" data-action="learner-add"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Add credits</button>
+        </div>
+      </div>
+      <div class="seg set-seg" role="group" aria-label="Learner">${[["sessions", "Sessions"], ["credits", "Credits"]].map(([id, l]) => `<button type="button" data-action="learner-tab" data-id="${id}" aria-pressed="${tab === id}">${l}</button>`).join("")}</div>
+      ${list}
+    </div>`;
+}
+
+function pageUsage() {
+  const tab = state.usageTab;
+  const seg = `<div class="seg set-seg" role="group" aria-label="Usage">${[["overview", "Overview"], ["details", "Details"]].map(([id, l]) => `<button type="button" data-action="usage-tab" data-id="${id}" aria-pressed="${tab === id}">${l}</button>`).join("")}</div>`;
+  let body = "";
+  if (tab === "overview") {
+    const pct = Math.round((USAGE_LEFT / USAGE_ADDED) * 100);
+    body = `
+      <article class="card us-card">
+        <div class="us-top"><div><p class="us-label">Remaining credits</p><p class="us-big">${USAGE_LEFT} <span>min</span></p></div>
+          <button class="btn btn--secondary btn--sm" type="button" data-action="bill-buy">Buy credits</button></div>
+        <div class="us-bar-row"><div class="us-bar" role="progressbar" aria-valuenow="${USAGE_LEFT}" aria-valuemin="0" aria-valuemax="${USAGE_ADDED}" aria-label="Credits remaining"><i style="width:${pct}%"></i></div><span class="us-of">of ${USAGE_ADDED.toLocaleString("en-US")} added</span></div>
+        <p class="us-note">Each new learner gets 30 min; give more on their page (up to 360 min each). 90 min (From TrainerTwin) expire 10 Nov.</p>
+      </article>
+      <h2 class="us-h2">Credits added</h2>
+      <p class="us-sub">Free trial credits, minute packs and grants from TrainerTwin, with when they expire.</p>
+      <div class="us-table" role="table" aria-label="Credits added">
+        <div class="us-row us-row--credits us-row--head" role="row"><span role="columnheader">Note</span><span role="columnheader">Date</span><span role="columnheader">Expires</span><span role="columnheader" class="us-num">Credits</span></div>
+        ${USAGE_CREDITS.map((r) => `<div class="us-row us-row--credits" role="row"><span role="cell">${esc(r[0])}</span><span role="cell" class="us-muted">${r[1]}</span><span role="cell" class="us-muted">${r[2]}</span><span role="cell" class="us-num"><b>${r[3]}</b> min</span></div>`).join("")}
+      </div>`;
+  } else {
+    const range = ["7d", "30d", "90d"].map((r) => `<button type="button" data-action="usage-range" data-id="${r}" aria-pressed="${state.usageRange === r}">${r}</button>`).join("");
+    const log = USAGE_LOG.filter((r) => state.usageFilter === "all" || (state.usageFilter === "credits" ? r[0] === "credit" : r[0] !== "credit"));
+    body = `
+      <div class="us-sec-head"><div><h2 class="us-h2">Twins and role plays</h2><p class="us-sub">Minutes of calls on each, in the period.</p></div><div class="us-range" role="group" aria-label="Period">${range}</div></div>
+      <div class="us-table" role="table" aria-label="Twins and role plays">
+        <div class="us-row us-row--twins us-row--head" role="row"><span role="columnheader">Name</span><span role="columnheader">Type</span><span role="columnheader" class="us-num">Calls</span><span role="columnheader" class="us-num">Learners</span><span role="columnheader" class="us-num">Team</span></div>
+        ${USAGE_TWINS.map((r) => `<div class="us-row us-row--twins" role="row"><span role="cell">${esc(r[0])}</span><span role="cell" class="us-muted">${r[1]}</span><span role="cell" class="us-num">${r[2]}</span><span role="cell" class="us-num">${r[3]}</span><span role="cell" class="us-num">${r[4]}</span></div>`).join("")}
+      </div>
+      <h2 class="us-h2 us-h2--gap">Team</h2>
+      <p class="us-sub">Your admins' and team's own calls, paid from the organization's credits.</p>
+      <div class="us-table" role="table" aria-label="Team usage">
+        <div class="us-row us-row--team us-row--head" role="row"><span role="columnheader">Person</span><span role="columnheader" class="us-num">Calibration</span><span role="columnheader" class="us-num">Twins</span><span role="columnheader" class="us-num">Role plays</span><span role="columnheader" class="us-num">Total</span></div>
+        ${USAGE_TEAM.map((r) => `<div class="us-row us-row--team" role="row"><span role="cell">${esc(r[0])}</span>${r.slice(1).map((n) => `<span role="cell" class="us-num">${n} min</span>`).join("")}</div>`).join("")}
+      </div>
+      <div class="us-sec-head us-sec-head--gap"><div><h2 class="us-h2">Activity log</h2><p class="us-sub">Every credit given and every call in the period.</p></div>
+        <div class="us-tools"><select class="input us-select" aria-label="Filter activity" data-change="usage-filter">${[["all", "Everything"], ["calls", "Calls"], ["credits", "Credits added"]].map(([v, l]) => `<option value="${v}"${state.usageFilter === v ? " selected" : ""}>${l}</option>`).join("")}</select>
+        <button class="btn btn--secondary btn--sm" type="button" data-action="usage-csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4l0 12"/></svg>CSV</button></div></div>
+      <div class="us-table" role="table" aria-label="Activity log">
+        ${log.map((r) => `<div class="us-row us-row--log" role="row"><span class="us-dot us-dot--${r[0]}" aria-hidden="true"></span><span role="cell">${esc(r[1])}</span><span role="cell" class="us-muted">${r[2]}</span><span role="cell" class="us-num"><b>${r[3]}</b></span></div>`).join("")}
+        <div class="us-foot"><span class="us-muted">1–${log.length} of 59</span><span class="us-pager"><button class="btn btn--ghost btn--sm" type="button" disabled>Previous</button><button class="btn btn--ghost btn--sm" type="button" data-action="usage-page">Next</button></span></div>
+      </div>
+      <div class="us-sec-head us-sec-head--gap"><div><h2 class="us-h2">Learners</h2><p class="us-sub">What each learner was given, has used and has left, since they joined.</p></div>
+        <div class="set-search us-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg><input class="input" type="search" placeholder="Search learners" aria-label="Search learners" data-live-filter=".us-learner"></div></div>
+      <div class="us-table" role="table" aria-label="Learners">
+        <div class="us-row us-row--learners us-row--head" role="row"><span role="columnheader">Learner</span><span role="columnheader">Given</span><span role="columnheader">Used</span><span role="columnheader">Left</span></div>
+        ${USAGE_LEARNERS.map((r, i) => `<div class="us-row us-row--learners us-learner us-link" role="row" tabindex="0" data-action="learner-open" data-id="${esc(r[0])}" data-s="${esc((r[0] + " " + r[1]).toLowerCase())}"><span class="us-who"><span class="rp-avatar rp-avatar--${avIdx(r[0])}" aria-hidden="true">${esc(r[0].charAt(0).toUpperCase())}</span><span class="set-row-text"><span class="set-row-name">${esc(r[0])}</span><span class="set-row-sub">${esc(r[1])}</span></span></span>${(() => { const L = learnerInfo(r[0]); return `<span role="cell">${L.given} min</span><span role="cell">${L.used} min</span><span role="cell">${L.left} min${L.left <= 5 ? ` <span class="badge badge--caution us-low">Low</span>` : ""}</span>`; })()}</div>`).join("")}
+      </div>`;
+  }
+  return `
+    <div class="page page--library page--twin-profile set-page us-page">
+      ${setHead("credits", "Usage", "Where your organization's credits go. 1 credit = 1 minute of practice.")}
+      ${seg}
+      ${body}
+    </div>`;
+}
+
+function pageBilling() {
+  const dl = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4l0 12"/></svg>';
+  const rc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 15l2 2l4 -4"/></svg>';
+  return `
+    <div class="page page--library page--twin-profile set-page us-page">
+      ${setHead("billing", "Billing", "Your plan, minute packs, invoices and billing details.")}
+      <h2 class="us-h2">Plan</h2>
+      <article class="card bl-card bl-card--row">
+        <div><p class="bl-title">Paid plan <span class="badge">Active</span></p><p class="bl-sub">$300.00 / month, tax included · renews 11 Dec 2026</p></div>
+        <button class="btn btn--secondary btn--sm" type="button" data-action="support-open">Support</button>
+      </article>
+      <h2 class="us-h2 us-h2--gap">Add-ons</h2>
+      <article class="card bl-card bl-card--row">
+        <div><p class="bl-title">Minute packs</p><p class="bl-sub">100 credits for $25.00, tax included. Added when the invoice is paid; they expire a year later.</p></div>
+        <div class="bl-actions"><button class="btn btn--ghost btn--sm" type="button" data-action="nav" data-id="usage">See usage</button><button class="btn btn--strong btn--sm" type="button" data-action="bill-buy">Buy credits</button></div>
+      </article>
+      <h2 class="us-h2 us-h2--gap">Invoices</h2>
+      <article class="card bl-card bl-inv">
+        ${BILL_INVOICES.map((r) => `<div class="bl-inv-row"><span class="bl-inv-name">${esc(r[0])}</span><span class="us-muted">${r[1]}</span><span class="badge">Paid</span><b class="bl-inv-amt">${r[2]}</b>
+          <span class="bl-menu-wrap"><button class="btn btn--ghost btn--icon btn--sm" type="button" data-action="bill-menu" aria-haspopup="menu" aria-expanded="${state.billMenu}" aria-label="Invoice actions"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.25" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="12.75" cy="8" r="1.15" fill="currentColor"/></svg></button>
+          ${state.billMenu ? `<div class="menu bl-menu" role="menu"><button type="button" role="menuitem" data-action="bill-dl" data-id="invoice">${dl}<span>Download invoice</span></button><button type="button" role="menuitem" data-action="bill-dl" data-id="receipt">${rc}<span>Download receipt</span></button></div>` : ""}</span></div>`).join("")}
+      </article>
+      <p class="us-sub bl-foot">Invoices and receipts are emailed to your billing emails. Pay online with Pay now (card, or bank transfer where offered).</p>
+      <div class="us-sec-head us-sec-head--gap"><h2 class="us-h2">Billing information</h2><button class="btn btn--ghost btn--sm" type="button" data-action="bill-edit">Edit</button></div>
+      <article class="card bl-card bl-info">
+        <div><p class="bl-title">Billing emails</p><p class="bl-sub">liveitupdxb20@gmail.com</p></div>
+        <div><p class="bl-title">Legal name</p><p class="bl-sub">Live it Up - F.Z.E</p></div>
+        <div><p class="bl-title">Billing address</p><p class="bl-sub">C1 Building, Ajman Free Zone</p></div>
+      </article>
+    </div>`;
+}
+
+function supportDialog() {
+  const ok = state.supportSubject.trim() && state.supportMsg.trim();
+  return `
+    <dialog class="issue-dialog sup-dialog" id="support-dialog" aria-labelledby="support-title">
+      <div class="issue-card sup-card">
+        <button class="btn btn--ghost btn--icon btn--sm sup-x" type="button" data-action="support-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg></button>
+        <h2 class="issue-title" id="support-title">Contact support</h2>
+        <p class="sup-sub">Ask us anything or tell us what went wrong. We'll reply to your email.</p>
+        <label class="label" for="support-subject">Subject</label>
+        <input class="input" id="support-subject" type="text" placeholder="What's it about?" value="${esc(state.supportSubject)}" data-support="subject">
+        <label class="label" for="support-msg">Message</label>
+        <textarea class="input" id="support-msg" rows="3" placeholder="Tell us the details..." data-support="msg">${esc(state.supportMsg)}</textarea>
+        <div class="sup-actions"><button class="btn btn--ghost" type="button" data-action="support-close">Cancel</button><button class="btn btn--strong" type="button" id="support-send" data-action="support-send"${ok ? "" : " disabled"}>Send</button></div>
+      </div>
+    </dialog>`;
+}
+
+function mountSupportDialog() {
+  const dlg = document.getElementById("support-dialog");
+  if (!dlg) return;
+  if (typeof dlg.showModal === "function" && !dlg.open) dlg.showModal();
+  dlg.addEventListener("cancel", (ev) => { ev.preventDefault(); actions["support-close"](); });
+  dlg.addEventListener("click", (ev) => { if (ev.target === dlg) actions["support-close"](); });
+}
 
 function pageVoices() {
   const mine = state.voicesTab === "mine";
@@ -15609,6 +15895,33 @@ const actions = {
   },
   "user-menu-toggle"() { state.userMenu = !state.userMenu; render(); },
   "user-menu-go"(el) { state.userMenu = false; actions.nav({ dataset: { id: el.dataset.id } }); },
+  "support-open"() { state.userMenu = false; state.supportOpen = true; render(); },
+  "support-close"() { state.supportOpen = false; render(); },
+  "support-send"() {
+    if (!(state.supportSubject.trim() && state.supportMsg.trim())) return;
+    state.supportOpen = false; state.supportSubject = ""; state.supportMsg = "";
+    render();
+    toast("Message sent. We’ll reply to your email.");
+  },
+  "usage-tab"(el) { state.usageTab = el.dataset.id; render(); },
+  "usage-range"(el) { state.usageRange = el.dataset.id; render(); },
+  "usage-filter"(el) { state.usageFilter = el.value; render(); },
+  "usage-csv"() { toast("Activity log exported as CSV."); },
+  "learner-open"(el) { state.learnerId = el.dataset.id; state.learnerTab = "sessions"; render(); },
+  "learner-back"() { state.learnerId = ""; render(); },
+  "learner-tab"(el) { state.learnerTab = el.dataset.id; render(); },
+  "learner-add"() {
+    const n = state.learnerId;
+    state.learnerExtra[n] = (state.learnerExtra[n] || 0) + 30;
+    render();
+    toast("30 min added to " + n + ".");
+  },
+  "learner-session"() { toast("Opens the session report."); },
+  "usage-page"() { toast("That’s the whole period."); },
+  "bill-buy"() { toast("Minute packs: 100 credits for $25.00."); },
+  "bill-edit"() { toast("Billing details can be edited here."); },
+  "bill-menu"() { state.billMenu = !state.billMenu; render(); },
+  "bill-dl"(el) { state.billMenu = false; render(); toast(el.dataset.id === "receipt" ? "Receipt downloaded." : "Invoice downloaded."); },
   "user-docs"() { state.userMenu = false; toast("Docs open in a new tab."); },
   "user-logout"() { state.userMenu = false; toast("You’re logged out."); },
   "voices-tab"(el) { state.voicesTab = el.dataset.id; state.voicePlaying = ""; render(); },
@@ -16735,6 +17048,7 @@ const actions = {
     state.twinSessionId = "";
     state.rpsDetailId = "";
     state.calOverviewId = "";
+    state.learnerId = "";
     const nextNav = el.dataset.id;
     if (nextNav === "roleplay") { state.roleFilter = "published"; state.roleDetailId = ""; }
     state.nav = nextNav;
@@ -16874,6 +17188,11 @@ document.addEventListener("click", (e) => {
         return;
       }
     }
+  }
+  if (state.billMenu && !e.target.closest(".bl-menu-wrap")) {
+    state.billMenu = false;
+    render();
+    if (!el || el.disabled) return;
   }
   if (state.twinInfoOpen && !e.target.closest(".twin-hero-name")) {
     state.twinInfoOpen = false;
@@ -17230,6 +17549,7 @@ document.addEventListener("focusout", (e) => {
 });
 
 document.addEventListener("keydown", (e) => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.classList && e.target.classList.contains("us-link")) { e.preventDefault(); e.target.click(); return; }
   if (state.roleMenuId && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
     const items = Array.from(document.querySelectorAll(".rp-row-menu [role='menuitem']"));
     if (!items.length) return;
@@ -17528,7 +17848,7 @@ function docPersonaCards() {
   }));
 }
 
-Object.assign(state, { accountReady: true, twinReady: true, authEmail: "olga@olgasiliveitup.com", step: 6, nav: "setup", studioView: "profile" });
+Object.assign(state, { accountReady: true, twinReady: true, authEmail: "sample@mycompany.com", step: 6, nav: "setup", studioView: "profile" });
 // Personas edited in any tab are kept in localStorage so the tab that opened the editor can pick them up.
 const PERSONA_STORE = "tt-v3-personas";
 function loadPersonaStore() {
@@ -17573,7 +17893,7 @@ window.addEventListener("storage", (e) => {
   state.authMode = "signup";
   state.authPendingAction = "ob-start";
   // Demo values so the card can be submitted straight away.
-  state.authEmail = "olga@olgasiliveitup.com";
+  state.authEmail = "sample@mycompany.com";
   state.authPassword = "demo-password-1";
   state.authConfirm = "demo-password-1";
 })();
