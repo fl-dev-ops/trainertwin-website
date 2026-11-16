@@ -19,6 +19,8 @@ export interface SwitchProps {
   "aria-label"?: string;
   disabled?: boolean;
   name?: string;
+  /** Which side the track sits on. `end` puts the label and hint first and the track at the far right, as in a settings row. */
+  side?: "start" | "end";
   className?: string;
 }
 
@@ -43,12 +45,13 @@ export function Switch({
   hintStyle = "tooltip",
   disabled,
   name,
+  side = "start",
   className,
   ...rest
 }: SwitchProps) {
   const id = useId();
   return (
-    <div className={cn("flex items-start gap-3", className)}>
+    <div className={cn("flex items-start gap-3", side === "end" && "w-full flex-row-reverse items-center justify-between", className)}>
       <button
         id={id}
         type="button"
@@ -85,7 +88,7 @@ export function Switch({
               <label
                 id={`${id}-label`}
                 htmlFor={id}
-                className={cn("text-[14px] leading-5 text-ink", disabled ? "cursor-not-allowed opacity-45" : "cursor-pointer")}
+                className={cn("text-[14px] leading-5 text-ink", side === "end" && "font-label", disabled ? "cursor-not-allowed opacity-45" : "cursor-pointer")}
               >
                 {label}
               </label>

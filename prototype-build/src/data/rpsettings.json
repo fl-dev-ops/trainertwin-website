@@ -1,0 +1,113 @@
+{
+ "title": "Persona",
+ "create": "Create persona",
+ "createSvg": "<svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"M8 3.5v9M3.5 8h9\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"></path></svg>",
+ "panelTitle": "Real estate sales personas",
+ "intro": "Practise sales conversations with clients in real estate. Pick a default, or create your own.",
+ "view": [
+  {
+   "label": "Card view",
+   "id": "card",
+   "svg": "<svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"2.5\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect><rect x=\"9\" y=\"2.5\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect><rect x=\"2.5\" y=\"9\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect><rect x=\"9\" y=\"9\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect></svg>",
+   "on": false
+  },
+  {
+   "label": "List view",
+   "id": "list",
+   "svg": "<svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"M2.5 4h11M2.5 8h11M2.5 12h11\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"></path></svg>",
+   "on": true
+  }
+ ],
+ "head": [
+  "",
+  "Persona",
+  "Role",
+  "Traits",
+  "",
+  ""
+ ],
+ "moreSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" width=\"18\" height=\"18\"><path d=\"M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\"></path><path d=\"M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\"></path><path d=\"M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\"></path></svg>",
+ "rows": [
+  {
+   "photo": "../media/client-landlord.jpg",
+   "initial": "",
+   "name": "Ravi",
+   "place": "Oman",
+   "role": "First-time investor",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "",
+   "initial": "F",
+   "name": "Faisal",
+   "place": "Riyadh, Saudi Arabia",
+   "role": "Experienced investor",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "../media/persona-marcus.jpg",
+   "initial": "",
+   "name": "Karim",
+   "place": "Hamburg, Germany",
+   "role": "German/Syrian entrepreneur",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "",
+   "initial": "A",
+   "name": "Adam",
+   "place": "United States",
+   "role": "US-based dentist",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "",
+   "initial": "C",
+   "name": "Cedric",
+   "place": "France",
+   "role": "French agent-buyer",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "",
+   "initial": "F",
+   "name": "Farid",
+   "place": "United Kingdom",
+   "role": "UK-based family buyer",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "../media/client-seller.jpg",
+   "initial": "",
+   "name": "Anna",
+   "place": "",
+   "role": "JLT window-shopper",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "../media/persona-elena.jpg",
+   "initial": "",
+   "name": "Sara",
+   "place": "",
+   "role": "Relocating with kids",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  },
+  {
+   "photo": "../media/client-buyer.jpg",
+   "initial": "",
+   "name": "Peter",
+   "place": "Vienna, Austria",
+   "role": "Cautious European retiree",
+   "tag": "Asks for options on WhatsApp",
+   "more": "+2"
+  }
+ ]
+}

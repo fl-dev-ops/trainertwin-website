@@ -18,6 +18,8 @@ export interface SegmentOption<T extends string> {
   value: T;
   label: string;
   icon?: ReactNode;
+  /** After the label: a count, or the prototype's 8px orange dot for "something is waiting". */
+  badge?: ReactNode;
 }
 
 export interface SegmentedControlProps<T extends string> {
@@ -95,6 +97,7 @@ export function SegmentedControl<T extends string>({
           >
             {o.icon ? <span className={cn("flex-none", on && "text-primary")}>{o.icon}</span> : null}
             {o.label}
+            {o.badge}
           </button>
         );
       })}

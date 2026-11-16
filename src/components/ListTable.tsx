@@ -49,17 +49,22 @@ export interface UsageMeterProps {
   used: number;
   total: number;
   unit?: string;
+  /** Inline after the text, e.g. a "Low" `Badge` when nothing is left. */
+  badge?: ReactNode;
 }
 
-export function UsageMeter({ used, total, unit = "" }: UsageMeterProps) {
+export function UsageMeter({ used, total, unit = "", badge }: UsageMeterProps) {
   const pct = Math.max(0, Math.min(100, Math.round((used / total) * 100)));
   return (
     <span className="flex min-w-0 flex-col gap-[6px]">
       <span aria-hidden="true" className="block h-1.5 overflow-hidden rounded-full bg-fill-soft">
         <span className={cn("block h-full rounded-[inherit]", pct >= 90 ? "bg-caution" : "bg-ink")} style={{ width: `${pct}%` }} />
       </span>
-      <span className="text-[13px] leading-[18px] text-ink-secondary tabular-nums">
-        {used} used · {total - used} left{unit ? ` ${unit}` : ""}
+      <span className="flex items-center gap-2 text-[13px] leading-[18px] whitespace-nowrap text-ink-secondary tabular-nums">
+        <span>
+          {used} used · {Math.round((total - used) * 100) / 100} left{unit ? ` ${unit}` : ""}
+        </span>
+        {badge}
       </span>
     </span>
   );

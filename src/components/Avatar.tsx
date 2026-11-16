@@ -32,7 +32,7 @@ export interface AvatarProps
 
 const sizes: Record<AvatarSize, string> = {
   xs: "h-6 w-6 text-[9.5px]",
-  sm: "h-7 w-7 text-[10.5px]",
+  sm: "h-7 w-7 text-[12px]",
   md: "h-8 w-8 text-[12px]",
   lg: "h-11 w-11 text-[15px]",
 };

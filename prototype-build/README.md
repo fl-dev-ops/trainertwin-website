@@ -13,3 +13,12 @@ from v3 are icon paths and sample data, extracted once into `src/generated.ts`.
 - `src/pages/`: one file per page, composing Storybook components.
 - `src/local/`: anything that had to be written here because Storybook has no component yet. Each file starts
   with "NOT IN STORYBOOK YET". These are the candidates to promote.
+
+## Pages (left-nav order)
+
+Twin agents, Twin sessions, Twin users, Twin's brain, Scenarios, Roleplay sessions, Persona, Usage, Billing, Settings,
+plus the Support dialog (the rail's Support item). Sample rows are scraped read-only from the rendered v3 by
+`scripts/prototype-build/extract.mjs <nav id>` into `src/data/`.
+
+    node scripts/prototype-build/compare-text.mjs <nav id> [light|dark] [--shot]
+    # matches elements by their text in v3 and here, lists position / size / colour differences

@@ -19,15 +19,17 @@ export interface SummaryCardProps {
   unit?: string;
   /** Right-aligned on the number's baseline: "21 sessions rated". */
   count?: string;
+  /** `sm` is the prototype's 24px figure for a money amount ("AED 630"); the default 32px suits a score. */
+  valueSize?: "md" | "sm";
   visual?: ReactNode;
   className?: string;
 }
 
-export function SummaryCard({ title, icon, value, unit, count, visual, className }: SummaryCardProps) {
+export function SummaryCard({ title, icon, value, unit, count, valueSize = "md", visual, className }: SummaryCardProps) {
   return (
     <div
       className={cn(
-        "flex min-h-[106px] flex-1 items-center gap-4 rounded-lg border border-line-card bg-surface px-6 py-5 shadow-e1",
+        "flex min-h-[104px] flex-1 items-center gap-4 rounded-lg border border-line-card bg-surface px-6 py-5 shadow-e1",
         className,
       )}
     >
@@ -38,9 +40,9 @@ export function SummaryCard({ title, icon, value, unit, count, visual, className
           {title}
         </div>
         <div className="flex items-baseline justify-between gap-4">
-          <span className="font-ui text-[32px] leading-10 font-title tabular-nums text-ink">
+          <span className={cn("font-ui font-title tabular-nums text-ink", valueSize === "sm" ? "text-[24px] leading-none tracking-[-0.01em]" : "text-[32px] leading-[1.1]")}>
             {value}
-            {unit ? <span className="ml-1 text-[15px] font-normal text-ink-muted">{unit}</span> : null}
+            {unit ? <span className="ml-1 text-[15px] font-normal text-ink-secondary">{unit}</span> : null}
           </span>
           {count ? <span className="font-ui text-[14px] leading-5 text-ink-secondary tabular-nums">{count}</span> : null}
         </div>

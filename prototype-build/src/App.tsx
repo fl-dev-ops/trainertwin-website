@@ -4,6 +4,16 @@ import { PageHeader } from "@components/PageHeader";
 import { EmptyState } from "@components/EmptyState";
 import { Icon, SunIcon, MoonIcon } from "./Svg";
 import { TwinAgents } from "./pages/TwinAgents";
+import { TwinSessions } from "./pages/TwinSessions";
+import { TwinUsers } from "./pages/TwinUsers";
+import { TwinBrain } from "./pages/TwinBrain";
+import { Scenarios } from "./pages/Scenarios";
+import { RoleplaySessions } from "./pages/RoleplaySessions";
+import { Persona } from "./pages/Persona";
+import { Usage } from "./pages/Usage";
+import { Billing } from "./pages/Billing";
+import { Settings } from "./pages/Settings";
+import { SupportDialog } from "./pages/SupportDialog";
 
 /**
  * The V3 prototype, rebuilt from the Storybook components (src/components). Everything visible here is a
@@ -16,7 +26,7 @@ type Nav = { id: string; label: string; icon: string; meta?: string };
 const TWIN: Nav[] = [
   { id: "setup", label: "Twin agents", icon: "setup" },
   { id: "calibrations", label: "Twin sessions", icon: "messages" },
-  { id: "learners", label: "Twin users", icon: "learners" },
+  { id: "twinusers", label: "Twin users", icon: "learners" },
   { id: "knowledge", label: "Twin’s brain", icon: "brain" },
 ];
 const ROLEPLAY: Nav[] = [
@@ -32,7 +42,18 @@ const FOOT: Nav[] = [
 ];
 const ALL = [...TWIN, ...ROLEPLAY, ...FOOT];
 
-const PAGES: Record<string, () => ReactNode> = { setup: () => <TwinAgents /> };
+const PAGES: Record<string, () => ReactNode> = {
+  setup: () => <TwinAgents />,
+  calibrations: () => <TwinSessions />,
+  twinusers: () => <TwinUsers />,
+  knowledge: () => <TwinBrain />,
+  roleplay: () => <Scenarios />,
+  sessions: () => <RoleplaySessions />,
+  rpsettings: () => <Persona />,
+  usage: () => <Usage />,
+  billing: () => <Billing />,
+  settings: () => <Settings />,
+};
 
 function readHash() {
   const h = window.location.hash.replace(/^#\/?/, "");
@@ -43,6 +64,7 @@ export function App() {
   const [page, setPage] = useState(readHash);
   const [collapsed, setCollapsed] = useState(false);
   const [dark, setDark] = useState(false);
+  const [support, setSupport] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
@@ -53,12 +75,12 @@ export function App() {
     return () => window.removeEventListener("hashchange", on);
   }, []);
   const go = (id: string) => {
-    window.location.hash = `/${id}`;
+    window.history.pushState(null, "", `#/${id}`);
     setPage(id);
   };
 
   const item = (n: Nav) => (
-    <NavItem key={n.id} label={n.label} icon={<Icon name={n.icon} />} meta={n.meta} active={page === n.id} onClick={() => go(n.id)} />
+    <NavItem key={n.id} label={n.label} icon={<Icon name={n.icon} />} meta={n.meta} active={page === n.id && n.id !== "support"} onClick={() => (n.id === "support" ? setSupport(true) : go(n.id))} />
   );
   const current = ALL.find((n) => n.id === page)!;
   const body = PAGES[page]?.() ?? (
@@ -88,6 +110,7 @@ export function App() {
         <NavGroup label="Twin">{TWIN.map(item)}</NavGroup>
         <NavGroup label="Roleplay">{ROLEPLAY.map(item)}</NavGroup>
       </NavRail>
+      <SupportDialog open={support} onClose={() => setSupport(false)} />
       <main className="relative z-10 min-w-0 flex-1 overflow-auto rounded-l-lg bg-canvas shadow-[-4px_0_16px_rgb(30_28_25/0.06)]">{body}</main>
     </div>
   );

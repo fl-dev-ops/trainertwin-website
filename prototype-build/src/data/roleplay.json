@@ -1,0 +1,279 @@
+{
+ "title": "Scenarios",
+ "searchSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\" stroke=\"currentColor\" stroke-width=\"2\"></circle><path d=\"M20 20l-3.5-3.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg>",
+ "placeholder": "Search...",
+ "newLabel": "New",
+ "newSvg": "<svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"M8 3.5v9M3.5 8h9\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"></path></svg>",
+ "sectionTitle": "Created roleplays",
+ "status": [
+  {
+   "label": "Published",
+   "id": "published",
+   "on": true
+  },
+  {
+   "label": "Draft",
+   "id": "draft",
+   "on": false
+  }
+ ],
+ "view": [
+  {
+   "label": "Card view",
+   "id": "card",
+   "svg": "<svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><rect x=\"2.5\" y=\"2.5\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect><rect x=\"9\" y=\"2.5\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect><rect x=\"2.5\" y=\"9\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect><rect x=\"9\" y=\"9\" width=\"4.5\" height=\"4.5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.5\"></rect></svg>",
+   "on": true
+  },
+  {
+   "label": "List view",
+   "id": "list",
+   "svg": "<svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"M2.5 4h11M2.5 8h11M2.5 12h11\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"></path></svg>",
+   "on": false
+  }
+ ],
+ "cards": [
+  {
+   "art": 0,
+   "who": "Ravi",
+   "quote": "Can you send me some options on WhatsApp?",
+   "face": "../media/client-landlord.jpg",
+   "title": "Ravi: first conversation",
+   "copy": "First-time investor · Oman. Lead from Instagram ad about passive income.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-1.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-2.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-3.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-4.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 1,
+   "who": "Faisal",
+   "quote": "Why are you asking this?",
+   "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "title": "Faisal: first conversation",
+   "copy": "Experienced investor · Riyadh, Saudi Arabia. Lead from Google ad 'Dubai Airbnb investment'.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-2.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-3.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-4.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-1.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 2,
+   "who": "Karim",
+   "quote": "Can you send me some options on WhatsApp?",
+   "face": "../media/persona-marcus.jpg",
+   "title": "Karim: first conversation",
+   "copy": "German/Syrian entrepreneur · Hamburg, Germany. Lead from YouTube video on Dubai investment.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-3.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-4.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-1.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-2.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 3,
+   "who": "Adam",
+   "quote": "Why are you asking this?",
+   "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23F3ECFB%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%236B3FA0%22%3EA%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "title": "Adam: first conversation",
+   "copy": "US-based dentist · United States. Lead from Facebook ad.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-4.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-1.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-2.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-3.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 4,
+   "who": "Cedric",
+   "quote": "Can you send me some options on WhatsApp?",
+   "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23E8F1FF%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%232B5BD7%22%3EC%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "title": "Cedric: first conversation",
+   "copy": "French agent-buyer · France. Lead from Facebook ad.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-1.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-2.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-3.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-4.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 5,
+   "who": "Farid",
+   "quote": "Why are you asking this?",
+   "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+   "title": "Farid: first conversation",
+   "copy": "UK-based family buyer · United Kingdom. Lead from Facebook ad.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-2.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-3.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-4.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-1.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 6,
+   "who": "Anna",
+   "quote": "Can you send me some options on WhatsApp?",
+   "face": "../media/client-seller.jpg",
+   "title": "Anna: first conversation",
+   "copy": "JLT window-shopper. Lead from Instagram reel.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-3.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-4.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-1.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-2.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 7,
+   "who": "Sara",
+   "quote": "Why are you asking this?",
+   "face": "../media/persona-elena.jpg",
+   "title": "Sara: first conversation",
+   "copy": "Relocating with kids. Lead from Facebook group link.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-4.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-1.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-2.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-3.png"
+    }
+   ],
+   "more": "+1"
+  },
+  {
+   "art": 8,
+   "who": "Peter",
+   "quote": "Can you send me some options on WhatsApp?",
+   "face": "../media/client-buyer.jpg",
+   "title": "Peter: first conversation",
+   "copy": "Cautious European retiree · Vienna, Austria. Lead from YouTube video about low-maintenance investments.",
+   "learners": [
+    {
+     "name": "Aisha",
+     "src": "../media/learner-1.png"
+    },
+    {
+     "name": "James",
+     "src": "../media/learner-2.png"
+    },
+    {
+     "name": "Nora",
+     "src": "../media/learner-3.png"
+    },
+    {
+     "name": "Leo",
+     "src": "../media/learner-4.png"
+    }
+   ],
+   "more": "+1"
+  }
+ ]
+}

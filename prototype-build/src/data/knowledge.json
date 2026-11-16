@@ -1,0 +1,143 @@
+{
+ "board": {
+  "w": 1000,
+  "h": 584,
+  "links": "\n              <path d=\"M 316 324 C 348 324, 348 302, 380 302\"></path><circle cx=\"316\" cy=\"324\" r=\"3.5\"></circle><circle cx=\"380\" cy=\"302\" r=\"3.5\"></circle><path d=\"M 628 302 C 660 302, 660 310, 692 310\"></path><circle cx=\"628\" cy=\"302\" r=\"3.5\"></circle><circle cx=\"692\" cy=\"310\" r=\"3.5\"></circle>\n            "
+ },
+ "tags": [
+  {
+   "tone": "info",
+   "left": 48,
+   "top": 126,
+   "width": null,
+   "height": "",
+   "text": "Knowledge"
+  },
+  {
+   "tone": "caution",
+   "left": 380,
+   "top": 126,
+   "width": null,
+   "height": "",
+   "text": "Training style"
+  },
+  {
+   "tone": "success",
+   "left": 692,
+   "top": 126,
+   "width": null,
+   "height": "",
+   "text": "Voice and avatar"
+  }
+ ],
+ "knowledge": {
+  "left": 48,
+  "top": 160,
+  "width": 268,
+  "height": "auto",
+  "kicker": "Knowledge",
+  "lines": [
+   {
+    "img": "https://www.google.com/s2/favicons?sz=64&domain=olgasiliveitup.com",
+    "glyph": "",
+    "label": "Website",
+    "value": "14 pages"
+   },
+   {
+    "img": "https://i.pravatar.cc/64?img=32",
+    "glyph": "",
+    "label": "LinkedIn",
+    "value": "36 posts"
+   },
+   {
+    "img": "https://picsum.photos/seed/olga-youtube/64",
+    "glyph": "",
+    "label": "YouTube",
+    "value": "48 videos"
+   },
+   {
+    "img": "https://i.pravatar.cc/64?img=47",
+    "glyph": "",
+    "label": "Instagram",
+    "value": "120 reels"
+   },
+   {
+    "img": "",
+    "glyph": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" width=\"12\" height=\"12\"><path d=\"M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2\"></path><path d=\"M7 9l5 -5l5 5\"></path><path d=\"M12 4v12\"></path></svg>",
+    "label": "Uploaded",
+    "value": "5 materials"
+   }
+  ],
+  "sources": [
+   {
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"></path><path d=\"M12 10l-6 10l-3 -5l6 -10l3 5\"></path><path d=\"M9 15h12l-3 5h-12\"></path><path d=\"M15 15l-6 -10h6l6 10l-6 0\"></path></svg>",
+    "label": "Google Drive",
+    "status": "Connected",
+    "connected": true
+   },
+   {
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"></path><path d=\"M11 17.5v-6.5h.5l4 6h.5v-6.5\"></path><path d=\"M19.077 20.071l-11.53 .887a1 1 0 0 1 -.876 -.397l-2.471 -3.294a1 1 0 0 1 -.2 -.6v-10.741a1 1 0 0 1 .923 -.997l11.389 -.876a2 2 0 0 1 1.262 .33l1.535 1.023a2 2 0 0 1 .891 1.664v12.004a1 1 0 0 1 -.923 .997\"></path><path d=\"M4.5 5.5l2.5 2.5\"></path><path d=\"M20 7l-13 1v12.5\"></path></svg>",
+    "label": "Notion",
+    "status": "Not connected",
+    "connected": false
+   }
+  ]
+ },
+ "style": {
+  "left": 380,
+  "top": 160,
+  "width": 248,
+  "height": "auto",
+  "kicker": "Training style",
+  "overview": "A real-estate sales coach in Dubai who treats selling as a process. She plays the tough buyer first, then gives agents word-for-word lines for the call.",
+  "rules": [
+   {
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12l5 5l10 -10\"></path></svg>",
+    "label": "5 do’s"
+   },
+   {
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M18 6l-12 12\"></path><path d=\"M6 6l12 12\"></path></svg>",
+    "label": "3 don’ts"
+   }
+  ]
+ },
+ "voice": {
+  "left": 692,
+  "top": 160,
+  "width": 260,
+  "height": "300px",
+  "kicker": "Voice and avatar",
+  "portrait": "https://i.pravatar.cc/240?img=32",
+  "title": "LinkedIn photo",
+  "note": "Your voice recording · 0:28 · Recorded",
+  "play": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M5 3.3v9.4a.6.6 0 0 0 .91.5l7.4-4.7a.6.6 0 0 0 0-1l-7.4-4.7a.6.6 0 0 0-.91.5Z\"></path></svg>",
+  "talk": "Talk to my twin",
+  "talkSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>"
+ },
+ "editSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4\"></path><path d=\"M13.5 6.5l4 4\"></path></svg>",
+ "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+ "back": "Back",
+ "updated": "Twin’s brain · Last updated 2 days ago",
+ "done": "Done",
+ "tabs": [
+  {
+   "label": "Knowledge",
+   "dot": false,
+   "dotLabel": "",
+   "selected": true
+  },
+  {
+   "label": "Questions",
+   "dot": true,
+   "dotLabel": "2 waiting",
+   "selected": false
+  },
+  {
+   "label": "Issues",
+   "dot": true,
+   "dotLabel": "5 waiting",
+   "selected": false
+  }
+ ],
+ "tabsLabel": "Twin’s brain"
+}
