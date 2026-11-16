@@ -11693,3 +11693,87 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 .ld-credits { width: auto; flex: 0 1 460px; min-width: 0; margin-left: auto; }
 @media (max-width: 720px) { .ld-head { flex-wrap: wrap; } .ld-credits { flex-basis: 100%; margin-left: 0; } }
 .us-who .set-row-name { font-weight: var(--tt-weight-title); }
+
+/* Activity log side panel */
+.al-tools { display: flex; align-items: center; gap: var(--tt-space-3); padding: var(--tt-space-4) var(--tt-space-6); border-bottom: var(--tt-border-thin) solid var(--tt-border); }
+.al-tools .btn svg { width: 16px; height: 16px; flex: none; }
+.al-count { margin-left: auto; font-size: 13px; white-space: nowrap; }
+.al-list { list-style: none; }
+.al-row { display: flex; align-items: center; gap: var(--tt-space-3); padding: 14px 0; }
+.al-row + .al-row { border-top: var(--tt-border-thin) solid var(--tt-border); }
+.al-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 20px; }
+.al-when { font-size: 13px; line-height: 18px; }
+.al-amt { font-weight: var(--tt-weight-title); font-size: 14px; white-space: nowrap; }
+
+/* One shadow for every list / table across the product (same as .an-table) */
+.us-table, .set-voices, .rp-table-card { box-shadow: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055); }
+.an-flat .us-table, .an-flat .rp-table-card { box-shadow: none; }
+.rps-list[role="list"] { box-shadow: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055); }
+.rps-list .rps-row--head { background: var(--tt-surface-sunken); cursor: default; padding-top: 10px; padding-bottom: 10px; font-size: 12px; line-height: 18px; letter-spacing: .04em; text-transform: uppercase; color: var(--tt-text-secondary); border-radius: calc(var(--tt-radius-lg) - 1px) calc(var(--tt-radius-lg) - 1px) 0 0; }
+.rps-list .rps-row--head:hover { background: var(--tt-surface-sunken); }
+.rps-list .rps-row--head ~ .rps-row:first-of-type { border-radius: 0; }
+.bl-plan { gap: var(--tt-space-4); }
+.bl-plan-row { display: flex; align-items: center; justify-content: space-between; gap: var(--tt-space-4); }
+.bl-addon-label { margin: var(--tt-space-2) 0 calc(var(--tt-space-2) * -1); font-size: 12px; line-height: 18px; letter-spacing: .04em; text-transform: uppercase; color: var(--tt-text-secondary); }
+.bl-addon { display: flex; align-items: center; justify-content: space-between; gap: var(--tt-space-4); padding: var(--tt-space-4); border: var(--tt-border-thin) solid var(--tt-border); border-radius: var(--tt-radius-md); background: var(--tt-surface-sunken); }
+@media (max-width: 720px) { .bl-plan-row, .bl-addon { flex-direction: column; align-items: flex-start; } }
+.bl-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--tt-space-5); align-items: stretch; }
+.bl-col { display: flex; flex-direction: column; min-width: 0; }
+.bl-col > .card { flex: 1; }
+.bl-col > .us-sec-head { align-items: center; }
+.bl-col > .us-sec-head .btn { margin-bottom: 0; }
+.bl-grid .bl-addon { flex-direction: column; align-items: flex-start; }
+.bl-grid .bl-plan-row { align-items: flex-start; }
+.bl-grid .bl-info > div { padding: 14px var(--tt-space-5); }
+@media (max-width: 720px) { .bl-grid { grid-template-columns: 1fr; } }
+.bl-col > .us-sec-head { min-height: 32px; margin-bottom: 0; }
+.set-tool .btn svg { width: 16px; height: 16px; flex: none; }
+.bl-grid .bl-addon .bl-actions { align-self: flex-end; }
+.bl-card { box-shadow: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055); }
+.bl-inv-row + .bl-inv-row { border-top: var(--tt-border-thin) solid var(--tt-border); }
+.bl-inv { overflow: visible; }
+.bl-title { font-weight: var(--tt-weight-title); }
+.bl-inv-amt { font-weight: var(--tt-weight-title); }
+/* Dialogs follow the system's dialog spec: padding 24, title 20/28 600, sub 14/20, help 13/20, close 32px at 12/12 */
+.sup-card { padding: var(--tt-space-6); }
+.sup-card .issue-title { font-size: 20px; line-height: 28px; font-weight: var(--tt-weight-title); letter-spacing: 0; margin: 0; padding-right: 40px; }
+.sup-card .set-help { font-size: 13px; line-height: 20px; margin: 0; }
+.sup-x { top: 12px; right: 12px; width: 32px; height: 32px; }
+.us-strong { font-weight: var(--tt-weight-title); }
+.us-row--credits:not(.us-row--head) .us-num, .us-row--credits:not(.us-row--head) .us-num b { font-weight: var(--tt-weight-title); }
+.bl-price { font-weight: var(--tt-weight-title); color: var(--tt-text-primary); }
+.bl-inv-ico { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--tt-fill-soft); color: var(--tt-text-secondary); }
+.bl-inv-ico svg { width: 20px; height: 20px; }
+.bl-grid { margin-top: 60px; }
+.bl-addon { margin-top: 12px; }
+.bl-addon { border: 0; }
+.bl-info > div { display: flex; align-items: center; gap: var(--tt-space-3); }
+.bl-info-text { min-width: 0; }
+.bl-info-text .bl-sub { overflow-wrap: anywhere; }
+.bl-crown { display: inline-grid; place-items: center; margin-right: var(--tt-space-2); color: var(--tt-text-primary); }
+.bl-crown svg { width: 18px; height: 18px; }
+.bl-addon .bl-sub { padding-top: 8px; }
+.bl-addon > div:first-child { align-self: stretch; }
+.bl-addon .bl-title .badge { margin-left: auto; }
+.bl-addon-badge { box-sizing: border-box; gap: var(--tt-space-1); padding: 3px 10px 3px 8px; border: 1px solid color-mix(in srgb, var(--tt-caution) 40%, transparent); }
+.bl-addon-badge .bl-crown { margin: 0; color: inherit; }
+.bl-addon-badge .bl-crown svg { width: 14px; height: 14px; }
+.bl-active { gap: var(--tt-space-1); padding-left: 8px; }
+.bl-active svg { width: 14px; height: 14px; flex: none; }
+.bl-card { box-shadow: none; }
+.bl-card { box-shadow: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055); }
+.bl-grid { grid-template-columns: minmax(0, 1fr); gap: var(--tt-space-8); }
+.bl-col > .card { flex: none; }
+.bl-grid .bl-addon { flex-direction: row; align-items: flex-start; justify-content: space-between; gap: var(--tt-space-4); }
+.bl-grid .bl-addon .bl-actions { align-self: flex-start; }
+.bl-addon > div:first-child { align-self: auto; flex: 1; min-width: 0; }
+.bl-addon .bl-title .badge { margin-left: 0; }
+@media (max-width: 720px) { .bl-grid .bl-addon { flex-direction: column; } }
+.bl-card.bl-inv { box-shadow: none; }
+.bl-card.bl-inv { border: 0; }
+.bl-inv-row { padding-left: 0; padding-right: 0; }
+.bl-info-text { display: contents; }
+.bl-info .bl-title { flex: 1; min-width: 0; }
+.bl-info .bl-sub { margin: 0; text-align: right; max-width: 60%; }
+.bl-info .bl-sub { white-space: pre-line; }
+.bl-info > div { align-items: center; }

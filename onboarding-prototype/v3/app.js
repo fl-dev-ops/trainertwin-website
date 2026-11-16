@@ -121,6 +121,8 @@ const state = {
   learnerId: "",
   learnerTab: "sessions",
   learnerExtra: {},
+  billInfo: { emails: "liveitupdxb20@gmail.com", legal: "Live it Up - F.Z.E", address: "C1 Building, Ajman Free Zone\nAjman\nUnited Arab Emirates", phone: "+971553897558" },
+  billEdit: null,
   usageTab: "overview",
   usageRange: "30d",
   usageFilter: "all",
@@ -291,6 +293,7 @@ const state = {
   railOpen: null,
   drawer: null,
   builtFromOpen: false,
+  activityOpen: false,
   conversationQuery: "",
   runId: null,
   runFields: {},
@@ -815,6 +818,7 @@ function render() {
   mountBotReassignDialog();
   mountObEditDialog();
   mountSupportDialog();
+  mountBillEditDialog();
   mountObLink();
   mountObWaves();
   mountStudioFocus();
@@ -882,9 +886,11 @@ function view() {
     ${state.userMenu ? userMenu() : ""}
     ${state.drawer ? drawer() : ""}
     ${state.builtFromOpen ? builtFromPanel() : ""}
+    ${state.activityOpen ? activityPanel() : ""}
     ${state.botReassign ? botReassignDialog() : ""}
     ${state.obEditAsk ? obEditConfirm() : ""}
     ${state.supportOpen ? supportDialog() : ""}
+    ${state.billEdit ? billEditDialog() : ""}
     ${state.auth ? authDialog() : ""}
     ${state.addKnowledgeOpen ? addKnowledgeDialog() : ""}
     ${state.voiceDialog ? voiceDialog() : ""}
@@ -949,9 +955,14 @@ function icon(name) {
     credits: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6v10c0 .888 .772 1.45 2 2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 11c0 .888 .772 1.45 2 2"/>',
     billing: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 7a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-10"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 10h18"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 15h.01"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M11 15h2"/>',
     lifebuoy: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 15l3.35 3.35"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 15l-3.35 3.35"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5.65 5.65l3.35 3.35"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M18.35 5.65l-3.35 3.35"/>',
+    mail: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6l9 -6"/>',
+    building: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 21l18 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 8l1 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l1 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 16l1 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 8l1 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 12l1 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 16l1 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"/>',
+    mappin: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/>',
+    crown: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z"/>',
+    phone: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/>',
     back: '<path d="M5 12l14 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 -6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
   };
-  const viewBox = name === "credits" || name === "billing" || name === "lifebuoy" || name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
+  const viewBox = name === "phone" || name === "crown" || name === "mail" || name === "building" || name === "mappin" || name === "credits" || name === "billing" || name === "lifebuoy" || name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
   return `<svg viewBox="${viewBox}" aria-hidden="true">${paths[name]}</svg>`;
 }
 
@@ -2106,6 +2117,13 @@ document.addEventListener("input", (e) => {
     document.querySelectorAll(lf.dataset.liveFilter).forEach((it) => { it.hidden = !!needle && !(it.dataset.s || "").includes(needle); });
     return;
   }
+  const bf = e.target && e.target.closest ? e.target.closest("[data-bill]") : null;
+  if (bf && state.billEdit) {
+    state.billEdit[bf.dataset.bill] = bf.value;
+    const save = document.getElementById("bill-save");
+    if (save) save.disabled = !(state.billEdit.emails.trim() && state.billEdit.legal.trim() && state.billEdit.address.trim());
+    return;
+  }
   const sp = e.target && e.target.closest ? e.target.closest("[data-support]") : null;
   if (sp) {
     state[sp.dataset.support === "subject" ? "supportSubject" : "supportMsg"] = sp.value;
@@ -3076,6 +3094,7 @@ function pageRoleSettings() {
       </div>
       ${list.length && listView ? `
       <div class="rps-list" role="list">
+        <div class="rps-row rps-row--head" aria-hidden="true"><span></span><span>Persona</span><span>Role</span><span>Traits</span><span>${list.some((p) => p.voice && RPS_VOICES.some((v) => v.id === p.voice)) ? "Voice" : ""}</span><span></span></div>
         ${list.map((p) => {
           const tags = p.behaviours.length ? p.behaviours : ["Not set"];
           const voiceName = p.voice ? (RPS_VOICES.find((v) => v.id === p.voice) || { name: "" }).name : "";
@@ -3985,7 +4004,7 @@ function pageTwinUsers() {
       </div>
       <div class="an-table lr-table" role="table" aria-label="All learners">
         <div class="an-row an-row--twinusers an-row--head" role="row">
-          <span role="columnheader">Learner</span><span role="columnheader" class="lr-email">Email</span><span role="columnheader">Assigned agents</span><span role="columnheader">Credits given</span><span role="columnheader">Until</span><span role="columnheader">Credits used</span>
+          <span role="columnheader">Learner</span><span role="columnheader" class="lr-email">Email</span><span role="columnheader">Assigned</span><span role="columnheader">Credits given</span><span role="columnheader">Until</span><span role="columnheader">Credits used</span>
         </div>
         ${TWIN_USERS.map(([name, email]) => {
           const L = learnerInfo(name), used = L.used, given = L.given, left = L.left;
@@ -4131,9 +4150,9 @@ const MY_VOICES = [
 const USAGE_LEFT = 618;
 const USAGE_ADDED = 1270;
 const USAGE_CREDITS = [
-  ["From TrainerTwin", "11 Nov 2026", "Never", "+1,000"], ["From TrainerTwin", "11 Nov 2026", "Never", "+50"],
-  ["From TrainerTwin", "11 Nov 2026", "Never", "+100"], ["From TrainerTwin", "11 Nov 2026", "Never", "+30"],
-  ["From TrainerTwin", "10 Nov 2026", "11 Nov 2027", "+90"]
+  ["Added from Olga", "11 Nov 2026", "Never", "+1,000"], ["Auto credited", "11 Nov 2026", "Never", "+50"],
+  ["TrainerTwin added", "11 Nov 2026", "Never", "+100"], ["Added from Olga", "11 Nov 2026", "Never", "+30"],
+  ["Auto credited", "10 Nov 2026", "11 Nov 2027", "+90"]
 ];
 const USAGE_TWINS = [["Olga Sinenko's twin", "Twin", 45, "88 min", "112 min"], ["Objection Handling", "Twin", 1, "3 min", "0 min"]];
 const USAGE_TEAM = [["Olga Sinenko", 61, 0, 0, 61], ["Cathy Nivedha", 22, 19, 0, 41], ["Team", 0, 5, 0, 5], ["Bhuvan", 3, 2, 0, 4]];
@@ -4154,7 +4173,13 @@ const USAGE_LEARNERS = [
   ["safwankadri786786", "safwankadri786786@gmail.com", 60, "2.6", "57", ""], ["kjsofficemail", "kjsofficemail@gmail.com", 60, "1.7", "58", ""],
   ["bechir.realestate", "bechir.realestate@gmail.com", 60, "30", "30", ""]
 ];
-const BILL_INVOICES = [["TrainerTwin Paid plan, 11 Nov 2026 – 10 Dec 2026", "11 Nov 2026", "$300.00"]];
+const BILL_INVOICES = [
+  ["TrainerTwin Minute packs, 100 credits", "14 Nov 2026", "$25.00"],
+  ["TrainerTwin Paid plan, 11 Nov 2026 – 10 Dec 2026", "11 Nov 2026", "$300.00"],
+  ["TrainerTwin Minute packs, 400 credits", "2 Nov 2026", "$100.00"],
+  ["TrainerTwin Plan upgrade, pro-rated, 28 Oct – 10 Nov 2026", "28 Oct 2026", "$127.50"],
+  ["TrainerTwin Minute packs, 200 credits", "20 Oct 2026", "$50.00"]
+];
 
 const LD_TOPICS = ["Client follow-up", "Re-engaging silent leads", "Follow-up messaging", "Client re-engagement", "Handling postponed calls", "Lead follow-up", "Video outreach strategy", "Handling message inquiries", "Qualifying client criteria", "Booking client calls", "Handling catalogue requests", "Call transition", "Voice note outreach"];
 const LD_SESSIONS_EGOR = [["Today, 14:12", 0, 6], ["Today, 14:07", 2, 3], ["Today, 0:38", 4, 10], ["Sat, 23:07", 5, 3], ["Sat, 22:34", 7, 3], ["Sat, 22:32", 9, 2], ["Sat, 22:23", 11, 4], ["Sat, 15:10", 1, 5], ["Fri, 18:42", 6, 2], ["Fri, 10:15", 8, 3]];
@@ -4214,6 +4239,35 @@ function pageLearnerDetail() {
     </div>`;
 }
 
+function activityRows() {
+  return USAGE_LOG.filter((r) => state.usageFilter === "all" || (state.usageFilter === "credits" ? r[0] === "credit" : r[0] !== "credit"));
+}
+
+function activityPanel() {
+  const rows = activityRows();
+  return `
+    <button class="scrim" type="button" data-action="activity-close" aria-label="Close panel"></button>
+    <aside class="sidepanel al-panel" role="dialog" aria-modal="true" aria-labelledby="al-title">
+      <div class="sidepanel-head">
+        <div>
+          <h2 class="card-title" id="al-title">Activity log</h2>
+          <p class="card-sub">Every credit given and every call in the period.</p>
+        </div>
+        <button class="btn btn--ghost btn--icon btn--sm" id="al-close" type="button" data-action="activity-close" aria-label="Close">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+      </div>
+      <div class="al-tools">
+        <select class="input us-select" aria-label="Filter activity" data-change="usage-filter">${[["all", "Everything"], ["calls", "Calls"], ["credits", "Credits added"]].map(([v, l]) => `<option value="${v}"${state.usageFilter === v ? " selected" : ""}>${l}</option>`).join("")}</select>
+        <span class="al-count us-muted tabular">${rows.length} entries</span>
+        <button class="btn btn--secondary btn--sm" type="button" data-action="usage-csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4l0 12"/></svg>Download CSV</button>
+      </div>
+      <ul class="sidepanel-body al-list">
+        ${rows.map((r) => `<li class="al-row"><span class="us-dot us-dot--${r[0]}" aria-hidden="true"></span><span class="al-text"><span class="al-name">${esc(r[1])}</span><span class="al-when us-muted">${r[2]}</span></span><b class="al-amt tabular">${r[3]}</b></li>`).join("")}
+      </ul>
+    </aside>`;
+}
+
 function pageUsage() {
   const tab = state.usageTab;
   const seg = `<div class="seg set-seg" role="group" aria-label="Usage">${[["overview", "Overview"], ["details", "Details"]].map(([id, l]) => `<button type="button" data-action="usage-tab" data-id="${id}" aria-pressed="${tab === id}">${l}</button>`).join("")}</div>`;
@@ -4223,19 +4277,18 @@ function pageUsage() {
     body = `
       <article class="card us-card">
         <div class="us-top"><div><p class="us-label">Remaining credits</p><p class="us-big">${USAGE_LEFT} <span>min</span></p></div>
-          <button class="btn btn--secondary btn--sm" type="button" data-action="bill-buy">Buy credits</button></div>
+          <button class="btn btn--strong btn--sm" type="button" data-action="bill-buy">Buy credits</button></div>
         <div class="us-bar-row"><div class="us-bar" role="progressbar" aria-valuenow="${USAGE_LEFT}" aria-valuemin="0" aria-valuemax="${USAGE_ADDED}" aria-label="Credits remaining"><i style="width:${pct}%"></i></div><span class="us-of">of ${USAGE_ADDED.toLocaleString("en-US")} added</span></div>
-        <p class="us-note">Each new learner gets 30 min; give more on their page (up to 360 min each). 90 min (From TrainerTwin) expire 10 Nov.</p>
+        <p class="us-note">Each new learner gets 30 min; give more on their page (up to 360 min each). 90 min (Auto credited) expire 10 Nov.</p>
       </article>
       <h2 class="us-h2">Credits added</h2>
       <p class="us-sub">Free trial credits, minute packs and grants from TrainerTwin, with when they expire.</p>
       <div class="us-table" role="table" aria-label="Credits added">
         <div class="us-row us-row--credits us-row--head" role="row"><span role="columnheader">Note</span><span role="columnheader">Date</span><span role="columnheader">Expires</span><span role="columnheader" class="us-num">Credits</span></div>
-        ${USAGE_CREDITS.map((r) => `<div class="us-row us-row--credits" role="row"><span role="cell">${esc(r[0])}</span><span role="cell" class="us-muted">${r[1]}</span><span role="cell" class="us-muted">${r[2]}</span><span role="cell" class="us-num"><b>${r[3]}</b> min</span></div>`).join("")}
+        ${USAGE_CREDITS.map((r) => `<div class="us-row us-row--credits" role="row"><span role="cell" class="us-strong">${esc(r[0])}</span><span role="cell" class="us-muted">${r[1]}</span><span role="cell" class="us-muted">${r[2]}</span><span role="cell" class="us-num"><b>${r[3]}</b> min</span></div>`).join("")}
       </div>`;
   } else {
     const range = ["7d", "30d", "90d"].map((r) => `<button type="button" data-action="usage-range" data-id="${r}" aria-pressed="${state.usageRange === r}">${r}</button>`).join("");
-    const log = USAGE_LOG.filter((r) => state.usageFilter === "all" || (state.usageFilter === "credits" ? r[0] === "credit" : r[0] !== "credit"));
     body = `
       <div class="us-sec-head"><div><h2 class="us-h2">Twins and role plays</h2><p class="us-sub">Minutes of calls on each, in the period.</p></div><div class="us-range" role="group" aria-label="Period">${range}</div></div>
       <div class="us-table" role="table" aria-label="Twins and role plays">
@@ -4248,13 +4301,6 @@ function pageUsage() {
         <div class="us-row us-row--team us-row--head" role="row"><span role="columnheader">Person</span><span role="columnheader" class="us-num">Calibration</span><span role="columnheader" class="us-num">Twins</span><span role="columnheader" class="us-num">Role plays</span><span role="columnheader" class="us-num">Total</span></div>
         ${USAGE_TEAM.map((r) => `<div class="us-row us-row--team" role="row"><span role="cell">${esc(r[0])}</span>${r.slice(1).map((n) => `<span role="cell" class="us-num">${n} min</span>`).join("")}</div>`).join("")}
       </div>
-      <div class="us-sec-head us-sec-head--gap"><div><h2 class="us-h2">Activity log</h2><p class="us-sub">Every credit given and every call in the period.</p></div>
-        <div class="us-tools"><select class="input us-select" aria-label="Filter activity" data-change="usage-filter">${[["all", "Everything"], ["calls", "Calls"], ["credits", "Credits added"]].map(([v, l]) => `<option value="${v}"${state.usageFilter === v ? " selected" : ""}>${l}</option>`).join("")}</select>
-        <button class="btn btn--secondary btn--sm" type="button" data-action="usage-csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4l0 12"/></svg>CSV</button></div></div>
-      <div class="us-table" role="table" aria-label="Activity log">
-        ${log.map((r) => `<div class="us-row us-row--log" role="row"><span class="us-dot us-dot--${r[0]}" aria-hidden="true"></span><span role="cell">${esc(r[1])}</span><span role="cell" class="us-muted">${r[2]}</span><span role="cell" class="us-num"><b>${r[3]}</b></span></div>`).join("")}
-        <div class="us-foot"><span class="us-muted">1–${log.length} of 59</span><span class="us-pager"><button class="btn btn--ghost btn--sm" type="button" disabled>Previous</button><button class="btn btn--ghost btn--sm" type="button" data-action="usage-page">Next</button></span></div>
-      </div>
       <div class="us-sec-head us-sec-head--gap"><div><h2 class="us-h2">Learners</h2><p class="us-sub">What each learner was given, has used and has left, since they joined.</p></div>
         <div class="set-search us-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg><input class="input" type="search" placeholder="Search learners" aria-label="Search learners" data-live-filter=".us-learner"></div></div>
       <div class="us-table" role="table" aria-label="Learners">
@@ -4264,7 +4310,7 @@ function pageUsage() {
   }
   return `
     <div class="page page--library page--twin-profile set-page us-page">
-      ${setHead("credits", "Usage", "Where your organization's credits go. 1 credit = 1 minute of practice.")}
+      ${setHead("credits", "Usage", "Where your organization's credits go. 1 credit = 1 minute of practice.", `<button class="btn btn--secondary" type="button" data-action="activity-open" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l11 0"/><path d="M9 12l11 0"/><path d="M9 18l11 0"/><path d="M5 6l0 .01"/><path d="M5 12l0 .01"/><path d="M5 18l0 .01"/></svg>Activity log</button>`)}
       ${seg}
       ${body}
     </div>`;
@@ -4275,29 +4321,35 @@ function pageBilling() {
   const rc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/><path d="M9 15l2 2l4 -4"/></svg>';
   return `
     <div class="page page--library page--twin-profile set-page us-page">
-      ${setHead("billing", "Billing", "Your plan, minute packs, invoices and billing details.")}
-      <h2 class="us-h2">Plan</h2>
-      <article class="card bl-card bl-card--row">
-        <div><p class="bl-title">Paid plan <span class="badge">Active</span></p><p class="bl-sub">$300.00 / month, tax included · renews 11 Dec 2026</p></div>
-        <button class="btn btn--secondary btn--sm" type="button" data-action="support-open">Support</button>
+      ${setHead("billing", "Billing", "Your plan, minute packs, invoices and billing details.", `<button class="btn btn--secondary" type="button" data-action="support-open">${icon("lifebuoy")}Support</button>`)}
+      <div class="bl-grid">
+      <div class="bl-col">
+      <div class="us-sec-head"><h2 class="us-h2">Plan</h2></div>
+      <article class="card bl-card bl-plan">
+        <div class="bl-plan-row">
+          <div><p class="bl-title">Paid plan <span class="badge bl-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5l10 -10"/></svg>Active</span></p><p class="bl-sub"><b class="bl-price">$300.00</b> / month, tax included · renews <b class="bl-price">11 Dec 2026</b></p></div>
+        </div>
+        <div class="bl-addon">
+          <div><p class="bl-title">Minute packs <span class="badge badge--caution bl-addon-badge"><span class="bl-crown" aria-hidden="true">${icon("crown")}</span>Add-on</span></p><p class="bl-sub"><b class="bl-price">100 credits</b> for <b class="bl-price">$25.00</b>, tax included. Added when the invoice is paid;<br>they expire a year later.</p></div>
+          <div class="bl-actions"><button class="btn btn--secondary btn--sm" type="button" data-action="nav" data-id="usage">See usage</button><button class="btn btn--strong btn--sm" type="button" data-action="bill-buy">Buy credits</button></div>
+        </div>
       </article>
-      <h2 class="us-h2 us-h2--gap">Add-ons</h2>
-      <article class="card bl-card bl-card--row">
-        <div><p class="bl-title">Minute packs</p><p class="bl-sub">100 credits for $25.00, tax included. Added when the invoice is paid; they expire a year later.</p></div>
-        <div class="bl-actions"><button class="btn btn--ghost btn--sm" type="button" data-action="nav" data-id="usage">See usage</button><button class="btn btn--strong btn--sm" type="button" data-action="bill-buy">Buy credits</button></div>
+      </div>
+      <div class="bl-col">
+      <div class="us-sec-head"><h2 class="us-h2">Billing information</h2><button class="btn btn--ghost btn--sm" type="button" data-action="bill-edit">Edit</button></div>
+      <article class="card bl-card bl-info">
+        <div><span class="bl-inv-ico" aria-hidden="true">${icon("mail")}</span><span class="bl-info-text"><p class="bl-title">Billing emails</p><p class="bl-sub">${esc(state.billInfo.emails)}</p></span></div>
+        <div><span class="bl-inv-ico" aria-hidden="true">${icon("building")}</span><span class="bl-info-text"><p class="bl-title">Legal name</p><p class="bl-sub">${esc(state.billInfo.legal)}</p></span></div>
+        <div><span class="bl-inv-ico" aria-hidden="true">${icon("mappin")}</span><span class="bl-info-text"><p class="bl-title">Billing address</p><p class="bl-sub">${esc(state.billInfo.address)}</p></span></div>
+        <div><span class="bl-inv-ico" aria-hidden="true">${icon("phone")}</span><span class="bl-info-text"><p class="bl-title">Phone</p><p class="bl-sub">${esc(state.billInfo.phone)}</p></span></div>
       </article>
+      </div>
+      </div>
       <h2 class="us-h2 us-h2--gap">Invoices</h2>
       <article class="card bl-card bl-inv">
-        ${BILL_INVOICES.map((r) => `<div class="bl-inv-row"><span class="bl-inv-name">${esc(r[0])}</span><span class="us-muted">${r[1]}</span><span class="badge">Paid</span><b class="bl-inv-amt">${r[2]}</b>
-          <span class="bl-menu-wrap"><button class="btn btn--ghost btn--icon btn--sm" type="button" data-action="bill-menu" aria-haspopup="menu" aria-expanded="${state.billMenu}" aria-label="Invoice actions"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.25" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="12.75" cy="8" r="1.15" fill="currentColor"/></svg></button>
-          ${state.billMenu ? `<div class="menu bl-menu" role="menu"><button type="button" role="menuitem" data-action="bill-dl" data-id="invoice">${dl}<span>Download invoice</span></button><button type="button" role="menuitem" data-action="bill-dl" data-id="receipt">${rc}<span>Download receipt</span></button></div>` : ""}</span></div>`).join("")}
-      </article>
-      <p class="us-sub bl-foot">Invoices and receipts are emailed to your billing emails. Pay online with Pay now (card, or bank transfer where offered).</p>
-      <div class="us-sec-head us-sec-head--gap"><h2 class="us-h2">Billing information</h2><button class="btn btn--ghost btn--sm" type="button" data-action="bill-edit">Edit</button></div>
-      <article class="card bl-card bl-info">
-        <div><p class="bl-title">Billing emails</p><p class="bl-sub">liveitupdxb20@gmail.com</p></div>
-        <div><p class="bl-title">Legal name</p><p class="bl-sub">Live it Up - F.Z.E</p></div>
-        <div><p class="bl-title">Billing address</p><p class="bl-sub">C1 Building, Ajman Free Zone</p></div>
+        ${BILL_INVOICES.map((r, i) => `<div class="bl-inv-row"><span class="bl-inv-ico" aria-hidden="true">${icon(/Minute packs/.test(r[0]) ? "credits" : "billing")}</span><span class="bl-inv-name">${esc(r[0])}</span><span class="us-muted">${r[1]}</span><span class="badge">Paid</span><b class="bl-inv-amt">${r[2]}</b>
+          <span class="bl-menu-wrap"><button class="btn btn--ghost btn--icon btn--sm" type="button" data-action="bill-menu" data-id="${i}" aria-haspopup="menu" aria-expanded="${state.billMenu === String(i)}" aria-label="Invoice actions"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.25" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="12.75" cy="8" r="1.15" fill="currentColor"/></svg></button>
+          ${state.billMenu === String(i) ? `<div class="menu bl-menu" role="menu"><button type="button" role="menuitem" data-action="bill-dl" data-id="invoice">${dl}<span>Download invoice</span></button><button type="button" role="menuitem" data-action="bill-dl" data-id="receipt">${rc}<span>Download receipt</span></button></div>` : ""}</span></div>`).join("")}
       </article>
     </div>`;
 }
@@ -4317,6 +4369,37 @@ function supportDialog() {
         <div class="sup-actions"><button class="btn btn--ghost" type="button" data-action="support-close">Cancel</button><button class="btn btn--strong" type="button" id="support-send" data-action="support-send"${ok ? "" : " disabled"}>Send</button></div>
       </div>
     </dialog>`;
+}
+
+function billEditDialog() {
+  const d = state.billEdit;
+  const ok = d.emails.trim() && d.legal.trim() && d.address.trim();
+  return `
+    <dialog class="issue-dialog sup-dialog" id="bill-edit-dialog" aria-labelledby="bill-edit-title">
+      <div class="issue-card sup-card">
+        <button class="btn btn--ghost btn--icon btn--sm sup-x" type="button" data-action="bill-edit-cancel" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6l-12 12"/><path d="M6 6l12 12"/></svg></button>
+        <h2 class="issue-title" id="bill-edit-title">Edit billing information</h2>
+        <p class="sup-sub">Invoices and receipts are sent to these details.</p>
+        <label class="label" for="bill-emails">Billing emails</label>
+        <input class="input" id="bill-emails" type="text" value="${esc(d.emails)}" data-bill="emails" autocomplete="email">
+        <p class="set-help">Separate several emails with commas.</p>
+        <label class="label" for="bill-legal">Legal name</label>
+        <input class="input" id="bill-legal" type="text" value="${esc(d.legal)}" data-bill="legal" autocomplete="organization">
+        <label class="label" for="bill-address">Billing address</label>
+        <textarea class="input" id="bill-address" rows="3" data-bill="address" autocomplete="street-address">${esc(d.address)}</textarea>
+        <label class="label" for="bill-phone">Phone</label>
+        <input class="input" id="bill-phone" type="tel" value="${esc(d.phone || "")}" data-bill="phone" autocomplete="tel">
+        <div class="sup-actions"><button class="btn btn--ghost" type="button" data-action="bill-edit-cancel">Cancel</button><button class="btn btn--strong" type="button" id="bill-save" data-action="bill-edit-save"${ok ? "" : " disabled"}>Save changes</button></div>
+      </div>
+    </dialog>`;
+}
+
+function mountBillEditDialog() {
+  const dlg = document.getElementById("bill-edit-dialog");
+  if (!dlg) return;
+  if (typeof dlg.showModal === "function" && !dlg.open) dlg.showModal();
+  dlg.addEventListener("cancel", (ev) => { ev.preventDefault(); actions["bill-edit-cancel"](); });
+  dlg.addEventListener("click", (ev) => { if (ev.target === dlg) actions["bill-edit-cancel"](); });
 }
 
 function mountSupportDialog() {
@@ -15906,7 +15989,18 @@ const actions = {
   "usage-tab"(el) { state.usageTab = el.dataset.id; render(); },
   "usage-range"(el) { state.usageRange = el.dataset.id; render(); },
   "usage-filter"(el) { state.usageFilter = el.value; render(); },
-  "usage-csv"() { toast("Activity log exported as CSV."); },
+  "activity-open"() { state.activityOpen = true; state.afterFocus = "al-close"; render(); },
+  "activity-close"() { state.activityOpen = false; render(); },
+  "usage-csv"() {
+    const q = (v) => '"' + String(v).replace(/"/g, '""') + '"';
+    const csv = ["Type,Activity,When,Minutes"].concat(activityRows().map((r) => [r[0], r[1], r[2], r[3]].map(q).join(","))).join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = "activity-log.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast("Activity log downloaded.");
+  },
   "learner-open"(el) { state.learnerId = el.dataset.id; state.learnerTab = "sessions"; render(); },
   "learner-back"() { state.learnerId = ""; render(); },
   "learner-tab"(el) { state.learnerTab = el.dataset.id; render(); },
@@ -15919,8 +16013,17 @@ const actions = {
   "learner-session"() { toast("Opens the session report."); },
   "usage-page"() { toast("That’s the whole period."); },
   "bill-buy"() { toast("Minute packs: 100 credits for $25.00."); },
-  "bill-edit"() { toast("Billing details can be edited here."); },
-  "bill-menu"() { state.billMenu = !state.billMenu; render(); },
+  "bill-edit"() { state.billEdit = Object.assign({}, state.billInfo); render(); },
+  "bill-edit-cancel"() { state.billEdit = null; render(); },
+  "bill-edit-save"() {
+    const d = state.billEdit;
+    if (!d || !d.emails.trim() || !d.legal.trim() || !d.address.trim()) return;
+    state.billInfo = { emails: d.emails.trim(), legal: d.legal.trim(), address: d.address.trim(), phone: (d.phone || "").trim() };
+    state.billEdit = null;
+    render();
+    toast("Billing information updated.");
+  },
+  "bill-menu"(el) { state.billMenu = state.billMenu === el.dataset.id ? false : el.dataset.id; render(); },
   "bill-dl"(el) { state.billMenu = false; render(); toast(el.dataset.id === "receipt" ? "Receipt downloaded." : "Invoice downloaded."); },
   "user-docs"() { state.userMenu = false; toast("Docs open in a new tab."); },
   "user-logout"() { state.userMenu = false; toast("You’re logged out."); },
@@ -17049,6 +17152,7 @@ const actions = {
     state.rpsDetailId = "";
     state.calOverviewId = "";
     state.learnerId = "";
+    state.activityOpen = false;
     const nextNav = el.dataset.id;
     if (nextNav === "roleplay") { state.roleFilter = "published"; state.roleDetailId = ""; }
     state.nav = nextNav;
@@ -17629,6 +17733,11 @@ document.addEventListener("keydown", (e) => {
   }
   if (e.key === "Escape" && state.auth) return;
   if (e.key === "Escape" && state.addKnowledgeOpen) return;
+  if (e.key === "Escape" && state.activityOpen) {
+    state.activityOpen = false;
+    render();
+    return;
+  }
   if (e.key === "Escape" && state.builtFromOpen) {
     state.builtFromOpen = false;
     render();
