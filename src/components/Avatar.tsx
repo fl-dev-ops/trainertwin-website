@@ -3,6 +3,19 @@ import { cn } from "./cn";
 
 export type AvatarSize = "xs" | "sm" | "md" | "lg";
 
+/** `neutral` is the default and the rule (D05/29 Sep: avatars repeat, so they stay quiet). The five
+ *  tinted tones are the V3 prototype's learner avatars (`.rp-avatar--1..5`), copied on request. */
+export type AvatarTone = "neutral" | "success" | "info" | "caution" | "danger" | "brand";
+
+const tones: Record<AvatarTone, string> = {
+  neutral: "bg-fill-soft text-ink-secondary",
+  success: "bg-success-subtle text-success",
+  info: "bg-info-subtle text-info",
+  caution: "bg-caution-subtle text-caution",
+  danger: "bg-danger-subtle text-danger",
+  brand: "bg-primary-subtle text-primary-ink",
+};
+
 export interface AvatarProps
   extends Omit<ImgHTMLAttributes<HTMLImageElement>, "size"> {
   /** Image URL. When absent or broken, the initials fallback shows instead. */
@@ -13,6 +26,8 @@ export interface AvatarProps
    */
   alt: string;
   size?: AvatarSize;
+  /** Tint for the initials fallback. Default neutral. */
+  tone?: AvatarTone;
 }
 
 const sizes: Record<AvatarSize, string> = {
@@ -35,7 +50,7 @@ function initials(name: string) {
   return (first + last).toUpperCase();
 }
 
-export function Avatar({ src, alt, size = "md", className, ...rest }: AvatarProps) {
+export function Avatar({ src, alt, size = "md", tone = "neutral", className, ...rest }: AvatarProps) {
   const base = cn(
     "shrink-0 overflow-hidden rounded-full object-cover",
     sizes[size],
@@ -59,7 +74,8 @@ export function Avatar({ src, alt, size = "md", className, ...rest }: AvatarProp
           // someone is has never been a thing to press. fill-soft/ink-secondary
           // both flip with the token layer, so the monogram keeps its contrast
           // in either theme.
-          "grid place-items-center bg-fill-soft font-ui font-semibold text-ink-secondary",
+          "grid place-items-center font-ui font-semibold",
+          tones[tone],
         )}
       >
         <span aria-hidden="true">{initials(alt)}</span>

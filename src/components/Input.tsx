@@ -42,7 +42,7 @@ export function Input({
       <label
         htmlFor={inputId}
         className={cn(
-          "font-ui text-[13px] font-label text-ink",
+          "font-ui text-[13px] leading-5 font-label text-ink-secondary",
           labelHidden && "sr-only",
         )}
       >
@@ -54,7 +54,7 @@ export function Input({
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
         className={cn(
-          "h-9 w-full rounded-sm bg-surface px-3",
+          "h-10 w-full rounded-sm bg-surface px-3",
           "font-ui text-[14px] text-ink",
           // 0.5px hairline — the form border width
           "border-[length:var(--tt-border-form)] border-solid",
@@ -72,11 +72,11 @@ export function Input({
       />
 
       {error ? (
-        <p id={describedBy} className="font-ui text-[12px] text-danger">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-danger">
           {error}
         </p>
       ) : hint ? (
-        <p id={describedBy} className="font-ui text-[12px] text-ink-tertiary">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-ink-tertiary">
           {hint}
         </p>
       ) : null}

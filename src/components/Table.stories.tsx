@@ -54,7 +54,7 @@ function TeamMembersTable() {
   );
 
   return (
-    <TableCard.Root className="max-w-[980px]">
+    <TableCard.Root className="w-[980px] max-w-full">
       <TableCard.Header
         title="Team members"
         badge={`${members.length} people`}
@@ -125,7 +125,7 @@ export const TeamMembers: Story = { render: () => <TeamMembersTable /> };
 
 export const WithoutSelection: Story = {
   render: () => (
-    <TableCard.Root className="max-w-[720px]">
+    <TableCard.Root className="w-[720px] max-w-full">
       <TableCard.Header title="Recent sessions" badge="3 today" />
       <Table aria-label="Recent sessions">
         <Table.Header>

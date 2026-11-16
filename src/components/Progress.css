@@ -1,0 +1,18 @@
+/* Skeletons pulse opacity rather than shimmer, so they survive both themes. */
+@keyframes tt-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+.tt-skeleton {
+  animation: tt-pulse 1.6s var(--tt-ease-standard) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-skeleton {
+    animation: none;
+  }
+}

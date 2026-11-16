@@ -82,7 +82,7 @@ export function Select({
 
   return (
     <div className="flex w-full flex-col gap-1.5" ref={rootRef}>
-      <span id={labelId} className="font-ui text-[13px] font-label text-ink">
+      <span id={labelId} className="font-ui text-[13px] leading-5 font-label text-ink-secondary">
         {label}
       </span>
 
@@ -101,7 +101,7 @@ export function Select({
           className={cn(
             "tt-lb-field",
             "flex w-full items-center justify-between gap-2",
-            "min-h-9 rounded-sm bg-surface px-3 py-1.5",
+            "min-h-10 rounded-sm bg-surface px-3 py-1.5",
             "font-ui text-left text-[14px]",
             "border-[length:var(--tt-border-form)] border-solid",
             "transition-colors duration-150 ease-standard",
@@ -188,11 +188,11 @@ export function Select({
       {name ? <input type="hidden" name={name} value={value} /> : null}
 
       {error ? (
-        <p id={describedBy} className="font-ui text-[12px] text-danger">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-danger">
           {error}
         </p>
       ) : hint ? (
-        <p id={describedBy} className="font-ui text-[12px] text-ink-tertiary">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-ink-tertiary">
           {hint}
         </p>
       ) : null}

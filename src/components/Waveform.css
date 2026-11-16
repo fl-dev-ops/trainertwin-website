@@ -1,0 +1,23 @@
+@keyframes tt-wave {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.tt-wave-bar {
+  transform-origin: center;
+  transform: scaleY(var(--lv, 0.3));
+}
+.tt-wave--live .tt-wave-bar {
+  animation: tt-wave 900ms ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-wave--live .tt-wave-bar {
+    animation: none;
+    transform: scaleY(var(--lv, 0.6));
+  }
+}
