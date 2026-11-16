@@ -1,51 +1,71 @@
-import type { CSSProperties } from "react";
+"use client";
+
+import { useSyncExternalStore } from "react";
+import { Waves } from "react-animated-waves";
 import { cn } from "./cn";
-import "./Waveform.css";
 
 /**
- * Audio waveform (§8, Sign-in flow: Record). A row of rounded bars, 32px tall with a 3px
- * gap, drawn in `--tt-live` while recording (the live-recording colour, used for nothing
- * else) or in neutral ink for a recorded clip.
+ * The voice-recording wave, copied from the V3 prototype (`obWave` / `mountObWaves`, the "Add your voice"
+ * step): the `react-animated-waves` canvas, 72px tall, three soft layers in an orange gradient
+ * (`--tt-primary`, #FF8A4C, `--tt-primary`). It fills its container's width.
  *
- * Two modes:
- *   `live`    bars bounce on a staggered 900ms loop; no data needed. For "recording now" when
- *             you are not feeding it audio levels. Stops (static) under reduced motion.
- *   `levels`  a fixed shape from an array of 0 to 1 amplitudes, e.g. a recorded clip or a
- *             real mic stream you sample yourself.
+ * Two presets, the prototype's:
+ *   idle  `live` off: amplitude 12, intensity .35, speed .6 (a gentle swell while waiting to record).
+ *   live  `live` on:  amplitude 30, intensity 1, speed 1.4 (while recording).
  *
- * Decorative by default (`aria-hidden`): the words "Recording · 0:12" beside it carry the
- * meaning. Pass `label` where the waveform is the only indication.
+ * Decorative by default (`aria-hidden`): the words "Recording · 0:12" beside it carry the meaning. Pass
+ * `label` where the wave is the only indication. Colours are read from `--tt-primary` (and follow a theme
+ * change); pass `colors` to override. Reduced motion is respected (the canvas is still); the prototype
+ * itself ignores the setting, so that is the one difference.
  */
 export interface WaveformProps {
-  /** Animate. Ignored when `levels` is given (those are driven by you). */
+  /** Recording now. Off is the quiet idle wave. */
   live?: boolean;
-  /** 0 to 1 amplitudes, one per bar. */
-  levels?: readonly number[];
-  /** Bar count when `live` and no `levels`. */
-  bars?: number;
-  tone?: "live" | "neutral";
+  /** Canvas height in px. The prototype's is 72. */
+  height?: number;
+  /** Override the gradient stops (any CSS colours). Default: `--tt-primary`, #FF8A4C, `--tt-primary`. */
+  colors?: string[];
+  /** Stop animating for users who ask for reduced motion. Default true. */
+  respectReducedMotion?: boolean;
   /** Accessible name; makes it `role="img"` instead of decorative. */
   label?: string;
   className?: string;
 }
 
-export function Waveform({ live = false, levels, bars = 32, tone = "live", label, className }: WaveformProps) {
-  const n = levels ? levels.length : bars;
+const PRESET = {
+  idle: { amplitude: 12, intensity: 0.35, speed: 0.6 },
+  live: { amplitude: 30, intensity: 1, speed: 1.4 },
+} as const;
+
+function readPrimary() {
+  if (typeof document === "undefined") return "#FF5A00";
+  return getComputedStyle(document.documentElement).getPropertyValue("--tt-primary").trim() || "#FF5A00";
+}
+
+function subscribe(notify: () => void) {
+  const mo = new MutationObserver(notify);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
+  return () => mo.disconnect();
+}
+
+export function Waveform({ live = false, height = 72, colors, respectReducedMotion = true, label, className }: WaveformProps) {
+  const primary = useSyncExternalStore(subscribe, readPrimary, () => "#FF5A00");
+  const p = PRESET[live ? "live" : "idle"];
   return (
-    <span
+    <div
       {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}
-      className={cn("inline-flex h-8 items-center gap-[3px]", live && !levels && "tt-wave--live", className)}
+      className={cn("w-full", className)}
+      style={{ height }}
     >
-      {Array.from({ length: n }, (_, i) => {
-        const lv = levels ? Math.max(0.08, Math.min(1, levels[i])) : 0.3 + ((i * 37) % 7) / 10;
-        return (
-          <span
-            key={i}
-            className={cn("tt-wave-bar block h-full w-[3px] rounded-full", tone === "live" ? "bg-live" : "bg-ink-tertiary")}
-            style={{ "--lv": lv, "--i": i % 12 } as CSSProperties}
-          />
-        );
-      })}
-    </span>
+      <Waves
+        colors={colors ?? [primary, "#FF8A4C", primary]}
+        amplitude={p.amplitude}
+        intensity={p.intensity}
+        speed={p.speed}
+        height="100%"
+        respectReducedMotion={respectReducedMotion}
+        style={{ display: "block", width: "100%", height: "100%" }}
+      />
+    </div>
   );
 }

@@ -50,7 +50,7 @@ What is measurable today is **parity: for each thing the prototype draws, is the
 | Add card, source (checkbox) card, Twin-for-all card, stat pill | `addCard`, `knowledgeFileCard`, `twinAllCard` | `AddCard`, `SourceCard`, `TwinAllCard`, `StatPill`, `LearnerStack` | Product/Cards |
 | Phone header, tab bar | `.mobile-head`, `.tabbar` | `MobileHeader`, `HeaderButton`, `TabBar`, `TabBarItem` | Structure/MobileShell |
 | Calendar popover, date field | `renderAssignCal`, `.assign-cal` | `Calendar`, `DateField` | Foundations/Calendar |
-| Audio waveform | `.mic-wave`, the record step | `Waveform` | Foundations/Waveform |
+| Audio waveform | `.vs-wave` (react-animated-waves canvas), the record step | `Waveform` | Foundations/Waveform |
 | Select | 7 `<select>` | `Select` | Foundations/Select |
 | Multi-select | `.v2-ms` | `MultiSelect` | Foundations/MultiSelect |
 | Badge | `.badge` ×46 | `Badge` | Foundations/Badge |
