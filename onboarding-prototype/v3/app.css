@@ -11485,7 +11485,7 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 
 /* "Here's what we found": each profile is a selectable tile — ticked = this is me, unticked = removed */
 .v2-found .v2-prof { cursor: pointer; transition: border-color .15s ease, background .15s ease, opacity .15s ease; }
-.v2-found .v2-prof.is-on { border-color: var(--tt-primary); }
+.v2-found .v2-prof.is-on { border-color: var(--tt-border); }
 .v2-found .v2-prof.is-off { opacity: 1; background: var(--tt-surface-sunken); }
 .v2-found .v2-prof.is-off .card-title, .v2-found .v2-prof.is-off .card-sub, .v2-found .v2-prof.is-off .profile-avatar { opacity: .5; }
 .v2-pick { flex: none; display: grid; place-items: center; width: 22px; height: 22px; margin-right: var(--tt-space-1); padding: 0; border: 1.5px solid var(--tt-border-interactive); border-radius: 6px; background: var(--tt-surface); color: transparent; cursor: pointer; transition: background .15s ease, border-color .15s ease, color .15s ease; }
