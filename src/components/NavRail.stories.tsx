@@ -3,7 +3,6 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { NavRail, NavGroup, NavItem, RailUser, RailBrand, RailAction } from "./NavRail";
 import { ChatIcon, EyeIcon, HomeIcon, InboxIcon, SettingsIcon } from "./UiIcons";
-import { Button } from "./Button";
 
 const meta = {
   title: "Structure/NavRail",
@@ -36,7 +35,9 @@ const nav = [
   { group: "Group two", items: [["four", "Item four", <ChatIcon key="c" />], ["five", "Item five", <ChatIcon key="d" />], ["six", "Item six", <EyeIcon key="e" />]] },
 ] as const;
 
-function Demo({ collapsed, onToggle }: { collapsed: boolean; onToggle?: () => void }) {
+function Demo({ startCollapsed }: { startCollapsed: boolean }) {
+  const [collapsed, setCollapsed] = useState(startCollapsed);
+  const onToggle = () => setCollapsed((c) => !c);
   const [active, setActive] = useState("one");
   const item = ([id, label, icon, alert]: readonly [string, string, React.ReactNode, boolean?]) => (
     <NavItem key={id} label={label} icon={icon} alert={alert} active={active === id} onClick={() => setActive(id)} />
@@ -68,16 +69,11 @@ function Demo({ collapsed, onToggle }: { collapsed: boolean; onToggle?: () => vo
   );
 }
 
-export const Expanded: Story = { render: () => <Demo collapsed={false} /> };
-export const Collapsed: Story = { render: () => <Demo collapsed /> };
-export const Toggle: Story = {
-  render: function Render() {
-    const [c, setC] = useState(false);
-    return (
-      <div>
-        <div className="p-3"><Button variant="secondary" size="sm" onClick={() => setC(!c)}>{c ? "Expand" : "Collapse"}</Button></div>
-        <Demo collapsed={c} onToggle={() => setC(!c)} />
-      </div>
-    );
-  },
+export const Expanded: Story = {
+  parameters: { docs: { description: { story: "Starts expanded. Click the logo to collapse it, as in the prototype." } } },
+  render: () => <Demo startCollapsed={false} />,
+};
+export const Collapsed: Story = {
+  parameters: { docs: { description: { story: "Starts collapsed. Hover the logo to see the expand icon, click it to expand." } } },
+  render: () => <Demo startCollapsed />,
 };
