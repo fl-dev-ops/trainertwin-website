@@ -134,8 +134,6 @@ const state = {
   accRole: "all",
   accTab: "twin",
   tsFocus: "",
-  inboxTab: "twin",
-  inboxView: "all",
   inboxDone: [],
   inboxAnswered: [],
   brainQView: "open",
@@ -797,7 +795,7 @@ function render() {
     if (n) n.scrollTop = scrolls[i];
   });
   if (state.step >= 1 && state.step <= 5) state.setupStep = state.step;
-  const titles = { home: "Home", analytics: "Analytics", roleplay: "Scenarios", videos: "Gen videos", setup: "Twin Agents", knowledge: "Twin’s brain", calibrations: "Twin sessions", learners: "Twin users", roleusers: "Roleplay users", sessions: "Roleplay sessions", rpsettings: "Persona", inbox: "Inbox", cohorts: "Cohorts", acclearners: "Learners", team: "Team", settings: "Settings", profile: "Profile", voices: "Voices", devapi: "Developer API", ask: "Ask your twin" };
+  const titles = { home: "Home", analytics: "Analytics", roleplay: "Scenarios", videos: "Gen videos", setup: "Twin Agents", knowledge: "Twin’s brain", calibrations: "Twin sessions", learners: "Twin users", roleusers: "Roleplay users", sessions: "Roleplay sessions", rpsettings: "Persona", cohorts: "Cohorts", acclearners: "Learners", team: "Team", settings: "Settings", profile: "Profile", voices: "Voices", devapi: "Developer API", ask: "Ask your twin" };
   document.title = "TrainerTwin — " + (titles[activeNav()] || "Home");
   mountAuth();
   mountAddKnowledge();
@@ -934,7 +932,6 @@ function icon(name) {
     usage: '<path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     cohorts: '<path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 10h2a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13v-1a2 2 0 0 1 2 -2h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     team: '<path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13a20 20 0 0 0 18 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
-    inbox: '<path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 13h3l3 3h4l3 -3h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     messages: '<path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     sessions: '<path d="M12 8l0 4l2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     rpsettings: '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 21v-2a4 4 0 0 1 4 -4h2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.001 15.5v1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.001 21v1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22.032 17.25l-1.299 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.27 20l-1.3 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.97 17.25l1.3 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.733 20l1.3 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -963,7 +960,7 @@ function icon(name) {
     receipt: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5"/>',
     back: '<path d="M5 12l14 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 -6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
   };
-  const viewBox = name === "receipt" || name === "phone" || name === "crown" || name === "mail" || name === "building" || name === "mappin" || name === "credits" || name === "billing" || name === "lifebuoy" || name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
+  const viewBox = name === "receipt" || name === "phone" || name === "crown" || name === "mail" || name === "building" || name === "mappin" || name === "credits" || name === "billing" || name === "lifebuoy" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
   return `<svg viewBox="${viewBox}" aria-hidden="true">${paths[name]}</svg>`;
 }
 
@@ -1469,7 +1466,6 @@ function main() {
   if (nav === "usage") return pageUsage();
   if (nav === "billing") return pageBilling();
   if (nav === "settings") return pageSettings();
-  if (nav === "inbox") return pageInbox();
   if (nav === "cohorts") return pageCohorts();
   if (nav === "acclearners") return pageAccLearners();
   if (nav === "team") return pageTeam();
@@ -3676,17 +3672,7 @@ const ROLE_USERS = [
   { name: "Daniel Cho", phone: "+82 10 5555 1234", email: "daniel.cho@outlook.com", roles: 1, sessions: 2 }
 ];
 
-// ---- Inbox: everything waiting on Olga, split by Twin and Roleplay ----
-const INBOX_TWIN_REQUESTS = [
-  { chip: "Free trial · 10 min", tone: "info", who: "Hassan Ali", text: "tried The off-plan sales process", when: "Today" },
-  { chip: "Paid · AED 90", tone: "success", who: "Nora Ali", text: "extended The off-plan sales process +30 min · +30 days", when: "Today" },
-  { chip: "Paid · AED 90", tone: "success", who: "Aisha Khan", text: "extended The off-plan sales process +30 min · +30 days", when: "21 Oct" },
-  { chip: "Paid · AED 90", tone: "success", who: "Omar Haddad", text: "extended The off-plan sales process +30 min · +30 days", when: "12 Oct" }
-];
-const INBOX_ROLE_REQUESTS = [
-  { chip: "Free trial · 1 session", tone: "info", who: "Leo Martin", text: "tried Ravi: first conversation", when: "Today" },
-  { chip: "Paid · AED 60", tone: "success", who: "Priya Nair", text: "bought 3 more sessions of Ravi: first conversation", when: "Yesterday" }
-];
+// ---- Questions and issues waiting on Olga (shown on Twin’s brain) ----
 const INBOX_QUESTIONS = [
   { id: "q-1", q: "What do I say if the client already bought with another agent?", who: "James Carter", agent: "The off-plan sales process", when: "Today, 11:05 am" },
   { id: "q-2", q: "How do I handle a client who wants to pay in crypto?", who: "Nora Ali", agent: "The off-plan sales process", when: "Yesterday" }
@@ -3706,45 +3692,9 @@ const INBOX_ISSUES_RESOLVED = [
 const INBOX_ISSUES_CORRECTED = [
   { id: "co-1", who: "Omar Haddad", agent: "The off-plan sales process", where: "20 Oct, 3:40 pm", reason: "Wrong or inaccurate answer" }
 ];
-const INBOX_ROLE_ISSUES = [
-  { id: "ri-1", who: "Aisha Khan", role: "Ravi: first conversation", roleId: "ravi", session: "ravi-0", where: "During the call · 2:40 · Today, 9:02 am", reason: "Sounds robotic", note: "The client repeated the same line twice and went flat." },
-  { id: "ri-2", who: "James Carter", role: "Faisal: first conversation", roleId: "faisal", session: "faisal-1", where: "During the call · 4:05 · Yesterday, 11:02 am", reason: "Wrong accent", note: "Daniel’s accent changed halfway through." }
-];
-const INBOX_EXPIRING = {
-  twin: { title: "Sep 2026 batch · access to The off-plan sales process ends 15 Nov 2026", sub: "40 min each · learners can extend themselves for AED 90", nav: "learners" },
-  roleplay: { title: "Sep 2026 batch · access to Ravi: first conversation ends 22 Nov 2026", sub: "3 sessions each · learners can buy more for AED 60", nav: "roleusers" }
-};
-
 function inboxPending(list) {
   return list.filter((item) => !state.inboxDone.includes(item.id));
 }
-function inboxTabCount(tab) {
-  return tab === "twin" ? inboxPending(INBOX_QUESTIONS).length + inboxPending(INBOX_TWIN_ISSUES).length : inboxPending(INBOX_ROLE_ISSUES).length;
-}
-function inboxCount() {
-  return (state.features.twin ? inboxTabCount("twin") : 0) + (state.features.roleplay ? inboxTabCount("roleplay") : 0);
-}
-
-function inboxSection(title, sub, count, body) {
-  return `
-    <section class="inbox-sec">
-      <h2 class="inbox-h">${esc(title)}${count ? `<b class="inbox-count" aria-label="${count} waiting">${count}</b>` : ""}</h2>
-      ${sub ? `<p class="inbox-sub">${esc(sub)}</p>` : ""}
-      ${body}
-    </section>`;
-}
-
-function inboxRequests(list) {
-  return `
-    <ul class="inbox-requests">
-      ${list.map((r) => `
-        <li>
-          <span class="badge badge--${r.tone}">${esc(r.chip)}</span>
-          <span class="inbox-line"><b>${esc(r.who)}</b> ${esc(r.text)} · ${esc(r.when)}<span class="inbox-quiet"> · no action needed</span></span>
-        </li>`).join("")}
-    </ul>`;
-}
-
 // Who it is from: a small avatar, the name, and when. Shared by the cards below.
 function inboxWho(name, detail) {
   const tone = (name.length % 5) + 1;
@@ -3807,132 +3757,6 @@ function inboxHistoryCard(item) {
         </div>
       </div>
     </article>`;
-}
-
-function inboxIssueCard(item, kind) {
-  const twin = kind === "twin";
-  return `
-    <article class="inbox-card">
-      <div class="inbox-row">
-        <div class="inbox-main">
-          ${inboxWho(item.who, "· " + item.where)}
-          <p class="inbox-title">${esc(item.reason)}</p>
-          <span class="badge inbox-agent">${esc(twin ? item.agent : item.role)}</span>
-          ${twin ? `
-          <div class="inbox-quote">
-            <p class="inbox-label">Twin said</p>
-            <p class="inbox-said">${esc(item.said)}</p>
-          </div>
-          <div class="inbox-quote">
-            <p class="inbox-label">Your calibration</p>
-            <p class="inbox-fix">${esc(item.fix)}</p>
-          </div>` : `
-          <div class="inbox-quote">
-            <p class="inbox-label">Learner’s note</p>
-            <p class="inbox-fix">${esc(item.note)}</p>
-          </div>`}
-        </div>
-        <div class="inbox-actions">
-          ${twin
-            ? `<button class="btn btn--secondary btn--sm" type="button" data-action="inbox-issue-correct" data-id="${esc(item.id)}">Correct the answer</button>`
-            : `<button class="btn btn--secondary btn--sm" type="button" data-action="inbox-issue-open" data-role="${esc(item.roleId)}" data-id="${esc(item.session)}">Open session</button>`}
-          <button class="btn btn--ghost btn--sm" type="button" data-action="inbox-issue-resolve" data-id="${esc(item.id)}">Mark resolved</button>
-        </div>
-      </div>
-    </article>`;
-}
-
-function inboxExpiring(kind) {
-  const e = INBOX_EXPIRING[kind];
-  return `
-    <article class="inbox-card">
-      <div class="inbox-row">
-        <div class="inbox-main">
-          <p class="inbox-title">${esc(e.title)}</p>
-          <p class="inbox-meta">${esc(e.sub)}</p>
-        </div>
-        <div class="inbox-actions"><button class="btn btn--secondary btn--sm" type="button" data-action="inbox-open-access" data-id="${esc(e.nav)}">Open access</button></div>
-      </div>
-    </article>`;
-}
-
-const INBOX_VIEWS = [
-  ["all", "All alerts", "Everything waiting on you, newest first."],
-  ["requests", "Access requests", "Learners who asked you for more. Learners extend themselves when you’ve set an extension price."],
-  ["ask", "Ask Olga", "Questions your twin agents couldn’t answer from your material."],
-  ["issues", "Reported issues", "Problems learners flagged during a call."],
-  ["ending", "Access ending soon", "In the next 3 weeks."]
-];
-
-function inboxViewCount(view, tab) {
-  if (view === "ask") return tab === "twin" ? inboxPending(INBOX_QUESTIONS).length : 0;
-  if (view === "issues") return inboxPending(tab === "twin" ? INBOX_TWIN_ISSUES : INBOX_ROLE_ISSUES).length;
-  if (view === "all") return inboxTabCount(tab);
-  return 0;
-}
-
-function pageInbox() {
-  const both = state.features.twin && state.features.roleplay;
-  let tab = state.inboxTab;
-  if (tab === "twin" && !state.features.twin) tab = "roleplay";
-  if (tab === "roleplay" && !state.features.roleplay) tab = "twin";
-  const tabs = [["twin", "Twin"], ["roleplay", "Roleplay"]];
-  const views = INBOX_VIEWS.filter(([id]) => id !== "ask" || tab === "twin");
-  let view = state.inboxView;
-  if (!views.some(([id]) => id === view)) view = "all";
-  const [, viewTitle, viewSub] = INBOX_VIEWS.find(([id]) => id === view);
-  const quiet = (text) => `<p class="inbox-empty">${text}</p>`;
-    let body;
-  if (view === "all") {
-    const questions = inboxPending(INBOX_QUESTIONS);
-    const issues = inboxPending(tab === "twin" ? INBOX_TWIN_ISSUES : INBOX_ROLE_ISSUES);
-    const sec = (id, count, content) => { const [, title, sub] = INBOX_VIEWS.find(([v]) => v === id); return inboxSection(title, sub, count, content); };
-    body = `<div class="inbox-all">${[
-      sec("requests", 0, inboxRequests(tab === "twin" ? INBOX_TWIN_REQUESTS : INBOX_ROLE_REQUESTS)),
-      tab === "twin" ? sec("ask", questions.length, questions.length ? questions.map(inboxQuestionCard).join("") : quiet("All caught up. No questions waiting.")) : "",
-      sec("issues", issues.length, issues.length ? issues.map((item) => inboxIssueCard(item, tab)).join("") : quiet("All caught up. No issues reported.")),
-      sec("ending", 0, inboxExpiring(tab === "twin" ? "twin" : "roleplay"))
-    ].join("")}</div>`;
-  } else if (view === "requests") {
-    body = inboxRequests(tab === "twin" ? INBOX_TWIN_REQUESTS : INBOX_ROLE_REQUESTS);
-  } else if (view === "ask") {
-    const items = inboxPending(INBOX_QUESTIONS);
-    body = items.length ? items.map(inboxQuestionCard).join("") : quiet("All caught up. No questions waiting.");
-  } else if (view === "issues") {
-    const items = inboxPending(tab === "twin" ? INBOX_TWIN_ISSUES : INBOX_ROLE_ISSUES);
-    body = items.length ? items.map((item) => inboxIssueCard(item, tab)).join("") : quiet("All caught up. No issues reported.");
-  } else {
-    body = inboxExpiring(tab === "twin" ? "twin" : "roleplay");
-  }
-  return `
-    <div class="page page--library page--twin-profile page--inbox">
-      <div class="lib-head">
-        <h1 class="lib-title"><span class="lib-mark">${icon("inbox")}</span>Inbox</h1>
-        ${both ? `
-        <div class="seg inbox-seg" role="group" aria-label="Inbox">
-          ${tabs.map(([id, label]) => { const n = inboxTabCount(id); return `<button type="button" data-action="inbox-tab" data-id="${id}" aria-pressed="${tab === id}">${label}${n ? `<b class="inbox-count">${n}</b>` : ""}</button>`; }).join("")}
-        </div>` : ""}
-      </div>
-      <div class="inbox-layout">
-        <nav class="inbox-menu" aria-label="Inbox folders">
-          ${views.map(([id, label]) => { const n = inboxViewCount(id, tab); return `<button type="button" class="inbox-menu-item" data-action="inbox-view" data-id="${id}" ${view === id ? 'aria-current="page"' : ""}><span>${label}</span>${n ? `<b class="inbox-count">${n}</b>` : ""}</button>`; }).join("")}
-        </nav>
-        <section class="inbox-pane" aria-label="${esc(viewTitle)}">
-          ${view === "all" ? "" : (() => {
-            // The first sentence is the heading; anything after it is the line of detail under it.
-            const cut = viewSub.indexOf(". ");
-            const lead = cut < 0 ? viewSub : viewSub.slice(0, cut + 1);
-            const rest = cut < 0 ? "" : viewSub.slice(cut + 2);
-            return `<header class="inbox-pane-head">
-            <h2 class="inbox-h">${esc(lead)}</h2>
-            ${rest ? `<p class="inbox-sub">${esc(rest)}</p>` : ""}
-          </header>`;
-          })()}
-          ${body}
-        </section>
-      </div>
-    </div>
-  `;
 }
 
 // ---- Accounts: cohorts, learners and the team ----
@@ -15285,17 +15109,6 @@ const actions = {
   "acc-new-cohort"() { toast("Name the cohort, then add learners and pick what they get access to."); },
   "acc-invite-learner"() { toast("Invite link copied. Share it with your learners."); },
   "acc-invite-member"() { toast("Invite sent. They will get an email to join your team."); },
-  "inbox-tab"(el) {
-    state.inboxTab = el.dataset.id;
-    state.inboxAnswering = "";
-    if (state.inboxTab !== "twin" && state.inboxView === "ask") state.inboxView = "all";
-    render();
-  },
-  "inbox-view"(el) {
-    state.inboxView = el.dataset.id;
-    state.inboxAnswering = "";
-    render();
-  },
   "inbox-answer"(el) {
     state.inboxAnswering = el.dataset.id;
     state.inboxDraft = "";
@@ -15343,15 +15156,6 @@ const actions = {
     state.brainTab = "knowledge";
     actions.nav({ dataset: { id: "knowledge" } });
     toast("Add the right answer here. The issue is now under Corrected.");
-  },
-  "inbox-issue-open"(el) {
-    actions.nav({ dataset: { id: "sessions" } });
-    actions["session-open"]({ dataset: { role: el.dataset.role, id: el.dataset.id } });
-  },
-  "inbox-open-access"(el) {
-    // Access lives on Accounts > Learners, on the Twin or Roleplay tab.
-    state.accTab = el.dataset.id === "roleusers" ? "roleplay" : "twin";
-    actions.nav({ dataset: { id: "acclearners" } });
   },
   "bot-assign-open"() {
     const d = state.botDraft;
