@@ -7,6 +7,7 @@ import { Checkbox } from "./Checkbox";
 import { StatPill } from "./StatPill";
 import { LearnerStack, type Learner } from "./LearnerStack";
 import { Button } from "./Button";
+import { Menu, type MenuEntry } from "./Menu";
 import { MoreVerticalIcon } from "./UiIcons";
 
 /**
@@ -102,10 +103,12 @@ export interface TwinAllCardProps {
   href?: string;
   onOpen?: () => void;
   onMore?: () => void;
+  /** The card's own ⋮ menu: pass the items and the card renders a `Menu`. Ignored `onMore` then. */
+  actions?: readonly MenuEntry[];
   className?: string;
 }
 
-export function TwinAllCard({ name, meta, photoSrc, learners = [], href, onOpen, onMore, className }: TwinAllCardProps) {
+export function TwinAllCard({ name, meta, photoSrc, learners = [], href, onOpen, onMore, actions, className }: TwinAllCardProps) {
   const nameCls =
     "relative text-left font-ui text-[18px] leading-6 font-title text-ink after:absolute after:inset-0 after:z-[1] after:content-[''] focus-visible:outline-none tt-open";
   return (
@@ -138,9 +141,22 @@ export function TwinAllCard({ name, meta, photoSrc, learners = [], href, onOpen,
         <p className="m-0 flex items-center gap-1 font-ui text-[15px] leading-5 text-ink-secondary">{meta}</p>
         {learners.length ? <LearnerStack learners={learners} /> : null}
       </div>
-      <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${name}`} aria-haspopup="menu" onClick={onMore} className="relative z-[2] flex-none bg-fill-soft! hover:bg-fill-soft-hover!">
-        <MoreVerticalIcon />
-      </Button>
+      {actions ? (
+        <Menu
+          label={`Actions for ${name}`}
+          items={actions}
+          className="relative z-[2] flex-none"
+          trigger={(p) => (
+            <Button variant="ghost" size="sm" iconOnly {...p} aria-label={`Actions for ${name}`} className="bg-fill-soft! hover:bg-fill-soft-hover!">
+              <MoreVerticalIcon />
+            </Button>
+          )}
+        />
+      ) : (
+              <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${name}`} aria-haspopup="menu" onClick={onMore} className="relative z-[2] flex-none bg-fill-soft! hover:bg-fill-soft-hover!">
+          <MoreVerticalIcon />
+        </Button>
+      )}
     </article>
   );
 }

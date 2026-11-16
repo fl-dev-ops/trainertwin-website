@@ -5,6 +5,7 @@ import { cn } from "./cn";
 import { Avatar } from "./Avatar";
 import { LearnerStack, type Learner } from "./LearnerStack";
 import { Button } from "./Button";
+import { Menu, type MenuEntry } from "./Menu";
 import { MoreVerticalIcon } from "./UiIcons";
 import "./AgentCard.css";
 
@@ -59,8 +60,10 @@ export interface AgentCardProps {
   href?: string;
   /** Or run something instead. Renders the title as a button. */
   onOpen?: () => void;
-  /** Called by the ⋮ button. The menu itself is the caller's. */
+  /** Called by the ⋮ button. The menu itself is the caller's. Ignored when `actions` is given. */
   onMore?: () => void;
+  /** The card's own ⋮ menu: pass the items and the card renders a `Menu` (named "Actions for <title>"). */
+  actions?: readonly MenuEntry[];
   /** Force a state for documentation. */
   forceState?: "hover" | "focus";
   /** Slot for an open menu, positioned over the footer. */
@@ -84,6 +87,7 @@ export function AgentCard({
   href,
   onOpen,
   onMore,
+  actions,
   forceState,
   menu,
   className,
@@ -125,7 +129,7 @@ export function AgentCard({
   return (
     <article
       className={cn(
-        "group relative flex min-h-(--tt-size-card-h) w-(--tt-size-card-w) max-w-full flex-col",
+        "group relative flex w-(--tt-size-card-w) max-w-full flex-col",
         "rounded-lg border border-line-card bg-surface text-left shadow-card",
         "transition-shadow duration-(--tt-duration-quick) ease-standard",
         "hover:shadow-e2 has-[.tt-open:focus-visible]:outline-2 has-[.tt-open:focus-visible]:outline-offset-2 has-[.tt-open:focus-visible]:outline-primary",
@@ -205,9 +209,13 @@ export function AgentCard({
 
       <div className="mt-auto flex items-center justify-between gap-2 p-4">
         <LearnerStack learners={learners} max={maxLearners} />
-        <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${title}`} aria-haspopup="menu" onClick={onMore} className="relative z-[2]">
-          <MoreVerticalIcon />
-        </Button>
+        {actions ? (
+          <Menu label={`Actions for ${title}`} items={actions} className="relative z-[2]" />
+        ) : (
+          <Button variant="ghost" size="sm" iconOnly aria-label={`Actions for ${title}`} aria-haspopup="menu" onClick={onMore} className="relative z-[2]">
+            <MoreVerticalIcon />
+          </Button>
+        )}
       </div>
       {menu}
     </article>

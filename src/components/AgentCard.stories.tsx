@@ -100,3 +100,22 @@ export const Grid: Story = {
     </div>
   ),
 };
+
+export const WithMenu: Story = {
+  args: {
+    actions: [
+      { label: "Item one", onSelect: () => {} },
+      { label: "Item two", onSelect: () => {} },
+      "divider",
+      { label: "Item three", danger: true, onSelect: () => {} },
+    ],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Pass `actions` and the card renders its own ⋮ `Menu` (named \"Actions for <title>\") instead of calling `onMore`. Open it and use the arrow keys.",
+      },
+    },
+  },
+};

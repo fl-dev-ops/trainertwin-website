@@ -11,7 +11,9 @@
     "tokens:check": "node scripts/sync-tokens.mjs --check",
     "compare:prototype": "node scripts/compare-prototype/run.mjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build:prototype": "vite build --config prototype-build/vite.config.mjs",
+    "watch:prototype": "vite build --watch --config prototype-build/vite.config.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^9.7.0",

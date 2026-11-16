@@ -179,8 +179,8 @@ const paddings: Record<ButtonSize, string> = {
  * 54px tall, the page hierarchy is wrong, not the button.
  */
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-8 text-[13px]",
-  md: "h-9 text-[14px]",
+  sm: "h-8 text-[13px] leading-5",
+  md: "h-9 text-[14px] leading-5",
   lg: "h-[50px] text-[19px]",
   xl: "h-[54px] text-[16px]",
 };

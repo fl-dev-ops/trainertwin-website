@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "./cn";
+import { Button } from "./Button";
 import { MoreVerticalIcon } from "./UiIcons";
 
 /**
@@ -126,14 +127,9 @@ export function Menu({ label, items, align = "end", trigger, className }: MenuPr
       {trigger ? (
         trigger(triggerProps)
       ) : (
-        <button
-          type="button"
-          {...triggerProps}
-          aria-label={label}
-          className="grid h-8 w-8 place-items-center rounded-full text-ink-secondary hover:bg-fill-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
+        <Button variant="ghost" size="sm" iconOnly {...triggerProps} aria-label={label}>
           <MoreVerticalIcon />
-        </button>
+        </Button>
       )}
       {open ? (
         <div
