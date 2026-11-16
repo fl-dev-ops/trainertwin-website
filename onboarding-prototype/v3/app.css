@@ -11777,3 +11777,4 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 .bl-info .bl-sub { margin: 0; text-align: right; max-width: 60%; }
 .bl-info .bl-sub { white-space: pre-line; }
 .bl-info > div { align-items: center; }
+.bl-inv-cr { min-width: 96px; text-align: right; font-size: 14px; color: var(--tt-text-secondary); white-space: nowrap; font-variant-numeric: tabular-nums; }

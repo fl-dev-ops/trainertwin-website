@@ -960,9 +960,10 @@ function icon(name) {
     mappin: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0"/>',
     crown: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z"/>',
     phone: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/>',
+    receipt: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5"/>',
     back: '<path d="M5 12l14 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 -6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
   };
-  const viewBox = name === "phone" || name === "crown" || name === "mail" || name === "building" || name === "mappin" || name === "credits" || name === "billing" || name === "lifebuoy" || name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
+  const viewBox = name === "receipt" || name === "phone" || name === "crown" || name === "mail" || name === "building" || name === "mappin" || name === "credits" || name === "billing" || name === "lifebuoy" || name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
   return `<svg viewBox="${viewBox}" aria-hidden="true">${paths[name]}</svg>`;
 }
 
@@ -4174,11 +4175,11 @@ const USAGE_LEARNERS = [
   ["bechir.realestate", "bechir.realestate@gmail.com", 60, "30", "30", ""]
 ];
 const BILL_INVOICES = [
-  ["TrainerTwin Minute packs, 100 credits", "14 Nov 2026", "$25.00"],
-  ["TrainerTwin Paid plan, 11 Nov 2026 – 10 Dec 2026", "11 Nov 2026", "$300.00"],
-  ["TrainerTwin Minute packs, 400 credits", "2 Nov 2026", "$100.00"],
-  ["TrainerTwin Plan upgrade, pro-rated, 28 Oct – 10 Nov 2026", "28 Oct 2026", "$127.50"],
-  ["TrainerTwin Minute packs, 200 credits", "20 Oct 2026", "$50.00"]
+  ["Minute pack Add-ons credits", "14 Nov 2026", "$25.00", "+100 min"],
+  ["TrainerTwin Plan renewal", "11 Nov 2026", "$300.00", "+1,000 min"],
+  ["Minute pack Add-ons credits", "2 Nov 2026", "$100.00", "+400 min"],
+  ["Minute pack Add-ons credits", "20 Oct 2026", "$50.00", "+200 min"],
+  ["TrainerTwin Plan renewal", "11 Oct 2026", "$250.00", "+800 min"]
 ];
 
 const LD_TOPICS = ["Client follow-up", "Re-engaging silent leads", "Follow-up messaging", "Client re-engagement", "Handling postponed calls", "Lead follow-up", "Video outreach strategy", "Handling message inquiries", "Qualifying client criteria", "Booking client calls", "Handling catalogue requests", "Call transition", "Voice note outreach"];
@@ -4347,7 +4348,7 @@ function pageBilling() {
       </div>
       <h2 class="us-h2 us-h2--gap">Invoices</h2>
       <article class="card bl-card bl-inv">
-        ${BILL_INVOICES.map((r, i) => `<div class="bl-inv-row"><span class="bl-inv-ico" aria-hidden="true">${icon(/Minute packs/.test(r[0]) ? "credits" : "billing")}</span><span class="bl-inv-name">${esc(r[0])}</span><span class="us-muted">${r[1]}</span><span class="badge">Paid</span><b class="bl-inv-amt">${r[2]}</b>
+        ${BILL_INVOICES.map((r, i) => `<div class="bl-inv-row"><span class="bl-inv-ico" aria-hidden="true">${icon(/Plan renewal/.test(r[0]) ? "billing" : "credits")}</span><span class="bl-inv-name">${esc(r[0])}</span><span class="us-muted">${r[1]}</span><span class="badge">Paid</span><b class="bl-inv-amt">${r[2]}</b><span class="bl-inv-cr">${r[3]}</span>
           <span class="bl-menu-wrap"><button class="btn btn--ghost btn--icon btn--sm" type="button" data-action="bill-menu" data-id="${i}" aria-haspopup="menu" aria-expanded="${state.billMenu === String(i)}" aria-label="Invoice actions"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.25" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="12.75" cy="8" r="1.15" fill="currentColor"/></svg></button>
           ${state.billMenu === String(i) ? `<div class="menu bl-menu" role="menu"><button type="button" role="menuitem" data-action="bill-dl" data-id="invoice">${dl}<span>Download invoice</span></button><button type="button" role="menuitem" data-action="bill-dl" data-id="receipt">${rc}<span>Download receipt</span></button></div>` : ""}</span></div>`).join("")}
       </article>
