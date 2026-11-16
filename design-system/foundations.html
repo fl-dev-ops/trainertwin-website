@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TrainerTwin Design Foundations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -728,6 +729,10 @@ ul.rules.neg li::before { background: var(--color-danger); }
    which hides the single most useful thing about it: that it was decided the
    other way first, and why that didn't hold. */
 .st-reversed { background: var(--color-info-subtle); color: var(--color-info); border-color: var(--color-info); }
+.status-item[hidden] { display: none; }
+/* Locked | Reversed switch under the Decision record heading, 10 Nov 2026. The one
+   Open item in this list (D29) sits under Locked with its own Open tag. */
+.dec-tabs { align-self: flex-start; margin-bottom: var(--space-5); }
 .status-item p { font-size: 14px; margin: 0; color: var(--color-text-secondary); }
 .status-item p b { color: var(--color-text-primary); font-weight: var(--weight-semibold); }
 
@@ -774,9 +779,11 @@ footer {
   transition: background var(--duration-quick) var(--ease-standard),
               border-color var(--duration-quick) var(--ease-standard);
 }
-.c-btn:disabled { opacity: .45; pointer-events: none; }
+/* Disabled, as the V3 prototype draws it (16 Nov 2026): a flat fill-soft with a muted label and a
+   not-allowed cursor, not a faded copy of the variant. */
+.c-btn:disabled { background: var(--color-fill-soft); color: var(--color-text-muted); border-color: transparent; cursor: not-allowed; }
 .c-btn--sm { height: 32px; padding: 0 var(--space-3); font-size: 13px; }
-.c-btn--md { height: 36px; padding: 0 var(--space-5); font-size: 14px; }  /* 40 -> 36, 4 Nov 2026 (D109) */
+.c-btn--md { height: 36px; padding: 0 var(--space-4); font-size: 14px; }  /* 40 -> 36, 4 Nov 2026 (D109); padding 20 -> 16 to the prototype, 16 Nov 2026 (D122) */
 .c-btn--lg { height: 50px; padding: 0 var(--space-6); font-size: 19px; }
 /* xl is the MARKETING CTA. 16px label, because marketing body copy is 16px and a
    call to action should never read smaller than the paragraph above it. */
@@ -785,20 +792,24 @@ footer {
 .c-btn--primary:hover { background: var(--color-primary-hover); }
 .c-btn--strong { background: var(--color-cta-strong); color: var(--color-on-cta-strong); }
 .c-btn--strong:hover { background: var(--color-cta-strong-hover); }
-/* Shadow added 30 Sep 2026, confirmed on three separate buttons in a running
-   onboarding prototype. strong/primary read as buttons through their fill;
-   secondary's fill is a near-invisible step off the surface, so it gets a
-   small proportionate lift instead. */
+/* THE BUTTONS ARE THE V3 PROTOTYPE'S (D122, 16 Nov 2026). Prototype btn--primary and btn--strong both
+   render orange, so both are `primary` here; the dark `strong` above is kept for the marketing site
+   only. Secondary is WHITE (--color-surface) with the soft shadow, hover mixes 3% ink, press scales to
+   98%; it was a grey fill (--color-fill-soft) before, from an earlier Figma read. */
 .c-btn--secondary {
-  background: var(--color-fill-soft); color: var(--color-text-primary);
+  background: var(--color-surface); color: var(--color-text-primary);
   border-color: transparent;
   box-shadow: var(--shadow-secondary);
+  transition: background-color var(--duration-quick) var(--ease-standard), transform var(--duration-quick) var(--ease-standard);
 }
-.c-btn--secondary:hover { background: var(--color-fill-soft-hover); }
-.c-btn--ghost { background: transparent; color: var(--color-text-secondary); }
-.c-btn--ghost:hover { background: var(--color-surface-sunken); color: var(--color-text-primary); }
-.c-btn--danger { background: transparent; color: var(--color-danger); border-color: var(--color-danger); }
-.c-btn--danger:hover { background: var(--color-danger-subtle); }
+.c-btn--secondary:hover:not(:disabled) { background: color-mix(in srgb, var(--color-text-primary) 3%, var(--color-surface)); }
+.c-btn--secondary:active:not(:disabled) { transform: scale(.98); }
+.c-btn--ghost { background: transparent; color: var(--color-text-primary); }
+.c-btn--ghost:hover:not(:disabled) { background: var(--color-fill-soft); }
+.c-btn--danger { background: transparent; color: var(--color-danger); border-color: var(--color-danger-border); }
+.c-btn--danger:hover:not(:disabled) { background: var(--color-danger-subtle); }
+.c-btn--success { background: var(--color-success); color: var(--color-surface); }
+.c-btn--success:hover:not(:disabled) { background: color-mix(in srgb, var(--color-text-primary) 12%, var(--color-success)); }
 .c-btn--icon { width: 36px; padding: 0; }
 .c-btn svg { flex: none; }
 
@@ -813,8 +824,8 @@ footer {
 /* ---------------------------------------------------------- forms */
 .c-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .c-label {
-  font-family: var(--font-ui); font-size: 13px; font-weight: var(--weight-medium);
-  color: var(--color-text-primary);
+  font-family: var(--font-ui); font-size: 13px; line-height: 20px; font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);  /* the prototype: secondary, not ink (D124) */
 }
 .c-label .c-req { color: var(--color-danger); margin-left: 2px; }
 .c-label .c-opt { color: var(--color-text-tertiary); font-weight: var(--weight-regular); margin-left: 6px; }
@@ -826,7 +837,7 @@ footer {
   border-radius: var(--radius-sm);
   transition: border-color var(--duration-quick) var(--ease-standard);
 }
-.c-input, .c-select { height: 36px; padding: 0 var(--space-3); }  /* 40 -> 36, 4 Nov 2026 (D110) */
+.c-input, .c-select { height: 40px; padding: 0 var(--space-3); }  /* 40 -> 36 on 4 Nov 2026 (D110); back to 40 on 16 Nov 2026 (D124), as the prototype draws it */
 .c-textarea { min-height: 88px; padding: 10px var(--space-3); line-height: 1.5; resize: vertical; }
 .c-input::placeholder, .c-textarea::placeholder { color: var(--color-text-muted); }
 .c-input:hover, .c-textarea:hover, .c-select:hover,
@@ -835,7 +846,7 @@ footer {
 .c-input:disabled, .c-textarea:disabled, .c-select:disabled {
   opacity: .5; cursor: not-allowed; background: var(--color-surface-sunken);
 }
-.c-hint { font-size: 12px; color: var(--color-text-tertiary); margin: 0; }
+.c-hint { font-size: 13px; line-height: 20px; color: var(--color-text-tertiary); margin: 0; }  /* 13/20, the prototype (D124) */
 .c-err { font-size: 12px; color: var(--color-danger); margin: 0; }
 
 .c-selwrap { position: relative; }
@@ -908,7 +919,7 @@ footer {
 /* ---------------------------------------------------------- badges */
 .c-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--font-ui); font-size: 11.5px; font-weight: var(--weight-medium); line-height: 1.4;
+  font-family: var(--font-ui); font-size: 12px; font-weight: var(--weight-medium); line-height: 16px;
   padding: var(--pad-pill-md); border-radius: var(--radius-pill);
   border: var(--border-hairline) solid;
 }
@@ -1498,7 +1509,7 @@ table.c-table { width: 100%; min-width: 520px; border-collapse: collapse; font-s
 /* ---------------------------------------------------------- segmented control */
 .c-seg {
   display: inline-flex; align-items: center; gap: 2px;
-  padding: 3px;
+  padding: 4px;
   background: var(--color-surface-sunken);
   border: var(--border-hairline) solid var(--color-border);
   border-radius: var(--radius-pill);
@@ -1951,6 +1962,183 @@ footer { padding-top: var(--space-6); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
+
+    /* ---- Twin agent / roleplay card specimens (16 Nov 2026) ---- */
+    .art-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:var(--space-4); }
+    .art-sw { display:flex; flex-direction:column; gap:4px; font-size:13px; line-height:18px; color:var(--color-text-tertiary); }
+    .art-sw b { color:var(--color-text-primary); font-weight:600; font-size:13px; }
+    .art-sw code { font-size:11px; }
+    .art-chip { display:block; height:72px; border-radius:var(--radius-md); border:1px solid var(--color-card-border); }
+    .tc-row { display:flex; flex-wrap:wrap; gap:var(--space-4); align-items:flex-start; }
+    .tc-card { position:relative; display:flex; flex-direction:column; width:var(--tt-size-card-w); min-height:var(--tt-size-card-h); border:1px solid var(--color-card-border); border-radius:var(--radius-lg); background:var(--color-surface); box-shadow:var(--card-shadow); text-align:left; color:inherit; cursor:pointer; transition:box-shadow var(--tt-duration-quick) var(--tt-ease-standard); }
+    .tc-card:hover, .tc-card.is-hover { box-shadow:var(--elevation-2); }
+    .tc-card:focus-visible, .tc-card.is-focus { outline:2px solid var(--color-primary); outline-offset:2px; }
+    .tc-art { position:relative; display:block; min-height:var(--tt-size-card-art); overflow:hidden; border-radius:var(--radius-lg) var(--radius-lg) 0 0; }
+    .tc-art--twin { display:flex; align-items:center; }
+    .tc-art--0 { background:var(--tt-art-0); }
+    .tc-art--1 { background:var(--tt-art-1); }
+    .tc-art--2 { background:var(--tt-art-2); }
+    .tc-art--3 { background:var(--tt-art-3); }
+    .tc-art--4 { background:var(--tt-art-4); }
+    .tc-art--5 { background:var(--tt-art-5); }
+    .tc-art--6 { background:var(--tt-art-6); }
+    .tc-art--7 { background:var(--tt-art-7); }
+    .tc-art--8 { background:var(--tt-art-8); }
+    .tc-art--9 { background:var(--tt-art-9); }
+    .tc-lib { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:var(--space-2); max-width:420px; }
+    .tc-sw { appearance:none; position:relative; height:56px; border:1px solid var(--color-card-border); border-radius:var(--radius-md); cursor:pointer; padding:0; display:flex; align-items:flex-end; justify-content:flex-start; font:inherit; font-size:11px; line-height:16px; font-weight:600; color:var(--tt-on-art); transition:box-shadow var(--tt-duration-quick) var(--tt-ease-standard); }
+    .tc-sw span { padding:0 6px 4px; }
+    .tc-sw:hover { box-shadow:var(--elevation-2); }
+    .tc-sw:focus-visible { outline:2px solid var(--color-primary); outline-offset:2px; }
+    .tc-sw[aria-checked="true"] { outline:2px solid var(--color-primary); outline-offset:2px; }
+    .tc-pick { display:flex; flex-wrap:wrap; gap:var(--space-6); align-items:flex-start; }
+    .tc-pick-side { display:flex; flex-direction:column; gap:var(--space-3); flex:0 1 420px; min-width:260px; }
+    .tc-pick-out { font-size:13px; line-height:20px; color:var(--color-text-tertiary); }
+    .tc-pick-out code { font-size:12px; }
+    .tc-quote { position:relative; z-index:1; flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:var(--space-2); padding:16px 16px 36px; }
+    .tc-art--twin .tc-quote { padding-block:16px; }
+    .tc-who { font-size:12px; line-height:16px; letter-spacing:.06em; text-transform:uppercase; font-weight:500; color:var(--tt-on-art); }
+    .tc-bubble { position:relative; display:flex; align-items:flex-start; gap:8px; padding:12px; border-radius:12px; background:var(--color-surface); color:var(--color-text-tertiary); font-size:13px; line-height:18px; box-shadow:var(--tt-shadow-bubble); transform-style:preserve-3d; transform:perspective(var(--tt-tilt-perspective)) rotateX(calc(var(--rx,0) * 1deg)) rotateY(calc(var(--ry,0) * 1deg)) scale(var(--sc,1)); transition:transform var(--tt-duration-settle) var(--tt-ease-settle), box-shadow var(--tt-duration-settle) var(--tt-ease-settle); will-change:transform; }
+    .tc-bubble::before { content:""; position:absolute; left:10px; right:10px; bottom:-10px; height:16px; border-radius:0 0 var(--radius-md) var(--radius-md); background:color-mix(in srgb, var(--color-surface) 28%, transparent); z-index:-1; }
+    .tc-bubble::after { content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; background:radial-gradient(farthest-corner circle at var(--gx,50%) var(--gy,50%), var(--tt-art-glare-core), var(--tt-art-glare-edge) 35%, transparent 62%); transition:opacity .4s; }
+    .tc-bubble.is-tilting { --sc:var(--tt-tilt-scale); box-shadow:calc(var(--tx,0) * -1px) 12px 22px rgb(30 28 25 / .18), 0 2px 6px rgb(0 0 0 / .08); transition:transform var(--tt-duration-follow) linear, box-shadow var(--tt-duration-follow) linear; }
+    .tc-bubble.is-tilting::after { opacity:1; }
+    .tc-face { flex:none; width:var(--tt-size-avatar-xs); height:var(--tt-size-avatar-xs); border-radius:50%; object-fit:cover; object-position:center 20%; transform:translateZ(14px); }
+    .tc-face--video { width:40px; height:40px; background:var(--color-fill-soft); object-position:center 22%; }
+    .tc-qtext { display:flex; flex-direction:column; min-width:0; transform:translateZ(6px); }
+    .tc-qname { color:var(--color-text-primary); font-weight:600; }
+    .tc-body { display:flex; flex-direction:column; gap:8px; padding:14px 16px 0; }
+    .tc-title { font-size:15px; line-height:22px; font-weight:600; letter-spacing:-.015em; color:var(--color-text-primary); }
+    .tc-copy { font-size:13px; line-height:20px; color:var(--color-text-tertiary); }
+    .tc-foot { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:auto; padding:16px; }
+    .tc-stack { display:flex; align-items:center; }
+    .tc-av { display:block; width:var(--tt-size-avatar-sm); height:var(--tt-size-avatar-sm); flex:none; margin-left:-8px; border:2px solid var(--color-surface); border-radius:999px; background:var(--color-fill-soft); object-fit:cover; }
+    .tc-av:first-child { margin-left:0; }
+    .tc-av--more { display:grid; place-items:center; background:var(--color-fill-soft-hover); color:var(--color-text-secondary); font-size:11px; font-weight:500; }
+    .tc-more { display:grid; place-items:center; width:var(--tt-size-avatar-md); height:var(--tt-size-avatar-md); border:0; border-radius:999px; background:transparent; color:var(--color-text-secondary); cursor:pointer; }
+    .tc-more:hover { background:var(--color-fill-soft); }
+    .tc-more svg { width:16px; height:16px; }
+    .tc-menu { position:absolute; right:12px; bottom:56px; z-index:2; width:180px; padding:8px; border-radius:8px; background:var(--color-surface); box-shadow:var(--elevation-2); }
+    .tc-menu div { height:32px; display:flex; align-items:center; padding:0 8px; border-radius:4px; font-size:13px; line-height:20px; color:var(--color-text-primary); }
+    .tc-menu div:first-child { background:var(--color-fill-soft); }
+    .tc-all { display:flex; align-items:center; gap:20px; width:100%; max-width:896px; padding:20px; border:1px solid var(--color-card-border); border-radius:var(--radius-lg); background:var(--color-surface); box-shadow:var(--card-shadow); cursor:pointer; transition:border-color var(--tt-duration-quick) var(--tt-ease-standard); }
+    .tc-all:hover, .tc-all.is-hover { border-color:var(--color-border-interactive); }
+    .tc-all-photo { flex:none; width:var(--tt-size-photo); height:var(--tt-size-photo); border-radius:var(--radius-lg); object-fit:cover; object-position:center 18%; background:var(--color-fill-soft); }
+    .tc-all-body { flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:8px; }
+    .tc-all-name { margin:0; font-size:18px; line-height:24px; font-weight:600; color:var(--color-text-primary); }
+    .tc-all-meta { margin:0; display:flex; align-items:center; gap:4px; font-size:15px; line-height:20px; color:var(--color-text-secondary); }
+    .tc-all .tc-more { background:var(--color-fill-soft); }
+    @media (prefers-reduced-motion: reduce) { .tc-bubble, .tc-bubble.is-tilting { transition:none; } }
+/* tt:generated:start — written by scripts/sync-tokens.mjs from src/styles/tokens.css (b6d027fd).
+   Every --tt-* token this page does not define by hand. Do not edit. */
+:root {
+  --tt-weight-regular: 400;
+  --tt-weight-medium: 500;
+  --tt-weight-semibold: 600;
+  --tt-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --tt-pad-pill-sm: 2px 8px;
+  --tt-pad-pill-md: 4px 12px;
+  --tt-pad-pill-lg: 6px 16px;
+  --tt-border-form: 0.5px;
+  --tt-border-thin: 1px;
+  --tt-border-focus: 2px;
+  --tt-container-prose: 65ch;
+  --tt-container-sm: 640px;
+  --tt-container-md: 900px;
+  --tt-container-lg: 1200px;
+  --tt-container-xl: 1440px;
+  --tt-z-base: 0;
+  --tt-z-raised: 10;
+  --tt-z-sticky: 20;
+  --tt-z-dropdown: 30;
+  --tt-z-overlay: 40;
+  --tt-z-modal: 50;
+  --tt-z-toast: 60;
+  --tt-z-tooltip: 70;
+  --tt-icon-xs: 12px;
+  --tt-icon-sm: 16px;
+  --tt-icon-md: 20px;
+  --tt-icon-lg: 24px;
+  --tt-target-min: 24px;
+  --tt-duration-instant: 80ms;
+  --tt-duration-quick: 140ms;
+  --tt-duration-base: 200ms;
+  --tt-duration-slow: 320ms;
+  --tt-duration-deliberate: 480ms;
+  --tt-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --tt-ease-enter: cubic-bezier(0, 0, 0, 1);
+  --tt-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --tt-duration-follow: 90ms;
+  --tt-duration-settle: 600ms;
+  --tt-ease-settle: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --tt-tilt-max: 9deg;
+  --tt-tilt-scale: 1.04;
+  --tt-tilt-perspective: 700px;
+  --tt-tilt-reduced: 0.3;
+  --tt-size-avatar-xs: 24px;
+  --tt-size-avatar-sm: 28px;
+  --tt-size-avatar-md: 32px;
+  --tt-size-avatar-lg: 44px;
+  --tt-size-avatar-xl: 64px;
+  --tt-size-photo: 76px;
+  --tt-size-card-w: 288px;
+  --tt-size-card-h: 338px;
+  --tt-size-card-art: 168px;
+  --tt-art-0: linear-gradient(135deg, #A8C6EC 0%, #D2C3E8 50%, #F1C6D7 100%);
+  --tt-art-1: linear-gradient(135deg, #A8E0C9 0%, #BFE0E8 50%, #C7CDF2 100%);
+  --tt-art-2: linear-gradient(135deg, #F3CFA0 0%, #F0BCC7 50%, #DDB8EA 100%);
+  --tt-art-3: linear-gradient(135deg, #CBE3A8 0%, #BFE6CF 50%, #A8E0E0 100%);
+  --tt-art-4: linear-gradient(135deg, #F6D9A0 0%, #F2C2B0 50%, #ECB6CC 100%);
+  --tt-art-5: linear-gradient(135deg, #B8CDF0 0%, #C8C4EC 50%, #E0C0E8 100%);
+  --tt-art-6: linear-gradient(135deg, #F0E3A0 0%, #ECD0B0 50%, #E8BCC4 100%);
+  --tt-art-7: linear-gradient(135deg, #A0E4E0 0%, #B8D4EC 50%, #CCC8F0 100%);
+  --tt-art-8: linear-gradient(135deg, #F0C8A8 0%, #EEC0D0 50%, #D8BCE8 100%);
+  --tt-art-9: linear-gradient(135deg, #BCEAD0 0%, #C4E0E4 50%, #D4D0F0 100%);
+  --tt-on-art: rgb(28 27 27 / 0.72);
+  --tt-shadow-bubble: 0 2px 8px rgb(0 0 0 / 0.08);
+  --tt-art-glare-core: rgb(255 90 0 / 0.10);
+  --tt-art-glare-edge: rgb(255 90 0 / 0.04);
+  --tt-scrim: rgb(11 10 9 / 0.55);
+  --tt-shadow-dialog: 0 4px 8px rgb(30 28 25 / 0.2);
+  --tt-shadow-toast: 0 8px 24px rgb(30 28 25 / 0.12), 0 2px 6px rgb(30 28 25 / 0.06);
+  --tt-shadow-list: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055);
+  --tt-shadow-node: 0 2px 4px rgb(30 28 25 / 0.0525), 0 8px 20px rgb(30 28 25 / 0.0825);
+  --tt-weight-body: var(--tt-weight-regular);
+  --tt-weight-title: var(--tt-weight-semibold);
+  --tt-weight-label: var(--tt-weight-medium);
+  --tt-weight-cta: var(--tt-weight-semibold);
+  --tt-elevation-1: 0 1px 2px rgba(30, 28, 25, .06);
+  --tt-elevation-2: 0 2px 4px rgb(30 28 25 / 0.07), 0 8px 20px rgb(30 28 25 / 0.11);
+  --tt-elevation-3: 0 4px 8px rgb(30 28 25 / 0.09), 0 16px 40px rgb(30 28 25 / 0.16);
+  --tt-card-shadow: 0 1px 2px rgba(30, 28, 25, .04);
+  --tt-shadow-secondary: 0 0 1px rgba(0, 0, 0, .4), 0 1px 1px rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .04);
+  --tt-ink-faint: rgb(30 28 25 / 0.06);
+  --tt-ink-soft: rgb(30 28 25 / 0.12);
+  --tt-ink-strong: rgb(30 28 25 / 0.20);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tt-elevation-1: 0 0 0 1px rgb(253 251 247 / 0.05);
+    --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
+    --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
+    --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
+    --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+    --tt-ink-faint: rgb(253 251 247 / 0.06);
+    --tt-ink-soft: rgb(253 251 247 / 0.12);
+    --tt-ink-strong: rgb(253 251 247 / 0.20);
+  }
+}
+:root[data-theme="dark"] {
+  --tt-elevation-1: 0 0 0 1px rgb(253 251 247 / 0.05);
+  --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
+  --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
+  --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
+  --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+  --tt-ink-faint: rgb(253 251 247 / 0.06);
+  --tt-ink-soft: rgb(253 251 247 / 0.12);
+  --tt-ink-strong: rgb(253 251 247 / 0.20);
+}
+/* tt:generated:end */
 </style>
 
 <header class="topbar">
@@ -2021,168 +2209,220 @@ footer { padding-top: var(--space-6); }
         <h2>What's locked</h2>
         <p>These came out of the brief and are treated as fixed. Everything downstream derives from them, so changing one of these is a system-level change, not a tweak.</p>
       </div>
+      <div class="c-seg dec-tabs" role="tablist" aria-label="Decision status">
+        <button type="button" role="tab" aria-selected="true" data-dec-tab="locked">Locked <span class="c-segbadge">49</span></button>
+        <button type="button" role="tab" aria-selected="false" data-dec-tab="reversed">Reversed <span class="c-segbadge">4</span></button>
+      </div>
       <div class="status">
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>The rail follows the prototype exactly: 214px wide, an orange dot instead of a count, 17 Nov 2026</b> Bhuvan: "Prototype nav rail is final." Measured against the live prototype, the Storybook <code>NavRail</code> was wrong in several places and D120 had recorded two of them wrongly. <b>Width:</b> 214px (72 collapsed), not 248: the prototype's last <code>.rail</code> rule wins; 248 was an earlier rule. <b>Count:</b> a plain 8px orange dot at the end of the row, no number (<code>.nav-badge</code>); collapsed, the dot sits on the icon's corner with a 2px ring in the rail colour. The orange count pill of D120 is retired, <code>NavItem</code> takes <code>alert</code> instead of <code>count</code>. <b>Brand row:</b> a 20px orange mark with a 16px wordmark (600, -0.02em, 6px gap) as the button that collapses the rail, and a 32px theme switch (<code>RailAction</code>); collapsed, the row stacks and the mark swaps to an expand icon on hover. <b>Items:</b> 32px tall, 20px icons, 8px between items, a quiet <code>meta</code> value at the end of a row (13/18 secondary, e.g. minutes left). Group labels sit 12px below the previous item, 4px from the top. Collapsed items are 40px squares and a group label becomes a 1px divider. <b>Foot:</b> the items (Usage, Billing, Support, Settings) sit above the user card: photo 32, name 14/20 medium, 1px card border, radius 12, two soft shadows (<code>footerNav</code> and <code>footer</code>). Measured equal to the live prototype: rail 214, brand 32, item 32, icon 20, user card 50.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Every component was checked side by side against the prototype; 20 differences fixed: 16 Nov 2026</b> Bhuvan: check all components against the prototype. A harness (<code>npm run compare:prototype</code>, <code>scripts/compare-prototype/</code>) puts the prototype's own markup, with its real classes, into the live page, reads the computed styles, reads the matching story, and diffs them in light and dark: 45 cases. <b>Fixed to match the prototype:</b> every button now shows a pointer (Tailwind v4 resets it to default); icons in secondary and ghost buttons use the secondary ink; <b>Badge</b> is 12px with 4/12 padding and the neutral fill is <code>--tt-fill-soft</code> (default size is now md); <b>Input, Select, MultiSelect, DateField are 40px, not 36</b> (reverses D110 for inputs; buttons stay 36), labels are secondary ink at 13/20 and hints 13/20; <b>SegmentedControl</b> is padding 4, no border, buttons 6/16 at 14/20; <b>Toast, Modal, SidePanel, ConfirmDialog</b>: the dialog gradient and tile are exact, the title tracks -0.025em, the close is a ghost icon Button; the <b>side panel is 480 wide with square edges</b> (not 560 with 24px corners), header 20/24, title 17/24; <b>GateCard</b> is radius 16, a 1px border, no shadow, centred, with a gradient hero band (not radius 24 with a shadow); <b>AddCard</b> is radius 16 with a field-coloured dashed border and a primary-ink 14/24 label; <b>NumberTile</b> gets the 1px inset ring and 32/1.1 value (the real <code>.tm-metric</code>), <b>SummaryCard</b> is radius 16 with elevation-1 (the real <code>.tm-rating</code>); <b>AttentionChip</b> padding is 16; <b>Stepper</b> steps are 24 tall, 8 gap; <b>Calendar</b>: title 500, weekday row 28 tall in secondary ink, disabled days tertiary, prev-month 35%, a 1px border, 2px grid gaps; <b>Link</b> is 500; <b>ProgressBar</b> track is <code>--tt-fill-soft</code>, fill ink; <b>RadioCard</b> is radius 16 with the prototype's selected border; dark: the nav item label and icon are ink, not orange, when active, the transcript well and lines use sunken and raised, the tab bar shadow stays warm-dark. <b>A real bug found:</b> <code>tokens.css</code> sets <code>b, strong { font-weight: medium }</code> unlayered, which beat the <code>font-title</code> utility, so every <code>&lt;b&gt;</code> I used (voice row names, activity amounts, flow edit titles) rendered 500, not 600; they are spans now. <b>Not comparable, by design:</b> Tooltip (the prototype's is a light chart tip, the system's is inverted), Tabs (the prototype uses the segmented control), Waveform (the prototype's mic wave is 4 bars at 14px), Table, Pagination, Alert, Spinner, EmptyState (dashed) have no prototype counterpart to diff.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Components carry no product copy: words are props, stories use generic copy: 16 Nov 2026</b> Bhuvan: the components were built from prototype copy, but a component should be generic (a Button says &ldquo;Button&rdquo;, not &ldquo;Save&rdquo; or &ldquo;Cancel&rdquo;). <b>Rule:</b> a component holds no product copy. Its words come from props; where a word is functional chrome a screen reader needs (<code>Close</code>, <code>Dismiss</code>, <code>Previous</code>, <code>Cancel</code>) it has a plain-English default that is also a prop, so it can be translated. <b>Stories:</b> every foundation component's playground and variant stories use neutral words (&ldquo;Button&rdquo;, &ldquo;Label&rdquo;, &ldquo;Title&rdquo;, &ldquo;Item one&rdquo;, &ldquo;Helper text&rdquo;). Product pattern stories (AgentCard, Cards, FlowNode, VoiceRows, ListTable, Usage, ChatBubble, Metrics) keep realistic prototype copy and say so: it is example copy, not a default. <b>Changed in code:</b> <code>Toast</code> titles are neutral by default (<code>titles</code> prop; <code>PROTOTYPE_TOAST_TITLES</code> holds the prototype's) and inferring the kind from the message is off by default (<code>inferKind</code>); <code>Calendar</code>'s footer reason is a neutral default (<code>disabledReason</code>) and it takes <code>locale</code> and <code>labels</code>; <code>Modal</code>, <code>SidePanel</code> and <code>Alert</code> take <code>closeLabel</code> / <code>dismissLabel</code>; <code>Pagination</code> takes <code>labels</code>. <b>Copy consistency</b> (voice, error wording, tone) is a writing guideline, &sect;10 Writing, not something a component pre-writes. Not done: a few aria strings in product patterns (<code>AgentCard</code> &ldquo;Actions for&rdquo;, <code>LearnerStack</code>).</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Buttons are the V3 prototype's: secondary is white, not grey; success added; disabled is flat: 16 Nov 2026</b> Bhuvan, looking at the Storybook setup card: <i>&ldquo;I didn&rsquo;t design this button in foundations or the prototype. Use buttons from the prototype.&rdquo;</i> The grey secondary came from an earlier Figma read and was never what the prototype draws. Aligned to the prototype's <code>.btn</code>: <b>secondary</b> is white (<code>--tt-surface</code>) with <code>--tt-shadow-secondary</code>, hover mixes 3% ink, press scales to 98%; <b>ghost</b> has ink text and a <code>--tt-fill-soft</code> hover; <b>danger</b> uses the soft <code>--tt-danger-border</code>; a <b>success</b> variant is added (green fill); <b>disabled</b> is a flat <code>--tt-fill-soft</code> with a muted label and a not-allowed cursor instead of 45% opacity; <b>md</b> padding is 16, not 20. Prototype <code>btn--primary</code> and <code>btn--strong</code> both render orange, so both map to <code>primary</code>; the dark <code>strong</code> stays for the marketing site only (open: retire it?). Applied to <code>Button.tsx</code>, its stories and this page's button demos.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>The remaining prototype patterns are copied into components; the Inbox page is removed from the prototype: 16 Nov 2026</b> Bhuvan: copy the no-spec patterns from the prototype and change them later if needed; skip the Inbox, and remove it from the prototype too. <b>Built from the prototype's own CSS</b> (no spec behind them, so expect changes): <code>FlowNode</code> (with <code>FlowSource</code>, <code>FlowStartNode</code>, <code>FlowEditRow</code>), <code>VoiceRow</code> and <code>VoiceListRow</code>, <code>ListTable</code> with <code>ListRow</code>, <code>LearnerRow</code> and <code>UsageMeter</code>, <code>UsageCard</code> and <code>ActivityRow</code>, and <code>ChatBubble</code> (message, transcript and call variants) with <code>ChatThread</code>. <code>Avatar</code> gained a <code>tone</code> prop for the prototype's five tinted learner avatars (neutral stays the default). Two tokens added from the prototype, <code>--tt-shadow-list</code> and <code>--tt-shadow-node</code>. <b>Inbox:</b> the Inbox <i>page</i> in the V3 prototype was already unreachable (no rail item, nothing navigated to it), so it is removed with its dead helpers, actions, state and CSS. Twin's brain (Questions and Issues tabs) shares the question and issue data and cards, so those stay. No Inbox component is built.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Prototype is final for Toast, Modal, the switch fill and the rail; the ring hole follows the spec: 16 Nov 2026</b> Bhuvan walked through the five places the spec and the V3 prototype disagreed. <b>Toast:</b> the prototype's. A card tinted by kind, a 36px coloured disc, a timer bar, one at a time, 4.5s (6.5s for error and warning), shadow <code>--tt-shadow-toast</code>; the message decides the kind. <b>Modal:</b> the prototype's. Every popup shares the confirm dialog's surface: a grey-to-white gradient, a 4px white border, radius 24, one drop shadow <code>--tt-shadow-dialog</code>, the icon in a framed tile (the earlier 16px Modal radius is retired). <b>Switch fill:</b> brand orange when on (<code>--tt-primary</code>), off <code>--tt-border</code>, thumb always the surface: the one place a state is orange; a checked Checkbox, a selected tile and a selected segment stay neutral. <b>Nav rail:</b> the prototype's (width and count corrected by D125: 214px, an orange dot). <b>Ring hole:</b> the spec's, final: a 25px hole <i>radius</i> on the 64px ring (the CSS <code>radial-gradient(circle, transparent 25px, …)</code>), 5px on the 18px top-bar ring. Two tokens added, <code>--tt-shadow-dialog</code> and <code>--tt-shadow-toast</code>.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>A switch's hint sits behind an info icon with a tooltip; the tooltip is never the only copy: 16 Nov 2026</b> Bhuvan, looking at the Switch story: the hint under the label should be an info icon that shows the hint as a tooltip on hover. Built as <code>InfoHint</code> (Tooltip.tsx): the icon is a real button, so keyboard focus shows the tooltip too, and the same text is rendered once for assistive tech and linked with <code>aria-describedby</code>, so the tooltip is never the only copy of something required (§8 Tooltip rule). Switch defaults to <code>hintStyle="tooltip"</code>; Checkbox defaults to inline and offers the same. Same pass: the batch of Toast, Modal / ConfirmDialog / SidePanel, Menu and Tooltip, and a fix so a MultiSelect field never widens as chips are added (they wrap and grow it down; story wrappers were shrink-to-fit).</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Tokens are generated, not copied; the card's literals became tokens: 16 Nov 2026</b> Bhuvan asked for the whole system to be scalable and shareable with Storybook. The audit found the token block copied into four places with no generator, and about a dozen values used everywhere as literals. <code>src/styles/tokens.css</code> stays the one source; <code>npm run tokens:sync</code> now regenerates <code>design-system/tokens.json</code>, the &sect;4 block and fingerprint in the MD, the fingerprint in DECISIONS, and a generated block in this page; <code>npm run tokens:check</code> fails on any drift and on the two dark blocks disagreeing. New families, all already in the product as literals: <code>--tt-art-0..9</code> (card gradients, same in dark), <code>--tt-on-art</code>, <code>--tt-shadow-bubble</code>, <code>--tt-art-glare-*</code>, <code>--tt-size-avatar-xs..xl</code> (24/28/32/44/64), <code>--tt-size-photo</code>, <code>--tt-size-card-w/h/art</code>, <code>--tt-duration-follow/settle</code>, <code>--tt-ease-settle</code>, <code>--tt-tilt-*</code>, theme-aware <code>--tt-ink-faint/soft/strong</code> and <code>--tt-scrim</code>, with Tailwind aliases (<code>bg-art-N</code>, <code>shadow-bubble</code>, <code>bg-tint-*</code>, <code>bg-scrim</code>). The card specimens on this page now read them. Tilt, glare and the 16/12 radii are no longer hard-coded.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>The twin agent card and the roleplay card are one shell, specced live: 16 Nov 2026</b> Bhuvan: these two cards are used specifically for twin agents and roleplay cases, and asked for the card's layout, type, interactions and motion from the deployed page. Read from the V3 build (the Vercel beta runs the same card CSS) and rebuilt as live specimens in §08 (rest, hover, focus, menu open, the wide “Twin for all use cases” card), with tables for layout and type, states and motion. 288 × 338, radius 16, a 168px pastel-gradient picture holding a white quote bubble that tilts toward the pointer (±9°, 1.04, orange glare, 90ms tracking, 600ms release, reduced-motion aware), 15/22 600 title, 13/20 tertiary copy, a learner stack and a ⋮ menu. Twin agent differs only in a 40px looping video face; roleplay adds a client eyebrow and name.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Usage, Billing, Twin users, the learner page, Activity log and Support, folded in: 16 Nov 2026</b> Bhuvan’s round-2 hand-off (<code>PROTOTYPE-V3-DECISIONS-ROUND-2.md</code>, from the V3 prototype at <code>app.js?v=1182</code>, <code>app.css?v=1154</code>). <b>The values are the hand-off’s; this pass did not re-measure the build.</b> Everything the hand-off did not flag is in §8 as a component or screen row. Every flagged item (&#9873;1 to &#9873;12, plus the radius-10 tile and the icon stroke found on the way) is recorded as <b>Open</b> and nothing in it is a rule yet. Round 2 &#9873;13, the prototype-only behaviour and sample data, is a rule: Add credits adds 30 minutes in memory; the CSV exports the filtered list; every session, invoice, learner, credit amount and name is made-up sample data (Plan $300.00 / month renewing 11 Dec 2026, a 100-credit pack for $25.00, 7 Twin users with 60 min each, 9 Usage learners, 8 Activity log entries). Mark all of it as placeholder in any spec.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Lists in a card get a label bar, and a row that opens something is clickable</b> The labelled table (label bar on <code>--color-surface-sunken</code>, radius on the top corners only, rows 14 × 20) is how Usage, Twin users, the Persona list and the learner Sessions read. A clickable row has a hover surface, a 2px primary focus ring at −2px and Enter / Space; at ≤720 only the first and last column stay. The shadow it carries is Open (Round 2 &#9873;1).</p>
+        </div>
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>A page header can carry one secondary tool button</b> Usage (Activity log) and Billing (Support) put one secondary md button top-right, level with the title, instead of a divider. It never competes with the page’s one orange action. Icons on these pages are Tabler outline: 14 in a tag, 16 in a button, 20 in a nav item or tile.</p>
+        </div>
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Page-level cards and tables are radius 16; what sits inside them is 12: 6 Nov 2026.</b> Bhuvan asked which radius a twin detail card used and whether it was applied consistently. Measured across every V3 page: cards, tables and the card grids were mostly 16, while the twin detail, Profile, Settings and the Sessions / Calibrations summary cards were 12, so the same kind of box changed radius between pages. <b>Rule:</b> a card or table that stands on the page is <code>--radius-lg</code> (16); a tile, row, stat or chat bubble inside a card is <code>--radius-md</code> (12); controls stay 8; the setup card and auth modal stay 24. <b>Changed:</b> <code>Card</code> and <code>TableCard</code> are now <code>rounded-lg</code>; the V3 twin detail, Profile, Settings, Sessions and Calibrations summary cards moved to 16. The grey number tiles on Sessions and Calibrations stay 12 (D92). Resolves the open &ldquo;card and table radius 16 vs 12&rdquo; item. No token changed; <code>md</code> is still 12 and <code>lg</code> still 16.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The components now follow D107</b> <code>Button.tsx</code> defaults to <code>primary</code>; its comments and Storybook stories were rewritten around “one orange per view”. The two marketing CTAs that need black (EarlyAccessSteps, InviteForm) pass <code>variant="strong"</code> explicitly, so nothing changes on the marketing site. Row and card actions that had relied on the old default (the Card story's Open source, the neighbour card's Select, the checklist rows) are <code>secondary</code>. <code>Pagination</code> was already <code>secondary</code>. Until now the docs said orange and the code said black.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The full-page setup card has four widths and one anatomy</b> Radius <code>--tt-radius-xl</code> (24), padding 32, no border, <code>--tt-elevation-2</code>, centred under the page title and stepper. Width follows the content: <b>480</b> for a form or a choice (Build my twin, Add your voice, Voice library, Record), <b>600</b> for the “What we found about you” card beside the video, <b>640</b> for a result (Twin is ready), <b>680</b> for a list (Here's what we found). Replaces the earlier single 640 / 700. <code>Card</code> gains <code>variant="setup"</code>, the first V3 surface built as a component, and it is the one card that pads itself and has no border.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The sign-in flow, Build my twin to Twin ready, folded in: 5 Nov 2026</b> Bhuvan: “Double check all the components in this whole flow and update the design system and components.” The V3 build was walked live at 1024×768: eleven in-app screens, then the sign-in flow (Your link, Here's what we found, Add your voice, Voice library, Record, Recorded, the live call with “What we found about you”, the Add knowledge dialog, Twin ready). Every button, field, card and colour was read from computed styles. <b>Result:</b> 40 distinct colour uses, 33 resolve exactly to a token and 7 are alpha blends or a UA default; every filled button is the orange primary at <code>md</code> 36 or <code>sm</code> 32 (D107, D109); cards match §8 except the radius-16 rows already open; <b>fields in the build are still 40px</b> where the system says 36 (D110), recorded as Open. New surfaces are in the “Sign-in flow, measured” table (§8). The build's class <code>btn--strong</code> is the orange primary, a naming drift and not the black variant.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="reversed">
           <span class="status-tag st-reversed">Reversed</span>
           <p><b>Buttons and fields are 36px, 4 Nov 2026 (D109, D110).</b> Bhuvan: <em>&ldquo;md button height should be 36px&rdquo;</em>, then <em>&ldquo;Both to 36&rdquo;</em>. The <code>md</code> button, <code>Input</code>, <code>Select</code>, the dropdown trigger and the multi-select resting height all drop from 40px to 36px, so a field and a button on one row line up. <code>sm</code> stays 32 and <code>lg</code> 50; the 48px auth-modal fields (D43) are unchanged. The components were changed too: <code>Button.tsx</code>, <code>Input.tsx</code>, <code>Select.tsx</code>, <code>MultiSelect.tsx</code>.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="reversed">
           <span class="status-tag st-reversed">Reversed</span>
           <p><b>The default button is the orange primary again, 4 Nov 2026 (D107).</b> Bhuvan: <em>&ldquo;Orange everywhere.&rdquo;</em> Reverses the 29 Sep allowlist (D04, D45): a button with no variant is brand orange, <b>one per view or dialog</b>: Create new, Continue, Save and Assign, Send by email, Create and publish, Done, as the V3 build already ships it. <b>Unchanged:</b> orange is still not selection or state (selected rows, checked checkboxes, the calendar day, avatars, count pills, chat tints); a row or card action is a small <code>secondary</code>; destructive stays outlined. <b>Cost:</b> white on orange is 3.13:1 at 13&ndash;14px (D01), now on every view instead of three buttons per flow. The dark <code>strong</code> variant stays defined; its role and marketing CTAs are Open. Also: the page-header &ldquo;Create new&rdquo; label is weight 500 and stays 500 (D108) the one named exception to &ldquo;CTA labels are 600&rdquo;. Docs only: <code>Button.tsx</code> and the tokens are not changed.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>V3 measured specification folded in, 4 Nov 2026, second pass.</b> <code>ONBOARDING-V3-DESIGN-SPEC.md</code> (59 captures, ~4,200 computed-style measurements; images in <code>design-system/onboarding-v3-reference/</code>) compared with this document and with the first pass. <b>Added:</b> the desktop and phone shell, a third page pattern (the 896px library page), a measured component table with a Matches / New / Differs / Conflicts verdict per row, the page recipe, a screen index, and the states / defaults rules. <b>Corrected from the first pass:</b> overline tracking is <code>.09em</code> (not <code>.06em</code>); sessions-table headers are <code>surface-sunken</code> like the system Table, so only the Assign list&rsquo;s header is <code>fill-soft</code>; and the neutral-letter-avatar line in D101 is withdrawn, the two source documents disagree, so avatar colour is Open. <b>Not applied as rules:</b> the V3 build&rsquo;s orange-everywhere experiment, orange selection states (chip ring, switch, inbox selection, nav count), 16px card and table radius, and its dialog and toast surfaces, each contradicts a locked decision and sits in &sect;10. Still hand-synced into the MD files; <code>tokens.css</code> untouched.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Onboarding V3 (&ldquo;Twin-enabled&rdquo;) round folded in, 4 Nov 2026.</b> Product&rsquo;s hand-off list (<code>ONBOARDING-V3-DECISIONS-FOR-FOUNDATIONS.md</code>) walked against this document item by item. <b>Applied:</b> the 16 / 12 / 4 gap rules, metric &middot; amount &middot; emphasis type, the custom select chevron and filter dropdown, the full calendar spec (288px, Sunday-first, &ldquo;30 days&rdquo; default, past days disabled), letter avatars and the green &ldquo;Responded&rdquo; badge, the table title row, rings, a <b>214px rail</b> (was 248), &ldquo;Roleplay&rdquo; as one word, and five new components specced in &sect;08, summary card, number tile, attention chip, side panel, respond / assign dialogs. <b>Not applied as rules:</b> the six items product marked &#9873; CHECK, plus off-scale values and contradictions found while folding in, all listed as Open in &sect;10. No token changed (<code>tokens.css</code> fingerprint <code>28be37a9</code> is unchanged). One bug fixed on the way: the <code>.c-avatar</code> demo was still brand-ink, contradicting the locked neutral-avatar decision and the real <code>Avatar.tsx</code>.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Full re-sweep of the onboarding prototype, 2 Oct 2026.</b> Bhuvan: <em>&ldquo;Take all the decisions so far and update in md file and the design system html&hellip; check all the pages and changes in cards, btn, shadows, bg, typo, spacing, buttons types, etc.&rdquo;</em> Walked every reachable screen (Find you, Knowledge grid, Voice/avatar step, Home/Analytics/Role play gates, Settings, the sign-up modal) in both themes, inspecting computed styles rather than screenshots. Two real findings: the <code>secondary</code>-button shadow's light-theme value was a never-measured guess from 30 Sep (that prototype session was dark-only) now corrected to the actual three-layer recipe, confirmed on four separate buttons across three screens (below, Button). And two new selectable-state patterns not seen before, a radio-card and an image-tile, both using a colour or inset-shadow change instead of a border-width change, so a selection never reflows its neighbours (below, Components). Everything else checked, badges, overline colour, the knowledge-grid checkbox, dark-mode canvas, page-title size, matched what this document already specs; no change needed there.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Six decisions collected from a running onboarding prototype, 30 Sep 2026.</b> Bhuvan: <em>&ldquo;Collect all the decisions we made in this onboarding flow, building UI, spacing, colours, fonts, and all, and update our design system.&rdquo;</em> Inspected live (computed styles, not screenshots): <code>secondary</code> buttons get a shadow, the radius scale gains a 24px <code>xl</code> step, checked checkboxes were reviewed and <b>kept</b> dark-neutral (the prototype used orange; not adopted), a real dark-mode bug was found and fixed (below), and the per-page header pattern was confirmed. Full detail in each relevant section; decision record in the design-system MD.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Dark-mode <code>--tt-fill-soft</code> was silently missing, found and fixed 30 Sep 2026.</b> It existed in the SYSTEM-dark block (<code>@media prefers-color-scheme: dark</code>) but was never copied into the EXPLICIT <code>[data-theme="dark"]</code> block, so any visitor with an explicit dark toggle, not a dark OS, fell through to the light value, and the real <code>secondary</code> Button rendered light-grey on near-black in production dark mode. Found by checking a live dark Storybook against the onboarding prototype's (correctly dark) secondary-button colour. This document's own tokens were never affected, both blocks here already carried <code>#2B2B2B</code>.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Active nav's icon and label were never part of the orange allowlist, corrected 30 Sep 2026.</b> While reconciling the prototype's orange active-nav text against this document's own, older, Figma-measured spec (below: fill neutral, icon <code>--color-primary</code>, label <code>--color-primary-ink</code>), a genuine contradiction turned up: an earlier pass elsewhere in the MD had over-broadened the 29 Sep orange-allowlist rule to exclude active nav <em>entirely</em>, when only its FILL was ever meant to stay neutral. Fixed in five places in the MD (and in the trainertwin-product-design skill). This document's own spec, below, was correct the whole time and did not need to change.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>One loader, one states demo, 29 Sep 2026.</b> This document carried <em>two</em> near-identical button-states rows: one using a generic 14px circular spinner, one using the real brand-mark grid. Bhuvan picked the brand grid and asked for them merged, done, and <code>.c-spin</code> with its <code>c-rot</code> keyframe was <b>deleted</b> rather than left as dead CSS for someone to copy. The surviving row keeps the SVG plus icon rather than a <code>+</code> character, because a text glyph sits on the font&rsquo;s baseline instead of the icon&rsquo;s optical centre and renders at the label&rsquo;s weight rather than the icon stroke. <b>A bug surfaced in the merge:</b> <code>.c-btn--loading</code> at specificity 0,1,0 was being outranked by <code>.c-btn:disabled</code> at 0,1,1, so a loading button rendered at 45%, pixel-identical to true disabled, which is exactly what the note beneath the demo promises never happens. It came from the 25 Sep loader work in this file; the React Button had already been fixed for the identical trap and this mirror kept it. Now <code>.c-btn--loading:disabled</code>, which wins at 0,2,1.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="reversed">
           <span class="status-tag st-reversed">Reversed</span>
           <p><b>Titles are semibold again, 29 Sep 2026.</b> Bhuvan, from a built screen: <em>&ldquo;use tt weight semibold 600 for table, card, section titles, user name in the table. Current one look very flat.&rdquo;</em> The 25 Sep pass moved titles 600&nbsp;&rarr;&nbsp;500 to fix &ldquo;too much font weight&rdquo;, and overshot the other way: with titles, labels, badges and inline emphasis <b>all</b> sitting at 500, a card or table had no weight contrast between its heading and its own content. <code>--weight-title</code> now points at semibold. Deliberately narrow, labels stay 500 and <code>b</code>/<code>strong</code> stay 500, so the original heavy-bold complaint is not re-created; what comes back is one step between title and label, which is exactly what 25 Sep removed. Found while doing it: this document&rsquo;s own type scale already <em>claimed</em> &ldquo;Figtree 600&rdquo; for <code>product/title-l/m/s</code> while rendering its samples at 500, the spec and its own demo disagreed, and the spec was right.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Two utilities for the same property must never both be emitted, 29 Sep 2026.</b> Icon-only buttons in the React library shipped their glyph <b>squashed to 6&times;16px</b>. <code>iconSizes</code> set <code>px-0</code>, <code>sizes</code> set <code>px-3</code>, and both landed on the element; single-class Tailwind utilities tie on specificity, so the generated source order picked the winner, <code>px-3</code>. That left a 32px button with an 8px content box, and because an inline SVG defaults to <code>flex-shrink: 1</code> the icon was compressed rather than overflowing, which is why it read as &ldquo;small&rdquo; instead of &ldquo;broken&rdquo;. Padding now lives in its own map and exactly one of padding/width is emitted. <b>The CSS in this document was never affected</b>: <code>.c-btn--icon.c-btn--sm</code> is a two-class selector and outranks <code>.c-btn--sm</code>, so the spec and the component had quietly diverged, with the spec correct. The same trap was already written up here for the disabled/loading opacity; it had simply never been applied to the size maps.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="reversed">
           <span class="status-tag st-reversed">Reversed</span>
           <p><b>The radius scale starts at 4px again, 29 Sep 2026.</b> The 4px step was retired 9 Sep 2026 on the rule &ldquo;8px is the floor across the system&rdquo;, which left <code>xs</code> a dead alias of <code>sm</code> and the scale effectively 8/12/16. The cost landed on the smallest controls: an 18px checkbox at 8px radius rounds 44% of its own half-width and reads as a lozenge rather than a square with softened corners. A radius has to step <em>with</em> the element, and there was no step below 8 for an 18px control to take. The scale is <b>4 / 8 / 12 / 16 / pill</b>, and 4 is reserved for controls at or under ~20px. Repointing <code>xs</code> carried the source chip, the table&rsquo;s inline sort button and five marketing usages down with it, each checked and small enough, while <code>.c-option</code>, a 46px menu row in this document, was moved <em>up</em> to <code>sm</code> rather than left on the smallest step.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The checkmark is a 1px stroke, not a filled glyph, 29 Sep 2026.</b> It was a <code>clip-path</code> polygon, where the stroke weight is implied by the outline&rsquo;s geometry rather than stated, it worked out around 2px, heavy against a 0.5px field border and impossible to adjust without redrawing the path. Two borders on a rotated 5&times;9 box give an exact, stated 1px that cannot drift; the <code>translate</code> re-centres it, because rotating that box moves its optical centre off the one the grid is centring. The indeterminate dash dropped to 1px to match, so both states read as one control drawn with one pen.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Orange is allowlisted to three moments, 29 Sep 2026.</b> The old rule was &ldquo;the single directed action in view&rdquo;, which in practice produced an orange Continue button on <em>every</em> view, plus an orange active nav item, plus an orange tint on every selected row, plus an orange disc for every avatar. A screen came back with fifteen orange elements on it and no primary action legible among them. Orange now appears on exactly three things: a flow&rsquo;s <b>terminal commit</b> (<em>Save &amp; finish</em>), a <b>dialog&rsquo;s confirm</b>, and the <b>select action on a recommended card</b>: plus the logo mark, which is not a control. <code>strong</code> became the Button default the same day, in product <em>and</em> marketing, so the restrained result is what you get by writing no variant at all.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Selection is neutral, not branded, 29 Sep 2026.</b> Selected rows take <code>--color-fill-soft</code>; checked checkboxes, radios and switches fill with <code>--color-cta-strong</code>; a chosen dropdown row&rsquo;s tick is text-primary; avatar monograms are fill-soft on text-secondary. Selection is a state, not a destination, it should be legible at a glance without spending the one colour that means <em>press this</em>. The checkbox beside a selected row already carries the signal in a second channel, so this satisfies SC 1.4.1 with colour doing <em>less</em> work, not more.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>JetBrains Mono removed entirely, 29 Sep 2026.</b> The brand is two families, Figtree and Noto Serif; no third webfont is imported, downloaded or shipped, and this document no longer requests one. Everything that was reaching for mono because it looked technical, table figures, the pagination counter, section kickers, status tags, demo labels, icon-size and logo-size captions, is Figtree now. <b><code>tabular-nums</code> became load-bearing rather than decorative</b>: Figtree&rsquo;s default figures are proportional, measuring 99px against 154px for <code>111111</code> versus <code>000000</code> at 40px, so without it a counter jitters as it advances and a numeric column&rsquo;s right edge goes ragged. Measured against the real loaded face before the switch, not assumed. What still renders fixed-width is only literal code: the <code>code</code> element, the token-name and hex-value columns of the reference tables, and the landing page&rsquo;s simulated terminals, all resolving to the reader&rsquo;s own operating-system monospace, which is not a brand family and costs no request. The token <code>--tt-font-mono</code> was kept <em>declared</em> rather than deleted: 41 declarations across the marketing CSS reference it with no fallback, and an undefined custom property invalidates the whole declaration, which would have silently dropped fixed-width from every code mock on the site.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Primary is <code>#FF5A00</code>.</b> Pure orange over the red-orange alternative, chosen so the entire red band stays free for error, destructive, and record states, non-negotiable in a product built on recording and deleting a trainer's material.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The marketing page is a surface of this system, not a separate one.</b> Decided 10 Sep 2026 after auditing it: of 700 colour literals across 273 unique values, <b>489 uses sat within a just-noticeable difference of an existing token</b>: nobody chose <code>#242424</code> over <code>#2B2B2B</code>. That is drift, and it is fixed by deriving: the landing keeps its own vocabulary (<code>--l-night</code>, <code>--l-paper</code>) but every value with a system equivalent points at it, so the two can no longer diverge. Where the landing had solved something the product had not, night bands, the marketing type steps, the oversized CTA, the system adopted its answer rather than inventing a second one.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The hot red-orange is dropped; marketing uses <code>--color-primary</code>.</b> The landing carried <code>#EC3013</code> on its hero badge and a progress bar. It measures <b>1.24:1 against <code>--color-danger</code></b>: indistinguishable from the error colour, and directly against the reason <code>#FF5A00</code> was chosen in the first place: to keep the whole red band free for error, destructive and record states. Rather than carve out an exception, the accent goes.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b><code>--color-live</code> is red; <code>--color-available</code> is green. They are not the same idea.</b> Recording is a <em>warning</em>, you are being captured, and borrows the red of a record light. Availability is <em>reassurance</em>, this trainer can be reached now. The landing was using one word for both. Two tokens, and they never substitute for one another.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>IBM Plex Sans and Hanken Grotesk are marketing-only faces.</b> Plex sets the wordmark lockup and the footer watermark; Hanken sets the footer's own tighter scale. Both were already shipping and deliberately scoped; the problem was that the system never declared them, so they read as drift. They are now named, with the restriction intact: <b>neither ever appears in product UI</b>, which stays three roles wide.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Noto Serif is marketing-only. Nowhere in the product, at any size.</b> Reversed 25 Sep 2026, the original decision allowed serif on in-product titles above 20px, reasoning that authorship deserved the same voice inside the app as outside it. Bhuvan's call: the product now commits fully to Figtree, including its largest titles (modal headings, page headers, the composed-screen title). Marketing pages, the landing site and <code>src/components/home/</code>, still combine both faces exactly as before; nothing changes there. The shared <code>Card</code> component's <code>display</code> prop stays, because marketing reuses that component and needs the opt-in, but product code must never pass it.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Buttons are full-radius pills, not radius-sm rectangles.</b> Changed 25 Sep 2026. An icon-only button is a circle now, not a rounded square. This is the one control pinned to the maximum radius regardless of its size step, breaking the system's usual "radius steps with the element" rule on purpose, a button is meant to read as reachable, not as a small panel.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Filled badges and labels lost their border.</b> Changed 25 Sep 2026. A coloured fill already reads as a shape; a border on top of it was doubling up. The exceptions are structural, not stylistic: <code>--live</code>/<code>--available</code> badges and the <code>outside</code> source chip have a transparent or near-transparent background, so their border is the only thing defining the pill, removing it there would delete the badge, not lighten it.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Cards get their own lighter border and shadow.</b> Changed 25 Sep 2026. <code>--color-line</code> and <code>--elevation-1</code> are shared by every internal divider and resting surface in the system; a card's outer edge sits next to open canvas on every side, not inside another surface, and reads as heavier than an internal divider at the same value. New, card-scoped tokens (one step lighter on the neutral ramp; half the shadow alpha) internal dividers between a card's own header/body/footer are unaffected.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The card footer is a divider, not a filled band.</b> Changed 25 Sep 2026, resolving a divergence flagged and left open on 10 Sep: the Figma used a hairline over a plain row; this shipped with a <code>--color-surface-sunken</code> fill instead. The fill is gone; the divider stays.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-open">Open</span>
           <p><b><code>lg</code>/<code>xl</code> are marketing-only; product uses <code>sm</code>/<code>md</code>, and that leaves <code>primary</code> with no compliant size.</b> Changed 25 Sep 2026. White-on-orange only clears WCAG AA at <code>lg</code> (19px bold) the entire reason it existed. Restricting product to <code>sm</code>/<code>md</code> was not paired with a fix, on purpose: it's flagged here and in the exceptions table rather than silently patched. Needs one of, let <code>primary</code> alone keep <code>lg</code> in-product, move to a near-black label at small sizes, or have <code>strong</code>/<code>secondary</code> absorb what <code>primary</code> did.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Button gained a <code>loading</code> state, and its own loading mark.</b> Added 25 Sep 2026 from the Figma reference at node 885:274. Not a generic spinner, the brand mark's own 3&times;3 grid, decomposed into nine cells with an independent keyframe each, because the reference's brightness sweep dips through the centre cell once per cycle and a uniform staggered animation can't reproduce that. <code>loading</code> stays visibly distinct from <code>disabled</code> (70% vs 45% opacity) on purpose, matching the two clearly different states the reference showed.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b><code>body</code> explicitly sets <code>font-weight: 400</code>.</b> Found 25 Sep 2026. Every subtext element computed to 400 anyway, the browser's own UA default, but only by accident; the line was missing from this document's own <code>body</code> rule and from the real app's. Added to both, plus explicit <code>font-normal</code> at a couple of call sites that pair directly with a <code>font-medium</code> title, so the pairing documents itself rather than relying on inheritance alone.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Segmented Control is now the default tabbed-content pattern; the old tabs became &ldquo;Underline Tabs,&rdquo; secondary.</b> Reversed 25 Sep 2026, was &ldquo;segmented control never changes content, that's what makes it not tabs.&rdquo; Bhuvan's call, prompted by wanting the Session Shell's own Voice/Text/Video switcher to hold genuinely different panes. What decides now is the shape of the choice (2&ndash;4 short parallel options, one always selected), not a technicality about what's rendered underneath. Underline Tabs survives, demoted, reachable only by that name, see &sect;8.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Three type weights: 400, 500, 600, revised 25 Sep 2026, was two.</b> The 10 Sep fix collapsed a four-weight drift down to 400/600, which solved the drift but overshot: 600 on every title and every <code>&lt;b&gt;</code>/<code>&lt;strong&gt;</code> read as too heavy in the product (Bhuvan's call, benchmarked against Town.com, where titles and inline emphasis carry hierarchy through size and colour rather than through maximum available weight). 500 carried titles, labels, table headers and inline emphasis at the time; titles moved back to 600 on 29 Sep 2026 (below), so today it is labels, table headers and inline emphasis that hold 500, and 600 covers titles alongside the button/CTA label. <code>700</code> stays out of the scale for the original reason: it closes up Figtree's counters at UI sizes.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b><code>b</code> and <code>strong</code> reset to 600 globally.</b> Every user-agent stylesheet sets them to <code>bold</code> = 700, and nothing here overrode it. Emphasis in content therefore bypassed every correctly-specified component, a <code>&lt;strong&gt;</code> in a stat row, a <code>&lt;b&gt;</code> in a twin's answer, and rendered 700 regardless. This was the single largest source of stray 700s. Reset once at the root, never per component.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Pill padding is 3&times; horizontal, not 2&times;.</b> Same failure as weight, found the same way: padding was never tokenised, so this document's own badge sat at <code>3px 9px</code>, 9px is not a step on the 4pt scale, and screens drifted to 8 / 10 / 11 / 13px. A <code>radius-pill</code> end optically eats about half a stem of space at each edge, so a pill needs <em>more</em> side padding than the rounded rectangle beside it, not the same. <b>12px is the floor</b> for any pill carrying more than two words.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Personality: Warm Precision.</b> Precision is structural, grid, radii discipline, restrained chrome, honest empty states, and carries the Studio, where a trainer stakes their reputation. Warmth is human-layer, type, copy, avatars, easing, and carries the Session, where a nervous learner is practising. Energy is budgeted entirely to motion, never to colour or density.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>One brand tier, not two.</b> Trainer ownership is expressed through identity assets, photo, name, voice, in-session logo, not through a per-trainer accent colour. Orange therefore means one thing everywhere: <em>the platform is acting</em>. This is what keeps the marketplace legible when a learner follows six trainers.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Both themes are first-class.</b> Three token layers, primitive &rarr; semantic &rarr; component. No raw hex reaches a component, ever. Light and dark are audited to the same bar.</p>
         </div>
-        <div class="status-item">
+        <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Mode is a view, not a session type.</b> Voice, text, and video share one Session Shell and one transcript. A learner can start a mock interview in voice, drop to text for a code question, and lose nothing.</p>
         </div>
@@ -2256,6 +2496,14 @@ footer { padding-top: var(--space-6); }
           </thead>
           <tbody id="semantic-table"></tbody>
         </table>
+      </div>
+
+      <div class="panel c-stack" id="art-gradients">
+        <div>
+          <h3>Card art gradients</h3>
+          <p style="color:var(--color-text-secondary); max-width:68ch;">Ten pastel three-stop gradients for the picture on a Twin agent or roleplay card. They are tokens, <code>--tt-art-0</code> to <code>--tt-art-9</code>, <code>linear-gradient(135deg, A 0%, B 50%, C 100%)</code>. A card never picks its own: it takes <code>index % 10</code> from its place in the list, so a long list reads as a run of ten. <b>Identical in light and dark on purpose.</b> The picture is an illustration surface with a white bubble on it, not a theme surface, so these are not semantic colours and are not a palette to reuse elsewhere. Text on them is <code>--tt-on-art</code>. Tailwind: <code>bg-art-0</code> to <code>bg-art-9</code>. See them in use under Components, Twin agent card &amp; roleplay card.</p>
+        </div>
+        <div class="art-grid"><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-0);" role="img" aria-label="Gradient 0"></span><b>--tt-art-0</b><span>Blue &middot; lilac &middot; pink</span><code>#A8C6EC &rarr; #D2C3E8 &rarr; #F1C6D7</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-1);" role="img" aria-label="Gradient 1"></span><b>--tt-art-1</b><span>Mint &middot; aqua &middot; periwinkle</span><code>#A8E0C9 &rarr; #BFE0E8 &rarr; #C7CDF2</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-2);" role="img" aria-label="Gradient 2"></span><b>--tt-art-2</b><span>Sand &middot; rose &middot; orchid</span><code>#F3CFA0 &rarr; #F0BCC7 &rarr; #DDB8EA</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-3);" role="img" aria-label="Gradient 3"></span><b>--tt-art-3</b><span>Lime &middot; mint &middot; aqua</span><code>#CBE3A8 &rarr; #BFE6CF &rarr; #A8E0E0</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-4);" role="img" aria-label="Gradient 4"></span><b>--tt-art-4</b><span>Honey &middot; peach &middot; pink</span><code>#F6D9A0 &rarr; #F2C2B0 &rarr; #ECB6CC</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-5);" role="img" aria-label="Gradient 5"></span><b>--tt-art-5</b><span>Sky &middot; lavender &middot; mauve</span><code>#B8CDF0 &rarr; #C8C4EC &rarr; #E0C0E8</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-6);" role="img" aria-label="Gradient 6"></span><b>--tt-art-6</b><span>Butter &middot; tan &middot; blush</span><code>#F0E3A0 &rarr; #ECD0B0 &rarr; #E8BCC4</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-7);" role="img" aria-label="Gradient 7"></span><b>--tt-art-7</b><span>Aqua &middot; sky &middot; periwinkle</span><code>#A0E4E0 &rarr; #B8D4EC &rarr; #CCC8F0</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-8);" role="img" aria-label="Gradient 8"></span><b>--tt-art-8</b><span>Apricot &middot; pink &middot; violet</span><code>#F0C8A8 &rarr; #EEC0D0 &rarr; #D8BCE8</code></div><div class="art-sw"><span class="art-chip" style="background:var(--tt-art-9);" role="img" aria-label="Gradient 9"></span><b>--tt-art-9</b><span>Seafoam &middot; mist &middot; lilac</span><code>#BCEAD0 &rarr; #C4E0E4 &rarr; #D4D0F0</code></div></div>
       </div>
     </section>
 
@@ -2619,10 +2867,11 @@ footer { padding-top: var(--space-6); }
           <span class="c-lab">Variants</span>
           <div class="c-row">
             <button class="c-btn c-btn--md c-btn--primary" type="button">Save &amp; finish</button>
-            <button class="c-btn c-btn--md c-btn--strong" type="button">Strong, not the default</button>
+            <button class="c-btn c-btn--md c-btn--strong" type="button">Strong (marketing only)</button>
             <button class="c-btn c-btn--md c-btn--secondary" type="button">Save draft</button>
             <button class="c-btn c-btn--md c-btn--ghost" type="button">Cancel</button>
             <button class="c-btn c-btn--md c-btn--danger" type="button">Delete source</button>
+            <button class="c-btn c-btn--md c-btn--success" type="button">Approve</button>
           </div>
         </div>
 
@@ -2649,9 +2898,21 @@ footer { padding-top: var(--space-6); }
               <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="3" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="8" cy="13" r="1.5"/></svg>
             </button>
           </div>
-          <p class="c-note"><b>The loading mark is the brand mark's own grid</b>, not a generic spinner, see the CSS note above <code>.c-spinner</code>. It is the product <code>Spinner</code>: <b>20px</b> (3 &times; 5px cells, 1.5px gap) in an <code>md</code> or larger button, <b>16px</b> (4px cells, 1px gap) in <code>sm</code>. <code>loading</code> is 70% opacity and non-interactive; true <code>disabled</code> is 45%, kept visibly different on purpose, matching the Figma reference (node 885:274).</p>
+          <p class="c-note"><b>The loading mark is the brand mark's own grid</b>, not a generic spinner, see the CSS note above <code>.c-spinner</code>. It is the product <code>Spinner</code>: <b>20px</b> (3 &times; 5px cells, 1.5px gap) in an <code>md</code> or larger button, <b>16px</b> (4px cells, 1px gap) in <code>sm</code>. <code>loading</code> is 70% opacity and non-interactive; true <code>disabled</code> is a flat <code>--color-fill-soft</code> with a muted label and a not-allowed cursor (the prototype's, D122), visibly different from the 70% loading state.</p>
         </div>
 
+        <div class="c-spec">
+          <span class="c-lab">The prototype's icon buttons &middot; leading, trailing, icon alone (16px glyphs, 16 Nov 2026)</span>
+          <div class="c-toolbar">
+            <button class="c-btn c-btn--md c-btn--primary" type="button"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Add source</button>
+            <button class="c-btn c-btn--md c-btn--secondary" type="button"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.5v9l7.5-4.5L5 3.5Z"/></svg>Play</button>
+            <button class="c-btn c-btn--md c-btn--secondary" type="button">Billing<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
+            <button class="c-btn c-btn--sm c-btn--icon c-btn--ghost" type="button" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+            <button class="c-btn c-btn--sm c-btn--icon c-btn--ghost" type="button" aria-label="More options"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button>
+            <button class="c-btn c-btn--sm c-btn--icon c-btn--secondary" type="button" aria-label="Play"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.5v9l7.5-4.5L5 3.5Z"/></svg></button>
+          </div>
+          <p class="c-note" style="margin-top:var(--space-2);">Every glyph is forced to 16px (<code>--tt-icon-sm</code>), as the prototype does with <code>.btn svg</code>. The workhorses are the <b>small ghost icon button</b> (close &times;, the &#8942; row menu) and the small secondary. Leading icon = the action&rsquo;s object, trailing = direction or an external destination, never both. An icon alone always carries an <code>aria-label</code>.</p>
+        </div>
         <div class="c-spec">
           <span class="c-lab">Icon with text &middot; icon alone &middot; notification count</span>
           <div class="c-toolbar">
@@ -3471,7 +3732,7 @@ footer { padding-top: var(--space-6); }
       <div class="panel c-stack">
         <div>
           <h3>Side panel, Respond &amp; Assign dialogs, agent surfaces</h3>
-          <p class="c-note">Four surfaces from the V3 prototype, 4 Nov 2026, specced, not yet <code>.tsx</code>. Dialog corner radius is <b>24 in the prototype and 16 in the system Modal</b>; that is unresolved (&sect;10), so build to the system value until it is decided. Backdrop for all of them is <code>rgb(11 10 9 / .55)</code>.</p>
+          <p class="c-note">Four surfaces from the V3 prototype, 4 Nov 2026, specced, not yet <code>.tsx</code>. Dialog corner radius is <b>24</b>, decided 16 Nov 2026 (D120): every popup shares the confirm dialog's surface. Backdrop for all of them is <code>rgb(11 10 9 / .55)</code>.</p>
         </div>
         <div class="table-wrap">
           <table>
@@ -3788,6 +4049,261 @@ footer { padding-top: var(--space-6); }
         </div>
       </div>
 
+      <div class="panel c-stack" id="components-in-code">
+        <div>
+          <h3>Components in code &amp; Storybook</h3>
+          <p class="c-note">Every row below is a real <code>.tsx</code> with a Storybook story. Run <code>npm run storybook</code> and open the story title. Anything specced in this page but not listed is still spec-only (see &sect;12 of the MD). Each component reads the tokens in <code>src/styles/tokens.css</code>, so a token change moves the story, the app and this page together. Added 16 Nov 2026, phase 2 of the scalable-system pass.</p>
+        </div>
+        <div class="table-wrap"><table style="min-width:760px;"><colgroup><col style="width:30%"><col style="width:30%"><col style="width:40%"></colgroup><thead><tr><th>Component</th><th>Storybook title</th><th>Source</th></tr></thead><tbody>
+<tr><td class="tok">Button</td><td><code>Foundations/Button</code></td><td><code>src/components/Button.tsx</code></td></tr>
+<tr><td class="tok">Input</td><td><code>Foundations/Input</code></td><td><code>src/components/Input.tsx</code></td></tr>
+<tr><td class="tok">Select</td><td><code>Foundations/Select</code></td><td><code>src/components/Select.tsx</code></td></tr>
+<tr><td class="tok">Textarea</td><td><code>Foundations/Textarea</code></td><td><code>src/components/Textarea.tsx</code></td></tr>
+<tr><td class="tok">Checkbox</td><td><code>Foundations/Checkbox</code></td><td><code>src/components/Checkbox.tsx</code></td></tr>
+<tr><td class="tok">Switch</td><td><code>Foundations/Switch</code></td><td><code>src/components/Switch.tsx</code></td></tr>
+<tr><td class="tok">Toast</td><td><code>Foundations/Toast</code></td><td><code>src/components/Toast.tsx</code></td></tr>
+<tr><td class="tok">Modal, ConfirmDialog, SidePanel</td><td><code>Foundations/Modal</code></td><td><code>src/components/Modal.tsx</code></td></tr>
+<tr><td class="tok">Menu</td><td><code>Foundations/Menu</code></td><td><code>src/components/Menu.tsx</code></td></tr>
+<tr><td class="tok">Tooltip, InfoHint</td><td><code>Foundations/Tooltip</code></td><td><code>src/components/Tooltip.tsx</code></td></tr>
+<tr><td class="tok">PageHeader, SectionHeading, BackBar</td><td><code>Structure/PageHeader</code></td><td><code>src/components/PageHeader.tsx</code></td></tr>
+<tr><td class="tok">Divider</td><td><code>Foundations/Divider</code></td><td><code>src/components/Divider.tsx</code></td></tr>
+<tr><td class="tok">Link</td><td><code>Foundations/Link</code></td><td><code>src/components/Link.tsx</code></td></tr>
+<tr><td class="tok">EmptyState, GateCard</td><td><code>Structure/EmptyState</code></td><td><code>src/components/EmptyState.tsx</code></td></tr>
+<tr><td class="tok">ProgressBar, ProgressRing, Skeleton</td><td><code>Foundations/Progress</code></td><td><code>src/components/Progress.tsx</code></td></tr>
+<tr><td class="tok">Stepper</td><td><code>Foundations/Stepper</code></td><td><code>src/components/Stepper.tsx</code></td></tr>
+<tr><td class="tok">NavRail, NavGroup, NavItem, RailUser</td><td><code>Structure/NavRail</code></td><td><code>src/components/NavRail.tsx</code></td></tr>
+<tr><td class="tok">Alert</td><td><code>Foundations/Alert</code></td><td><code>src/components/Alert.tsx</code></td></tr>
+<tr><td class="tok">Tabs, TabPanel</td><td><code>Foundations/Tabs</code></td><td><code>src/components/Tabs.tsx</code></td></tr>
+<tr><td class="tok">AddCard, SourceCard, TwinAllCard</td><td><code>Product/Cards</code></td><td><code>src/components/Cards.tsx</code></td></tr>
+<tr><td class="tok">StatPill, LearnerStack</td><td><code>Product/Cards</code></td><td><code>src/components/StatPill.tsx, LearnerStack.tsx</code></td></tr>
+<tr><td class="tok">MobileHeader, HeaderButton, TabBar, TabBarItem</td><td><code>Structure/MobileShell</code></td><td><code>src/components/MobileShell.tsx</code></td></tr>
+<tr><td class="tok">Calendar, DateField</td><td><code>Foundations/Calendar</code></td><td><code>src/components/Calendar.tsx</code></td></tr>
+<tr><td class="tok">Waveform</td><td><code>Foundations/Waveform</code></td><td><code>src/components/Waveform.tsx</code></td></tr>
+<tr><td class="tok">FlowNode, FlowSource, FlowStartNode, FlowEditRow</td><td><code>Product/FlowNode</code></td><td><code>src/components/FlowNode.tsx</code></td></tr>
+<tr><td class="tok">VoiceRow, VoiceListRow</td><td><code>Product/VoiceRows</code></td><td><code>src/components/VoiceRows.tsx</code></td></tr>
+<tr><td class="tok">ListTable, ListRow, LearnerRow, UsageMeter</td><td><code>Data/ListTable</code></td><td><code>src/components/ListTable.tsx</code></td></tr>
+<tr><td class="tok">UsageCard, ActivityRow</td><td><code>Product/Usage</code></td><td><code>src/components/Usage.tsx</code></td></tr>
+<tr><td class="tok">ChatBubble, ChatThread</td><td><code>Product/ChatBubble</code></td><td><code>src/components/ChatBubble.tsx</code></td></tr>
+<tr><td class="tok">MultiSelect</td><td><code>Foundations/MultiSelect</code></td><td><code>src/components/MultiSelect.tsx</code></td></tr>
+<tr><td class="tok">Badge</td><td><code>Foundations/Badge</code></td><td><code>src/components/Badge.tsx</code></td></tr>
+<tr><td class="tok">Avatar</td><td><code>Foundations/Avatar</code></td><td><code>src/components/Avatar.tsx</code></td></tr>
+<tr><td class="tok">Spinner</td><td><code>Foundations/Spinner</code></td><td><code>src/components/Spinner.tsx</code></td></tr>
+<tr><td class="tok">SegmentedControl</td><td><code>Foundations/SegmentedControl</code></td><td><code>src/components/SegmentedControl.tsx</code></td></tr>
+<tr><td class="tok">RadioCard, ImageTile</td><td><code>Foundations/SelectableTile</code></td><td><code>src/components/SelectableTile.tsx</code></td></tr>
+<tr><td class="tok">Logo</td><td><code>Foundations/Logo</code></td><td><code>src/components/Logo.tsx</code></td></tr>
+<tr><td class="tok">Card</td><td><code>Structure/Card</code></td><td><code>src/components/Card.tsx</code></td></tr>
+<tr><td class="tok">Table</td><td><code>Data/Table</code></td><td><code>src/components/Table.tsx</code></td></tr>
+<tr><td class="tok">TableCard</td><td><code>Data/TableCard</code></td><td><code>src/components/TableCard.tsx</code></td></tr>
+<tr><td class="tok">Pagination</td><td><code>Data/Pagination</code></td><td><code>src/components/Pagination.tsx</code></td></tr>
+<tr><td class="tok">AgentCard (twin, roleplay)</td><td><code>Product/AgentCard</code></td><td><code>src/components/AgentCard.tsx</code></td></tr>
+<tr><td class="tok">SummaryCard, NumberTile, AttentionChip</td><td><code>Product/Metrics</code></td><td><code>src/components/SummaryCard.tsx, NumberTile.tsx, AttentionChip.tsx</code></td></tr>
+<tr><td class="tok">DisclosureMarker</td><td><code>Session/DisclosureMarker</code></td><td><code>src/components/DisclosureMarker.tsx</code></td></tr>
+<tr><td class="tok">SourceChip</td><td><code>Session/SourceChip</code></td><td><code>src/components/SourceChip.tsx</code></td></tr>
+</tbody></table></div>
+      </div>
+
+      <!-- ---------------- Twin agent + roleplay cards (live) 16 Nov 2026 ---------------- -->
+      <div class="panel c-stack" id="twin-cards">
+        <div>
+          <h3>Twin agent card &amp; roleplay card</h3>
+          <p class="c-note">The two cards a trainer scrolls all day: <b>Twin Agents</b> (one card per use case) and <b>Scenarios</b> (one per roleplay). They share one shell. Read live from the V3 build (<code>app.css?v=1154</code>, Twin Agents and Scenarios pages), 16 Nov 2026; the Vercel beta runs the same card CSS (<code>app.css?v=1153</code>). Live below: <b>hover the picture, tab to a card, press &ldquo;&#8942;&rdquo;</b>. The wide card at the bottom is &ldquo;Twin for all use cases&rdquo;. Specced, not yet <code>.tsx</code>.</p>
+        </div>
+        <div class="c-spec">
+          <span class="c-lab">Pick a gradient &middot; the cards take it (the tokens are under Colour, Card art gradients)</span>
+          <div class="tc-pick">
+            <div class="tc-pick-side">
+              <div class="tc-lib" role="radiogroup" aria-label="Card gradient"><button type="button" class="tc-sw tc-art--0" role="radio" aria-checked="true" aria-label="Gradient 0: Blue · lilac · pink" data-i="0"><span>0</span></button><button type="button" class="tc-sw tc-art--1" role="radio" aria-checked="false" aria-label="Gradient 1: Mint · aqua · periwinkle" data-i="1"><span>1</span></button><button type="button" class="tc-sw tc-art--2" role="radio" aria-checked="false" aria-label="Gradient 2: Sand · rose · orchid" data-i="2"><span>2</span></button><button type="button" class="tc-sw tc-art--3" role="radio" aria-checked="false" aria-label="Gradient 3: Lime · mint · aqua" data-i="3"><span>3</span></button><button type="button" class="tc-sw tc-art--4" role="radio" aria-checked="false" aria-label="Gradient 4: Honey · peach · pink" data-i="4"><span>4</span></button><button type="button" class="tc-sw tc-art--5" role="radio" aria-checked="false" aria-label="Gradient 5: Sky · lavender · mauve" data-i="5"><span>5</span></button><button type="button" class="tc-sw tc-art--6" role="radio" aria-checked="false" aria-label="Gradient 6: Butter · tan · blush" data-i="6"><span>6</span></button><button type="button" class="tc-sw tc-art--7" role="radio" aria-checked="false" aria-label="Gradient 7: Aqua · sky · periwinkle" data-i="7"><span>7</span></button><button type="button" class="tc-sw tc-art--8" role="radio" aria-checked="false" aria-label="Gradient 8: Apricot · pink · violet" data-i="8"><span>8</span></button><button type="button" class="tc-sw tc-art--9" role="radio" aria-checked="false" aria-label="Gradient 9: Seafoam · mist · lilac" data-i="9"><span>9</span></button></div>
+              <p class="tc-pick-out" id="tc-pick-out" aria-live="polite"></p>
+              <p class="tc-pick-out">In the product a card never chooses: it takes gradient <code>index % 10</code> from its position in the list, so a list always reads as a run of ten. Here you choose, to see how the shell holds against each one. Both cards follow the pick.</p>
+            </div>
+            <article class="tc-card " tabindex="0" aria-label="Open The off-plan sales process">
+              <span data-pick class="tc-art tc-art--0 tc-art--twin" aria-hidden="true"><span class="tc-quote"><span class="tc-bubble"><video class="tc-face tc-face--video" src="../onboarding-prototype/media/twin-listening.mp4" autoplay muted loop playsinline preload="auto"></video><span class="tc-qtext"><span>&ldquo;I need a structure, step by step.&rdquo;</span></span></span></span></span>
+              <span class="tc-body"><span class="tc-title">The off-plan sales process</span><span class="tc-copy">First call, educational Zoom and presentation meeting. Every stage books the next one.</span></span>
+              <span class="tc-foot"><span class="tc-stack" aria-label="Learners"><img class="tc-av" src="../onboarding-prototype/media/learner-1.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-2.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-3.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-4.png" alt=""><span class="tc-av tc-av--more">+1</span></span><button class="tc-more" type="button" aria-label="Actions" aria-haspopup="menu"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button></span>
+            </article>
+            <article class="tc-card " tabindex="0" aria-label="Open Ravi: first conversation">
+              <span data-pick class="tc-art tc-art--1" aria-hidden="true"><span class="tc-quote"><span class="tc-who">Ravi</span><span class="tc-bubble"><img class="tc-face" src="../onboarding-prototype/media/client-landlord.jpg" alt=""><span class="tc-qtext"><span class="tc-qname">Ravi</span><span>&ldquo;Can you send me some options on WhatsApp?&rdquo;</span></span></span></span></span>
+              <span class="tc-body"><span class="tc-title">Ravi: first conversation</span><span class="tc-copy">First-time investor · Oman. Lead from Instagram ad about passive income.</span></span>
+              <span class="tc-foot"><span class="tc-stack" aria-label="Learners"><img class="tc-av" src="../onboarding-prototype/media/learner-1.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-2.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-3.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-4.png" alt=""><span class="tc-av tc-av--more">+1</span></span><button class="tc-more" type="button" aria-label="Actions" aria-haspopup="menu"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button></span>
+            </article>
+          </div>
+        </div>
+        <div class="c-spec">
+          <span class="c-lab">States, forced: rest &middot; hover &middot; focus-visible &middot; menu open</span>
+          <div class="tc-row">
+            <article class="tc-card " tabindex="0" aria-label="Open Ravi: first conversation">
+              <span class="tc-art tc-art--1" aria-hidden="true"><span class="tc-quote"><span class="tc-who">Ravi</span><span class="tc-bubble"><img class="tc-face" src="../onboarding-prototype/media/client-landlord.jpg" alt=""><span class="tc-qtext"><span class="tc-qname">Ravi</span><span>&ldquo;Can you send me some options on WhatsApp?&rdquo;</span></span></span></span></span>
+              <span class="tc-body"><span class="tc-title">Ravi: first conversation</span><span class="tc-copy">First-time investor · Oman. Lead from Instagram ad about passive income.</span></span>
+              <span class="tc-foot"><span class="tc-stack" aria-label="Learners"><img class="tc-av" src="../onboarding-prototype/media/learner-1.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-2.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-3.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-4.png" alt=""><span class="tc-av tc-av--more">+1</span></span><button class="tc-more" type="button" aria-label="Actions" aria-haspopup="menu"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button></span>
+            </article>
+            <article class="tc-card is-hover" tabindex="0" aria-label="Open Ravi: first conversation">
+              <span class="tc-art tc-art--1" aria-hidden="true"><span class="tc-quote"><span class="tc-who">Ravi</span><span class="tc-bubble"><img class="tc-face" src="../onboarding-prototype/media/client-landlord.jpg" alt=""><span class="tc-qtext"><span class="tc-qname">Ravi</span><span>&ldquo;Can you send me some options on WhatsApp?&rdquo;</span></span></span></span></span>
+              <span class="tc-body"><span class="tc-title">Ravi: first conversation</span><span class="tc-copy">First-time investor · Oman. Lead from Instagram ad about passive income.</span></span>
+              <span class="tc-foot"><span class="tc-stack" aria-label="Learners"><img class="tc-av" src="../onboarding-prototype/media/learner-1.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-2.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-3.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-4.png" alt=""><span class="tc-av tc-av--more">+1</span></span><button class="tc-more" type="button" aria-label="Actions" aria-haspopup="menu"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button></span>
+            </article>
+            <article class="tc-card is-focus" tabindex="0" aria-label="Open Ravi: first conversation">
+              <span class="tc-art tc-art--1" aria-hidden="true"><span class="tc-quote"><span class="tc-who">Ravi</span><span class="tc-bubble"><img class="tc-face" src="../onboarding-prototype/media/client-landlord.jpg" alt=""><span class="tc-qtext"><span class="tc-qname">Ravi</span><span>&ldquo;Can you send me some options on WhatsApp?&rdquo;</span></span></span></span></span>
+              <span class="tc-body"><span class="tc-title">Ravi: first conversation</span><span class="tc-copy">First-time investor · Oman. Lead from Instagram ad about passive income.</span></span>
+              <span class="tc-foot"><span class="tc-stack" aria-label="Learners"><img class="tc-av" src="../onboarding-prototype/media/learner-1.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-2.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-3.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-4.png" alt=""><span class="tc-av tc-av--more">+1</span></span><button class="tc-more" type="button" aria-label="Actions" aria-haspopup="menu"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button></span>
+            </article>
+            <div style="position:relative;"><article class="tc-card is-hover" tabindex="0" aria-label="Open Ravi: first conversation">
+              <span class="tc-art tc-art--1" aria-hidden="true"><span class="tc-quote"><span class="tc-who">Ravi</span><span class="tc-bubble"><img class="tc-face" src="../onboarding-prototype/media/client-landlord.jpg" alt=""><span class="tc-qtext"><span class="tc-qname">Ravi</span><span>&ldquo;Can you send me some options on WhatsApp?&rdquo;</span></span></span></span></span>
+              <span class="tc-body"><span class="tc-title">Ravi: first conversation</span><span class="tc-copy">First-time investor · Oman. Lead from Instagram ad about passive income.</span></span>
+              <span class="tc-foot"><span class="tc-stack" aria-label="Learners"><img class="tc-av" src="../onboarding-prototype/media/learner-1.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-2.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-3.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-4.png" alt=""><span class="tc-av tc-av--more">+1</span></span><button class="tc-more" type="button" aria-label="Actions" aria-haspopup="menu"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button></span><div class="tc-menu" role="menu"><div role="menuitem">Configure</div><div role="menuitem">Share</div><div role="menuitem">Assign</div><div role="menuitem">Try as learner</div></div>
+            </article></div>
+          </div>
+        </div>
+        <div class="c-spec">
+          <span class="c-lab">Twin for all use cases</span>
+          <div class="tc-all" tabindex="0" aria-label="Open Olga’s twin">
+            <img class="tc-all-photo" src="../onboarding-prototype/media/yt-frame-1.png" alt="">
+            <div class="tc-all-body"><h4 class="tc-all-name">Olga&rsquo;s twin</h4><p class="tc-all-meta">Last updated 29 Oct, 13:00 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p><span class="tc-stack" aria-label="Learners"><img class="tc-av" src="../onboarding-prototype/media/learner-1.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-2.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-3.png" alt=""><img class="tc-av" src="../onboarding-prototype/media/learner-4.png" alt=""><span class="tc-av tc-av--more">+1</span></span></div>
+            <button class="tc-more" type="button" aria-label="Actions" aria-haspopup="menu"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg></button>
+          </div>
+        </div>
+        <h4 style="margin:var(--space-6) 0 var(--space-2);">Tokens this card reads</h4>
+        <div class="table-wrap"><table style="min-width:760px;"><colgroup><col style="width:30%"><col style="width:36%"><col style="width:34%"></colgroup><thead><tr><th>Token</th><th>Value</th><th>Used for</th></tr></thead><tbody>
+<tr><td class="tok">--tt-size-card-w / -h / -art</td><td>288 / 338 / 168</td><td>Card width, min-height, picture height</td></tr>
+<tr><td class="tok">--tt-art-0 &hellip; --tt-art-9</td><td>135&deg; three-stop pastel gradients; same in light and dark</td><td>The picture. A card takes <code>index % 10</code></td></tr>
+<tr><td class="tok">--tt-on-art</td><td><code>rgb(28 27 27 / .72)</code></td><td>Client eyebrow on the picture</td></tr>
+<tr><td class="tok">--tt-shadow-bubble</td><td><code>0 2px 8px rgb(0 0 0 / .08)</code></td><td>Quote bubble at rest</td></tr>
+<tr><td class="tok">--tt-art-glare-core / -edge</td><td>orange at 10% / 4%</td><td>Glare that follows the pointer</td></tr>
+<tr><td class="tok">--tt-tilt-max / -scale / -perspective / -reduced</td><td>9deg / 1.04 / 700px / 0.3</td><td>Tilt depth, lift, perspective; reduced-motion factor</td></tr>
+<tr><td class="tok">--tt-duration-follow / -settle, --tt-ease-settle</td><td>90ms linear / 600ms, <code>cubic-bezier(.2,.8,.2,1)</code></td><td>Tracking and release</td></tr>
+<tr><td class="tok">--tt-size-avatar-xs / -sm / -md / -lg / -xl, --tt-size-photo</td><td>24 / 28 / 32 / 44 / 64, 76</td><td>Roleplay face, learner stack, &#8942; button; ring; Twin-for-all photo</td></tr>
+<tr><td class="tok">--tt-ink-faint / -soft / -strong, --tt-scrim</td><td>ink at 6 / 12 / 20%, flips in dark; <code>rgb(11 10 9 / .55)</code></td><td>Hairlines and soft shadows; modal backdrop</td></tr>
+</tbody></table></div>
+        <h4 style="margin:var(--space-6) 0 var(--space-2);">Layout &amp; type</h4>
+        <div class="table-wrap"><table style="min-width:760px;"><colgroup><col style="width:16%"><col style="width:60%"><col style="width:24%"></colgroup><thead><tr><th>Part</th><th>Value</th><th>Against the system</th></tr></thead><tbody>
+<tr><td class="tok">Card</td><td><code>article</code>, 288 × 338 in the 896 library page. <code>--color-surface</code>, 1px <code>--color-card-border</code>, <b>radius 16</b>, <code>--card-shadow</code> at rest, <code>overflow:visible</code>. Flex column; the footer takes <code>margin-top:auto</code> so every card in a row ends on the same line.</td><td>Radius 16 is the page-level card (6 Nov rule).</td></tr>
+<tr><td class="tok">Grid</td><td>3 columns of equal width, gap 16, 20 below the segmented control. <b>≤1100: 2 columns. ≤767: 1 column</b> and the card is full width.</td><td></td></tr>
+<tr><td class="tok">Picture</td><td><code>min-height:168</code>, radius <code>16 16 0 0</code>, <code>overflow:hidden</code>. <b>135° three-stop pastel gradient</b>, ten of them cycled by position (blue-lilac-pink, mint-aqua-periwinkle, sand-rose-orchid, lime-mint-aqua, butter-peach-pink, and five more). The gradients are hard-coded hex in both themes: Open, see §10.</td><td>New. Not tokens.</td></tr>
+<tr><td class="tok">Quote bubble</td><td>White <code>--color-surface</code> card inside the picture: padding 12, radius 12 (<code>--radius-md</code>), shadow <code>0 2px 8px rgb(0 0 0 / .08)</code>, <b>13/18 400 <code>--color-text-tertiary</code></b>. A second, translucent sheet peeks 10px below it (<code>::before</code>, inset 10 left and right, 16 tall, surface at 28%). The bubble sits 16 in from the edges; below it is 36 on the roleplay card, and the twin card centres it vertically.</td><td>New.</td></tr>
+<tr><td class="tok">Face in the bubble</td><td><b>Twin agent:</b> a 40px round muted looping video of the twin listening, <code>object-position:center 22%</code>. <b>Roleplay:</b> a 24px round image of the client (photo or a letter tile) beside a <b>client name 13/18 600 <code>--color-text-primary</code></b> over the quote.</td><td></td></tr>
+<tr><td class="tok">Eyebrow (roleplay only)</td><td>Client name above the bubble: 12/16 500, UPPERCASE, +.06em, <code>rgb(28 27 27 / .72)</code>. A twin agent card has none.</td><td></td></tr>
+<tr><td class="tok">Body</td><td>Padding <code>14 16 0</code>, gap 8. <b>Title 15/22 600, −.015em, <code>--color-text-primary</code></b>, then <b>copy 13/20 400 <code>--color-text-tertiary</code></b> (up to three lines on the 288 card).</td><td></td></tr>
+<tr><td class="tok">Footer</td><td>Padding <code>16 16 16</code>, space-between. <b>Learner stack:</b> 28px round avatars, 2px <code>--color-surface</code> ring, −8px overlap, then a “+N” counter (11/500, <code>--color-text-secondary</code> on <code>--color-fill-soft-hover</code>). <b>⋮:</b> ghost icon button sm, 32px, round, three 1.15-radius dots.</td><td>Avatar ring matches the card surface so the stack reads on both themes.</td></tr>
+<tr><td class="tok">Twin for all use cases</td><td>One wide card above the specific agents: <code>card</code>, padding 20, gap 20, margin-bottom 32, radius 16, <code>--card-shadow</code>. <b>76px photo, radius 16</b>; name <b>18/24 600</b>; “Last updated …” <b>15/20 400 <code>--color-text-secondary</code></b> with a 12px chevron that opens an info popover; the same learner stack under it; ⋮ at the right edge on <code>--color-fill-soft</code>. The section title above it is the page title, 18/24 600, −.015em.</td><td>A third card shape, so it is not in the 3-up grid.</td></tr>
+</tbody></table></div>
+        <h4 style="margin:var(--space-6) 0 var(--space-2);">Interaction states</h4>
+        <div class="table-wrap"><table style="min-width:760px;"><colgroup><col style="width:18%"><col style="width:82%"></colgroup><thead><tr><th>State</th><th>Behaviour</th></tr></thead><tbody>
+<tr><td class="tok">Rest</td><td><code>--card-shadow</code>, 1px <code>--color-card-border</code>.</td></tr>
+<tr><td class="tok">Hover (card)</td><td>Shadow to <code>--elevation-2</code> in 140ms, <code>cubic-bezier(.2,0,0,1)</code>. Cursor pointer. The wide card changes its <b>border</b> instead, to <code>--color-border-interactive</code>, and keeps its shadow.</td></tr>
+<tr><td class="tok">Hover (picture)</td><td>The bubble tilts: see Motion. Nothing else in the card moves.</td></tr>
+<tr><td class="tok">Focus-visible</td><td>2px <code>--color-primary</code> outline, 2px offset. <code>tabindex=0</code> on the card; the ⋮ is a second tab stop.</td></tr>
+<tr><td class="tok">Menu open</td><td>⋮ sets <code>aria-expanded=true</code> and opens a 180px menu: padding 8, radius 8, <code>--elevation-2</code>, items 32 tall, 13/20 400. <b>Configure · Share · Assign · Try as learner.</b></td></tr>
+<tr><td class="tok">Flagged</td><td><code>is-flagged</code>: 1.5px <code>--color-danger-border</code> outline at −1px offset.</td></tr>
+<tr><td class="tok">Click</td><td>The card opens the twin agent or the roleplay (<code>twin-bot-open</code>, <code>role-open</code>). The ⋮ and the avatars do not.</td></tr>
+</tbody></table></div>
+        <h4 style="margin:var(--space-6) 0 var(--space-2);">Motion</h4>
+        <div class="table-wrap"><table style="min-width:760px;"><colgroup><col style="width:18%"><col style="width:82%"></colgroup><thead><tr><th>Motion</th><th>Value</th></tr></thead><tbody>
+<tr><td class="tok">Tilt, tracking</td><td><code>pointermove</code> over the <b>whole picture</b> tilts the <b>bubble</b>: <code>perspective(700px) rotateX(−ny·9°) rotateY(nx·9°) scale(1.04)</code>, where nx, ny run −1 to 1 across the picture. Transform and shadow follow the pointer at <b>90ms linear</b>.</td></tr>
+<tr><td class="tok">Tilt, shadow and glare</td><td>While tilting, the bubble's shadow becomes <code>−nx·8px 12px 22px rgb(30 28 25 / .18)</code> plus <code>0 2px 6px rgb(0 0 0 / .08)</code>, and an orange glare follows the pointer: <code>radial-gradient(circle at x y, rgb(255 90 0 / .10), rgb(255 90 0 / .04) 35%, transparent 62%)</code>, fading in over 400ms.</td></tr>
+<tr><td class="tok">Tilt, depth</td><td>The face sits at <code>translateZ(14px)</code> and the text at <code>translateZ(6px)</code>, so they parallax against the bubble.</td></tr>
+<tr><td class="tok">Tilt, release</td><td>On <code>pointerout</code> of the picture the variables are removed and the bubble settles back over <b>600ms, <code>cubic-bezier(.2,.8,.2,1)</code></b>.</td></tr>
+<tr><td class="tok">Who tilts</td><td>Mouse and pen only; touch never tilts. <b>Reduced motion:</b> the tilt is 30% as deep and the transitions are removed.</td></tr>
+<tr><td class="tok">Video face</td><td>Autoplay, muted, loop, <code>playsinline</code>. It is the only moving image in the card.</td></tr>
+<tr><td class="tok">Card shadow</td><td>140ms, <code>--duration-quick</code>, <code>--ease-standard</code>. The slide-in menu has no animation.</td></tr>
+</tbody></table></div>
+        <ul class="rules">
+          <li><b>One shell, two cards.</b> The twin agent card differs only in the face (a 40px looping video, no client name, no eyebrow, bubble centred) and in what it opens. Anything built for one is built for both.</li>
+          <li><b>The picture is the only place colour lives.</b> The body and footer are neutral, so a page of nine cards stays calm and the gradients carry the variety.</li>
+          <li><b>Tilt is the one decorative motion in the product.</b> It lives on this bubble and on the usage credit card, nowhere else, and it respects reduced motion. It does not move on touch.</li>
+          <li><b>Open (&sect;10, Card gradients &amp; tilt):</b> the ten gradients are hard-coded hex; the glare is hard-coded <code>rgb(255 90 0)</code> rather than <code>--color-primary</code>; the bubble&rsquo;s shadow is <code>rgb(0 0 0 / .08)</code>, not an elevation token. Prototype-only: the learner avatars, client names, quotes and the twin video are sample content.</li>
+        </ul>
+      </div>
+
+      <!-- ---------------- Usage, Billing and Twin users, round 2 (16 Nov 2026) ---------------- -->
+      <div class="panel c-stack">
+        <div>
+          <h3>Usage, Billing, Twin users &amp; the learner page, round 2</h3>
+          <p class="c-note">Folded in from <code>PROTOTYPE-V3-DECISIONS-ROUND-2.md</code>, 16 Nov 2026. <b>The values are the hand-off&rsquo;s, not re-measured.</b> Anything marked <b>Open</b> carries a &#9873; and is not a rule: it is listed in &sect;10 for a yes or no. Specced, not yet <code>.tsx</code>.</p>
+        </div>
+        <div class="table-wrap">
+          <table style="min-width:880px;">
+            <colgroup><col style="width:15%"><col style="width:52%"><col style="width:10%"><col style="width:23%"></colgroup>
+            <thead><tr><th>Part</th><th>Spec</th><th>Verdict</th><th>Against the system</th></tr></thead>
+            <tbody>
+              <tr><td class="tok">Labelled table</td><td>Usage, Twin users, Persona list, learner Sessions. <code>--color-surface</code>, 1px <code>--color-card-border</code>, radius 16, <code>overflow:hidden</code>. <b>Label bar</b> (the header row): <code>--color-surface-sunken</code>, uppercase 12/18 500, +.04em, secondary, padding 10 × 20, <b>radius on the top corners only</b>. Rows are a grid: gap 12, padding 14 × 20, 1px <code>--color-border</code> divider; numbers right-aligned, tabular. At ≤720 keep the first and last column. Shadow is the shared list shadow: <b>Open, Round 2 &#9873;1</b>.</td><td><span class="c-badge c-badge--info">New</span></td><td>Same band as Table, now inside a card. Shadow is not <code>--elevation-1</code>.</td></tr>
+              <tr><td class="tok">Clickable row</td><td>A row that opens something: <code>cursor:pointer</code>, hover <code>--color-surface-sunken</code>, focus-visible 2px <code>--color-primary</code> outline at −2px offset, <code>tabindex=0</code>, Enter and Space activate.</td><td><span class="c-badge c-badge--info">New</span></td><td></td></tr>
+              <tr><td class="tok">Credits-used cell</td><td>Bar 6px, pill, track <code>--color-fill-soft</code>, fill <code>--color-text-primary</code>; a full bar turns <code>--color-caution</code>. Under it “N used · M left” 13/18 secondary; at 0 left a caution <b>Low</b> badge follows. Any use shows at least 3% of the bar.</td><td><span class="c-badge c-badge--info">New</span></td><td></td></tr>
+              <tr><td class="tok">Page header with a tool button</td><td>Usage (Activity log) and Billing (Support): 28px icon mark + title 18/24 600, sub 14/20 below; <b>one secondary md button</b> top-right, level with the title, a 16px icon before its label. No divider under the header on these two pages (margin-bottom 16).</td><td><span class="c-badge c-badge--info">New</span></td><td>One orange per view is untouched: the tool button is secondary.</td></tr>
+              <tr><td class="tok">Range switch</td><td>7d / 30d / 90d: text pills 14, pressed = <code>--color-fill-soft</code> pill, no border, right-aligned in the section header. Overview / Details and Sessions / Credits use the existing segmented control.</td><td><span class="c-badge c-badge--info">New</span></td><td></td></tr>
+              <tr><td class="tok">Tags</td><td><b>Active</b>: default badge (<code>--color-fill-soft</code>, secondary text) with a 14px check before the text (padding-left 8, gap 4, height stays 24). <b>Paid</b>: default badge. <b>Low</b>: caution badge. Icon inside a tag is 14.</td><td><span class="c-badge c-badge--success">Matches</span></td><td>Add-on tag (caution + crown + border) is <b>Open, Round 2 &#9873;3</b>.</td></tr>
+              <tr><td class="tok">Row icon tile</td><td>36 × 36, <code>--color-fill-soft</code>, 20px icon in <code>--color-text-secondary</code>, <code>flex:none</code>, 12 to 16 gap to the text. The only container for a row icon (Billing information, invoice rows). Corner radius 10 is <b>Open, Round 2 &#9873;14</b>.</td><td><span class="c-badge c-badge--caution">Differs</span></td><td>Nearest tokens are 8 and 12.</td></tr>
+              <tr><td class="tok">Label / value row</td><td>Billing information. Tile + label (15/22 600, flex 1) + value right-aligned (14/20 secondary, max-width 60%, <code>white-space:pre-line</code> so an address breaks on newlines). Rows 14 × 20 with 1px dividers; the card has no inner padding. Section head: title 18/24 + <b>Edit</b> (ghost sm) on the right.</td><td><span class="c-badge c-badge--info">New</span></td><td></td></tr>
+              <tr><td class="tok">Add-on box</td><td>Inside the Plan card. <code>--color-surface-sunken</code>, radius 12, padding 16, <b>no border</b>, margin-top 12. Text left (title 15/22 600 + tag + sub), actions <b>top-right</b> (See usage secondary sm, Buy credits primary sm). Sub has 8px padding-top and a deliberate break after “paid;”. At ≤720 the actions drop below.</td><td><span class="c-badge c-badge--info">New</span></td><td>Radius 12 inside a 16 card, as the 6 Nov rule says.</td></tr>
+              <tr><td class="tok">Invoice row and menu</td><td><code>[tile] name | date (muted) | Paid tag | price (600, right, min 80) | +N min (secondary, right, min 96) | …</code>. Two types only: <b>Plan renewal</b> (card icon) and <b>Minute pack Add-ons credits</b> (coins icon); names carry no period or credit count. The “…” is a ghost icon sm; the popover is 200 wide, right-aligned, items 40 tall (18px icon + label): Download invoice, Download receipt. One menu open at a time; outside click closes. The list has no card chrome: <b>Open, Round 2 &#9873;9</b>.</td><td><span class="c-badge c-badge--info">New</span></td><td></td></tr>
+              <tr><td class="tok">Credits-left card</td><td>Eyebrow 12/18 uppercase +.06em secondary; number <b>40/44</b> 600 on Usage, <b>28/32</b> 600 on the learner page, unit 18/400 secondary; 6px bar; note 14/22 (Usage) or “X of Y min used” (learner). Primary action beside or top-right: Buy credits (Usage), Add credits (learner). Padding 20 on Usage, 16 × 20 on the learner page; basis 460, shrinks, wraps below at ≤720.</td><td><span class="c-badge c-badge--info">New</span></td><td></td></tr>
+              <tr><td class="tok">Topic chip</td><td>13/20, 1px <code>--color-border</code>, pill, up to 2 shown + “+1”. Used in learner Sessions.</td><td><span class="c-badge c-badge--caution">Differs</span></td><td>Chips elsewhere are 34 tall; see the open chip row.</td></tr>
+              <tr><td class="tok">Dialogs: Contact support, Edit billing</td><td>Native <code>&lt;dialog&gt;</code>, width <code>min(660px, 100vw − 32)</code>, padding 24, stack gap 8. Title 20/28 600, sub 14/20, label 13/500, help 13/20. Close = 32px ghost icon at top 12 / right 12. Actions right-aligned, gap 12: Cancel (ghost) + primary; <b>primary disabled until valid</b>; Esc and scrim click close. Support: Subject + Message (min 84); Send needs both; toast “Message sent. We’ll reply to your email.” Edit billing: Billing emails (help “Separate several emails with commas.”), Legal name, Billing address (3 rows, newline = line break), Phone; Save changes needs emails, legal name and address; toast “Billing information updated.” Opened from the Support nav item and the Billing header button. Field height 40 is <b>Open, Round 2 &#9873;4</b>; corner radius 24 is <b>Open, Round 2 &#9873;5</b>.</td><td><span class="c-badge c-badge--caution">Differs</span></td><td>Title and sub match the Modal; widths and fields are new.</td></tr>
+              <tr><td class="tok">Side panel: Activity log</td><td>Existing side-panel anatomy (right edge, scrim, 24 left corners, slide-in once). Adds a <b>toolbar</b> under the head: filter select (Everything / Calls / Credits added), entry count (secondary, right), <b>Download CSV</b> (secondary sm, download icon). Rows: padding 14, 8px dot, name 14/20, time 13/18 muted, amount 14 600 right. Filter re-renders the list and the CSV exports the <b>filtered</b> rows. Closes on ×, Esc, scrim, or leaving the page. Width 480 is <b>Open, Round 2 &#9873;6</b>; the “tried” dot colour is <b>Open, Round 2 &#9873;7</b>.</td><td><span class="c-badge c-badge--caution">Differs</span></td><td>System panel is 560.</td></tr>
+              <tr><td class="tok">Inline semi-bold value</td><td><code>&lt;b class="bl-price"&gt;</code>: weight 600, <code>--color-text-primary</code>, no size change. Plan price, renewal date, credit count, pack price. <b>Open, Round 2 &#9873;2</b>: the weight rule keeps 600 for titles and row names.</td><td><span class="c-badge c-badge--caution">Differs</span></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h4 style="margin:var(--space-6) 0 var(--space-2);">Type roles used</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Size / line</th><th>Weight</th></tr></thead>
+            <tbody>
+              <tr><td class="tok">Page title with icon mark</td><td>18/24</td><td>600</td></tr>
+              <tr><td class="tok">Section heading (Plan, Invoices)</td><td>18/24, −.015em</td><td>600</td></tr>
+              <tr><td class="tok">Section / page sub</td><td>14/20</td><td>400 secondary</td></tr>
+              <tr><td class="tok">Table header cell</td><td>12/18, +.04em, uppercase</td><td>500 secondary</td></tr>
+              <tr><td class="tok">Table body</td><td>14/20</td><td>400</td></tr>
+              <tr><td class="tok">Row title (name)</td><td>15/22</td><td>600</td></tr>
+              <tr><td class="tok">Row sub (email, time)</td><td>13/18</td><td>400 secondary</td></tr>
+              <tr><td class="tok">Big number, Usage remaining</td><td>40/44, unit 18 / 400</td><td>600</td></tr>
+              <tr><td class="tok">Big number, learner credits left</td><td>28/32, unit 18</td><td>600</td></tr>
+              <tr><td class="tok">Eyebrow (CREDITS LEFT)</td><td>12/18, +.06em, uppercase</td><td>500 secondary</td></tr>
+              <tr><td class="tok">Dialog title</td><td>20/28</td><td>600</td></tr>
+              <tr><td class="tok">Dialog sub</td><td>14/20</td><td>400 secondary</td></tr>
+              <tr><td class="tok">Field help</td><td>13/20</td><td>400 secondary</td></tr>
+              <tr><td class="tok">Badge / tag</td><td>12/20</td><td>500</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h4 style="margin:var(--space-6) 0 var(--space-2);">Icons on these pages</h4>
+        <p class="c-note">Tabler outline, 24 &times; 24 viewBox, round caps and joins, <code>currentColor</code>. Stroke 2 is <b>Open</b> (&#9873;15 in &sect;10): the Icon sizes panel steps it by size.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Icon</th><th>Used for</th><th>Size</th></tr></thead>
+            <tbody>
+              <tr><td class="tok">credits (coins)</td><td>Usage nav and page mark, invoice type “Minute pack Add-ons credits”</td><td>20</td></tr>
+              <tr><td class="tok">billing (credit card)</td><td>Billing nav and page mark, invoice type “Plan renewal”</td><td>20</td></tr>
+              <tr><td class="tok">lifebuoy</td><td>Support nav item; Support header button</td><td>20 / 16</td></tr>
+              <tr><td class="tok">mail · building · mappin · phone</td><td>Billing information row tiles (emails, legal name, address, phone)</td><td>20 in tile</td></tr>
+              <tr><td class="tok">crown</td><td>Add-on tag</td><td>14</td></tr>
+              <tr><td class="tok">check (<code>M5 12l5 5l10 -10</code>, stroke 2.5)</td><td>Active tag</td><td>14</td></tr>
+              <tr><td class="tok">list (3 dots + 3 lines)</td><td>Activity log button</td><td>16</td></tr>
+              <tr><td class="tok">download</td><td>Download CSV; invoice menu</td><td>16 / 18</td></tr>
+              <tr><td class="tok">arrow up-right</td><td>Session row “open”</td><td>14</td></tr>
+              <tr><td class="tok">learners</td><td>Twin users nav and page mark</td><td>20</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h4 style="margin:var(--space-6) 0 var(--space-2);">Pages &amp; navigation</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Page</th><th>Layout</th></tr></thead>
+            <tbody>
+              <tr><td class="tok">Usage</td><td>Header (credits icon, “Usage”, sub “Where your organization's credits go. 1 credit = 1 minute of practice.”, <b>Activity log</b> top-right), then Overview / Details. <b>Overview:</b> Remaining-credits card (40/44 number + “min”, <b>Buy credits</b> primary top-right, 6px bar, “of 1,270 added”) → “Credits added” section → labelled table (Note, Date, Expires, Credits; note and amount 600). <b>Details:</b> “Twins and role plays” with the 7d / 30d / 90d switch → “Team” table → “Learners” with a 260 search and a clickable table (avatar + name 600 + email, Given, Used, Left + Low). The old Activity log section moved to the side panel.</td></tr>
+              <tr><td class="tok">Billing</td><td>Header (billing icon, <b>Support</b> top-right), then three full-width blocks 32 apart: <b>Plan</b> card (title “Paid plan” + Active tag, sub with bold price and renewal date, then the Add-on box) → <b>Billing information</b> card (label / value rows; Edit opens the dialog) → <b>Invoices</b> list. The gap above the first block is 60, <b>Open, Round 2 &#9873;10</b>.</td></tr>
+              <tr><td class="tok">Twin users</td><td>Library-style header (learners icon) → h2 “All learners” + sub “People who can learn from your twins”, stacked, not side by side → labelled table (Learner / Email / Assigned / Credits given / Until / Credits used). Rows open the learner page.</td></tr>
+              <tr><td class="tok">Learner page</td><td><code>← Back</code> → header: 80px avatar (letter 32) + name 20/28 600 + email 16/22 secondary on the left, <b>Credits-left card</b> on the right → Sessions / Credits segmented control → table. Sessions: 10 rows, each Learner (avatar, name 600, time), Topics (chips), Duration, Helpfulness (“–”), ↗; a row toasts “Opens the session report.” Credits: Note / Date / Until / Credits.</td></tr>
+              <tr><td class="tok">Persona list</td><td>List view gains the <b>label bar</b> (Persona / Role / Traits / Voice), the shared list shadow and semi-bold persona names. The Voice column shows only when at least one persona has a voice (<b>Open, Round 2 &#9873;11</b>).</td></tr>
+              <tr><td class="tok">Navigation</td><td>Rail foot, top to bottom: <b>Usage</b> (right-aligned “618 min”, hidden when the rail is collapsed), <b>Billing</b>, <b>Support</b> (opens the dialog, does not navigate), <b>Settings</b>, then the account chip. Twin group: Twin agents · Twin sessions · <b>Twin users</b> · Twin’s brain. The phone tab bar is unchanged. Going to another page closes the Activity log panel and the learner page.</td></tr>
+              <tr><td class="tok">Earlier in the same session</td><td>Sign up first (full-page card, login / sign-up toggle, prefilled sample email, orange Sign up); link auto-fill after 2 s with Next always enabled; Stop recording always enabled; “Make changes” confirm dialog (Cancel / Yes, make changes); “Built from” + “View all ↗” opens a right-edge file list; Assigned to: Unassign + Edit; account menu (Profile settings, Voices, Team, Developer API, Docs, Log out); one wide “Twin for all use cases” card above the specific agents; Finding-you tiles with a <code>--color-border</code> light-grey border and Looks right disabled until one is ticked; favicon = white mark on orange. The auto-fill, always-enabled Next and Stop are prototype behaviour, not rules.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="rules">
+          <li><b>Prototype-only, never a rule (Round 2 &#9873;13).</b> Add credits adds 30 minutes in memory; the CSV exports the filtered list; every session, invoice, learner, credit amount and name is made-up sample data (Plan $300.00 / month renewing 11 Dec 2026, a 100-credit pack for $25.00, 7 Twin users with 60 min each, 9 Usage learners, 8 Activity log entries). Mark all of it as placeholder in any spec.</li>
+          <li><b>Buttons.</b> Primary (orange): Buy credits, Add credits, Send, Save changes. Secondary: Support, Activity log, See usage, Download CSV. Ghost: Edit, Cancel, Previous / Next. No new variant.</li>
+        </ul>
+      </div>
+
     </section>
 
     <!-- 09 LAYOUT -->
@@ -3842,8 +4358,8 @@ footer { padding-top: var(--space-6); }
         <ul class="rules">
           <li><b>The page header carries one action.</b> If a screen needs two, the second is <code>secondary</code>, never two filled buttons side by side competing at the top of a page.</li>
           <li><b>The sidebar is <code>--z-sticky</code></b>, above content but below every overlay. It never covers a dialog.</li>
-          <li><b>The sidebar is 214px, changed 4 Nov 2026, was 248px (and 148px before 30 Sep).</b> It went 248 &rarr; 198 &rarr; 214 while the V3 prototype was polished; 214 is what its labels, icons and padding settled at. Collapsed stays 72px. The nav section label is &ldquo;ROLEPLAY&rdquo;, one word. The small shell diagram above still uses 148px on purpose, a compact proportional illustration, not a pixel claim.</li>
-          <li><b>Below <code>md</code> the sidebar becomes a drawer.</b> A 214px rail on a 375px phone leaves little for content.</li>
+          <li><b>The sidebar is 214px, confirmed 17 Nov 2026 (D125); D120's 248 was a stale prototype rule.</b> It went 248 &rarr; 198 &rarr; 214 while the V3 prototype was polished; 214 is what its labels, icons and padding settled at. Collapsed stays 72px. The nav section label is &ldquo;ROLEPLAY&rdquo;, one word. The small shell diagram above still uses 148px on purpose, a compact proportional illustration, not a pixel claim.</li>
+          <li><b>Below <code>md</code> the sidebar becomes a drawer.</b> A 248px rail on a 375px phone leaves little for content.</li>
         </ul>
       </div>
 
@@ -4184,7 +4700,7 @@ footer { padding-top: var(--space-6); }
               <tr><td class="tok">Nav item</td><td>190×32, gap 8, padding <code>0 8</code>, radius 8, 14/20 regular secondary, 16px outline icon; hover = <code>--tt-fill-soft</code> + primary text</td><td><span class="c-badge c-badge--success">Matches</span></td><td></td></tr>
               <tr><td class="tok">Active nav item</td><td><code>--tt-surface</code> fill, label <code>--tt-primary-ink</code>, weight 500, icon <code>--tt-primary</code>, <code>--tt-elevation-1</code></td><td><span class="c-badge c-badge--success">Matches</span></td><td>The recorded neutral pill + orange text exception.</td></tr>
               <tr><td class="tok">Rail label</td><td>11/16, 500, UPPERCASE, +.08em, tertiary, padding <code>0 8</code></td><td><span class="c-badge c-badge--caution">Differs</span></td><td>System overline is +.09em; .01em apart.</td></tr>
-              <tr><td class="tok">Nav count badge</td><td>18px circle minimum, <code>--tt-primary</code> fill, white 11/18 500, padding <code>0 6</code></td><td><span class="c-badge c-badge--danger">Conflicts</span></td><td>D04: no orange count pill. See §10.</td></tr>
+              <tr><td class="tok">Nav alert</td><td>8px circle, <code>--tt-primary</code> fill, no number</td><td><span class="c-badge c-badge--success">Matches</span></td><td>D125: the prototype draws a dot, not a count pill.</td></tr>
               <tr><td class="tok">User card</td><td>190×50, radius 12, white, 1px <code>--tt-card-border</code>, elevation-1, padding <code>8 12 8 8</code>, gap 12, name 14/20</td><td><span class="c-badge c-badge--info">New</span></td><td>Photo 32px + name.</td></tr>
               <tr><td class="tok">Rail order</td><td>Brand row (32px, theme switch right) · Inbox · TWIN: Twin agents, Twin sessions, Twin's brain · ROLEPLAY: Scenarios, Roleplay sessions, Persona · spacer · Settings · user card</td><td><span class="c-badge c-badge--info">New</span></td><td>Accounts live on Settings as cards, not in the rail.</td></tr>
               <tr><td class="tok">Phone: top bar</td><td>≤ 767px: rail hidden; <code>header.mobile-head</code> 56px, canvas, padding <code>0 16</code>; logo + wordmark left, layout / theme / account icon buttons right</td><td><span class="c-badge c-badge--info">New</span></td><td>Not in the system today.</td></tr>
@@ -4298,6 +4814,67 @@ footer { padding-top: var(--space-6); }
           <p><b>Class naming drift in the build.</b> <code>btn--strong</code> there is the orange primary. Anyone porting by class name would get the black variant; port by look, or rename in the build.</p>
         </div>
         <div class="status-item"><span class="status-tag st-open">Open</span><p><b>What is left of <code>strong</code>, and the cost of an orange default (D107).</b> The dark <code>strong</code> variant is still defined (<code>--tt-cta-strong</code> drives checkboxes and the calendar day) but nothing in product now uses it as a button, keep it for a second filled button, merge it into <code>primary</code>, or retire it. Marketing CTAs are not covered by V3 and still use <code>strong</code>. And the standing accessibility item gets wider: white on orange is 3.13:1 at 13&ndash;14px, and every view now carries one, not three per flow. Options, none chosen: let <code>primary</code> alone keep <code>lg</code> in product, move to a near-black label at <code>sm</code> / <code>md</code>, or accept it as a documented exception.</p></div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;1: One shared list shadow.</b> <code>0 2px 4px rgb(30 28 25 / .035), 0 8px 20px rgb(30 28 25 / .055)</code> sits on every labelled table, the Plan and Billing information cards and four older tables (10 places). It is not <code>--elevation-1</code>. Decide: a new token (suggested <code>--elevation-list</code>) or fold it into elevation-1.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;2: Inline semi-bold in running text.</b> Plan price, renewal date, “100 credits”, “$25.00” are 600; the weight rule keeps 600 for titles and row names and 500 for inline emphasis.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;3: The yellow Add-on tag.</b> <code>badge--caution</code> + crown icon + a 1px border at 40% caution (<code>color-mix</code>, not a token). Caution gold is the warning colour and Add-on is not a warning.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;4: Dialog fields are 40px.</b> Support and Edit billing follow the build, not D110 (36). Same open question as the sign-in form fields.</p>
+        </div>
+        
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;6: Activity log panel is 480.</b> <code>min(480px, 100vw)</code>; the system side panel is 560.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;7: Two colours with no token.</b> Activity dot “tried” <code>#7C93D6</code> and the wave’s second stop <code>#FF8A4C</code>. Make tokens or swap for <code>--color-info</code> and <code>--color-orange-400</code>.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;8: Orange count per view.</b> Usage 1 (Buy credits), Billing 1 (Buy credits), learner page 1 (Add credits), each dialog 1 (Send / Save changes), Usage → Details 0. Confirm this is D107's “one per view or dialog”.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;9: Invoice list has no card chrome.</b> No border, no shadow, rows flush, while Plan and Billing information are shadowed cards. Decide whether “borderless list” is a named variant of Table.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;10: 60px above the first block on Billing.</b> Not a step on the 4pt scale (48 and 64 exist). Round to 64 or keep 60.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;11: Voice column appears only if a persona has a voice.</b> Behaviour, not style. Make it a rule or leave it prototype-only.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;12: Wave animation uses a library.</b> <code>react-animated-waves</code> (canvas), bundled as <code>vendor-waves.js</code>, about 240 KB. 72px box, amplitude 30 live / 12 idle (must stay under half the height), intensity 1 / 0.35, speed 1.4 / 0.6, colours primary / <code>#FF8A4C</code> / primary, reduced motion ignored. The system has no canvas or animation-library rule: documented component or prototype-only?</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;14: The 36px icon tile has radius 10.</b> A new value; nearest tokens are 8 and 12. Not in the hand-off’s list, but its own text marks it.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Round 2 &#9873;15: Icon stroke 2 at every size.</b> The hand-off says one stroke weight (2, Tabler outline) everywhere. The Icon sizes panel steps stroke by size (2 / 1.75 / 1.6 / 1.4 at 12 / 16 / 20 / 24). Found while folding in; not in the hand-off.</p>
+        </div>
+        <div class="status-item">
+          <span class="status-tag st-open">Open</span>
+          <p><b>Twin and roleplay card: hard-coded gradients, glare and bubble shadow. Partly resolved 16 Nov 2026 (D118):</b> now <code>--tt-art-*</code>, <code>--tt-art-glare-*</code> and <code>--tt-shadow-bubble</code>; whether the tilt is a documented pattern is still open. The ten picture gradients are hard-coded hex, the tilt glare is <code>rgb(255 90 0)</code> instead of <code>--color-primary</code>, and the bubble shadow <code>rgb(0 0 0 / .08)</code> is not an elevation token. Make tokens (<code>--art-gradient-0</code> to <code>9</code>) or accept them as illustration, and decide whether the tilt (the product's one decorative motion) is a documented pattern.</p>
+        </div>
+        
+        
+        
+        
       </div>
     </section>
 
@@ -4875,5 +5452,75 @@ footer { padding-top: var(--space-6); }
       });
     });
   });
+
+  /* Decision record tabs: Locked | Reversed. Filters the status items by data-dec. */
+  (function () {
+    var tabs = document.querySelectorAll("[data-dec-tab]");
+    var items = document.querySelectorAll("#decisions .status-item[data-dec]");
+    tabs.forEach(function (tb) {
+      tb.addEventListener("click", function () {
+        tabs.forEach(function (o) { o.setAttribute("aria-selected", String(o === tb)); });
+        items.forEach(function (it) { it.hidden = it.dataset.dec !== tb.dataset.decTab; });
+      });
+    });
+    items.forEach(function (it) { it.hidden = it.dataset.dec !== "locked"; });
+  })();
+})();
+</script>
+
+<script>
+/* Twin agent / roleplay card specimens: the picture tilts the bubble (same maths as the prototype). */
+(function () {
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function tiltTo(el, e, deg) {
+    var r = el.getBoundingClientRect();
+    var nx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+    var ny = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - 0.5) * 2));
+    var k = reduced ? 0.3 : 1;
+    el.classList.add("is-tilting");
+    el.style.setProperty("--rx", (-ny * deg * k).toFixed(2));
+    el.style.setProperty("--ry", (nx * deg * k).toFixed(2));
+    el.style.setProperty("--tx", (nx * 8).toFixed(2));
+    el.style.setProperty("--gx", (50 + nx * 46).toFixed(1) + "%");
+    el.style.setProperty("--gy", (50 + ny * 46).toFixed(1) + "%");
+  }
+  function tiltOff(el) {
+    el.classList.remove("is-tilting");
+    ["--rx", "--ry", "--tx", "--gx", "--gy"].forEach(function (n) { el.style.removeProperty(n); });
+  }
+  document.addEventListener("pointermove", function (e) {
+    if (e.pointerType && e.pointerType !== "mouse" && e.pointerType !== "pen") return;
+    var art = e.target.closest && e.target.closest(".tc-art");
+    var b = art && art.querySelector(".tc-bubble");
+    if (b) tiltTo(b, e, parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--tt-tilt-max")) || 9);
+  });
+  document.addEventListener("pointerout", function (e) {
+    var art = e.target.closest && e.target.closest(".tc-art");
+    if (art && !art.contains(e.relatedTarget)) { var b = art.querySelector(".tc-bubble"); if (b) tiltOff(b); }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var G=[["#A8C6EC","#D2C3E8","#F1C6D7"],["#A8E0C9","#BFE0E8","#C7CDF2"],["#F3CFA0","#F0BCC7","#DDB8EA"],["#CBE3A8","#BFE6CF","#A8E0E0"],["#F6D9A0","#F2C2B0","#ECB6CC"],["#B8CDF0","#C8C4EC","#E0C0E8"],["#F0E3A0","#ECD0B0","#E8BCC4"],["#A0E4E0","#B8D4EC","#CCC8F0"],["#F0C8A8","#EEC0D0","#D8BCE8"],["#BCEAD0","#C4E0E4","#D4D0F0"]], N=["Blue · lilac · pink","Mint · aqua · periwinkle","Sand · rose · orchid","Lime · mint · aqua","Honey · peach · pink","Sky · lavender · mauve","Butter · tan · blush","Aqua · sky · periwinkle","Apricot · pink · violet","Seafoam · mist · lilac"];
+  var out=document.getElementById('tc-pick-out');
+  var sws=[].slice.call(document.querySelectorAll('.tc-sw'));
+  var arts=[].slice.call(document.querySelectorAll('.tc-art[data-pick]'));
+  function pick(i){
+    sws.forEach(function(b){ b.setAttribute('aria-checked', String(+b.dataset.i===i)); b.tabIndex=(+b.dataset.i===i)?0:-1; });
+    arts.forEach(function(a){ a.className=a.className.replace(/tc-art--\d+/,'tc-art--'+i); });
+    if(out) out.innerHTML='<b>Gradient '+i+'</b> &middot; '+N[i]+' &middot; <code>135deg</code> '+G[i].join(' <code>&rarr;</code> ').replace(/#\w+/g,function(h){return '<code>'+h+'</code>';});
+  }
+  sws.forEach(function(b){
+    b.addEventListener('click',function(){ pick(+b.dataset.i); });
+    b.addEventListener('keydown',function(e){
+      var cur=sws.findIndex(function(x){return x.getAttribute('aria-checked')==='true';}), n=null;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown') n=(cur+1)%10;
+      if(e.key==='ArrowLeft'||e.key==='ArrowUp') n=(cur+9)%10;
+      if(n!==null){ e.preventDefault(); pick(n); sws[n].focus(); }
+    });
+  });
+  pick(0);
 })();
 </script>
