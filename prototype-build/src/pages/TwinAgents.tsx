@@ -59,6 +59,7 @@ export function TwinAgents() {
         <TwinAllCard
           name="Olga’s twin"
           meta="Last updated 29 Oct, 13:00"
+          metaIcon={<svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
           photoSrc={PRESENCE}
           learners={learnersFor(0)}
           actions={twinAllActions}

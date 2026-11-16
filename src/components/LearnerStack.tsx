@@ -17,11 +17,11 @@ export function LearnerStack({ learners, max = 4, className }: { learners: reado
   return (
     <span className={cn("flex items-center", className)} role="group" aria-label="Learners">
       {shown.map((l, i) => (
-        <Avatar key={l.name} src={l.src} alt={l.name} size="sm" className={cn("ring-2 ring-surface", i > 0 && "-ml-2")} />
+        <Avatar key={l.name} src={l.src} alt={l.name} size="sm" className={cn("box-border border-2 border-surface", i > 0 && "-ml-2")} />
       ))}
       {more > 0 ? (
         <span
-          className="-ml-2 grid h-7 w-7 place-items-center rounded-full bg-fill-soft-hover font-ui text-[11px] font-medium text-ink-secondary ring-2 ring-surface"
+          className="-ml-2 grid h-7 w-7 place-items-center rounded-full bg-fill-soft-hover font-ui text-[11px] font-medium text-ink-secondary border-2 border-surface"
           aria-label={`${more} more learners`}
         >
           +{more}

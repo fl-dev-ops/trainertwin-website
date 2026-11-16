@@ -98,6 +98,8 @@ export interface TwinAllCardProps {
   name: string;
   /** "Last updated 29 Oct, 13:00". */
   meta: string;
+  /** After the meta line: the prototype draws a 12px chevron here. */
+  metaIcon?: ReactNode;
   photoSrc?: string;
   learners?: readonly Learner[];
   href?: string;
@@ -108,7 +110,7 @@ export interface TwinAllCardProps {
   className?: string;
 }
 
-export function TwinAllCard({ name, meta, photoSrc, learners = [], href, onOpen, onMore, actions, className }: TwinAllCardProps) {
+export function TwinAllCard({ name, meta, metaIcon, photoSrc, learners = [], href, onOpen, onMore, actions, className }: TwinAllCardProps) {
   const nameCls =
     "relative text-left font-ui text-[18px] leading-6 font-title text-ink after:absolute after:inset-0 after:z-[1] after:content-[''] focus-visible:outline-none tt-open";
   return (
@@ -138,7 +140,7 @@ export function TwinAllCard({ name, meta, photoSrc, learners = [], href, onOpen,
             {name}
           </button>
         )}
-        <p className="m-0 flex items-center gap-1 font-ui text-[15px] leading-5 text-ink-secondary">{meta}</p>
+        <p className="m-0 flex items-center gap-1 font-ui text-[15px] leading-5 text-ink-secondary">{meta}{metaIcon ? <span aria-hidden="true" className="flex-none [&>svg]:h-3 [&>svg]:w-3">{metaIcon}</span> : null}</p>
         {learners.length ? <LearnerStack learners={learners} /> : null}
       </div>
       {actions ? (
