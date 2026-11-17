@@ -32,7 +32,7 @@ export function SessionsSummary({ label, data, pressedId, onChip, onShowAll, onT
               value={
                 <>
                   {t.value}
-                  {t.muted ? <span className="ml-1 text-[18px] font-medium text-ink-secondary">{t.muted}</span> : null}
+                  {t.muted ? <span className="ml-2 text-[18px] font-medium text-ink-secondary">{t.muted}</span> : null}
                 </>
               }
               onGo={t.go ? () => onTile?.(t.label) : undefined}

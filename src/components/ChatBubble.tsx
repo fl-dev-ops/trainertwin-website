@@ -23,16 +23,18 @@ export interface ChatBubbleProps {
   ask?: boolean;
   /** `transcript` only: who is speaking. */
   name?: string;
+  /** `transcript` only: weight of the name. `label` (500) in a chat, `title` (600) in a session report's transcript card (V3 `.sr-call`). */
+  nameWeight?: "label" | "title";
   children: ReactNode;
   className?: string;
 }
 
-export function ChatBubble({ variant = "message", side = "twin", ask = false, name, children, className }: ChatBubbleProps) {
+export function ChatBubble({ variant = "message", side = "twin", ask = false, name, nameWeight = "label", children, className }: ChatBubbleProps) {
   const left = side === "twin";
   if (variant === "transcript") {
     return (
       <div className={cn("max-w-[78%] rounded-md bg-surface p-3 font-ui shadow-e1 dark:bg-surface-raised", left ? "self-start" : "self-end", className)}>
-        {name ? <span className="mb-0.5 block text-[13px] leading-[18px] font-label text-ink">{name}</span> : null}
+        {name ? <span className={cn("mb-0.5 block text-[13px] leading-[18px] text-ink", nameWeight === "title" ? "font-title" : "font-label")}>{name}</span> : null}
         <p className="m-0 text-[14px] leading-5 text-ink">{children}</p>
       </div>
     );

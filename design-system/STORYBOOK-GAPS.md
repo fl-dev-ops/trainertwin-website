@@ -37,6 +37,21 @@ Ranked by how many pages need it, then by how much each copy costs to keep in st
 | 16 | ~~**Card lift shadows**~~ (done, D129: `--tt-shadow-lift`, `--tt-shadow-sheet`) | **9** literal `shadow-[0_2px_4px…,0_8px_20px…]` strings in 7 files (V3 uses three different two-layer shadows) | Tokens `--tt-shadow-lift-1/2/3`, so pages say `shadow-lift`. Needs a design decision on which three | S |
 | 17 | **Canvas flow board** | Twin's brain: absolute-positioned nodes, tags, connectors, zoom | A `FlowBoard` wrapper with node placement and `FlowLink`. `FlowNode` exists | M |
 
+## 1b. Found while building the Roleplay sessions pages (17 Nov 2026)
+
+Local pieces in `prototype-build/src` that are not in Storybook yet, ranked by how many places use them:
+
+| Piece | Where | Proposed component |
+|---|---|---|
+| `FeedbackCard` (stars, score and question, quote, reported issues, or "No feedback left") | both session reports | `FeedbackCard` |
+| `ChoiceChip` (a toggle pill that turns white with an orange ring when pressed) | Feels-off dialog; V3 also uses it for trait pickers | `ChoiceChip` |
+| `SessionsSummary` (four number tiles, rating and paid cards, "Needs a look" chips) | Twin sessions, Roleplay sessions | `SummaryBlock` (gap 4) |
+| Rubric row (name, 6px bar, points) and note row (round tick or "!" icon, title, text, Jump) | Roleplay report | `ScoreRow`, `NoteRow` |
+| Rated pill ("Feels like me" with a thumb) | Twin session report | a `Badge` variant |
+| Textarea label with a lighter "Optional" suffix | Feels-off dialog | `Textarea` `optional` prop |
+
+V3 quirk, kept on purpose: the Roleplay filter lists nine roleplays that are all called "First conversation" (V3 strips the client's name from the title). Say if the build should show the client names instead.
+
 ## 2. Suggested order
 
 1. ~~Swap `BackBar` in~~, ~~`description` on `PageHeader` (2)~~ and ~~icons (9)~~: all done 17 Nov 2026 (D128). The build page now resolves every scraped icon to a library icon except Drive, Notion and one sparkle variant, and the 14 duplicate `html()` helpers are one function.

@@ -38,6 +38,16 @@ export const Transcript: Story = {
   ),
 };
 
+export const ReportTranscript: Story = {
+  parameters: { docs: { description: { story: "`nameWeight=\"title\"`: the speaker's name is 600 instead of 500, as in V3's session-report transcript card (`.sr-call`). Everywhere else a transcript keeps the 500 name." } } },
+  render: () => (
+    <ChatThread well className="w-[460px] max-w-full">
+      <ChatBubble variant="transcript" nameWeight="title" side="twin" name="Ravi">Can you send me some options on WhatsApp?</ChatBubble>
+      <ChatBubble variant="transcript" nameWeight="title" side="you" name="Learner">Of course. Do you prefer a villa or an apartment?</ChatBubble>
+    </ChatThread>
+  ),
+};
+
 export const Call: Story = {
   render: () => (
     <ChatThread className="w-[420px] max-w-full">

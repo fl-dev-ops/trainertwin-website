@@ -21,6 +21,7 @@ import { AgentEdit } from "./pages/AgentEdit";
 import { CalibrateOverview } from "./pages/CalibrateOverview";
 import { TryRoom } from "./pages/TryRoom";
 import { SessionReport } from "./pages/SessionReport";
+import { RoleplayReport } from "./pages/RoleplayReport";
 import { CreateAgent } from "./pages/CreateAgent";
 import { TWIN_BOTS } from "./generated";
 
@@ -57,7 +58,7 @@ const PAGES: Record<string, (r: { sub: string; go: (id: string, sub?: string) =>
   twinusers: () => <TwinUsers />,
   knowledge: ({ sub, go }) => <TwinBrain tab={sub || "knowledge"} onTab={(t) => go("knowledge", t === "knowledge" ? "" : t)} />,
   roleplay: () => <Scenarios />,
-  sessions: () => <RoleplaySessions />,
+  sessions: ({ sub, go }) => (sub ? <RoleplayReport index={Number(sub)} onBack={() => go("sessions")} /> : <RoleplaySessions onOpen={(i) => go("sessions", String(i))} />),
   rpsettings: () => <Persona />,
   usage: () => <Usage />,
   billing: () => <Billing />,

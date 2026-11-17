@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "./cn";
+import { SearchField } from "./SearchField";
 
 /**
  * The compact filter control for toolbars and page headers (V3 `.bot-range .home-ask-mode` and `.bq-chip`): a pill that
@@ -22,6 +23,8 @@ import { cn } from "./cn";
 export interface FilterOption {
   value: string;
   label: string;
+  /** A second, quieter line under the label (an email under a name). Also searched. */
+  description?: string;
 }
 
 export interface FilterSelectProps {
@@ -35,13 +38,23 @@ export interface FilterSelectProps {
   icon?: ReactNode;
   /** `select` width in px or any CSS length. Default: as wide as its text. */
   width?: number | string;
+  /**
+   * Put a search box above the list (V3's learner filter): typing narrows the options by label and description. The list
+   * becomes 320 wide and scrolls past 360. Every option is searched, "All learners" included.
+   */
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  /** Shown when the search matches nothing. */
+  emptyText?: string;
   /** Start with the list open. For documentation and tests; real pages leave it closed. */
   defaultOpen?: boolean;
   className?: string;
 }
 
-export function FilterSelect({ label, options, value, onChange, variant = "select", icon, width, defaultOpen = false, className }: FilterSelectProps) {
+export function FilterSelect({ label, options, value, onChange, variant = "select", icon, width, searchable = false, searchPlaceholder = "Search", emptyText = "Nothing matches that search.", defaultOpen = false, className }: FilterSelectProps) {
   const [open, setOpen] = useState(defaultOpen);
+  const [query, setQuery] = useState("");
+  const searchBox = useRef<HTMLDivElement>(null);
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -49,6 +62,12 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
   const chip = variant === "chip";
   const current = options.find((o) => o.value === value) ?? options[0];
   const active = chip && value !== options[0].value;
+  const q = query.trim().toLowerCase();
+  const shown = useMemo(
+    () => (searchable && q ? options.filter((o) => `${o.label} ${o.description ?? ""}`.toLowerCase().includes(q)) : options),
+    [options, q, searchable],
+  );
+  const empty = searchable && shown.length === 0;
 
   useEffect(() => {
     if (!open) return;
@@ -60,13 +79,16 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
   }, [open]);
 
   useEffect(() => {
-    if (open) refs.current[Math.max(0, options.findIndex((o) => o.value === value))]?.focus();
+    if (!open) return;
+    if (searchable) searchBox.current?.querySelector("input")?.focus();
+    else refs.current[Math.max(0, options.findIndex((o) => o.value === value))]?.focus();
     // Only when it opens: re-running as the value changes would yank focus.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   function close(refocus = true) {
     setOpen(false);
+    setQuery("");
     if (refocus) trigger.current?.focus();
   }
   function onTriggerKey(e: KeyboardEvent) {
@@ -76,12 +98,14 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
     }
   }
   function onListKey(e: KeyboardEvent) {
-    const i = refs.current.findIndex((r) => r === document.activeElement);
-    const go = (n: number) => refs.current[(n + options.length) % options.length]?.focus();
+    const live = refs.current.slice(0, shown.length);
+    if (e.key === "ArrowDown" && document.activeElement instanceof HTMLInputElement) { e.preventDefault(); live[0]?.focus(); return; }
+    const i = live.findIndex((r) => r === document.activeElement);
+    const go = (n: number) => shown.length && live[(n + shown.length) % shown.length]?.focus();
     if (e.key === "ArrowDown") { e.preventDefault(); go(i + 1); }
     else if (e.key === "ArrowUp") { e.preventDefault(); go(i - 1); }
     else if (e.key === "Home") { e.preventDefault(); go(0); }
-    else if (e.key === "End") { e.preventDefault(); go(options.length - 1); }
+    else if (e.key === "End") { e.preventDefault(); go(shown.length - 1); }
     else if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); close(); }
     else if (e.key === "Tab") close(false);
   }
@@ -122,40 +146,54 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
       </button>
       {open ? (
         <div
-          id={id}
-          role="listbox"
-          aria-label={label}
           onKeyDown={onListKey}
           className={cn(
-            "absolute top-[calc(100%+6px)] z-(--tt-z-dropdown) flex w-max min-w-full flex-col gap-0.5 rounded-md border border-line-card bg-surface p-2 font-ui shadow-e2",
+            "absolute top-[calc(100%+6px)] z-(--tt-z-dropdown) flex min-w-full flex-col gap-0.5 rounded-md border border-line-card bg-surface p-2 font-ui shadow-e2",
             chip ? "left-0 min-w-[180px]" : "right-0",
+            searchable ? "max-h-[360px] w-[320px] overflow-y-auto" : "w-max",
           )}
         >
-          {options.map((o, i) => (
-            <button
-              key={o.value}
-              ref={(el) => {
-                refs.current[i] = el;
-              }}
-              type="button"
-              role="option"
-              aria-selected={o.value === value}
-              onClick={() => {
-                onChange(o.value);
-                close();
-              }}
-              className={cn(
-                // One look for both variants (V3 `.twin-hero-ask-opt`): 36px, 8px radius, 14px. The chosen option keeps
-                // the grey fill and the label weight; hover and keyboard focus paint the same grey on the others, so
-                // the chosen one and the one under the pointer can both be grey at once.
-                "flex min-h-9 w-full cursor-pointer items-center rounded-sm px-2 py-2 text-left text-[14px] leading-5 whitespace-nowrap text-ink",
-                "hover:bg-fill-soft focus-visible:bg-fill-soft focus-visible:outline-none",
-                o.value === value && "bg-fill-soft font-label",
-              )}
-            >
-              {o.label}
-            </button>
-          ))}
+          {searchable ? (
+            <div ref={searchBox} className="mb-1">
+              <SearchField label={`Search ${label.replace(/^Filter by /i, "").toLowerCase()}`} placeholder={searchPlaceholder} value={query} onChange={setQuery} appearance="field" className="hover:border-line-interactive focus-within:border-line-interactive focus-within:outline-0!" />
+            </div>
+          ) : null}
+          <div id={id} role="listbox" aria-label={label} className="flex flex-col gap-0.5">
+            {shown.map((o, i) => (
+              <button
+                key={o.value}
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
+                type="button"
+                role="option"
+                aria-selected={o.value === value}
+                onClick={() => {
+                  onChange(o.value);
+                  close();
+                }}
+                className={cn(
+                  // One look for both variants (V3 `.twin-hero-ask-opt`): 36px, 8px radius, 14px. The chosen option keeps
+                  // the grey fill and the label weight; hover and keyboard focus paint the same grey on the others, so
+                  // the chosen one and the one under the pointer can both be grey at once.
+                  "flex min-h-9 w-full cursor-pointer items-center rounded-sm px-2 py-2 text-left text-[14px] leading-5 whitespace-nowrap text-ink",
+                  "hover:bg-fill-soft focus-visible:bg-fill-soft focus-visible:outline-none",
+                  o.description && "flex-col items-start gap-0",
+                  o.value === value && "bg-fill-soft font-label",
+                )}
+              >
+                {o.description ? (
+                  <>
+                    <span className="text-[14px] leading-5">{o.label}</span>
+                    <span className="text-[12px] leading-4 font-normal text-ink-secondary">{o.description}</span>
+                  </>
+                ) : (
+                  o.label
+                )}
+              </button>
+            ))}
+          </div>
+          {empty ? <p className="m-0 p-3 text-center text-[13px] text-ink-secondary">{emptyText}</p> : null}
         </div>
       ) : null}
     </div>

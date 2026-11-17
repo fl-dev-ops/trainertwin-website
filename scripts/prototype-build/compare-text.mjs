@@ -26,6 +26,7 @@ const FLOWS = {
   session: { hash: "calibrations/0", v3: async (p) => { await p.click('.nav-item[data-id="calibrations"]'); await p.click(".ts-rowbtn >> nth=0"); } },
   questions: { hash: "knowledge/questions", v3: async (p) => { await p.click('.nav-item[data-id="knowledge"]'); await p.click('.flow-tabs [data-id="questions"]'); } },
   issues: { hash: "knowledge/issues", v3: async (p) => { await p.click('.nav-item[data-id="knowledge"]'); await p.click('.flow-tabs [data-id="reports"]'); } },
+  rpsession: { hash: "sessions/0", v3: async (p) => { await p.click('.nav-item[data-id="sessions"]'); await p.click(".ts-rowbtn >> nth=0"); } },
   create: { hash: "setup/new", v3: async (p) => p.click(".lib-tools .btn--strong") },
   twinall: { hash: "setup/olga-twin", v3: async (p) => p.click(".twin-all") },
   agent2: { hash: "setup/listing-pitch", v3: async (p) => p.click('.rp-grid .rp-card[data-id="listing-pitch"]') },

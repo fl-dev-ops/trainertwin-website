@@ -59,3 +59,24 @@ export const OpenList: Story = {
     </div>
   ),
 };
+
+const people = [
+  { value: "all", label: "All learners" },
+  { value: "a", label: "Aisha Khan", description: "aisha.khan@gmail.com" },
+  { value: "j", label: "James Carter", description: "james.carter@outlook.com" },
+  { value: "n", label: "Nora Ali", description: "nora.ali@gmail.com" },
+];
+export const Searchable: Story = {
+  parameters: {
+    layout: "centered",
+    docs: { description: { story: "`searchable` with `description` on each option (V3's learner filter): a search box above the list, a second line under each name, 320 wide. Typing narrows by name and email; the box has focus when the list opens; ArrowDown moves into the options." } },
+  },
+  render: function Render() {
+    const [v, setV] = useState("all");
+    return (
+      <div className="h-[340px] w-[360px]">
+        <FilterSelect label="Filter by learner" options={people} value={v} onChange={setV} width={148} searchable searchPlaceholder="Search by name or email" emptyText="No one matches that search." defaultOpen />
+      </div>
+    );
+  },
+};

@@ -1,0 +1,3680 @@
+[
+ {
+  "role": "ravi",
+  "id": "ravi-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 1,
+  "scenario": "First conversation",
+  "score": "74 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 17/25",
+  "stars": 3,
+  "helpLabel": "Somewhat helpful",
+  "issue": "Other",
+  "report": {
+   "back": "Ravi: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Ravi: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "../media/client-landlord.jpg",
+    "name": "Ravi"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 3,
+    "num": "3",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Good, but I wanted one more example.”"
+   },
+   "issues": [
+    {
+     "badge": "Other",
+     "note": "The video froze for a few seconds."
+    }
+   ],
+   "rubric": {
+    "total": "74 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "26 / 30",
+      "pct": 87
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "14 / 20",
+      "pct": 70
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Share budget range and agree to a follow-up call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 26 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 14 / 20",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Covered what matters most · 17 / 25",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 17 / 25",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about purpose and family needs?"
+    },
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Keep in mind: risk-averse, prefers simple mortgage process, new to Dubai market."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we share budget range and agree to a follow-up call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "ravi",
+  "id": "ravi-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 2,
+  "scenario": "First conversation",
+  "score": "81 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 18/25",
+  "stars": null,
+  "helpLabel": "",
+  "issue": "",
+  "report": {
+   "back": "Ravi: first conversation",
+   "name": "James",
+   "subs": [
+    "Ravi: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "../media/client-landlord.jpg",
+    "name": "Ravi"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "No feedback left after this session.",
+    "stars": null,
+    "num": "",
+    "rest": "",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "81 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "28 / 30",
+      "pct": 93
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "16 / 20",
+      "pct": 80
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Share budget range and agree to a follow-up call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 28 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 16 / 20",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 18 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Covered what matters most · 19 / 25",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about purpose and family needs?"
+    },
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Keep in mind: risk-averse, prefers simple mortgage process, new to Dubai market."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we share budget range and agree to a follow-up call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "ravi",
+  "id": "ravi-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 3,
+  "scenario": "First conversation",
+  "score": "74 / 100",
+  "weak": "Opened the client up 19/30",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "",
+  "report": {
+   "back": "Ravi: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Ravi: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "../media/client-landlord.jpg",
+    "name": "Ravi"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "74 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "19 / 30",
+      "pct": 63
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "20 / 25",
+      "pct": 80
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "16 / 20",
+      "pct": 80
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Share budget range and agree to a follow-up call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Covered what matters most · 20 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 16 / 20",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Opened the client up · 19 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 19 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about purpose and family needs?"
+    },
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Ravi",
+     "twin": true,
+     "text": "Keep in mind: risk-averse, prefers simple mortgage process, new to Dubai market."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we share budget range and agree to a follow-up call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "faisal",
+  "id": "faisal-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 4,
+  "scenario": "First conversation",
+  "score": "70 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 16/25",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "",
+  "report": {
+   "back": "Faisal: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Faisal: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Faisal"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "70 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "23 / 30",
+      "pct": 77
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "16 / 25",
+      "pct": 64
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "14 / 20",
+      "pct": 70
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Share target yield and shortlist 2 projects for comparison",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 23 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 14 / 20",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 16 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Covered what matters most · 17 / 25",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions on hold period and yield risk?"
+    },
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Keep in mind: reduce work stress, prefers manageable operations."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we share target yield and shortlist 2 projects for comparison?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "faisal",
+  "id": "faisal-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 5,
+  "scenario": "First conversation",
+  "score": "77 / 100",
+  "weak": "Secured the goal next step with a date 14/20",
+  "stars": 4,
+  "helpLabel": "Helpful",
+  "issue": "",
+  "report": {
+   "back": "Faisal: first conversation",
+   "name": "James",
+   "subs": [
+    "Faisal: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Faisal"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "",
+    "stars": 4,
+    "num": "4",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“It repeated itself a little.”"
+   },
+   "issues": [],
+   "rubric": {
+    "total": "77 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "26 / 30",
+      "pct": 87
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "14 / 20",
+      "pct": 70
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Share target yield and shortlist 2 projects for comparison",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 26 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 19 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 14 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 18 / 25",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions on hold period and yield risk?"
+    },
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Keep in mind: reduce work stress, prefers manageable operations."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we share target yield and shortlist 2 projects for comparison?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "faisal",
+  "id": "faisal-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 1,
+  "scenario": "First conversation",
+  "score": "70 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 15/25",
+  "stars": 4,
+  "helpLabel": "Helpful",
+  "issue": "Flat or no emotion",
+  "report": {
+   "back": "Faisal: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Faisal: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Faisal"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 4,
+    "num": "4",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Answered exactly what I was stuck on.”"
+   },
+   "issues": [
+    {
+     "badge": "Flat or no emotion",
+     "note": "No emotion when it explained the payment plan."
+    }
+   ],
+   "rubric": {
+    "total": "70 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "23 / 30",
+      "pct": 77
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "15 / 25",
+      "pct": 60
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "14 / 20",
+      "pct": 70
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Share target yield and shortlist 2 projects for comparison",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 23 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 18 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 15 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Secured the goal next step with a date · 14 / 20",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions on hold period and yield risk?"
+    },
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Faisal",
+     "twin": true,
+     "text": "Keep in mind: reduce work stress, prefers manageable operations."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we share target yield and shortlist 2 projects for comparison?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "karim",
+  "id": "karim-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 2,
+  "scenario": "First conversation",
+  "score": "67 / 100",
+  "weak": "Secured the goal next step with a date 11/20",
+  "stars": 4,
+  "helpLabel": "Helpful",
+  "issue": "Doesn't sound like me",
+  "report": {
+   "back": "Karim: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Karim: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "../media/persona-marcus.jpg",
+    "name": "Karim"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 4,
+    "num": "4",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Helpful for the exam prep.”"
+   },
+   "issues": [
+    {
+     "badge": "Doesn't sound like me",
+     "note": "Olga is warmer than this."
+    }
+   ],
+   "rubric": {
+    "total": "67 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "18 / 30",
+      "pct": 60
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "11 / 20",
+      "pct": 55
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a structured comparison call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 19 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 19 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 11 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Opened the client up · 18 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about risk tolerance and exit plans?"
+    },
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Keep in mind: risk management, possible golden visa angle for parents."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we agree to a structured comparison call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "karim",
+  "id": "karim-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 3,
+  "scenario": "First conversation",
+  "score": "74 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 16/25",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "",
+  "report": {
+   "back": "Karim: first conversation",
+   "name": "James",
+   "subs": [
+    "Karim: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "../media/persona-marcus.jpg",
+    "name": "Karim"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "74 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "26 / 30",
+      "pct": 87
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "16 / 25",
+      "pct": 64
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "16 / 25",
+      "pct": 64
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "16 / 20",
+      "pct": 80
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a structured comparison call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 26 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 16 / 20",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Covered what matters most · 16 / 25",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 16 / 25",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about risk tolerance and exit plans?"
+    },
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Keep in mind: risk management, possible golden visa angle for parents."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we agree to a structured comparison call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "karim",
+  "id": "karim-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 4,
+  "scenario": "First conversation",
+  "score": "67 / 100",
+  "weak": "Covered what matters most 14/25",
+  "stars": 3,
+  "helpLabel": "Somewhat helpful",
+  "issue": "Wrong accent",
+  "report": {
+   "back": "Karim: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Karim: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "../media/persona-marcus.jpg",
+    "name": "Karim"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 3,
+    "num": "3",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Answered exactly what I was stuck on.”"
+   },
+   "issues": [
+    {
+     "badge": "Wrong accent",
+     "note": "The accent changed halfway through."
+    }
+   ],
+   "rubric": {
+    "total": "67 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "24 / 30",
+      "pct": 80
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "15 / 25",
+      "pct": 60
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "14 / 25",
+      "pct": 56
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "14 / 20",
+      "pct": 70
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a structured comparison call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 24 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 14 / 20",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Covered what matters most · 14 / 25",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 15 / 25",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about risk tolerance and exit plans?"
+    },
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Karim",
+     "twin": true,
+     "text": "Keep in mind: risk management, possible golden visa angle for parents."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we agree to a structured comparison call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "adam",
+  "id": "adam-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 5,
+  "scenario": "First conversation",
+  "score": "72 / 100",
+  "weak": "Opened the client up 19/30",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "",
+  "report": {
+   "back": "Adam: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Adam: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23F3ECFB%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%236B3FA0%22%3EA%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Adam"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "72 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "19 / 30",
+      "pct": 63
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "21 / 25",
+      "pct": 84
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "14 / 20",
+      "pct": 70
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a 20-minute online presentation call to compare options",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 21 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 18 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Opened the client up · 19 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Secured the goal next step with a date · 14 / 20",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with calm questions on why Dubai vs the US?"
+    },
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Keep in mind: needs mortgage, doesn’t understand payment plans yet, wants tax-efficient setup."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we agree to a 20-minute online presentation call to compare options?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "adam",
+  "id": "adam-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 1,
+  "scenario": "First conversation",
+  "score": "79 / 100",
+  "weak": "Opened the client up 22/30",
+  "stars": 3,
+  "helpLabel": "Somewhat helpful",
+  "issue": "Wrong pronunciation",
+  "report": {
+   "back": "Adam: first conversation",
+   "name": "James",
+   "subs": [
+    "Adam: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23F3ECFB%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%236B3FA0%22%3EA%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Adam"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "",
+    "stars": 3,
+    "num": "3",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Good, but I wanted one more example.”"
+   },
+   "issues": [
+    {
+     "badge": "Wrong pronunciation",
+     "note": "It said “off-plan” oddly."
+    }
+   ],
+   "rubric": {
+    "total": "79 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "22 / 30",
+      "pct": 73
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "22 / 25",
+      "pct": 88
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "16 / 20",
+      "pct": 80
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a 20-minute online presentation call to compare options",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 22 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 16 / 20",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Opened the client up · 22 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Covered what matters most · 19 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with calm questions on why Dubai vs the US?"
+    },
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Keep in mind: needs mortgage, doesn’t understand payment plans yet, wants tax-efficient setup."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we agree to a 20-minute online presentation call to compare options?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "adam",
+  "id": "adam-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 2,
+  "scenario": "First conversation",
+  "score": "72 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 13/25",
+  "stars": null,
+  "helpLabel": "",
+  "issue": "",
+  "report": {
+   "back": "Adam: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Adam: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23F3ECFB%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%236B3FA0%22%3EA%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Adam"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "No feedback left after this session.",
+    "stars": null,
+    "num": "",
+    "rest": "",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "72 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "22 / 30",
+      "pct": 73
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "13 / 25",
+      "pct": 52
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "21 / 25",
+      "pct": 84
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "16 / 20",
+      "pct": 80
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a 20-minute online presentation call to compare options",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Covered what matters most · 21 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Secured the goal next step with a date · 16 / 20",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 13 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Opened the client up · 22 / 30",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with calm questions on why Dubai vs the US?"
+    },
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Adam",
+     "twin": true,
+     "text": "Keep in mind: needs mortgage, doesn’t understand payment plans yet, wants tax-efficient setup."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we agree to a 20-minute online presentation call to compare options?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "cedric",
+  "id": "cedric-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 3,
+  "scenario": "First conversation",
+  "score": "65 / 100",
+  "weak": "Covered what matters most 14/25",
+  "stars": 3,
+  "helpLabel": "Somewhat helpful",
+  "issue": "Flat or no emotion",
+  "report": {
+   "back": "Cedric: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Cedric: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23E8F1FF%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%232B5BD7%22%3EC%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Cedric"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 3,
+    "num": "3",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Felt like talking to Olga. Quick and clear.”"
+   },
+   "issues": [
+    {
+     "badge": "Flat or no emotion",
+     "note": "No emotion when it explained the payment plan."
+    }
+   ],
+   "rubric": {
+    "total": "65 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "19 / 30",
+      "pct": 63
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "14 / 25",
+      "pct": 56
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "15 / 20",
+      "pct": 75
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Review a shortlist of 2–3 options and agree to a screen-share comparison call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 15 / 20",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 17 / 25",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Covered what matters most · 14 / 25",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Opened the client up · 19 / 30",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with concise, curated options matched to stated filters?"
+    },
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Keep in mind: funds tied to sale in France, prefers off-plan with 3–4 year post-handover payment plan, insists on seeing options first."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we review a shortlist of 2–3 options and agree to a screen-share comparison call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "cedric",
+  "id": "cedric-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 4,
+  "scenario": "First conversation",
+  "score": "72 / 100",
+  "weak": "Secured the goal next step with a date 10/20",
+  "stars": null,
+  "helpLabel": "",
+  "issue": "",
+  "report": {
+   "back": "Cedric: first conversation",
+   "name": "James",
+   "subs": [
+    "Cedric: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23E8F1FF%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%232B5BD7%22%3EC%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Cedric"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "No feedback left after this session.",
+    "stars": null,
+    "num": "",
+    "rest": "",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "72 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "24 / 30",
+      "pct": 80
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "21 / 25",
+      "pct": 84
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "10 / 20",
+      "pct": 50
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Review a shortlist of 2–3 options and agree to a screen-share comparison call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 21 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Opened the client up · 24 / 30",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 10 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Covered what matters most · 17 / 25",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with concise, curated options matched to stated filters?"
+    },
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Keep in mind: funds tied to sale in France, prefers off-plan with 3–4 year post-handover payment plan, insists on seeing options first."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we review a shortlist of 2–3 options and agree to a screen-share comparison call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "cedric",
+  "id": "cedric-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 5,
+  "scenario": "First conversation",
+  "score": "65 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 13/25",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "",
+  "report": {
+   "back": "Cedric: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Cedric: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23E8F1FF%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%232B5BD7%22%3EC%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Cedric"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "65 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "23 / 30",
+      "pct": 77
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "13 / 25",
+      "pct": 52
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "11 / 20",
+      "pct": 55
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Review a shortlist of 2–3 options and agree to a screen-share comparison call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 23 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 18 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 13 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Secured the goal next step with a date · 11 / 20",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with concise, curated options matched to stated filters?"
+    },
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Cedric",
+     "twin": true,
+     "text": "Keep in mind: funds tied to sale in France, prefers off-plan with 3–4 year post-handover payment plan, insists on seeing options first."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we review a shortlist of 2–3 options and agree to a screen-share comparison call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "farid",
+  "id": "farid-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 1,
+  "scenario": "First conversation",
+  "score": "69 / 100",
+  "weak": "Secured the goal next step with a date 12/20",
+  "stars": 3,
+  "helpLabel": "Somewhat helpful",
+  "issue": "Wrong accent",
+  "report": {
+   "back": "Farid: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Farid: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Farid"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 3,
+    "num": "3",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Answered exactly what I was stuck on.”"
+   },
+   "issues": [
+    {
+     "badge": "Wrong accent",
+     "note": "The accent changed halfway through."
+    }
+   ],
+   "rubric": {
+    "total": "69 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "20 / 30",
+      "pct": 67
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "20 / 25",
+      "pct": 80
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "12 / 20",
+      "pct": 60
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a structured comparison call (family-living vs investment) and outline a mortgage pre-qualification path",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Covered what matters most · 20 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 17 / 25",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 12 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Opened the client up · 20 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about family lifestyle and school needs?"
+    },
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Keep in mind: needs mortgage in Dubai (process unclear), expects a 'best price' or discount up to ~10%, confused about long- vs short-term rentals and switching, talking to many agents; trust is fragile."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we agree to a structured comparison call (family-living vs investment) and outline a mortgage pre-qualification path?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "farid",
+  "id": "farid-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 2,
+  "scenario": "First conversation",
+  "score": "76 / 100",
+  "weak": "Secured the goal next step with a date 13/20",
+  "stars": null,
+  "helpLabel": "",
+  "issue": "",
+  "report": {
+   "back": "Farid: first conversation",
+   "name": "James",
+   "subs": [
+    "Farid: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Farid"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "No feedback left after this session.",
+    "stars": null,
+    "num": "",
+    "rest": "",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "76 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "22 / 30",
+      "pct": 73
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "22 / 25",
+      "pct": 88
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "13 / 20",
+      "pct": 65
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a structured comparison call (family-living vs investment) and outline a mortgage pre-qualification path",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Covered what matters most · 22 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 19 / 25",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 13 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Opened the client up · 22 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about family lifestyle and school needs?"
+    },
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Keep in mind: needs mortgage in Dubai (process unclear), expects a 'best price' or discount up to ~10%, confused about long- vs short-term rentals and switching, talking to many agents; trust is fragile."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we agree to a structured comparison call (family-living vs investment) and outline a mortgage pre-qualification path?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "farid",
+  "id": "farid-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 3,
+  "scenario": "First conversation",
+  "score": "69 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 16/25",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "",
+  "report": {
+   "back": "Farid: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Farid: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22%23EAF6EE%22%2F%3E%3Ctext%20x%3D%2248%22%20y%3D%2248%22%20dy%3D%22.35em%22%20text-anchor%3D%22middle%22%20font-family%3D%22Figtree%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2244%22%20font-weight%3D%22600%22%20fill%3D%22%231A6739%22%3EF%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "name": "Farid"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "69 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "20 / 30",
+      "pct": 67
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "16 / 25",
+      "pct": 64
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "20 / 25",
+      "pct": 80
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "13 / 20",
+      "pct": 65
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a structured comparison call (family-living vs investment) and outline a mortgage pre-qualification path",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Covered what matters most · 20 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Opened the client up · 20 / 30",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 16 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Secured the goal next step with a date · 13 / 20",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about family lifestyle and school needs?"
+    },
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Farid",
+     "twin": true,
+     "text": "Keep in mind: needs mortgage in Dubai (process unclear), expects a 'best price' or discount up to ~10%, confused about long- vs short-term rentals and switching, talking to many agents; trust is fragile."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we agree to a structured comparison call (family-living vs investment) and outline a mortgage pre-qualification path?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "anna",
+  "id": "anna-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 4,
+  "scenario": "First conversation",
+  "score": "66 / 100",
+  "weak": "Opened the client up 16/30",
+  "stars": 4,
+  "helpLabel": "Helpful",
+  "issue": "Sounds robotic",
+  "report": {
+   "back": "Anna: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Anna: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "../media/client-seller.jpg",
+    "name": "Anna"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 4,
+    "num": "4",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Good, but I wanted one more example.”"
+   },
+   "issues": [
+    {
+     "badge": "Sounds robotic",
+     "note": "The middle of the answer sounded flat and robotic."
+    }
+   ],
+   "rubric": {
+    "total": "66 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "16 / 30",
+      "pct": 53
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "15 / 20",
+      "pct": 75
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to share rough budget and a short follow-up call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 15 / 20",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 18 / 25",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Opened the client up · 16 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 17 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about why moving matters?"
+    },
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Keep in mind: busy schedule, wants WhatsApp options first, doesn’t want mortgage hassle."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we agree to share rough budget and a short follow-up call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "anna",
+  "id": "anna-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 5,
+  "scenario": "First conversation",
+  "score": "73 / 100",
+  "weak": "Covered what matters most 15/25",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "",
+  "report": {
+   "back": "Anna: first conversation",
+   "name": "James",
+   "subs": [
+    "Anna: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "../media/client-seller.jpg",
+    "name": "Anna"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "73 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "23 / 30",
+      "pct": 77
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "23 / 25",
+      "pct": 92
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "15 / 25",
+      "pct": 60
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "12 / 20",
+      "pct": 60
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to share rough budget and a short follow-up call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 23 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Opened the client up · 23 / 30",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 12 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Covered what matters most · 15 / 25",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about why moving matters?"
+    },
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Keep in mind: busy schedule, wants WhatsApp options first, doesn’t want mortgage hassle."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we agree to share rough budget and a short follow-up call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "anna",
+  "id": "anna-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 1,
+  "scenario": "First conversation",
+  "score": "66 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 15/25",
+  "stars": 3,
+  "helpLabel": "Somewhat helpful",
+  "issue": "Flat or no emotion",
+  "report": {
+   "back": "Anna: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Anna: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "../media/client-seller.jpg",
+    "name": "Anna"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 3,
+    "num": "3",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“It repeated itself a little.”"
+   },
+   "issues": [
+    {
+     "badge": "Flat or no emotion",
+     "note": "No emotion when it explained the payment plan."
+    }
+   ],
+   "rubric": {
+    "total": "66 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "23 / 30",
+      "pct": 77
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "15 / 25",
+      "pct": 60
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "16 / 25",
+      "pct": 64
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "12 / 20",
+      "pct": 60
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to share rough budget and a short follow-up call",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 23 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 16 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 12 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 15 / 25",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about why moving matters?"
+    },
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Anna",
+     "twin": true,
+     "text": "Keep in mind: busy schedule, wants WhatsApp options first, doesn’t want mortgage hassle."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we agree to share rough budget and a short follow-up call?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "sara",
+  "id": "sara-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 2,
+  "scenario": "First conversation",
+  "score": "71 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 16/25",
+  "stars": null,
+  "helpLabel": "",
+  "issue": "",
+  "report": {
+   "back": "Sara: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Sara: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "../media/persona-elena.jpg",
+    "name": "Sara"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "No feedback left after this session.",
+    "stars": null,
+    "num": "",
+    "rest": "",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "71 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "25 / 30",
+      "pct": 83
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "16 / 25",
+      "pct": 64
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "13 / 20",
+      "pct": 65
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Book two viewings around school timings",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 25 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 17 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 16 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Secured the goal next step with a date · 13 / 20",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about daily routine and commute?"
+    },
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Keep in mind: school timings, quiet street, storage, avoid construction noise."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we book two viewings around school timings?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "sara",
+  "id": "sara-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 3,
+  "scenario": "First conversation",
+  "score": "78 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 17/25",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "Sounds robotic",
+  "report": {
+   "back": "Sara: first conversation",
+   "name": "James",
+   "subs": [
+    "Sara: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "../media/persona-elena.jpg",
+    "name": "Sara"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [
+    {
+     "badge": "Sounds robotic",
+     "note": "The middle of the answer sounded flat and robotic."
+    }
+   ],
+   "rubric": {
+    "total": "78 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "27 / 30",
+      "pct": 90
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "17 / 25",
+      "pct": 68
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "15 / 20",
+      "pct": 75
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Book two viewings around school timings",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Opened the client up · 27 / 30",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 19 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 17 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Secured the goal next step with a date · 15 / 20",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about daily routine and commute?"
+    },
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Keep in mind: school timings, quiet street, storage, avoid construction noise."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we book two viewings around school timings?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "sara",
+  "id": "sara-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 4,
+  "scenario": "First conversation",
+  "score": "71 / 100",
+  "weak": "Opened the client up 18/30",
+  "stars": 4,
+  "helpLabel": "Helpful",
+  "issue": "",
+  "report": {
+   "back": "Sara: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Sara: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "../media/persona-elena.jpg",
+    "name": "Sara"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 4,
+    "num": "4",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“Helpful for the exam prep.”"
+   },
+   "issues": [],
+   "rubric": {
+    "total": "71 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "18 / 30",
+      "pct": 60
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "19 / 25",
+      "pct": 76
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "15 / 20",
+      "pct": 75
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Book two viewings around school timings",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 19 / 25",
+       "text": "Used one clear example instead of a list.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 19 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Opened the client up · 18 / 30",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Secured the goal next step with a date · 15 / 20",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions about daily routine and commute?"
+    },
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Sara",
+     "twin": true,
+     "text": "Keep in mind: school timings, quiet street, storage, avoid construction noise."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we book two viewings around school timings?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "peter",
+  "id": "peter-0",
+  "name": "Aisha",
+  "sub": "Today, 2:14 pm · 8 min",
+  "tone": 5,
+  "scenario": "First conversation",
+  "score": "68 / 100",
+  "weak": "Avoided shutdown triggers and pet peeves 14/25",
+  "stars": 3,
+  "helpLabel": "Somewhat helpful",
+  "issue": "Flat or no emotion",
+  "report": {
+   "back": "Peter: first conversation",
+   "name": "Aisha",
+   "subs": [
+    "Peter: first conversation",
+    "Today, 2:14 pm · 8 min"
+   ],
+   "client": {
+    "face": "../media/client-buyer.jpg",
+    "name": "Peter"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 8 min",
+   "fb": {
+    "empty": "",
+    "stars": 3,
+    "num": "3",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": "“It repeated itself a little.”"
+   },
+   "issues": [
+    {
+     "badge": "Flat or no emotion",
+     "note": "No emotion when it explained the payment plan."
+    }
+   ],
+   "rubric": {
+    "total": "68 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "18 / 30",
+      "pct": 60
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "14 / 25",
+      "pct": 56
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "18 / 20",
+      "pct": 90
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a comparison call covering yield, service charges, and exit paths",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 18 / 20",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Covered what matters most · 18 / 25",
+       "text": "Stayed calm and even when the client pushed back.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 14 / 25",
+       "text": "Ask one more question before you offer the next step.",
+       "jump": "3:22 Jump",
+       "at": 202
+      },
+      {
+       "title": "Opened the client up · 18 / 30",
+       "text": "Name the number or the date out loud, so the client can agree to it.",
+       "jump": "5:26 Jump",
+       "at": 326
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions on risk tolerance and hold period?"
+    },
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Keep in mind: low maintenance, service-charge sensitivity, risk-averse, prefers simple management."
+    },
+    {
+     "who": "Aisha",
+     "twin": false,
+     "text": "Understood. Could we agree to a comparison call covering yield, service charges, and exit paths?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "peter",
+  "id": "peter-1",
+  "name": "James",
+  "sub": "Yesterday, 11:02 am · 6 min",
+  "tone": 1,
+  "scenario": "First conversation",
+  "score": "75 / 100",
+  "weak": "Secured the goal next step with a date 13/20",
+  "stars": null,
+  "helpLabel": "",
+  "issue": "",
+  "report": {
+   "back": "Peter: first conversation",
+   "name": "James",
+   "subs": [
+    "Peter: first conversation",
+    "Yesterday, 11:02 am · 6 min"
+   ],
+   "client": {
+    "face": "../media/client-buyer.jpg",
+    "name": "Peter"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 6 min",
+   "fb": {
+    "empty": "No feedback left after this session.",
+    "stars": null,
+    "num": "",
+    "rest": "",
+    "quote": ""
+   },
+   "issues": [],
+   "rubric": {
+    "total": "75 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "22 / 30",
+      "pct": 73
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "18 / 25",
+      "pct": 72
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "22 / 25",
+      "pct": 88
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "13 / 20",
+      "pct": 65
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a comparison call covering yield, service charges, and exit paths",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Covered what matters most · 22 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Opened the client up · 22 / 30",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 13 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "2:31 Jump",
+       "at": 151
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 18 / 25",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "4:05 Jump",
+       "at": 245
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions on risk tolerance and hold period?"
+    },
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Keep in mind: low maintenance, service-charge sensitivity, risk-averse, prefers simple management."
+    },
+    {
+     "who": "James",
+     "twin": false,
+     "text": "Understood. Could we agree to a comparison call covering yield, service charges, and exit paths?"
+    }
+   ]
+  }
+ },
+ {
+  "role": "peter",
+  "id": "peter-2",
+  "name": "Nora",
+  "sub": "Yesterday, 4:40 pm · 11 min",
+  "tone": 2,
+  "scenario": "First conversation",
+  "score": "68 / 100",
+  "weak": "Secured the goal next step with a date 12/20",
+  "stars": 5,
+  "helpLabel": "Very helpful",
+  "issue": "Pacing feels off",
+  "report": {
+   "back": "Peter: first conversation",
+   "name": "Nora",
+   "subs": [
+    "Peter: first conversation",
+    "Yesterday, 4:40 pm · 11 min"
+   ],
+   "client": {
+    "face": "../media/client-buyer.jpg",
+    "name": "Peter"
+   },
+   "video": "../media/reel.mp4#t=0.5",
+   "caption": "Recording · 11 min",
+   "fb": {
+    "empty": "",
+    "stars": 5,
+    "num": "5",
+    "rest": "/ 5 · How helpful was this roleplay?",
+    "quote": ""
+   },
+   "issues": [
+    {
+     "badge": "Pacing feels off",
+     "note": "It spoke too fast when listing the steps."
+    }
+   ],
+   "rubric": {
+    "total": "68 / 100",
+    "lines": [
+     {
+      "name": "Opened the client up",
+      "pts": "20 / 30",
+      "pct": 67
+     },
+     {
+      "name": "Avoided shutdown triggers and pet peeves",
+      "pts": "16 / 25",
+      "pct": 64
+     },
+     {
+      "name": "Covered what matters most",
+      "pts": "20 / 25",
+      "pct": 80
+     },
+     {
+      "name": "Secured the goal next step with a date",
+      "pts": "12 / 20",
+      "pct": 60
+     }
+    ]
+   },
+   "goals": [
+    {
+     "text": "Agree to a comparison call covering yield, service charges, and exit paths",
+     "status": "Met"
+    }
+   ],
+   "notes": [
+    {
+     "h": "What went well",
+     "items": [
+      {
+       "title": "Covered what matters most · 20 / 25",
+       "text": "Answered the real concern, not the first thing said.",
+       "jump": "",
+       "at": null
+      },
+      {
+       "title": "Opened the client up · 20 / 30",
+       "text": "Kept the next step simple and specific.",
+       "jump": "",
+       "at": null
+      }
+     ]
+    },
+    {
+     "h": "To work on",
+     "items": [
+      {
+       "title": "Secured the goal next step with a date · 12 / 20",
+       "text": "Slow down when the client sounds unsure. Give them room.",
+       "jump": "4:37 Jump",
+       "at": 277
+      },
+      {
+       "title": "Avoided shutdown triggers and pet peeves · 16 / 25",
+       "text": "Let the client finish before you answer. A short pause shows you heard them.",
+       "jump": "7:29 Jump",
+       "at": 449
+      }
+     ]
+    }
+   ],
+   "lines": [
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Can you send me some options on WhatsApp?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Happy to help. Could we start with questions on risk tolerance and hold period?"
+    },
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Why are you asking this?"
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Fair question. I want what I send you to actually fit."
+    },
+    {
+     "who": "Peter",
+     "twin": true,
+     "text": "Keep in mind: low maintenance, service-charge sensitivity, risk-averse, prefers simple management."
+    },
+    {
+     "who": "Nora",
+     "twin": false,
+     "text": "Understood. Could we agree to a comparison call covering yield, service charges, and exit paths?"
+    }
+   ]
+  }
+ }
+]

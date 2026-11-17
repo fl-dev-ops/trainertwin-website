@@ -53,7 +53,8 @@ export function SearchField({ label, value, onChange, placeholder, size = "md", 
         onChange={(e) => onChange(e.target.value)}
         autoComplete="off"
         autoFocus={autoFocus}
-        className="min-w-0 flex-1 border-0 bg-transparent p-0 text-[14px] leading-5 text-ink outline-none placeholder:text-ink-muted"
+        // `outline-none!`: the base `:focus-visible` rule is unlayered, so a plain utility loses to it and the input drew its own ring inside the pill's.
+        className="min-w-0 flex-1 border-0 bg-transparent p-0 text-[14px] leading-5 text-ink outline-none! placeholder:text-ink-muted"
       />
       {onClear ? (
         <Button variant="ghost" size="sm" iconOnly aria-label={clearLabel} onClick={onClear} className="h-6! min-h-0! w-6!">

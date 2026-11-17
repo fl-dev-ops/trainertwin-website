@@ -9,13 +9,12 @@ import { Badge } from "@components/Badge";
 import { Icon } from "../Svg";
 import { FilterSelect } from "@components/FilterSelect";
 import { SessionsSummary, type SessionsSummaryData } from "../local/SessionsSummary";
-import { AVATAR_TONES } from "../local/bits";
+import { AVATAR_TONES, LEARNER_OPTIONS } from "../local/bits";
 import data from "../data/calibrations.json";
 
 const COLS = "minmax(0,1.3fr) minmax(0,1.2fr) 84px 96px minmax(150px,1fr) 28px";
 const COHORT_OF: Record<string, string> = { Aisha: "sep", James: "sep", Nora: "sep", Leo: "aug", Priya: "aug" };
 const COHORTS = [["all", "All cohorts"], ["sep", "Sep 2026 batch"], ["aug", "Aug 2026 batch"]];
-const LEARNERS = ["all", "Aisha", "James", "Nora", "Leo", "Priya"];
 const RANGES = [["7", "Last 7 days"], ["30", "Last 30 days"], ["90", "Last 90 days"]];
 const daysAgo = (when: string) => (/^Today/.test(when) ? 0 : /^Yesterday/.test(when) ? 1 : /^Monday/.test(when) ? 3 : /^Sunday/.test(when) ? 4 : 5);
 const arrow = (
@@ -68,7 +67,7 @@ export function TwinSessions({ onOpen, onAsk }: { onOpen?: (index: number) => vo
         tools={
           <div className="flex items-center gap-3">
             <FilterSelect width={148} label="Filter by cohort" options={COHORTS.map(([v, l]) => ({ value: v, label: l }))} value={f.cohort} onChange={set("cohort")} />
-            <FilterSelect width={148} label="Filter by learner" options={LEARNERS.map((v) => ({ value: v, label: v === "all" ? "All learners" : v }))} value={f.learner} onChange={set("learner")} />
+            <FilterSelect width={148} label="Filter by learner" options={LEARNER_OPTIONS} value={f.learner} onChange={set("learner")} searchable searchPlaceholder="Search by name or email" emptyText="No one matches that search." />
             <FilterSelect width={148} label="Filter by agent" options={[{ value: "all", label: "All twin agents" }, ...agents.map((a) => ({ value: a, label: a }))]} value={f.agent} onChange={set("agent")} />
             <FilterSelect width={148} label="Filter by date" options={RANGES.map(([v, l]) => ({ value: v, label: l }))} value={f.date} onChange={set("date")} />
           </div>
