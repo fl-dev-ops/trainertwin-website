@@ -14,6 +14,9 @@ import { ChevronDownIcon } from "./icons";
  *             option is chosen; no chevron. For a row of independent filters ("Agent", "Date asked"). The list lines up
  *             with the left edge.
  *
+ * The list is V3's one dropdown surface (`.twin-hero-ask-menu`): white, 1px card border, 12px radius, 8px padding, 2px
+ * between options, 6px below the pill. Each option is 36px; hover and the chosen option share one soft grey.
+ *
  * The first option is the "no filter" choice. Keyboard: Enter, Space or ArrowDown on the pill opens the list and focuses
  * the chosen option; ArrowUp/Down, Home and End move; Enter picks; Escape closes and returns focus; Tab closes.
  */
@@ -33,11 +36,13 @@ export interface FilterSelectProps {
   icon?: ReactNode;
   /** `select` width in px or any CSS length. Default: as wide as its text. */
   width?: number | string;
+  /** Start with the list open. For documentation and tests; real pages leave it closed. */
+  defaultOpen?: boolean;
   className?: string;
 }
 
-export function FilterSelect({ label, options, value, onChange, variant = "select", icon, width, className }: FilterSelectProps) {
-  const [open, setOpen] = useState(false);
+export function FilterSelect({ label, options, value, onChange, variant = "select", icon, width, defaultOpen = false, className }: FilterSelectProps) {
+  const [open, setOpen] = useState(defaultOpen);
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -119,7 +124,10 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
           role="listbox"
           aria-label={label}
           onKeyDown={onListKey}
-          className={cn("absolute top-[calc(100%+4px)] z-(--tt-z-dropdown) min-w-full rounded-md bg-surface-raised p-2 font-ui shadow-e2", chip ? "left-0 min-w-[180px]" : "right-0 rounded-sm")}
+          className={cn(
+            "absolute top-[calc(100%+6px)] z-(--tt-z-dropdown) flex w-max min-w-full flex-col gap-0.5 rounded-md border border-line-card bg-surface p-2 font-ui shadow-e2",
+            chip ? "left-0 min-w-[180px]" : "right-0",
+          )}
         >
           {options.map((o, i) => (
             <button
@@ -135,9 +143,12 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
                 close();
               }}
               className={cn(
-                "flex w-full cursor-pointer items-center text-left whitespace-nowrap text-ink focus-visible:bg-fill-soft focus-visible:outline-none",
-                chip ? "min-h-10 rounded-sm px-3 text-[14px] leading-5" : "min-h-8 rounded-xs px-[10px] py-[6px] text-[13px] leading-5",
-                o.value === value ? (chip ? "bg-fill-soft" : "font-label") : "hover:bg-fill-soft",
+                // One look for both variants (V3 `.twin-hero-ask-opt`): 36px, 8px radius, 14px. The chosen option keeps
+                // the grey fill and the label weight; hover and keyboard focus paint the same grey on the others, so
+                // the chosen one and the one under the pointer can both be grey at once.
+                "flex min-h-9 w-full cursor-pointer items-center rounded-sm px-2 py-2 text-left text-[14px] leading-5 whitespace-nowrap text-ink",
+                "hover:bg-fill-soft focus-visible:bg-fill-soft focus-visible:outline-none",
+                o.value === value && "bg-fill-soft font-label",
               )}
             >
               {o.label}

@@ -45,6 +45,10 @@ Ranked by how many pages need it, then by how much each copy costs to keep in st
 5. **`DataList`/`InboxPane` (5) and `StatCard`/`SummaryBlock` (4)**: the biggest wins, and the largest.
 6. The rest (10–15, 17) as the pages that need them come up.
 
+## 2b. Dropdown surfaces that still differ from V3's list (D131)
+
+`FilterSelect` now uses V3's list (white, 1px border, 12px radius, 36px options). `Menu` (⋮), `Select` and `MultiSelect` each still draw their own list (8px radius, no border, 32px or 40px rows, and `Select` paints only the chosen row). V3 shows one look for all of them, so these three should share the list surface in a later pass. Not done: `Select` and `MultiSelect` are form fields and V3 uses native selects for some of them, so confirm which look is wanted first.
+
 ## 3. Where V3 was wrong or v3-specific (not to be copied)
 
 - V3 resets to the light theme when some menus or dialogs open (Assign dialog, chip menus). The build stays in the chosen theme.
