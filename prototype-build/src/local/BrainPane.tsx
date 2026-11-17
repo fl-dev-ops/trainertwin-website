@@ -4,6 +4,8 @@ import { Avatar } from "@components/Avatar";
 import { Button } from "@components/Button";
 import { Textarea } from "@components/Textarea";
 import { Menu, type MenuEntry } from "@components/Menu";
+import { FilterSelect } from "@components/FilterSelect";
+import { SearchField } from "@components/SearchField";
 import { AVATAR_TONES } from "./bits";
 import inbox from "../data/brain-inbox.json";
 import ui from "../data/brain-ui.json";
@@ -30,26 +32,6 @@ export function useInboxStore() {
   const [resolved, setResolved] = useState(inbox.resolved);
   const [corrected, setCorrected] = useState(inbox.corrected);
   return { questions, setQuestions, history, setHistory, issues, setIssues, resolved, setResolved, corrected, setCorrected };
-}
-
-/** A toolbar chip with a listbox under it (v3 `.bq-chip` + `.twin-hero-ask-menu`). */
-function ChipSelect({ label, icon, options, value, onChange }: { label: string; icon: string; options: [string, string][]; value: string; onChange: (v: string) => void }) {
-  const [open, setOpen] = useState(false);
-  const on = value !== options[0][0];
-  return (
-    <div className="relative">
-      <button type="button" aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((o) => !o)} onBlur={(e) => { if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) setOpen(false); }} className={`inline-flex h-8 cursor-pointer items-center gap-2 rounded-full border px-[14px] text-[13px] leading-5 text-ink hover:border-line-interactive [&>span>svg]:h-4 [&>span>svg]:w-4 [&>span>svg]:text-ink-secondary ${on ? "border-line-interactive bg-fill-soft" : "border-line-field bg-surface"}`}>
-        {html(icon)}{label}
-      </button>
-      {open ? (
-        <div role="listbox" aria-label={label} className="absolute top-[calc(100%+4px)] left-0 z-20 min-w-[180px] rounded-md bg-surface-raised p-2 shadow-e2">
-          {options.map(([v, l]) => (
-            <button key={v} type="button" role="option" aria-selected={v === value} onMouseDown={(e) => e.preventDefault()} onClick={() => { onChange(v); setOpen(false); }} className={`flex min-h-10 w-full cursor-pointer items-center rounded-sm px-3 text-left text-[14px] leading-5 text-ink ${v === value ? "bg-fill-soft" : "hover:bg-fill-soft"}`}>{l}</button>
-          ))}
-        </div>
-      ) : null}
-    </div>
-  );
 }
 
 /**
@@ -111,16 +93,12 @@ export function BrainPane({ kind, store, onCorrect }: { kind: "questions" | "iss
           </header>
           <div className="mt-6 flex items-center gap-2">
             {chips.map((c, i) => (
-              <ChipSelect key={c.label} label={c.label} icon={c.svg} value={i === 0 ? agentF : dateF} onChange={i === 0 ? setAgentF : setDateF}
-                options={i === 0 ? [["all", "All agents"], ...agents.map((a): [string, string] => [a, a])] : [["any", "Any time"], ["today", "Today"], ["earlier", "Earlier"]]} />
+              <FilterSelect key={c.label} variant="chip" label={c.label} icon={html(c.svg)} value={i === 0 ? agentF : dateF} onChange={i === 0 ? setAgentF : setDateF}
+                options={i === 0 ? [{ value: "all", label: "All agents" }, ...agents.map((a) => ({ value: a, label: a }))] : [{ value: "any", label: "Any time" }, { value: "today", label: "Today" }, { value: "earlier", label: "Earlier" }]} />
             ))}
             <span className="flex-1" />
             {searchOpen ? (
-              <label className="flex h-8 w-[220px] items-center gap-2 rounded-full border border-line-field bg-surface pr-1 pl-3 text-ink-secondary focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary [&>span>svg]:h-4 [&>span>svg]:w-4">
-                {html(ui.questions.searchSvg)}
-                <input autoFocus type="search" aria-label={ui.questions.searchLabel} placeholder={q ? "Search questions" : "Search issues"} value={search} onChange={(e) => setSearch(e.target.value)} className="min-w-0 flex-1 border-0 bg-transparent p-0 text-[13px] leading-5 text-ink outline-none placeholder:text-ink-tertiary" />
-                <Button variant="ghost" size="sm" iconOnly aria-label="Close search" onClick={() => { setSearch(""); setSearchOpen(false); }} className="h-6! w-6! min-h-0!">{html('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6l-12 12M6 6l12 12"/></svg>')}</Button>
-              </label>
+              <SearchField size="sm" appearance="field" autoFocus label={ui.questions.searchLabel} placeholder={q ? "Search questions" : "Search issues"} value={search} onChange={setSearch} onClear={() => { setSearch(""); setSearchOpen(false); }} clearLabel="Close search" className="w-[220px]" />
             ) : (
               <Button variant="ghost" size="sm" iconOnly aria-label={q ? "Search questions" : "Search issues"} onClick={() => setSearchOpen(true)}>{html(ui.questions.searchSvg)}</Button>
             )}

@@ -6,7 +6,7 @@ import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { SegmentedControl } from "@components/SegmentedControl";
 import { Menu, type MenuEntry } from "@components/Menu";
-import { FilterSelect } from "../local/FilterSelect";
+import { FilterSelect } from "@components/FilterSelect";
 
 import { MenuIcon, html } from "../Svg";
 import data from "../data/agent-detail.json";

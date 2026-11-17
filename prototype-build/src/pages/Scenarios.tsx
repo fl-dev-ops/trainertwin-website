@@ -6,7 +6,7 @@ import { AgentCard } from "@components/AgentCard";
 import { SegmentedControl } from "@components/SegmentedControl";
 import type { MenuEntry } from "@components/Menu";
 import { Icon, MenuIcon, html } from "../Svg";
-import { SearchField } from "../local/SearchField";
+import { SearchField } from "@components/SearchField";
 import data from "../data/roleplay.json";
 
 const noop = () => {};
@@ -30,7 +30,7 @@ export function Scenarios() {
         icon={<Icon name="role" />}
         tools={
           <>
-            <SearchField icon={html(data.searchSvg)} placeholder={data.placeholder} label="Search scenarios" value={q} onChange={setQ} />
+            <SearchField placeholder={data.placeholder} label="Search scenarios" value={q} onChange={setQ} className="w-[196px]" />
             <Button>
               {html(data.newSvg)}
               {data.newLabel}

@@ -7,7 +7,7 @@ import { ListTable, ListRow } from "@components/ListTable";
 import { Avatar } from "@components/Avatar";
 import { Badge } from "@components/Badge";
 import { Icon } from "../Svg";
-import { FilterSelect } from "../local/FilterSelect";
+import { FilterSelect } from "@components/FilterSelect";
 import { SessionsSummary } from "../local/SessionsSummary";
 import { AVATAR_TONES } from "../local/bits";
 import data from "../data/sessions.json";

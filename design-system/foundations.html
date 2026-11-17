@@ -2212,10 +2212,14 @@ footer { padding-top: var(--space-6); }
         <p>These came out of the brief and are treated as fixed. Everything downstream derives from them, so changing one of these is a system-level change, not a tweak.</p>
       </div>
       <div class="c-seg dec-tabs" role="tablist" aria-label="Decision status">
-        <button type="button" role="tab" aria-selected="true" data-dec-tab="locked">Locked <span class="c-segbadge">53</span></button>
+        <button type="button" role="tab" aria-selected="true" data-dec-tab="locked">Locked <span class="c-segbadge">54</span></button>
         <button type="button" role="tab" aria-selected="false" data-dec-tab="reversed">Reversed <span class="c-segbadge">4</span></button>
       </div>
       <div class="status">
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Two toolbar controls from the rebuild: FilterSelect and SearchField: 17 Nov 2026</b> <code>FilterSelect</code> is the compact filter pill that opens a listbox: <code>select</code> (the chosen label and a chevron, 32px, for "All cohorts", "Last 30 days") and <code>chip</code> (a fixed label with an optional icon, highlighted when anything but the first option is chosen, for a row of independent filters). The first option is the no-filter choice. Arrow keys, Home/End, Enter, Escape and Tab work. <code>SearchField</code> is the search pill with a magnifier and a borderless input: <code>md</code> 36px or <code>sm</code> 32px, <code>ring</code> or <code>field</code> border, an optional × (<code>onClear</code>). It has no visible label, so <code>label</code> is required. Together they replace seven hand-written filters, a chip dropdown and three search boxes in the rebuild; <code>Select</code> and <code>Input</code> stay the labelled form fields.</p>
+        </div>
         <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>Four small primitives from the rebuild: Page, Eyebrow, StarRating and the card-lift shadows: 17 Nov 2026</b> <code>Page</code> is the centred page body in five sizes (<code>library</code> 1024, <code>account</code> 1000, <code>fluid</code>, <code>reading</code> 720, <code>form</code> 718) with the padding that goes with each; the build wrote the same classes on 14 pages. <code>Eyebrow</code> is the 11/12 uppercase label (V3 <code>.overline</code>), with no margin of its own. <code>StarRating</code> is five stars with the colour following the value (5 success, 4 caution, 3 or less danger). Two shadow tokens join <code>--tt-shadow-list</code>: <code>--tt-shadow-lift</code> (a card a little above the page) and <code>--tt-shadow-sheet</code> (the white main sheet lifting off the rail); both have Tailwind aliases (<code>shadow-lift</code>, <code>shadow-sheet</code>). The token sync no longer rewrites <code>onboarding-prototype/v3/tokens.css</code> (v3 is a frozen reference): pass <code>--v3</code> to refresh it.</p>

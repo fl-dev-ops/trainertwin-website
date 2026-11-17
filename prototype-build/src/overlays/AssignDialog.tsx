@@ -3,7 +3,8 @@ import { Modal } from "@components/Modal";
 import { Button } from "@components/Button";
 import { Checkbox } from "@components/Checkbox";
 import { Avatar } from "@components/Avatar";
-import { FilterSelect } from "../local/FilterSelect";
+import { FilterSelect } from "@components/FilterSelect";
+import { SearchField } from "@components/SearchField";
 import { AVATAR_TONES } from "../local/bits";
 import data from "../data/assign.json";
 
@@ -38,10 +39,7 @@ export function AssignDialog({ open, onClose, botTitle }: { open: boolean; onClo
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <FilterSelect width={148} label="Filter by cohort" options={data.cohorts.map(([v, l]) => ({ value: v, label: l }))} value={cohort} onChange={setCohort} />
-          <label className="flex h-9 min-w-0 flex-1 items-center gap-2 rounded-full border border-line-field bg-surface px-3 text-ink-tertiary focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-primary">
-            <svg className="h-4 w-4 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-            <input type="search" aria-label="Search users" placeholder={data.search} value={q} onChange={(e) => setQ(e.target.value)} className="min-w-0 flex-1 border-0 bg-transparent p-0 font-ui text-[13px] leading-5 text-ink outline-none placeholder:text-ink-muted" />
-          </label>
+          <SearchField label="Search users" appearance="field" placeholder={data.search} value={q} onChange={setQ} className="min-w-0 flex-1" />
         </div>
         <div role="table" aria-label="Learners" className="max-h-[340px] overflow-y-auto rounded-md border border-line">
           <div role="row" className="sticky top-0 z-[1] grid grid-cols-[44px_44px_1fr_auto] items-center gap-3 bg-surface-sunken px-4 py-[13px] font-ui text-[12px] leading-4 text-ink-secondary">
