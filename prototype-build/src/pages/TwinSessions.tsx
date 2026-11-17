@@ -80,7 +80,11 @@ export function TwinSessions({ onOpen, onAsk }: { onOpen?: (index: number) => vo
         pressedId={focus}
         onChip={(id) => (id === "ask" ? onAsk?.() : setFocus((c) => (c === id ? null : id)))}
         onShowAll={() => setFocus(null)}
-        onTile={(l) => (l === "Questions" ? onAsk?.() : l === "Issues reported" ? setFocus("issues") : document.getElementById("ts-table")?.scrollIntoView({ behavior: "smooth" }))}
+        onTile={(l) => {
+          if (l === "Questions") return onAsk?.();
+          if (l === "Issues reported") setFocus("issues");
+          document.getElementById("ts-table")?.scrollIntoView({ behavior: "smooth" });
+        }}
       />
       <div id="ts-table" className="mt-5 border-t border-line pt-5">
         <Eyebrow className="mb-3">{data.overline}</Eyebrow>
