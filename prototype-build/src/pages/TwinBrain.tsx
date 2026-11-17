@@ -2,7 +2,8 @@ import { useState } from "react";
 import { FlowNode, FlowSource } from "@components/FlowNode";
 import { Button } from "@components/Button";
 import { SegmentedControl } from "@components/SegmentedControl";
-import { BrainPane } from "../local/BrainPane";
+import { BrainPane, useInboxStore } from "../local/BrainPane";
+import { useToast } from "@components/Toast";
 import data from "../data/knowledge.json";
 
 const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
@@ -19,16 +20,18 @@ function At({ left, top, width, height, children }: { left: number; top: number;
 }
 
 export function TwinBrain({ tab = "knowledge", onTab }: { tab?: string; onTab?: (t: string) => void }) {
+  const store = useInboxStore();
+  const { toast } = useToast();
   const [, force] = useState(0);
   const setTab = (t: string) => { onTab?.(t); force((n) => n + 1); };
   const k = data.knowledge, st = data.style, v = data.voice;
   const dot = (label: string) => <span role="img" aria-label={label} className="h-2 w-2 flex-none rounded-full bg-primary" />;
   return (
     <div className="relative flex h-full min-h-0 bg-surface" style={{ backgroundImage: "radial-gradient(circle, var(--tt-border) 1.15px, transparent 1.15px)", backgroundSize: "18px 18px" }}>
-      {tab !== "knowledge" ? <BrainPane key={tab} kind={tab === "issues" ? "issues" : "questions"} /> : null}
+      {tab !== "knowledge" ? <BrainPane key={tab} kind={tab === "issues" ? "issues" : "questions"} store={store} onCorrect={() => { setTab("knowledge"); toast("Add the right answer here. The issue is now under Corrected.", { type: "info" }); }} /> : null}
       <div className="m-auto flex-none" style={tab !== "knowledge" ? { visibility: "hidden" } : undefined}>
         <div className="relative" style={{ width: data.board.w, height: data.board.h }}>
-          <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible fill-none stroke-ink-tertiary [&_circle]:fill-ink-tertiary [&_circle]:stroke-none [&_path]:stroke-[1.5]" viewBox={`0 0 ${data.board.w} ${data.board.h}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: data.board.links }} />
+          <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible fill-none stroke-ink-tertiary [&_circle]:fill-surface [&_circle]:stroke-ink-tertiary [&_circle]:stroke-[1.5] [&_path]:stroke-[1.5]" viewBox={`0 0 ${data.board.w} ${data.board.h}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: data.board.links }} />
           {data.tags.map((t) => (
             <span key={t.text} className={`absolute z-[2] rounded-full px-[10px] py-1 font-ui text-[12px] leading-4 font-label whitespace-nowrap ${TAGS[t.tone as keyof typeof TAGS]}`} style={{ left: t.left, top: t.top }}>
               {t.text}
@@ -53,12 +56,12 @@ export function TwinBrain({ tab = "knowledge", onTab }: { tab?: string; onTab?: 
                   </span>
                 ))}
               </span>
-              <span className="flex w-full flex-col gap-[6px]">
+              <span className="mt-2 flex w-full flex-col gap-[6px]">
                 {k.sources.map((s) => (
                   <FlowSource key={s.label} icon={html(s.svg)}>
                     <span>{s.label}</span>
                     {s.connected ? (
-                      <span className="ml-auto inline-flex items-center gap-[3px] rounded-full bg-success-subtle py-[2px] pr-[7px] pl-[5px] text-[11px] leading-4 font-label text-success">Connected</span>
+                      <span className="ml-auto inline-flex items-center gap-[3px] rounded-full bg-success-subtle py-[2px] pr-[7px] pl-[5px] text-[11px] leading-4 font-label text-success"><svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5l10 -10" /></svg>Connected</span>
                     ) : (
                       <span className="ml-auto text-[12px] text-ink-tertiary">{s.status}</span>
                     )}
@@ -82,14 +85,14 @@ export function TwinBrain({ tab = "knowledge", onTab }: { tab?: string; onTab?: 
             </FlowNode>
           </At>
 
-          <At left={v.left} top={v.top} width={v.width}>
-            <FlowNode kicker={v.kicker} title="" className="items-center gap-[10px] text-center [&>span:nth-child(2)]:hidden" >
+          <At left={v.left} top={v.top} width={v.width} height={v.height}>
+            <FlowNode kicker={v.kicker} title="" className="h-full items-center! gap-[10px] text-center [&>span:nth-child(2)]:hidden [&>span:last-child]:flex-1 [&>span:last-child]:items-center! [&>span:last-child]:justify-between" >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={v.portrait} alt="" className="h-14 w-14 rounded-full object-cover" />
               <span className="font-ui text-[15px] leading-[22px] font-title">{v.title}</span>
               <span className="font-ui text-[13px] leading-[18px] text-ink-secondary">{v.note}</span>
               <span className="mt-2 flex items-center gap-2" aria-hidden="true">
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-fill-soft text-ink [&>svg]:h-3 [&>svg]:w-3">{html(v.play)}</span>
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-fill-soft text-ink [&>span>svg]:h-3 [&>span>svg]:w-3">{html(v.play)}</span>
                 <span className="flex items-center gap-[3px]">
                   {BARS.map((h, i) => (
                     <i key={i} className="block w-[3px] rounded-full bg-line-field" style={{ height: h }} />
@@ -119,7 +122,7 @@ export function TwinBrain({ tab = "knowledge", onTab }: { tab?: string; onTab?: 
           className="bg-surface shadow-e2"
           value={tab}
           onChange={setTab}
-          options={data.tabs.map((t) => ({ value: t.label.toLowerCase(), label: t.label, badge: t.dot ? dot(t.dotLabel) : undefined }))}
+          options={data.tabs.map((t) => ({ value: t.label.toLowerCase(), label: t.label, badge: (t.label === "Questions" ? store.questions.length : t.label === "Issues" ? store.issues.length : 0) ? dot(t.dotLabel) : undefined }))}
         />
       </div>
       <div hidden={tab !== "knowledge"} className="absolute right-4 bottom-4 z-[6] flex items-center gap-2 rounded-full border border-line-card bg-surface p-[6px] shadow-e1" role="group" aria-label="Zoom">

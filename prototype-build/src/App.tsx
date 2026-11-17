@@ -14,6 +14,7 @@ import { Usage } from "./pages/Usage";
 import { Billing } from "./pages/Billing";
 import { Settings } from "./pages/Settings";
 import { SupportDialog } from "./pages/SupportDialog";
+import { ToastProvider, PROTOTYPE_TOAST_TITLES } from "@components/Toast";
 import { AgentDetail } from "./pages/AgentDetail";
 import { AgentEdit } from "./pages/AgentEdit";
 import { CalibrateOverview } from "./pages/CalibrateOverview";
@@ -105,6 +106,7 @@ export function App() {
   if (page === "setup" && route.sub.endsWith("/try")) return <TryRoom onEnd={() => go("setup", route.sub.split("/")[0])} />;
 
   return (
+    <ToastProvider titles={PROTOTYPE_TOAST_TITLES}>
     <div className="flex h-full min-h-screen bg-surface-sunken">
       <NavRail
         aria-label="Main"
@@ -125,5 +127,6 @@ export function App() {
       <SupportDialog open={support} onClose={() => setSupport(false)} />
       <main className="relative z-10 min-w-0 flex-1 overflow-auto rounded-l-lg bg-canvas shadow-[-4px_0_16px_rgb(30_28_25/0.06)]">{body}</main>
     </div>
+    </ToastProvider>
   );
 }
