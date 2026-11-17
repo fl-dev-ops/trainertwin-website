@@ -2,13 +2,12 @@
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { cn } from "./cn";
-import { ChevronDownIcon } from "./icons";
 
 /**
  * The compact filter control for toolbars and page headers (V3 `.bot-range .home-ask-mode` and `.bq-chip`): a pill that
  * opens a listbox. `Select` is the labelled form field; this is for narrowing a list.
  *
- *   `select`  shows the chosen option's label with a chevron; 32px, a 1px field border, `--tt-text-primary`. The list
+ *   `select`  shows the chosen option's label with a chevron; 32px, a hairline field border (`--tt-border-form`, 0.5px), a thin 12×7 chevron, `--tt-text-primary`. The list
  *             lines up with the pill's right edge. For "All cohorts", "Last 30 days".
  *   `chip`    shows a fixed `label` (with an optional leading `icon`) and highlights when anything other than the first
  *             option is chosen; no chevron. For a row of independent filters ("Agent", "Date asked"). The list lines up
@@ -99,11 +98,12 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
         onClick={() => setOpen((o) => !o)}
         onKeyDown={onTriggerKey}
         className={cn(
-          "inline-flex h-8 items-center gap-2 rounded-full border font-ui text-[13px] leading-5 text-ink",
+          "inline-flex h-8 items-center gap-2 rounded-full border-solid font-ui text-[13px] leading-5 text-ink",
           "hover:border-line-interactive focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+          // The chip is a 1px outline (V3 `.bq-chip`); the select pill is a form-weight hairline (`--tt-border-form`, 0.5px).
           chip
-            ? cn("cursor-pointer px-[14px] [&_svg]:h-4 [&_svg]:w-4 [&_svg]:text-ink-secondary", active ? "border-line-interactive bg-fill-soft" : "border-line-field bg-surface")
-            : "w-full cursor-pointer justify-between border-line-field bg-surface pr-3 pl-4 font-label",
+            ? cn("cursor-pointer border px-[14px] [&_svg]:h-4 [&_svg]:w-4 [&_svg]:text-ink-secondary", active ? "border-line-interactive bg-fill-soft" : "border-line-field bg-surface")
+            : "w-full cursor-pointer justify-between border-[length:var(--tt-border-form)] border-line-field bg-surface pr-3 pl-4 font-label",
         )}
       >
         {chip ? (
@@ -114,7 +114,9 @@ export function FilterSelect({ label, options, value, onChange, variant = "selec
         ) : (
           <>
             <span className="min-w-0 flex-1 truncate text-left">{current.label}</span>
-            <ChevronDownIcon size={12} className="flex-none" />
+            <svg viewBox="3.8 5.8 8.4 4.9" fill="none" aria-hidden="true" className="h-[7px] w-3 flex-none">
+              <path d="M4.5 6.5 8 10l3.5-3.5" stroke="currentColor" strokeWidth="0.94" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </>
         )}
       </button>

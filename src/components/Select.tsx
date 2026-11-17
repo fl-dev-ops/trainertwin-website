@@ -135,9 +135,9 @@ export function Select({
           onKeyDown={onListKeyDown}
           className={cn(
             "tt-lb-list",
-            "absolute z-20 mt-1 max-h-64 w-full overflow-y-auto",
-            "rounded-sm border-[length:var(--tt-border-form)] border-solid border-line-field",
-            "bg-surface-raised py-1 shadow-e2",
+            // V3's one dropdown surface (D131): white, 1px card border, 12px radius, 2px between options.
+            "absolute z-20 mt-[6px] flex max-h-64 w-full flex-col gap-0.5 overflow-y-auto",
+            "rounded-md border border-line-card bg-surface p-2 shadow-e2",
           )}
         >
           {options.map((option, index) => {
@@ -154,8 +154,8 @@ export function Select({
                 onClick={() => pick(option.value)}
                 className={cn(
                   "tt-lb-option",
-                  "flex cursor-pointer items-center gap-2 px-3 py-2",
-                  "font-ui text-[14px] text-ink outline-none",
+                  "flex min-h-9 cursor-pointer items-center gap-2 rounded-sm px-2 py-2",
+                  "font-ui text-[14px] leading-5 text-ink outline-none",
                   isSelected && "bg-fill-soft",
                   "hover:bg-fill-soft focus-visible:bg-fill-soft",
                   "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus",
