@@ -8,7 +8,7 @@ import { cn } from "./cn";
  * A number and its count share ONE text baseline, the count pushed to the card's
  * right edge. Wording is "21 sessions rated", never "of 27".
  *
- * `visual` is the left slot: the 66px rating illustration, or `ProgressRing`.
+ * `visual` is the left slot: the 50px rating illustration, or `ProgressRing`.
  */
 export interface SummaryCardProps {
   title: string;
@@ -35,7 +35,7 @@ export function SummaryCard({ title, icon, value, unit, count, valueSize = "md",
     >
       {visual ? <div className="flex-none">{visual}</div> : null}
       <div className="flex min-w-0 flex-1 flex-col gap-1">
-        <div className="flex items-center gap-[6px] font-ui text-[15px] leading-5 text-ink-secondary">
+        <div className="flex items-center gap-2 font-ui text-[15px] leading-5 text-ink-secondary">
           {icon ? <span className="flex-none [&_svg]:h-[14px] [&_svg]:w-[14px]">{icon}</span> : null}
           {title}
         </div>

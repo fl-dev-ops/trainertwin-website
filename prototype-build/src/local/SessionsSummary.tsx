@@ -47,13 +47,13 @@ export function SessionsSummary({ label, data, pressedId, onChip, onShowAll, onT
             value={data.rating.value}
             unit="/ 5"
             count={data.rating.count}
-            visual={<span aria-hidden="true" className="block h-[62px] w-[66px] [&_svg]:h-[66px] [&_svg]:w-[66px] [&_svg]:-translate-y-[2px]" dangerouslySetInnerHTML={{ __html: data.rating.svg }} />}
+            visual={<span aria-hidden="true" className="block h-[50px] w-[50px] [&_svg]:h-[50px] [&_svg]:w-[50px]" dangerouslySetInnerHTML={{ __html: data.rating.svg }} />}
           />
-          <SummaryCard title="Paid by learners" icon={html(data.paid.icon)} valueSize="sm" value={data.paid.amount} count={data.paid.count} visual={<span className="flex"><ProgressRing percent={parseInt(data.paid.pct)} title={data.paid.title} /></span>} />
+          <SummaryCard title="Paid by learners" icon={html(data.paid.icon)} valueSize="sm" value={data.paid.amount} count={data.paid.count} visual={<span className="mr-1 flex"><ProgressRing percent={parseInt(data.paid.pct)} title={data.paid.title} /></span>} />
         </div>
       </section>
       <div role="group" aria-label="Needs a look" className="mt-5 mb-3 flex flex-wrap items-center gap-2">
-        <span className="mr-1 inline-flex items-center gap-1 font-ui text-[13px] leading-5 font-label text-ink [&>span>svg]:h-[14px] [&>span>svg]:w-[14px]">{html(data.attnIcon)}Needs a look</span>
+        <span className="mr-1 inline-flex items-center gap-2 font-ui text-[13px] leading-5 font-label text-ink [&>span>svg]:h-[14px] [&>span>svg]:w-[14px]">{html(data.attnIcon)}Needs a look</span>
         {data.attn.map((a) => (
           <AttentionChip key={a.label} tone={a.tone as "danger" | "caution" | "info"} label={a.label} pressed={!!a.id && pressedId === a.id} onClick={() => onChip?.(a.id ?? a.tone)} />
         ))}
