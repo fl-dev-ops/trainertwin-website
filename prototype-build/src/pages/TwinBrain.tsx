@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FlowNode, FlowSource } from "@components/FlowNode";
 import { Button } from "@components/Button";
 import { SegmentedControl } from "@components/SegmentedControl";
+import { BrainPane } from "../local/BrainPane";
 import data from "../data/knowledge.json";
 
 const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
@@ -17,13 +18,15 @@ function At({ left, top, width, height, children }: { left: number; top: number;
   );
 }
 
-export function TwinBrain() {
-  const [tab, setTab] = useState("knowledge");
+export function TwinBrain({ tab = "knowledge", onTab }: { tab?: string; onTab?: (t: string) => void }) {
+  const [, force] = useState(0);
+  const setTab = (t: string) => { onTab?.(t); force((n) => n + 1); };
   const k = data.knowledge, st = data.style, v = data.voice;
   const dot = (label: string) => <span role="img" aria-label={label} className="h-2 w-2 flex-none rounded-full bg-primary" />;
   return (
     <div className="relative flex h-full min-h-0 bg-surface" style={{ backgroundImage: "radial-gradient(circle, var(--tt-border) 1.15px, transparent 1.15px)", backgroundSize: "18px 18px" }}>
-      <div className="m-auto flex-none">
+      {tab !== "knowledge" ? <BrainPane key={tab} kind={tab === "issues" ? "issues" : "questions"} /> : null}
+      <div className="m-auto flex-none" style={tab !== "knowledge" ? { visibility: "hidden" } : undefined}>
         <div className="relative" style={{ width: data.board.w, height: data.board.h }}>
           <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible fill-none stroke-ink-tertiary [&_circle]:fill-ink-tertiary [&_circle]:stroke-none [&_path]:stroke-[1.5]" viewBox={`0 0 ${data.board.w} ${data.board.h}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: data.board.links }} />
           {data.tags.map((t) => (
@@ -103,7 +106,7 @@ export function TwinBrain() {
       </div>
 
       <div className="absolute top-4 right-4 left-4 z-[6] flex h-9 items-center justify-between">
-        <button type="button" className="inline-flex items-center gap-2 font-ui text-[14px] leading-5 text-ink cursor-pointer [&>svg]:h-4 [&>svg]:w-4">
+        <button type="button" className="inline-flex items-center gap-2 font-ui text-[14px] leading-5 text-ink cursor-pointer [&_svg]:h-4 [&_svg]:w-4">
           {html(data.backSvg)}
           {data.back}
         </button>
@@ -119,7 +122,7 @@ export function TwinBrain() {
           options={data.tabs.map((t) => ({ value: t.label.toLowerCase(), label: t.label, badge: t.dot ? dot(t.dotLabel) : undefined }))}
         />
       </div>
-      <div className="absolute right-4 bottom-4 z-[6] flex items-center gap-2 rounded-full border border-line-card bg-surface p-[6px] shadow-e1" role="group" aria-label="Zoom">
+      <div hidden={tab !== "knowledge"} className="absolute right-4 bottom-4 z-[6] flex items-center gap-2 rounded-full border border-line-card bg-surface p-[6px] shadow-e1" role="group" aria-label="Zoom">
         <Button variant="secondary" size="sm" iconOnly aria-label="Zoom out">−</Button>
         <span className="min-w-10 text-center font-ui text-[13px] leading-[18px] tabular-nums">100%</span>
         <Button variant="secondary" size="sm" iconOnly aria-label="Zoom in">+</Button>

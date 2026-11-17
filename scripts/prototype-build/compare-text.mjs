@@ -24,6 +24,8 @@ const FLOWS = {
   calibrate: { hash: "setup/offplan-process/calibrate", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-calibrate"]:visible'); } },
   try: { hash: "setup/offplan-process/try", rootA: ".demo-room", rootB: "#root", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="role-row-test"]:visible'); } },
   session: { hash: "calibrations/0", v3: async (p) => { await p.click('.nav-item[data-id="calibrations"]'); await p.click(".ts-rowbtn >> nth=0"); } },
+  questions: { hash: "knowledge/questions", v3: async (p) => { await p.click('.nav-item[data-id="knowledge"]'); await p.click('.flow-tabs [data-id="questions"]'); } },
+  issues: { hash: "knowledge/issues", v3: async (p) => { await p.click('.nav-item[data-id="knowledge"]'); await p.click('.flow-tabs [data-id="reports"]'); } },
   create: { hash: "setup/new", v3: async (p) => p.click(".lib-tools .btn--strong") },
   edit: { hash: "setup/offplan-process/edit", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-edit"]:visible'); } },
 };
