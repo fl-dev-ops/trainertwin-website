@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { StarRating } from "@components/StarRating";
+import { Page } from "@components/Page";
 import { html } from "../Svg";
 import { BackBar } from "@components/PageHeader";
 import { Card } from "@components/Card";
@@ -6,8 +8,7 @@ import { Badge } from "@components/Badge";
 import { Button } from "@components/Button";
 import { Avatar } from "@components/Avatar";
 import { ChatBubble, ChatThread } from "@components/ChatBubble";
-import { Stars, AVATAR_TONES } from "../local/bits";
-import detail from "../data/agent-detail.json";
+import { AVATAR_TONES } from "../local/bits";
 import all from "../data/twin-session-detail.json";
 
 const h = "m-0 mb-3 font-ui text-[16px] leading-6 font-title text-ink";
@@ -20,7 +21,7 @@ export function SessionReport({ index, onBack }: { index: number; onBack: () => 
   return (
     <div className="flex min-h-full flex-col">
       <BackBar label={d.back} onBack={onBack} />
-      <div className="mx-auto flex w-full max-w-[720px] flex-col gap-4 px-8 pt-6 pb-8">
+      <Page size="reading" className="flex flex-col gap-4">
         <Card className="px-6 py-5">
           <div className="flex items-center justify-between gap-6">
           <div className="min-w-0 flex-1 font-ui">
@@ -42,7 +43,7 @@ export function SessionReport({ index, onBack }: { index: number; onBack: () => 
           <Card className="px-6 py-5 font-ui">
             <h2 className={h}>Learner feedback</h2>
             <p className="m-0 flex items-center gap-2 text-[14px] leading-5">
-              <Stars n={d.fb.stars} tone={d.fb.tone} size={20} />
+              <StarRating value={d.fb.stars} size={20} />
               <b className="text-[18px] font-title tabular-nums text-ink">{d.fb.num}</b>
               <span className="text-ink-secondary">{d.fb.rest}</span>
             </p>
@@ -89,7 +90,7 @@ export function SessionReport({ index, onBack }: { index: number; onBack: () => 
             )}
           </ChatThread>
         </Card>
-      </div>
+      </Page>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import { Page } from "@components/Page";
 import { NavRail, NavGroup, NavItem, RailBrand, RailAction, RailUser } from "@components/NavRail";
 import { PageHeader } from "@components/PageHeader";
 import { EmptyState } from "@components/EmptyState";
@@ -95,12 +96,12 @@ export function App() {
   );
   const current = ALL.find((n) => n.id === page)!;
   const body = PAGES[page]?.({ sub: route.sub, go }) ?? (
-    <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
+    <Page>
       <PageHeader title={current.label} icon={<Icon name={current.icon} />} />
       <div className="mt-8">
         <EmptyState title="Not built yet" description="This page has not been rebuilt from the Storybook components yet." />
       </div>
-    </div>
+    </Page>
   );
 
   if (page === "setup" && route.sub.endsWith("/try")) return <TryRoom onEnd={() => go("setup", route.sub.split("/")[0])} />;
@@ -125,7 +126,7 @@ export function App() {
         <NavGroup label="Roleplay">{ROLEPLAY.map(item)}</NavGroup>
       </NavRail>
       <SupportDialog open={support} onClose={() => setSupport(false)} />
-      <main className="relative z-10 min-w-0 flex-1 overflow-auto rounded-l-lg bg-canvas shadow-[-4px_0_16px_rgb(30_28_25/0.06)]">{body}</main>
+      <main className="relative z-10 min-w-0 flex-1 overflow-auto rounded-l-lg bg-canvas shadow-sheet">{body}</main>
     </div>
     </ToastProvider>
   );

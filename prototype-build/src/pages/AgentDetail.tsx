@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { Eyebrow } from "@components/Eyebrow";
+import { Page } from "@components/Page";
 import { BackBar } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { SegmentedControl } from "@components/SegmentedControl";
 import { Menu, type MenuEntry } from "@components/Menu";
 import { FilterSelect } from "../local/FilterSelect";
-import { Overline } from "../local/bits";
+
 import { MenuIcon, html } from "../Svg";
 import data from "../data/agent-detail.json";
 
 const noop = () => {};
-const shadow = "shadow-[0_1px_2px_rgb(30_28_25/0.05),0_4px_14px_rgb(30_28_25/0.07)]";
 const TONES: Record<string, string> = {
   "rp-stat--sessions": "bg-success-subtle text-success",
   "rp-stat--review": "bg-caution-subtle text-caution",
@@ -52,19 +53,19 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
           </Button>
           <Menu label={`More actions for ${data.title}`} items={actions} trigger={(p) => <Button variant="secondary" size="sm" iconOnly {...p} aria-label={`More actions for ${data.title}`}>{html(data.moreSvg)}</Button>} />
         </div>} />
-      <div className="mx-auto w-full max-w-[1024px] px-16 pt-2 pb-8">
+      <Page className="pt-2!">
         <div className="grid grid-cols-2 items-stretch gap-4">
-          <Card className={`col-span-2 flex flex-col p-6 ${shadow}`}>
+          <Card className={`col-span-2 flex flex-col p-6 shadow-lift`}>
             <div className="flex items-start justify-between gap-6">
               <div className="min-w-0 flex-1">
                 <h1 className="m-0 mb-5 font-ui text-[20px] leading-7 font-title tracking-[-0.015em] text-ink">{data.title}</h1>
-                <Overline className="mt-0 mb-2">{data.kicker1}</Overline>
+                <Eyebrow className="mt-0 mb-3">{data.kicker1}</Eyebrow>
                 <p className="m-0 max-w-[65ch] font-ui text-[15px] leading-[23px] text-ink-secondary">{data.scenario}</p>
               </div>
-              <div className={`flex flex-none items-center gap-5 rounded-md bg-surface px-5 py-4 ${shadow}`}>
+              <div className={`flex flex-none items-center gap-5 rounded-md bg-surface px-5 py-4 shadow-lift`}>
                 <UsageRing pct={c.used} label={c.pct} />
                 <div className="font-ui">
-                  <Overline className="mb-2">{c.kicker}</Overline>
+                  <Eyebrow className="mb-3">{c.kicker}</Eyebrow>
                   <p className="m-0 text-[18px] leading-6 font-title text-ink tabular-nums">{c.value} <span className="text-[14px] font-normal text-ink-secondary">{c.muted}</span></p>
                   <p className="mt-2 mb-0 text-[13px] leading-5 text-ink-secondary">{c.note}</p>
                 </div>
@@ -72,7 +73,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
             </div>
             <hr className="mt-6 mb-0 h-px border-0 bg-line" />
             <div>
-              <Overline className="mt-2 mb-2">{data.kicker2}</Overline>
+              <Eyebrow className="mt-2 mb-3">{data.kicker2}</Eyebrow>
               <button type="button" className="flex min-h-10 w-full cursor-pointer items-center gap-3 rounded-sm bg-fill-soft px-3 text-left font-ui text-[14px] leading-5 text-ink" aria-label={`View all ${data.bf.name}`}>
                 <span className="grid h-5 w-5 flex-none place-items-center text-ink-secondary [&>span>svg]:h-5 [&>span>svg]:w-5">{html(data.bf.svg)}</span>
                 <span className="min-w-0 flex-1 truncate tabular-nums">{data.bf.name}</span>
@@ -81,7 +82,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
             </div>
           </Card>
 
-          <Card className={`flex flex-col p-5 ${shadow}`}>
+          <Card className={`flex flex-col p-5 shadow-lift`}>
             <h2 className="m-0 mb-4 font-ui text-[17px] leading-6 font-title tracking-[-0.015em] text-ink">{data.reportTitle}</h2>
             <div className="grid flex-1 auto-rows-fr grid-cols-2 gap-3">
               {data.stats.map((s) => {
@@ -89,7 +90,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
                 return (
                   <div key={s.label} className={`flex min-h-[90px] items-start justify-between gap-2 rounded-md px-4 py-3 ${s.view ? "" : "flex-col justify-between"} ${tone}`}>
                     <div>
-                      <Overline className="mb-2 text-inherit!">{s.label}</Overline>
+                      <Eyebrow className="mb-3 text-inherit!">{s.label}</Eyebrow>
                       <p className="m-0 font-ui text-[24px] leading-[30px] font-title tracking-[-0.015em] tabular-nums">{s.value}{s.muted ? <span className="ml-1 text-ink-secondary">{s.muted}</span> : null}</p>
                     </div>
                     {s.view ? (
@@ -104,7 +105,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
             </div>
           </Card>
 
-          <Card className={`flex flex-col p-5 ${shadow}`}>
+          <Card className={`flex flex-col p-5 shadow-lift`}>
             <h2 className="m-0 mb-4 font-ui text-[17px] leading-6 font-title tracking-[-0.015em] text-ink">{data.weeksTitle}</h2>
             <svg viewBox="0 0 720 192" role="img" aria-label="Sessions this week" className="block h-auto max-h-[120px] w-full">
               {BARS.map((b) => (
@@ -128,7 +129,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
             </ul>
           </Card>
 
-          <Card className={`col-span-2 flex flex-col p-5 ${shadow}`}>
+          <Card className={`col-span-2 flex flex-col p-5 shadow-lift`}>
             <h2 className="m-0 mb-4 font-ui text-[17px] leading-6 font-title tracking-[-0.015em] text-ink">{data.qTitle}</h2>
             <ul className="m-0 flex list-none flex-col gap-2 p-0">
               {data.questions.map((q) => (
@@ -140,7 +141,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
             </ul>
           </Card>
 
-          <Card className={`col-span-2 p-5 ${shadow}`}>
+          <Card className={`col-span-2 p-5 shadow-lift`}>
             <SegmentedControl aria-label="Calibration, sessions or assigned users" className="mb-4" value={tab} onChange={setTab} options={data.tabs.map((t) => ({ value: t.label.toLowerCase().split(" ")[0], label: t.label }))} />
             <div className="-mx-5 -mb-5 overflow-hidden rounded-b-lg">
               {data.cals.map((r, i) => (
@@ -155,7 +156,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
             </div>
           </Card>
         </div>
-      </div>
+      </Page>
     </div>
   );
 }

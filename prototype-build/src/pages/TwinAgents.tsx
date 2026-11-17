@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Page } from "@components/Page";
 import { PageHeader, SectionHeading } from "@components/PageHeader";
 import { ConfirmDialog } from "@components/Modal";
 import { Button } from "@components/Button";
@@ -50,7 +51,7 @@ export function TwinAgents({ onNew = noop, onOpen = noop, onEdit = noop, onGo = 
   const bots: Bot[] = TWIN_BOTS.filter((b) => !removed.includes(b.id));
   const cur = dlg ?? lastDlg;
   return (
-    <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
+    <Page>
       <PageHeader
         title="Twin Agents"
         icon={<Icon name="setup" />}
@@ -117,6 +118,6 @@ export function TwinAgents({ onNew = noop, onOpen = noop, onEdit = noop, onGo = 
           />
         </>
       ) : null}
-    </div>
+    </Page>
   );
 }

@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { Page } from "@components/Page";
 import { PageHeader } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { SegmentedControl } from "@components/SegmentedControl";
 import { ListTable, ListRow } from "@components/ListTable";
 import { Menu, type MenuEntry } from "@components/Menu";
-import { Badge } from "@components/Badge";
 import { Icon, MenuIcon, html } from "../Svg";
 import data from "../data/rpsettings.json";
 
@@ -18,7 +18,7 @@ const actions: MenuEntry[] = [
 export function Persona() {
   const [view, setView] = useState("list");
   return (
-    <div className="mx-auto px-16 pt-5 pb-8">
+    <Page size="fluid">
       <PageHeader
         title={data.title}
         icon={<Icon name="rpsettings" />}
@@ -64,6 +64,6 @@ export function Persona() {
           </ListRow>
         ))}
       </ListTable>
-    </div>
+    </Page>
   );
 }

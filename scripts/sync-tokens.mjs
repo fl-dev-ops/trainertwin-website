@@ -253,8 +253,9 @@ for (const [name, v] of pageDark) {
    The v3 prototype ships its own copy of tokens.css (it is plain HTML, outside the
    Next app). Two things were true of it on 16 Nov 2026: no value disagreed with
    src/styles/tokens.css, and 36 tokens were simply missing. Keep the file as it is
-   and append what is missing in a generated block, so it can never fall behind. */
-{
+   and append what is missing in a generated block, so it can never fall behind.
+   v3 is a frozen reference now (17 Nov 2026): this step runs only with --v3. */
+if (process.argv.includes("--v3")) {
   let proto = read(P.proto);
   const pStart = "/* tt:generated:start";
   const pEnd = "/* tt:generated:end */";
@@ -280,6 +281,8 @@ for (const [name, v] of pageDark) {
   g += pEnd + "\n";
   put(P.proto, bare.replace(/\s+$/, "\n") + "\n" + g, "onboarding-prototype/v3/tokens.css");
   console.log(`prototype    ${have.size} hand-defined, ${pBase.length + pThemed.length} generated`);
+} else {
+  console.log("prototype    skipped (v3 is frozen; pass --v3 to refresh its generated block)");
 }
 
 /* -------------------------------------------------------------------- report */

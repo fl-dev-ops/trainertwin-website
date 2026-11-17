@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Page } from "@components/Page";
 import { Button } from "@components/Button";
 import { PageHeader } from "@components/PageHeader";
 import { Card } from "@components/Card";
@@ -13,7 +14,7 @@ export function Usage() {
   const [tab, setTab] = useState("overview");
   const c = data.card;
   return (
-    <div className="mx-auto max-w-[1000px] px-16 pt-5 pb-8">
+    <Page size="account">
       <PageHeader
         title={data.title}
         icon={<Icon name="credits" />}
@@ -61,6 +62,6 @@ export function Usage() {
           </ListRow>
         ))}
       </ListTable>
-    </div>
+    </Page>
   );
 }

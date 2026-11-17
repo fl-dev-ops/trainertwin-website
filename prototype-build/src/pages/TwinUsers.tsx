@@ -1,4 +1,5 @@
 import { PageHeader, SectionHeading } from "@components/PageHeader";
+import { Page } from "@components/Page";
 import { ListTable, ListRow, UsageMeter } from "@components/ListTable";
 import { Avatar } from "@components/Avatar";
 import { Badge } from "@components/Badge";
@@ -11,7 +12,7 @@ const num = (s: string) => parseFloat(s);
 
 export function TwinUsers() {
   return (
-    <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
+    <Page>
       <PageHeader title="Twin users" icon={<Icon name="learners" />} />
       <div className="mt-10 flex flex-col items-start gap-1">
         <SectionHeading className="mt-0!">{data.title}</SectionHeading>
@@ -43,6 +44,6 @@ export function TwinUsers() {
           );
         })}
       </ListTable>
-    </div>
+    </Page>
   );
 }

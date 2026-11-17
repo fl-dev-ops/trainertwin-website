@@ -1,4 +1,5 @@
 import { Button } from "@components/Button";
+import { Page } from "@components/Page";
 import { PageHeader } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { Badge } from "@components/Badge";
@@ -18,7 +19,7 @@ const icoBox = "grid h-9 w-9 flex-none place-items-center rounded-[10px] bg-fill
 
 export function Billing() {
   return (
-    <div className="mx-auto max-w-[1000px] px-16 pt-5 pb-8">
+    <Page size="account">
       <PageHeader
         title={data.title}
         icon={<Icon name="billing" />}
@@ -93,6 +94,6 @@ export function Billing() {
           </div>
         ))}
       </Card>
-    </div>
+    </Page>
   );
 }

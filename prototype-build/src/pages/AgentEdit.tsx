@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Page } from "@components/Page";
 import { BackBar } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
@@ -7,7 +8,6 @@ import { Badge } from "@components/Badge";
 import { XIcon } from "@components/UiIcons";
 import { Spinner } from "@components/Spinner";
 import { TWIN_BOTS } from "../generated";
-import detail from "../data/agent-detail.json";
 
 const FILES: [string, string][] = [
   ["PDF", "Three-stage process guide.pdf"],
@@ -80,12 +80,12 @@ export function AgentEdit({ id, onBack }: { id: string; onBack: () => void }) {
   return (
     <div className="flex min-h-full flex-col">
       <BackBar label={bot?.title ?? "Back"} onBack={onBack} />
-      <div className="mx-auto w-full max-w-[718px] pt-10 pb-12">
-        <Card className="p-6 shadow-[0_1px_2px_rgb(30_28_25/0.05),0_4px_14px_rgb(30_28_25/0.07)]">
+      <Page size="form">
+        <Card className="p-6 shadow-lift">
           <h1 className="m-0 mb-4 font-ui text-[18px] leading-6 font-title tracking-[-0.015em] text-ink">Edit twin agent for a specific use case</h1>
           <AgentForm files={files} onRemoveFile={(n) => setFiles((f) => f.filter((x) => x[1] !== n))} saveLabel="Save changes" onSave={onBack} />
         </Card>
-      </div>
+      </Page>
     </div>
   );
 }

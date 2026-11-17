@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Page } from "@components/Page";
 import { PageHeader, SectionHeading } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { AgentCard } from "@components/AgentCard";
@@ -23,7 +24,7 @@ export function Scenarios() {
   const [view, setView] = useState("card");
   const cards = data.cards.filter((c) => c.title.toLowerCase().includes(q.toLowerCase()));
   return (
-    <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
+    <Page>
       <PageHeader
         title={data.title}
         icon={<Icon name="role" />}
@@ -61,6 +62,6 @@ export function Scenarios() {
           />
         ))}
       </div>
-    </div>
+    </Page>
   );
 }

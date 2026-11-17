@@ -92,7 +92,7 @@ export function BrainPane({ kind, store, onCorrect }: { kind: "questions" | "iss
 
   return (
     <div className="absolute inset-x-0 top-[120px] bottom-0 z-[4] px-4 pb-8">
-      <section aria-label={q ? "Questions" : "Issues"} role="tabpanel" className="grid h-full grid-cols-[214px_1fr] overflow-hidden rounded-[20px] border border-line-card bg-surface font-ui shadow-[0_1px_2px_rgb(30_28_25/0.05),0_4px_14px_rgb(30_28_25/0.07)]">
+      <section aria-label={q ? "Questions" : "Issues"} role="tabpanel" className="grid h-full grid-cols-[214px_1fr] overflow-hidden rounded-[20px] border border-line-card bg-surface font-ui shadow-lift">
         <nav aria-label={q ? "Questions" : "Issues"} className="flex flex-col gap-1 border-r border-line p-3 pt-5">
           {m.map((it) => {
             const on = view === it.id;

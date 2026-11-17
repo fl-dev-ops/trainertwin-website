@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { StarRating } from "@components/StarRating";
+import { Eyebrow } from "@components/Eyebrow";
+import { Page } from "@components/Page";
 import { PageHeader } from "@components/PageHeader";
 import { ListTable, ListRow } from "@components/ListTable";
 import { Avatar } from "@components/Avatar";
@@ -6,7 +9,7 @@ import { Badge } from "@components/Badge";
 import { Icon } from "../Svg";
 import { FilterSelect } from "../local/FilterSelect";
 import { SessionsSummary } from "../local/SessionsSummary";
-import { Overline, Stars, AVATAR_TONES } from "../local/bits";
+import { AVATAR_TONES } from "../local/bits";
 import data from "../data/sessions.json";
 
 const COLS = "minmax(0,1fr) minmax(0,1.2fr) 90px minmax(0,1.5fr) minmax(0,1.1fr) 24px";
@@ -19,7 +22,7 @@ const arrow = (
 export function RoleplaySessions() {
   const [vals, setVals] = useState<string[]>(data.filters.map((f) => f.value));
   return (
-    <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
+    <Page>
       <PageHeader
         title="Roleplay sessions"
         icon={<Icon name="sessions" />}
@@ -33,7 +36,7 @@ export function RoleplaySessions() {
       />
       <SessionsSummary label="Roleplay sessions summary" data={data} />
       <div className="mt-5 border-t border-line pt-5">
-        <Overline className="mb-3">{data.overline}</Overline>
+        <Eyebrow className="mb-3">{data.overline}</Eyebrow>
         <ListTable label={data.tableLabel}>
           <ListRow head columns={COLS}>
             {data.head.map((h) => (
@@ -58,7 +61,7 @@ export function RoleplaySessions() {
                   <span className="text-ink-secondary">No rating</span>
                 ) : (
                   <>
-                    <Stars n={r.stars} tone={r.starTone} />
+                    <StarRating value={r.stars} />
                     <span className="text-[13px] leading-[18px] text-ink-secondary">{r.helpLabel}</span>
                     {r.issue ? <Badge tone="caution" className="mt-[2px]">{r.issue}</Badge> : null}
                   </>
@@ -69,6 +72,6 @@ export function RoleplaySessions() {
           ))}
         </ListTable>
       </div>
-    </div>
+    </Page>
   );
 }

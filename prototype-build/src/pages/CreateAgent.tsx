@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
+import { Page } from "@components/Page";
 import { BackBar } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Icon, html } from "../Svg";
 import { AgentForm } from "./AgentEdit";
-import detail from "../data/agent-detail.json";
 import data from "../data/create.json";
 
-const card = "shadow-[0_2px_4px_rgb(30_28_25/0.035),0_8px_20px_rgb(30_28_25/0.055)]";
 
 /**
  * v3 "Create use case": describe the agent to TeeTee (or pick a suggestion), or fill the form by hand. Sending a
@@ -33,8 +32,8 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex min-h-full flex-col">
       <BackBar label={data.back} onBack={onBack} />
-      <div className="mx-auto w-full max-w-[718px] pt-10 pb-12">
-        <section aria-label="Ask TeeTee" className={`relative flex min-h-[234px] flex-col overflow-hidden rounded-[24px] bg-fill-soft p-6 ${card}`}>
+      <Page size="form">
+        <section aria-label="Ask TeeTee" className={`relative flex min-h-[234px] flex-col overflow-hidden rounded-[24px] bg-fill-soft p-6 shadow-list`}>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(60% 55% at 50% 100%, color-mix(in srgb, var(--tt-primary) 14%, transparent), transparent 70%)" }} />
           <div className="relative flex flex-1 flex-col">
             <div className="max-w-[566px]">
@@ -48,7 +47,7 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
               ))}
             </div>
             </div>
-            <form className="mt-auto flex items-center gap-2 rounded-lg bg-surface py-2 pr-2 pl-[18px] shadow-[0_1px_2px_rgb(30_28_25/0.05),0_4px_14px_rgb(30_28_25/0.07)]" onSubmit={(e) => { e.preventDefault(); send(); }}>
+            <form className="mt-auto flex items-center gap-2 rounded-lg bg-surface py-2 pr-2 pl-[18px] shadow-lift" onSubmit={(e) => { e.preventDefault(); send(); }}>
               <label className="sr-only" htmlFor="bot-ask">Tell TeeTee what the twin agent should help with</label>
               <textarea id="bot-ask" rows={1} placeholder={data.placeholder} value={text} onChange={(e) => setText(e.target.value)} className="h-9 min-w-0 flex-1 resize-none border-0 bg-transparent p-0 pt-2 font-ui text-[15px] leading-5 text-ink outline-none placeholder:text-ink-tertiary" />
               <button type="button" aria-label="Dictate" className="grid h-9 w-9 flex-none cursor-pointer place-items-center rounded-full bg-fill-soft text-ink-secondary hover:bg-fill-soft-hover [&>span>svg]:h-4 [&>span>svg]:w-4">{html(data.micSvg)}</button>
@@ -56,7 +55,7 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
             </form>
           </div>
         </section>
-        <Card className={`mt-4 overflow-hidden rounded-[24px] p-0 ${card}`}>
+        <Card className={`mt-4 overflow-hidden rounded-[24px] p-0 shadow-list`}>
           <button type="button" aria-expanded={open} aria-controls="manual-body" onClick={() => setOpen((o) => !o)} className="flex w-full cursor-pointer items-center justify-between gap-3 border-0 bg-transparent p-6 text-left font-ui text-ink hover:bg-surface-sunken">
             <span className="flex flex-col gap-[2px]">
               <span className="text-[15px] leading-[22px] font-title">{title}</span>
@@ -70,7 +69,7 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
             </div>
           ) : null}
         </Card>
-      </div>
+      </Page>
     </div>
   );
 }

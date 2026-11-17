@@ -307,6 +307,10 @@
   /* List-as-table card and flow node lift, measured from the V3 prototype (.an-table, .flow-node). */
   --tt-shadow-list: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055);
   --tt-shadow-node: 0 2px 4px rgb(30 28 25 / 0.0525), 0 8px 20px rgb(30 28 25 / 0.0825);
+  /* A card that sits a little above the page: the detail cards and the Twin's brain pane (V3 .rp-analytics, .brain-card). */
+  --tt-shadow-lift: 0 1px 2px rgb(30 28 25 / 0.05), 0 4px 14px rgb(30 28 25 / 0.07);
+  /* The white main sheet lifting off the grey rail (V3 .main on desktop). Falls to the left. */
+  --tt-shadow-sheet: -4px 0 16px rgb(30 28 25 / 0.06);
 }
 
 /* ---------------------------------------------------- 2. SEMANTIC — LIGHT (base)

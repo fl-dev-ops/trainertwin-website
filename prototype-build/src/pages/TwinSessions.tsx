@@ -1,4 +1,7 @@
 import { useMemo, useState } from "react";
+import { StarRating } from "@components/StarRating";
+import { Eyebrow } from "@components/Eyebrow";
+import { Page } from "@components/Page";
 import { PageHeader } from "@components/PageHeader";
 import { ListTable, ListRow } from "@components/ListTable";
 import { Avatar } from "@components/Avatar";
@@ -6,7 +9,7 @@ import { Badge } from "@components/Badge";
 import { Icon } from "../Svg";
 import { FilterSelect } from "../local/FilterSelect";
 import { SessionsSummary, type SessionsSummaryData } from "../local/SessionsSummary";
-import { Overline, Stars, AVATAR_TONES } from "../local/bits";
+import { AVATAR_TONES } from "../local/bits";
 import data from "../data/calibrations.json";
 
 const COLS = "minmax(0,1.3fr) minmax(0,1.2fr) 84px 96px minmax(150px,1fr) 28px";
@@ -58,7 +61,7 @@ export function TwinSessions({ onOpen, onAsk }: { onOpen?: (index: number) => vo
   };
   const set = (k: keyof typeof f) => (v: string) => setF((x) => ({ ...x, [k]: v }));
   return (
-    <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
+    <Page>
       <PageHeader
         title="Twin sessions"
         icon={<Icon name="messages" />}
@@ -80,7 +83,7 @@ export function TwinSessions({ onOpen, onAsk }: { onOpen?: (index: number) => vo
         onTile={(l) => (l === "Questions" ? onAsk?.() : l === "Issues reported" ? setFocus("issues") : document.getElementById("ts-table")?.scrollIntoView({ behavior: "smooth" }))}
       />
       <div id="ts-table" className="mt-5 border-t border-line pt-5">
-        <Overline className="mb-3">{data.overline}</Overline>
+        <Eyebrow className="mb-3">{data.overline}</Eyebrow>
         {rows.length === 0 ? <p className="m-0 py-6 text-center font-ui text-[14px] text-ink-secondary">No sessions match these filters.</p> : (
         <ListTable label="Twin sessions">
           <ListRow head columns={COLS}>
@@ -105,7 +108,7 @@ export function TwinSessions({ onOpen, onAsk }: { onOpen?: (index: number) => vo
                   <span className="text-ink-secondary">No rating</span>
                 ) : (
                   <>
-                    <Stars n={r.stars} tone={r.starTone} />
+                    <StarRating value={r.stars} />
                     <span className="text-[13px] leading-[18px] text-ink-secondary">{r.helpLabel}</span>
                     {r.issue ? <Badge tone="caution" className="mt-[2px]">{r.issue}</Badge> : null}
                   </>
@@ -117,6 +120,6 @@ export function TwinSessions({ onOpen, onAsk }: { onOpen?: (index: number) => vo
         </ListTable>
         )}
       </div>
-    </div>
+    </Page>
   );
 }

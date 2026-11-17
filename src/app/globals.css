@@ -165,6 +165,8 @@
   --shadow-toast: var(--tt-shadow-toast);
   --shadow-list: var(--tt-shadow-list);
   --shadow-node: var(--tt-shadow-node);
+  --shadow-lift: var(--tt-shadow-lift);
+  --shadow-sheet: var(--tt-shadow-sheet);
   --color-tint-faint: var(--tt-ink-faint);
   --color-tint-soft: var(--tt-ink-soft);
   --color-tint-strong: var(--tt-ink-strong);
