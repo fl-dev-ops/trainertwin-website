@@ -36,6 +36,8 @@ type DialogBase = {
   closeLabel?: string;
   /** Close when the backdrop is clicked. Default true; turn off for a form in progress. */
   closeOnBackdrop?: boolean;
+  /** `gradient` (default) is the prototype's grey-to-white surface; `plain` is flat `--tt-surface` white, for a dialog that holds a list or a table. */
+  surface?: "gradient" | "plain";
   children?: ReactNode;
   /** The action row, right-aligned. Cancel first, the confirm action last. */
   footer?: ReactNode;
@@ -76,6 +78,7 @@ export interface ModalProps extends DialogBase {
 
 const GRADIENT = "bg-[linear-gradient(180deg,var(--tt-surface-sunken)_0%,var(--tt-surface)_100%)]";
 const SURFACE = `rounded-xl border-4 border-surface ${GRADIENT} shadow-dialog`;
+const SURFACE_PLAIN = "rounded-xl border-4 border-surface bg-surface shadow-dialog";
 
 /** The framed icon tile from the confirm dialog: a hairline gradient frame around an inset tile. */
 function IconTile({ children, tone }: { children: ReactNode; tone: "danger" | "calm" }) {
@@ -94,7 +97,7 @@ function IconTile({ children, tone }: { children: ReactNode; tone: "danger" | "c
   );
 }
 
-export function Modal({ open, onClose, title, description, icon, iconTone = "danger", closeLabel = "Close", closeOnBackdrop = true, children, footer, size = "md", className }: ModalProps) {
+export function Modal({ open, onClose, title, description, icon, iconTone = "danger", closeLabel = "Close", closeOnBackdrop = true, surface = "gradient", children, footer, size = "md", className }: ModalProps) {
   const titleId = useId();
   const { ref, ...handlers } = useDialog(open, onClose, closeOnBackdrop);
   return (
@@ -105,7 +108,7 @@ export function Modal({ open, onClose, title, description, icon, iconTone = "dan
       {...handlers}
     >
       {open ? (
-        <div className={cn("relative flex max-h-[calc(100dvh-32px)] flex-col items-start gap-5 p-6 font-ui text-ink", SURFACE, className)}>
+        <div className={cn("relative flex max-h-[calc(100dvh-32px)] flex-col items-start gap-5 p-6 font-ui text-ink", surface === "plain" ? SURFACE_PLAIN : SURFACE, className)}>
           <Button variant="ghost" size="sm" iconOnly leadingIcon={<XIcon />} aria-label={closeLabel} onClick={onClose} className="absolute top-3 right-3" />
           {icon ? <IconTile tone={iconTone}>{icon}</IconTile> : null}
           <div className="flex min-w-0 flex-col gap-2">

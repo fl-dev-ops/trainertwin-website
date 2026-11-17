@@ -25,7 +25,7 @@ export function AssignDialog({ open, onClose, botTitle }: { open: boolean; onClo
   const n = Object.values(picked).filter(Boolean).length;
   const all = open_.length > 0 && open_.every((r) => picked[r.email]);
   return (
-    <Modal open={open} onClose={onClose} size="lg" title={data.title} description={`${botTitle} · ${data.assigned} assigned${n ? ` · ${n} selected` : ""}`}
+    <Modal open={open} onClose={onClose} size="lg" surface="plain" title={data.title} description={`${botTitle} · ${data.assigned} assigned${n ? ` · ${n} selected` : ""}`}
       footer={
         <div className="flex w-full items-center justify-between gap-4">
           <p className="m-0 flex items-center gap-2 font-ui text-[13px] leading-5 text-ink-secondary">

@@ -80,6 +80,22 @@ export const Form: Story = {
   },
 };
 
+export const PlainSurface: Story = {
+  args: { open: false, onClose: () => {}, title: "" },
+  parameters: { docs: { description: { story: "`surface=\"plain\"`: flat white instead of the grey-to-white gradient, for a dialog that holds a list or a table (the assign-learners dialog). Everything else about the dialog is unchanged." } } },
+  render: function Render() {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open plain dialog</Button>
+        <Modal open={open} onClose={() => setOpen(false)} surface="plain" size="lg" title="Dialog title" description="Supporting text." footer={<Button onClick={() => setOpen(false)}>Done</Button>}>
+          <div className="rounded-md border border-line p-4 text-[14px] text-ink-secondary">A list or table goes here.</div>
+        </Modal>
+      </>
+    );
+  },
+};
+
 export const Panel: Story = {
   args: { open: false, onClose: () => {}, title: "" },
   parameters: { docs: { description: { story: "480 wide (the prototype's), full height, square edges, slides in from the right once. `width` sets another. Open a dialog from a row to see stacking: Escape closes the dialog first, then the panel." } } },
