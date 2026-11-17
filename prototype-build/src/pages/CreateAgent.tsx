@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BackBar } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Icon } from "../Svg";
@@ -32,12 +33,7 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
   };
   return (
     <div className="flex min-h-full flex-col">
-      <header className="flex min-h-16 flex-none items-center gap-3 bg-canvas px-8">
-        <button type="button" onClick={onBack} className="inline-flex cursor-pointer items-center gap-2 font-ui text-[14px] leading-5 text-ink [&>span>svg]:h-4 [&>span>svg]:w-4">
-          {html(detail.backSvg)}
-          {data.back}
-        </button>
-      </header>
+      <BackBar label={data.back} onBack={onBack} />
       <div className="mx-auto w-full max-w-[718px] pt-10 pb-12">
         <section aria-label="Ask TeeTee" className={`relative flex min-h-[234px] flex-col overflow-hidden rounded-[24px] bg-fill-soft p-6 ${card}`}>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(60% 55% at 50% 100%, color-mix(in srgb, var(--tt-primary) 14%, transparent), transparent 70%)" }} />

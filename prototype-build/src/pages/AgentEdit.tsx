@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BackBar } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Switch } from "@components/Switch";
@@ -8,7 +9,6 @@ import { Spinner } from "@components/Spinner";
 import { TWIN_BOTS } from "../generated";
 import detail from "../data/agent-detail.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const FILES: [string, string][] = [
   ["PDF", "Three-stage process guide.pdf"],
   ["PDF", "Dubai map and price per sq ft.pdf"],
@@ -79,12 +79,7 @@ export function AgentEdit({ id, onBack }: { id: string; onBack: () => void }) {
   const [files, setFiles] = useState(FILES);
   return (
     <div className="flex min-h-full flex-col">
-      <header className="flex min-h-16 flex-none items-center gap-3 bg-canvas px-8">
-        <button type="button" onClick={onBack} className="inline-flex cursor-pointer items-center gap-2 font-ui text-[14px] leading-5 text-ink [&>span>svg]:h-4 [&>span>svg]:w-4">
-          {html(detail.backSvg)}
-          {bot?.title ?? "Back"}
-        </button>
-      </header>
+      <BackBar label={bot?.title ?? "Back"} onBack={onBack} />
       <div className="mx-auto w-full max-w-[718px] pt-10 pb-12">
         <Card className="p-6 shadow-[0_1px_2px_rgb(30_28_25/0.05),0_4px_14px_rgb(30_28_25/0.07)]">
           <h1 className="m-0 mb-4 font-ui text-[18px] leading-6 font-title tracking-[-0.015em] text-ink">Edit twin agent for a specific use case</h1>

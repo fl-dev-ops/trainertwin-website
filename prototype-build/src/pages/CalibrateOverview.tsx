@@ -1,4 +1,5 @@
 import { Button } from "@components/Button";
+import { BackBar } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { SectionHeading } from "@components/PageHeader";
 import { Overline } from "../local/bits";
@@ -17,12 +18,7 @@ const card = "shadow-[0_2px_4px_rgb(30_28_25/0.035),0_8px_20px_rgb(30_28_25/0.05
 export function CalibrateOverview({ title, onBack, onNow }: { title: string; onBack: () => void; onNow: () => void }) {
   return (
     <div className="flex min-h-full flex-col">
-      <header className="flex min-h-16 flex-none items-center gap-3 bg-canvas px-8">
-        <button type="button" onClick={onBack} className="inline-flex cursor-pointer items-center gap-2 font-ui text-[14px] leading-5 text-ink [&>span>svg]:h-4 [&>span>svg]:w-4">
-          {html(detail.backSvg)}
-          My Twins
-        </button>
-      </header>
+      <BackBar label="My Twins" onBack={onBack} />
       <div className="mx-auto w-full max-w-[720px] flex-1 px-8 pt-6 pb-8">
         <div className="flex flex-col items-center text-center">
           <span className="block h-16 w-16 overflow-hidden rounded-lg bg-fill-soft shadow-e2">

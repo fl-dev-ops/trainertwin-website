@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BackBar } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { Badge } from "@components/Badge";
 import { Button } from "@components/Button";
@@ -18,12 +19,7 @@ export function SessionReport({ index, onBack }: { index: number; onBack: () => 
   if (!d) return null;
   return (
     <div className="flex min-h-full flex-col">
-      <header className="flex min-h-16 flex-none items-center gap-3 bg-canvas px-8">
-        <button type="button" onClick={onBack} className="inline-flex cursor-pointer items-center gap-2 font-ui text-[14px] leading-5 text-ink [&>span>svg]:h-4 [&>span>svg]:w-4">
-          {html(detail.backSvg)}
-          {d.back}
-        </button>
-      </header>
+      <BackBar label={d.back} onBack={onBack} />
       <div className="mx-auto flex w-full max-w-[720px] flex-col gap-4 px-8 pt-6 pb-8">
         <Card className="px-6 py-5">
           <div className="flex items-center justify-between gap-6">

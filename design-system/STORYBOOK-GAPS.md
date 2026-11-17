@@ -11,7 +11,7 @@ components imported). "Uses" means places in the build that wrote the pattern by
 
 | Component | What happened |
 |---|---|
-| `BackBar` (in `PageHeader.tsx`) | The build hand-rolls the 64px back header in **8 files** (detail, edit, calibrate, create, session report, brain…). `BackBar` exists with the same spec. Swap them in; if the tool slot (date filter, Calibrate, ⋮) does not fit, that is the real gap to fix in `BackBar`. |
+| `BackBar` (in `PageHeader.tsx`) | The build had hand-rolled the 64px back header in 5 places (detail, edit, calibrate, create, session report). **Done 17 Nov 2026:** all five now use `BackBar` (its `actions` slot carries the detail page's date filter, Calibrate and ⋮), and the page comparisons did not change. Twin's brain keeps its own toolbar (back, "last updated", Done) because that is a different layout. |
 
 ## 1. Ranked gaps
 
@@ -39,7 +39,7 @@ Ranked by how many pages need it, then by how much each copy costs to keep in st
 
 ## 2. Suggested order
 
-1. **Swap `BackBar` in** and **add `description` to `PageHeader`** (items 0 and 2): no new component, removes two hand-rolled headers.
+1. ~~Swap `BackBar` in~~ (done) and **add `description` to `PageHeader`** (item 2): no new component, removes the hand-rolled settings header.
 2. **Icons (9)**: removes the HTML escape hatch and 14 duplicate helpers; unblocks everything else.
 3. **`Page` (1), `Eyebrow` (6), `StarRating` (7), shadow tokens (16)**: all small, all used across most pages.
 4. **`FilterSelect` (3) and `SearchField` (8)**: used on the busiest pages.

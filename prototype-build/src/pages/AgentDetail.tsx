@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BackBar } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { SegmentedControl } from "@components/SegmentedControl";
@@ -44,20 +45,14 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
   const c = data.credit;
   return (
     <div className="flex min-h-full flex-col">
-      <header className="flex min-h-16 flex-none items-center justify-between gap-3 bg-canvas px-8">
-        <button type="button" onClick={onBack} className="inline-flex cursor-pointer items-center gap-2 font-ui text-[14px] leading-5 text-ink [&>span>svg]:h-4 [&>span>svg]:w-4">
-          {html(data.backSvg)}
-          {data.back}
-        </button>
-        <div className="flex items-center gap-3">
+      <BackBar label={data.back} onBack={onBack} actions={<div className="flex items-center gap-3">
           <FilterSelect width={124} label="Date range" options={["Last 30 days"].map((v) => ({ value: v, label: v }))} value={range} onChange={setRange} />
           <Button size="sm" onClick={onCalibrate} className="[&_svg]:h-4 [&_svg]:w-4">
             {html(data.calibrateSvg)}
             {data.calibrate}
           </Button>
           <Menu label={`More actions for ${data.title}`} items={actions} trigger={(p) => <Button variant="secondary" size="sm" iconOnly {...p} aria-label={`More actions for ${data.title}`}>{html(data.moreSvg)}</Button>} />
-        </div>
-      </header>
+        </div>} />
       <div className="mx-auto w-full max-w-[1024px] px-16 pt-2 pb-8">
         <div className="grid grid-cols-2 items-stretch gap-4">
           <Card className={`col-span-2 flex flex-col p-6 ${shadow}`}>
