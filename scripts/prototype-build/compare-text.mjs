@@ -23,6 +23,7 @@ const FLOWS = {
   detail: { hash: "setup/offplan-process", v3: async (p) => p.click(".rp-grid .rp-card >> nth=0") },
   calibrate: { hash: "setup/offplan-process/calibrate", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-calibrate"]:visible'); } },
   try: { hash: "setup/offplan-process/try", rootA: ".demo-room", rootB: "#root", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="role-row-test"]:visible'); } },
+  create: { hash: "setup/new", v3: async (p) => p.click(".lib-tools .btn--strong") },
   edit: { hash: "setup/offplan-process/edit", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-edit"]:visible'); } },
 };
 const SB = `http://localhost:8791/storybook-build/index.html#/${flow ? FLOWS[flow].hash : id}`;

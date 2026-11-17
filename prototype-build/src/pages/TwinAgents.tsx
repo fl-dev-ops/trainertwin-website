@@ -32,7 +32,7 @@ const mk = (open: (k: "share" | "assign" | "remove", b: Bot) => void, bot: Bot, 
   ...(twin ? [] : ["divider" as const, { label: "Remove", icon: <MenuIcon name="trash" />, danger: true, onSelect: () => open("remove", bot) } as MenuEntry]),
 ];
 
-export function TwinAgents({ onOpen = noop, onEdit = noop, onGo = noop }: { onOpen?: (id: string) => void; onEdit?: (id: string) => void; onGo?: (id: string, sub: string) => void }) {
+export function TwinAgents({ onNew = noop, onOpen = noop, onEdit = noop, onGo = noop }: { onNew?: () => void; onOpen?: (id: string) => void; onEdit?: (id: string) => void; onGo?: (id: string, sub: string) => void }) {
   // The prototype starts with these two removed (state.botsRemoved).
   const [removed, setRemoved] = useState<string[]>(["quiet-clients", "objection-handling"]);
   const [dlg, setDlg] = useState<Dlg>(null);
@@ -61,7 +61,7 @@ export function TwinAgents({ onOpen = noop, onEdit = noop, onGo = noop }: { onOp
               {credit ? <CreditPopover total={1000} used={416} idle={384} onBuy={() => setCredit(false)} /> : null}
             </div>
             {/* v3 sets button text to weight 500 on this page (.page--twin-profile .lib-tools .btn). */}
-            <Button className="font-medium!">
+            <Button className="font-medium!" onClick={onNew}>
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
               Create new
             </Button>
