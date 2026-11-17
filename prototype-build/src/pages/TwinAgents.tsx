@@ -23,8 +23,8 @@ function learnersFor(index: number) {
 
 const noop = () => {};
 type Dlg = { kind: "share" | "assign" | "remove"; bot: Bot } | null;
-const mk = (open: (k: "share" | "assign" | "remove", b: Bot) => void, bot: Bot, twin: boolean): MenuEntry[] => [
-  { label: "Configure", icon: <MenuIcon name="edit" />, onSelect: noop },
+const mk = (open: (k: "share" | "assign" | "remove", b: Bot) => void, bot: Bot, twin: boolean, edit: (id: string) => void): MenuEntry[] => [
+  { label: "Configure", icon: <MenuIcon name="edit" />, onSelect: () => edit(bot.id) },
   { label: "Calibrate", icon: <MenuIcon name="sliders" />, onSelect: noop },
   ...(twin ? [] : [{ label: "Try as learner", icon: <MenuIcon name="play" />, onSelect: noop } as MenuEntry]),
   { label: "Assign", icon: <MenuIcon name="assign" />, onSelect: () => open("assign", bot) },
@@ -32,7 +32,7 @@ const mk = (open: (k: "share" | "assign" | "remove", b: Bot) => void, bot: Bot, 
   ...(twin ? [] : ["divider" as const, { label: "Remove", icon: <MenuIcon name="trash" />, danger: true, onSelect: () => open("remove", bot) } as MenuEntry]),
 ];
 
-export function TwinAgents() {
+export function TwinAgents({ onOpen = noop, onEdit = noop }: { onOpen?: (id: string) => void; onEdit?: (id: string) => void }) {
   // The prototype starts with these two removed (state.botsRemoved).
   const [removed, setRemoved] = useState<string[]>(["quiet-clients", "objection-handling"]);
   const [dlg, setDlg] = useState<Dlg>(null);
@@ -78,7 +78,7 @@ export function TwinAgents() {
           metaIcon={<svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
           photoSrc={PRESENCE}
           learners={learnersFor(0)}
-          actions={mk(openDlg, TWIN_ALL, true)}
+          actions={mk(openDlg, TWIN_ALL, true, onEdit)}
         />
       </div>
       <div className="mt-10 flex items-center justify-between gap-3">
@@ -95,8 +95,8 @@ export function TwinAgents() {
             index={i}
             faceVideoSrc="../media/twin-listening.mp4"
             learners={learnersFor(i)}
-            actions={mk(openDlg, bot, false)}
-            onOpen={noop}
+            actions={mk(openDlg, bot, false, onEdit)}
+            onOpen={() => onOpen(bot.id)}
             className="w-auto"
           />
         ))}

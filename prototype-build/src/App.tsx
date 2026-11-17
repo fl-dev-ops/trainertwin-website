@@ -14,6 +14,8 @@ import { Usage } from "./pages/Usage";
 import { Billing } from "./pages/Billing";
 import { Settings } from "./pages/Settings";
 import { SupportDialog } from "./pages/SupportDialog";
+import { AgentDetail } from "./pages/AgentDetail";
+import { AgentEdit } from "./pages/AgentEdit";
 
 /**
  * The V3 prototype, rebuilt from the Storybook components (src/components). Everything visible here is a
@@ -42,8 +44,8 @@ const FOOT: Nav[] = [
 ];
 const ALL = [...TWIN, ...ROLEPLAY, ...FOOT];
 
-const PAGES: Record<string, () => ReactNode> = {
-  setup: () => <TwinAgents />,
+const PAGES: Record<string, (r: { sub: string; go: (id: string, sub?: string) => void }) => ReactNode> = {
+  setup: ({ sub, go }) => (sub.endsWith("/edit") ? <AgentEdit id={sub.split("/")[0]} onBack={() => go("setup", sub.split("/")[0])} /> : sub ? <AgentDetail id={sub} onBack={() => go("setup")} /> : <TwinAgents onOpen={(id) => go("setup", id)} onEdit={(id) => go("setup", `${id}/edit`)} />),
   calibrations: () => <TwinSessions />,
   twinusers: () => <TwinUsers />,
   knowledge: () => <TwinBrain />,
@@ -55,13 +57,16 @@ const PAGES: Record<string, () => ReactNode> = {
   settings: () => <Settings />,
 };
 
-function readHash() {
-  const h = window.location.hash.replace(/^#\/?/, "");
-  return ALL.some((n) => n.id === h) ? h : "setup";
+/** `#/<nav id>` or `#/<nav id>/<sub>` (e.g. `#/setup/offplan-process` is an agent's detail page). */
+function readHash(): { page: string; sub: string } {
+  const [h, ...rest] = window.location.hash.replace(/^#\/?/, "").split("/");
+  const sub = rest.join("/");
+  return { page: ALL.some((n) => n.id === h) ? h : "setup", sub };
 }
 
 export function App() {
-  const [page, setPage] = useState(readHash);
+  const [route, setRoute] = useState(readHash);
+  const page = route.page;
   const [collapsed, setCollapsed] = useState(false);
   const [dark, setDark] = useState(false);
   const [support, setSupport] = useState(false);
@@ -70,20 +75,20 @@ export function App() {
     document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
   }, [dark]);
   useEffect(() => {
-    const on = () => setPage(readHash());
+    const on = () => setRoute(readHash());
     window.addEventListener("hashchange", on);
     return () => window.removeEventListener("hashchange", on);
   }, []);
-  const go = (id: string) => {
-    window.history.pushState(null, "", `#/${id}`);
-    setPage(id);
+  const go = (id: string, sub = "") => {
+    window.history.pushState(null, "", `#/${id}${sub ? `/${sub}` : ""}`);
+    setRoute({ page: id, sub });
   };
 
   const item = (n: Nav) => (
     <NavItem key={n.id} label={n.label} icon={<Icon name={n.icon} />} meta={n.meta} active={page === n.id && n.id !== "support"} onClick={() => (n.id === "support" ? setSupport(true) : go(n.id))} />
   );
   const current = ALL.find((n) => n.id === page)!;
-  const body = PAGES[page]?.() ?? (
+  const body = PAGES[page]?.({ sub: route.sub, go }) ?? (
     <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
       <PageHeader title={current.label} icon={<Icon name={current.icon} />} />
       <div className="mt-8">

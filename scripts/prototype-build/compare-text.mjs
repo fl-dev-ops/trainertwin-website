@@ -17,7 +17,13 @@ const id = process.argv[2] || "setup";
 const theme = process.argv.includes("dark") ? "dark" : "light";
 const shot = process.argv.includes("--shot");
 const V3 = "http://localhost:8791/v3/index.html?app=1";
-const SB = `http://localhost:8791/storybook-build/index.html#/${id}`;
+const flow = (process.argv.find((a) => a.startsWith("--flow=")) || "").slice(7);
+// Flows: a sub-view reached by clicking in v3 (first agent card, or its Configure) and the matching hash here.
+const FLOWS = {
+  detail: { hash: "setup/offplan-process", v3: async (p) => p.click(".rp-grid .rp-card >> nth=0") },
+  edit: { hash: "setup/offplan-process/edit", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-edit"]:visible'); } },
+};
+const SB = `http://localhost:8791/storybook-build/index.html#/${flow ? FLOWS[flow].hash : id}`;
 
 // Collect every leaf-ish element with its own visible text: tag, text, rect, a few styles.
 const COLLECT = `(sel) => {
@@ -48,7 +54,8 @@ async function open(url, ready) {
   return p;
 }
 const a = await open(V3, async (p) => {
-  await p.locator(`.nav-item[data-id="${id}"], .rail-foot-nav [data-id="${id}"]`).first().click();
+  if (flow) await FLOWS[flow].v3(p);
+  else await p.locator(`.nav-item[data-id="${id}"], .rail-foot-nav [data-id="${id}"]`).first().click();
   if (theme === "dark") await p.locator("#theme-switch").first().click();
   await p.waitForTimeout(900);
 });
@@ -59,6 +66,7 @@ const b = await open(SB, async (p) => {
 await a.mouse.move(1270, 890);
 await b.mouse.move(1270, 890);
 const A = await a.evaluate(`(${COLLECT})(".main")`);
+console.log("v3 main found; build main found");
 const B = await b.evaluate(`(${COLLECT})("main")`);
 
 // Match by text + occurrence index.
