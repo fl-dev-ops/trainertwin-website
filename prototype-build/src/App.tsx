@@ -22,6 +22,7 @@ import { CalibrateOverview } from "./pages/CalibrateOverview";
 import { TryRoom } from "./pages/TryRoom";
 import { SessionReport } from "./pages/SessionReport";
 import { RoleplayReport } from "./pages/RoleplayReport";
+import { LearnerPage } from "./pages/LearnerPage";
 import { CreateAgent } from "./pages/CreateAgent";
 import { TWIN_BOTS } from "./generated";
 
@@ -55,7 +56,7 @@ const ALL = [...TWIN, ...ROLEPLAY, ...FOOT];
 const PAGES: Record<string, (r: { sub: string; go: (id: string, sub?: string) => void }) => ReactNode> = {
   setup: ({ sub, go }) => (sub === "new" ? <CreateAgent onBack={() => go("setup")} /> : sub.endsWith("/try") ? <TryRoom onEnd={() => go("setup", sub.split("/")[0])} /> : sub.endsWith("/calibrate") ? <CalibrateOverview title={TWIN_BOTS.find((b) => b.id === sub.split("/")[0])?.title ?? ""} onBack={() => go("setup", sub.split("/")[0])} onNow={() => {}} /> : sub.endsWith("/edit") ? <AgentEdit id={sub.split("/")[0]} onBack={() => go("setup", sub.split("/")[0])} /> : sub ? <AgentDetail id={sub} onBack={() => go("setup")} onCalibrate={() => go("setup", `${sub}/calibrate`)} onTry={() => go("setup", `${sub}/try`)} /> : <TwinAgents onNew={() => go("setup", "new")} onOpen={(id) => go("setup", id)} onEdit={(id) => go("setup", `${id}/edit`)} onGo={(id, sub) => go("setup", `${id}/${sub}`)} />),
   calibrations: ({ sub, go }) => (sub ? <SessionReport index={Number(sub)} onBack={() => go("calibrations")} /> : <TwinSessions onOpen={(i) => go("calibrations", String(i))} onAsk={() => go("knowledge", "questions")} />),
-  twinusers: () => <TwinUsers />,
+  twinusers: ({ sub, go }) => (sub ? <LearnerPage name={decodeURIComponent(sub)} onBack={() => go("twinusers")} /> : <TwinUsers onOpen={(n) => go("twinusers", encodeURIComponent(n))} />),
   knowledge: ({ sub, go }) => <TwinBrain tab={sub || "knowledge"} onTab={(t) => go("knowledge", t === "knowledge" ? "" : t)} />,
   roleplay: () => <Scenarios />,
   sessions: ({ sub, go }) => (sub ? <RoleplayReport index={Number(sub)} onBack={() => go("sessions")} /> : <RoleplaySessions onOpen={(i) => go("sessions", String(i))} />),

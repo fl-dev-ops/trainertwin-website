@@ -1,0 +1,772 @@
+[
+ {
+  "name": "bechir.realestate",
+  "email": "bechir.realestate@gmail.com",
+  "tone": 4,
+  "left": "30",
+  "used": "30 of 60 min used",
+  "barPct": 50,
+  "high": false,
+  "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M17 7l-10 10\"></path><path d=\"M8 7l9 0l0 9\"></path></svg>",
+  "sessions": [
+   {
+    "when": "Today, 14:12",
+    "chips": [
+     "Handling message inquiries",
+     "Qualifying client criteria",
+     "+1"
+    ],
+    "mins": "6 min"
+   },
+   {
+    "when": "Today, 14:07",
+    "chips": [
+     "Handling catalogue requests",
+     "Call transition",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Today, 0:38",
+    "chips": [
+     "Client follow-up",
+     "Re-engaging silent leads",
+     "+1"
+    ],
+    "mins": "10 min"
+   },
+   {
+    "when": "Sat, 23:07",
+    "chips": [
+     "Client re-engagement",
+     "Handling postponed calls",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:34",
+    "chips": [
+     "Video outreach strategy",
+     "Handling message inquiries",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:32",
+    "chips": [
+     "Booking client calls",
+     "Handling catalogue requests",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Sat, 22:23",
+    "chips": [
+     "Voice note outreach",
+     "Client follow-up",
+     "+1"
+    ],
+    "mins": "4 min"
+   },
+   {
+    "when": "Sat, 15:10",
+    "chips": [
+     "Follow-up messaging",
+     "Client re-engagement",
+     "+1"
+    ],
+    "mins": "5 min"
+   },
+   {
+    "when": "Fri, 18:42",
+    "chips": [
+     "Lead follow-up",
+     "Video outreach strategy",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Fri, 10:15",
+    "chips": [
+     "Qualifying client criteria",
+     "Booking client calls",
+     "+1"
+    ],
+    "mins": "3 min"
+   }
+  ],
+  "credits": [
+   [
+    "Given when they joined",
+    "11 Nov 2026",
+    "12 Dec 2026",
+    "+60 min"
+   ]
+  ]
+ },
+ {
+  "name": "egoryakina",
+  "email": "egoryakina@gmail.com",
+  "tone": 2,
+  "left": "0",
+  "used": "60 of 60 min used",
+  "barPct": 100,
+  "high": true,
+  "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M17 7l-10 10\"></path><path d=\"M8 7l9 0l0 9\"></path></svg>",
+  "sessions": [
+   {
+    "when": "Today, 14:12",
+    "chips": [
+     "Client follow-up",
+     "Re-engaging silent leads",
+     "+1"
+    ],
+    "mins": "6 min"
+   },
+   {
+    "when": "Today, 14:07",
+    "chips": [
+     "Follow-up messaging",
+     "Client re-engagement",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Today, 0:38",
+    "chips": [
+     "Handling postponed calls",
+     "Lead follow-up",
+     "+1"
+    ],
+    "mins": "10 min"
+   },
+   {
+    "when": "Sat, 23:07",
+    "chips": [
+     "Lead follow-up",
+     "Video outreach strategy",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:34",
+    "chips": [
+     "Handling message inquiries",
+     "Qualifying client criteria",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:32",
+    "chips": [
+     "Booking client calls",
+     "Handling catalogue requests",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Sat, 22:23",
+    "chips": [
+     "Call transition",
+     "Voice note outreach",
+     "+1"
+    ],
+    "mins": "4 min"
+   },
+   {
+    "when": "Sat, 15:10",
+    "chips": [
+     "Re-engaging silent leads",
+     "Follow-up messaging",
+     "+1"
+    ],
+    "mins": "5 min"
+   },
+   {
+    "when": "Fri, 18:42",
+    "chips": [
+     "Video outreach strategy",
+     "Handling message inquiries",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Fri, 10:15",
+    "chips": [
+     "Qualifying client criteria",
+     "Booking client calls",
+     "+1"
+    ],
+    "mins": "3 min"
+   }
+  ],
+  "credits": [
+   [
+    "Given when they joined",
+    "11 Nov 2026",
+    "12 Dec 2026",
+    "+60 min"
+   ]
+  ]
+ },
+ {
+  "name": "kjsofficemail",
+  "email": "kjsofficemail@gmail.com",
+  "tone": 3,
+  "left": "58.3",
+  "used": "1.7 of 60 min used",
+  "barPct": 3,
+  "high": false,
+  "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M17 7l-10 10\"></path><path d=\"M8 7l9 0l0 9\"></path></svg>",
+  "sessions": [
+   {
+    "when": "Today, 14:12",
+    "chips": [
+     "Client re-engagement",
+     "Handling postponed calls",
+     "+1"
+    ],
+    "mins": "6 min"
+   },
+   {
+    "when": "Today, 14:07",
+    "chips": [
+     "Video outreach strategy",
+     "Handling message inquiries",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Today, 0:38",
+    "chips": [
+     "Booking client calls",
+     "Handling catalogue requests",
+     "+1"
+    ],
+    "mins": "10 min"
+   },
+   {
+    "when": "Sat, 23:07",
+    "chips": [
+     "Voice note outreach",
+     "Client follow-up",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:34",
+    "chips": [
+     "Follow-up messaging",
+     "Client re-engagement",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:32",
+    "chips": [
+     "Lead follow-up",
+     "Video outreach strategy",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Sat, 22:23",
+    "chips": [
+     "Qualifying client criteria",
+     "Booking client calls",
+     "+1"
+    ],
+    "mins": "4 min"
+   },
+   {
+    "when": "Sat, 15:10",
+    "chips": [
+     "Call transition",
+     "Voice note outreach",
+     "+1"
+    ],
+    "mins": "5 min"
+   },
+   {
+    "when": "Fri, 18:42",
+    "chips": [
+     "Re-engaging silent leads",
+     "Follow-up messaging",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Fri, 10:15",
+    "chips": [
+     "Handling postponed calls",
+     "Lead follow-up",
+     "+1"
+    ],
+    "mins": "3 min"
+   }
+  ],
+  "credits": [
+   [
+    "Given when they joined",
+    "11 Nov 2026",
+    "12 Dec 2026",
+    "+60 min"
+   ]
+  ]
+ },
+ {
+  "name": "mady24n",
+  "email": "mady24n@gmail.com",
+  "tone": 5,
+  "left": "60",
+  "used": "0 of 60 min used",
+  "barPct": 0,
+  "high": false,
+  "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M17 7l-10 10\"></path><path d=\"M8 7l9 0l0 9\"></path></svg>",
+  "sessions": [
+   {
+    "when": "Today, 14:12",
+    "chips": [
+     "Lead follow-up",
+     "Video outreach strategy",
+     "+1"
+    ],
+    "mins": "6 min"
+   },
+   {
+    "when": "Today, 14:07",
+    "chips": [
+     "Qualifying client criteria",
+     "Booking client calls",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Today, 0:38",
+    "chips": [
+     "Call transition",
+     "Voice note outreach",
+     "+1"
+    ],
+    "mins": "10 min"
+   },
+   {
+    "when": "Sat, 23:07",
+    "chips": [
+     "Re-engaging silent leads",
+     "Follow-up messaging",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:34",
+    "chips": [
+     "Handling postponed calls",
+     "Lead follow-up",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:32",
+    "chips": [
+     "Handling message inquiries",
+     "Qualifying client criteria",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Sat, 22:23",
+    "chips": [
+     "Handling catalogue requests",
+     "Call transition",
+     "+1"
+    ],
+    "mins": "4 min"
+   },
+   {
+    "when": "Sat, 15:10",
+    "chips": [
+     "Client follow-up",
+     "Re-engaging silent leads",
+     "+1"
+    ],
+    "mins": "5 min"
+   },
+   {
+    "when": "Fri, 18:42",
+    "chips": [
+     "Client re-engagement",
+     "Handling postponed calls",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Fri, 10:15",
+    "chips": [
+     "Video outreach strategy",
+     "Handling message inquiries",
+     "+1"
+    ],
+    "mins": "3 min"
+   }
+  ],
+  "credits": [
+   [
+    "Given when they joined",
+    "11 Nov 2026",
+    "12 Dec 2026",
+    "+60 min"
+   ]
+  ]
+ },
+ {
+  "name": "mila.konsina",
+  "email": "mila.konsina@gmail.com",
+  "tone": 5,
+  "left": "60",
+  "used": "0 of 60 min used",
+  "barPct": 0,
+  "high": false,
+  "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M17 7l-10 10\"></path><path d=\"M8 7l9 0l0 9\"></path></svg>",
+  "sessions": [
+   {
+    "when": "Today, 14:12",
+    "chips": [
+     "Lead follow-up",
+     "Video outreach strategy",
+     "+1"
+    ],
+    "mins": "6 min"
+   },
+   {
+    "when": "Today, 14:07",
+    "chips": [
+     "Qualifying client criteria",
+     "Booking client calls",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Today, 0:38",
+    "chips": [
+     "Call transition",
+     "Voice note outreach",
+     "+1"
+    ],
+    "mins": "10 min"
+   },
+   {
+    "when": "Sat, 23:07",
+    "chips": [
+     "Re-engaging silent leads",
+     "Follow-up messaging",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:34",
+    "chips": [
+     "Handling postponed calls",
+     "Lead follow-up",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:32",
+    "chips": [
+     "Handling message inquiries",
+     "Qualifying client criteria",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Sat, 22:23",
+    "chips": [
+     "Handling catalogue requests",
+     "Call transition",
+     "+1"
+    ],
+    "mins": "4 min"
+   },
+   {
+    "when": "Sat, 15:10",
+    "chips": [
+     "Client follow-up",
+     "Re-engaging silent leads",
+     "+1"
+    ],
+    "mins": "5 min"
+   },
+   {
+    "when": "Fri, 18:42",
+    "chips": [
+     "Client re-engagement",
+     "Handling postponed calls",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Fri, 10:15",
+    "chips": [
+     "Video outreach strategy",
+     "Handling message inquiries",
+     "+1"
+    ],
+    "mins": "3 min"
+   }
+  ],
+  "credits": [
+   [
+    "Given when they joined",
+    "11 Nov 2026",
+    "12 Dec 2026",
+    "+60 min"
+   ]
+  ]
+ },
+ {
+  "name": "safwankadri786786",
+  "email": "safwankadri786786@gmail.com",
+  "tone": 1,
+  "left": "57.4",
+  "used": "2.6 of 60 min used",
+  "barPct": 4,
+  "high": false,
+  "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M17 7l-10 10\"></path><path d=\"M8 7l9 0l0 9\"></path></svg>",
+  "sessions": [
+   {
+    "when": "Today, 14:12",
+    "chips": [
+     "Call transition",
+     "Voice note outreach",
+     "+1"
+    ],
+    "mins": "6 min"
+   },
+   {
+    "when": "Today, 14:07",
+    "chips": [
+     "Re-engaging silent leads",
+     "Follow-up messaging",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Today, 0:38",
+    "chips": [
+     "Handling postponed calls",
+     "Lead follow-up",
+     "+1"
+    ],
+    "mins": "10 min"
+   },
+   {
+    "when": "Sat, 23:07",
+    "chips": [
+     "Handling message inquiries",
+     "Qualifying client criteria",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:34",
+    "chips": [
+     "Handling catalogue requests",
+     "Call transition",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:32",
+    "chips": [
+     "Client follow-up",
+     "Re-engaging silent leads",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Sat, 22:23",
+    "chips": [
+     "Client re-engagement",
+     "Handling postponed calls",
+     "+1"
+    ],
+    "mins": "4 min"
+   },
+   {
+    "when": "Sat, 15:10",
+    "chips": [
+     "Video outreach strategy",
+     "Handling message inquiries",
+     "+1"
+    ],
+    "mins": "5 min"
+   },
+   {
+    "when": "Fri, 18:42",
+    "chips": [
+     "Booking client calls",
+     "Handling catalogue requests",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Fri, 10:15",
+    "chips": [
+     "Voice note outreach",
+     "Client follow-up",
+     "+1"
+    ],
+    "mins": "3 min"
+   }
+  ],
+  "credits": [
+   [
+    "Given when they joined",
+    "11 Nov 2026",
+    "12 Dec 2026",
+    "+60 min"
+   ]
+  ]
+ },
+ {
+  "name": "themehakbhutani",
+  "email": "themehakbhutani@gmail.com",
+  "tone": 2,
+  "left": "60",
+  "used": "0 of 60 min used",
+  "barPct": 0,
+  "high": false,
+  "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M17 7l-10 10\"></path><path d=\"M8 7l9 0l0 9\"></path></svg>",
+  "sessions": [
+   {
+    "when": "Today, 14:12",
+    "chips": [
+     "Voice note outreach",
+     "Client follow-up",
+     "+1"
+    ],
+    "mins": "6 min"
+   },
+   {
+    "when": "Today, 14:07",
+    "chips": [
+     "Follow-up messaging",
+     "Client re-engagement",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Today, 0:38",
+    "chips": [
+     "Lead follow-up",
+     "Video outreach strategy",
+     "+1"
+    ],
+    "mins": "10 min"
+   },
+   {
+    "when": "Sat, 23:07",
+    "chips": [
+     "Qualifying client criteria",
+     "Booking client calls",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:34",
+    "chips": [
+     "Call transition",
+     "Voice note outreach",
+     "+1"
+    ],
+    "mins": "3 min"
+   },
+   {
+    "when": "Sat, 22:32",
+    "chips": [
+     "Re-engaging silent leads",
+     "Follow-up messaging",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Sat, 22:23",
+    "chips": [
+     "Handling postponed calls",
+     "Lead follow-up",
+     "+1"
+    ],
+    "mins": "4 min"
+   },
+   {
+    "when": "Sat, 15:10",
+    "chips": [
+     "Handling message inquiries",
+     "Qualifying client criteria",
+     "+1"
+    ],
+    "mins": "5 min"
+   },
+   {
+    "when": "Fri, 18:42",
+    "chips": [
+     "Handling catalogue requests",
+     "Call transition",
+     "+1"
+    ],
+    "mins": "2 min"
+   },
+   {
+    "when": "Fri, 10:15",
+    "chips": [
+     "Client follow-up",
+     "Re-engaging silent leads",
+     "+1"
+    ],
+    "mins": "3 min"
+   }
+  ],
+  "credits": [
+   [
+    "Given when they joined",
+    "11 Nov 2026",
+    "12 Dec 2026",
+    "+60 min"
+   ]
+  ]
+ }
+]

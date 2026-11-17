@@ -50,6 +50,17 @@ Local pieces in `prototype-build/src` that are not in Storybook yet, ranked by h
 | Rated pill ("Feels like me" with a thumb) | Twin session report | a `Badge` variant |
 | Textarea label with a lighter "Optional" suffix | Feels-off dialog | `Textarea` `optional` prop |
 
+Found building the Twin users pages:
+
+| Piece | Where | Proposed component |
+|---|---|---|
+| `BackLink`: the small "← Back" text button (V3 `.acc-back`), not the 64px `BackBar` | learner page | `BackLink` |
+| `Avatar` at 40px (session rows) and 80px (page head); the library stops at 44px (`lg`) | learner page | `Avatar` sizes `xl` (40) and `2xl` (80), or fix `lg` to V3's 40 |
+| Outline tag (1px border, 13/20, pill) for topics, "+1" | learner sessions | `Tag` |
+| A credits meter that is a bar plus "X of Y min used", with the "caution" colour when nothing is left | learner head; `UsageMeter` is close but has its own text and a 90% rule | `CreditMeter`, or an `UsageMeter` variant |
+
+V3 also opens this learner page from the Usage page's Learners table; the Usage page's Details tab is not built yet.
+
 V3 quirk, kept on purpose: the Roleplay filter lists nine roleplays that are all called "First conversation" (V3 strips the client's name from the title). Say if the build should show the client names instead.
 
 ## 2. Suggested order
