@@ -34,6 +34,22 @@ const STATES = {
     v3: async (p) => p.click(".lockup-toggle"),
     sb: async (p) => p.click("aside button[aria-pressed] >> nth=0"),
   },
+  "credit-popover": {
+    v3: async (p) => p.click(".credit-pill"),
+    sb: async (p) => p.click("main button[title]"),
+  },
+  "remove-dialog": {
+    v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-remove"]:visible'); },
+    sb: async (p) => { await p.click("main div.grid-cols-3 > article [aria-haspopup] >> nth=0"); await p.click('[role=menuitem]:has-text("Remove")'); },
+  },
+  "share-dialog": {
+    v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-share"]:visible'); },
+    sb: async (p) => { await p.click("main div.grid-cols-3 > article [aria-haspopup] >> nth=0"); await p.click('[role=menuitem]:has-text("Share")'); },
+  },
+  "assign-dialog": {
+    v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="role-assign-open"]:visible'); },
+    sb: async (p) => { await p.click("main div.grid-cols-3 > article [aria-haspopup] >> nth=0"); await p.click('[role=menuitem]:has-text("Assign")'); },
+  },
   "credit-hover": {
     v3: async (p) => p.hover(".credit-pill"),
     sb: async (p) => p.hover("main button[title]"),
@@ -47,12 +63,14 @@ async function open(url, dark, sw) {
   await p.goto(url, { waitUntil: "domcontentloaded" });
   await p.waitForTimeout(1800);
   await p.addStyleTag({ content: FREEZE });
-  if (dark) { await p.locator(sw).first().click(); await p.waitForTimeout(300); }
+  if (dark) { await p.locator(sw).first().click(); await p.waitForTimeout(700); }
   await p.mouse.move(1270, 890);
   return p;
 }
+const only = process.argv.slice(3);
 const out = [];
 for (const [name, s] of Object.entries(STATES)) {
+  if (only.length && !only.includes(name)) continue;
   const a = await open(V3, theme === "dark", "#theme-switch");
   const b = await open(SB, theme === "dark", "aside [aria-label='Switch to dark']");
   await s.v3(a); await s.sb(b);

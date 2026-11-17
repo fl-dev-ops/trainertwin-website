@@ -108,8 +108,8 @@ export function Modal({ open, onClose, title, description, icon, iconTone = "dan
         <div className={cn("relative flex max-h-[calc(100dvh-32px)] flex-col items-start gap-5 p-6 font-ui text-ink", SURFACE, className)}>
           <Button variant="ghost" size="sm" iconOnly leadingIcon={<XIcon />} aria-label={closeLabel} onClick={onClose} className="absolute top-3 right-3" />
           {icon ? <IconTile tone={iconTone}>{icon}</IconTile> : null}
-          <div className="flex min-w-0 flex-col gap-2 pr-8">
-            <h2 id={titleId} className="m-0 text-[20px] leading-7 font-title tracking-[-0.025em]">
+          <div className="flex min-w-0 flex-col gap-2">
+            <h2 id={titleId} className="m-0 pr-8 text-[20px] leading-7 font-title tracking-[-0.025em]">
               {title}
             </h2>
             {description ? <p className="m-0 text-[14px] leading-5 text-ink-secondary">{description}</p> : null}

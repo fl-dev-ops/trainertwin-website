@@ -1,10 +1,15 @@
+import { useEffect, useRef, useState } from "react";
 import { PageHeader, SectionHeading } from "@components/PageHeader";
+import { ConfirmDialog } from "@components/Modal";
 import { Button } from "@components/Button";
 import { AgentCard } from "@components/AgentCard";
 import { TwinAllCard } from "@components/Cards";
 import type { MenuEntry } from "@components/Menu";
 import { Icon, MenuIcon } from "../Svg";
 import { CreditPill } from "../local/CreditPill";
+import { CreditPopover } from "../local/CreditPopover";
+import { ShareDialog } from "../overlays/ShareDialog";
+import { AssignDialog } from "../overlays/AssignDialog";
 import { TWIN_BOTS, TWIN_ALL, type Bot } from "../generated";
 
 const PRESENCE = "https://i.pravatar.cc/240?img=32";
@@ -17,25 +22,33 @@ function learnersFor(index: number) {
 }
 
 const noop = () => {};
-const twinAllActions: MenuEntry[] = [
+type Dlg = { kind: "share" | "assign" | "remove"; bot: Bot } | null;
+const mk = (open: (k: "share" | "assign" | "remove", b: Bot) => void, bot: Bot, twin: boolean): MenuEntry[] => [
   { label: "Configure", icon: <MenuIcon name="edit" />, onSelect: noop },
   { label: "Calibrate", icon: <MenuIcon name="sliders" />, onSelect: noop },
-  { label: "Assign", icon: <MenuIcon name="assign" />, onSelect: noop },
-  { label: "Share", icon: <MenuIcon name="share" />, onSelect: noop },
-];
-const botActions: MenuEntry[] = [
-  { label: "Configure", icon: <MenuIcon name="edit" />, onSelect: noop },
-  { label: "Calibrate", icon: <MenuIcon name="sliders" />, onSelect: noop },
-  { label: "Try as learner", icon: <MenuIcon name="play" />, onSelect: noop },
-  { label: "Assign", icon: <MenuIcon name="assign" />, onSelect: noop },
-  { label: "Share", icon: <MenuIcon name="share" />, onSelect: noop },
-  "divider",
-  { label: "Remove", icon: <MenuIcon name="trash" />, danger: true, onSelect: noop },
+  ...(twin ? [] : [{ label: "Try as learner", icon: <MenuIcon name="play" />, onSelect: noop } as MenuEntry]),
+  { label: "Assign", icon: <MenuIcon name="assign" />, onSelect: () => open("assign", bot) },
+  { label: "Share", icon: <MenuIcon name="share" />, onSelect: () => open("share", bot) },
+  ...(twin ? [] : ["divider" as const, { label: "Remove", icon: <MenuIcon name="trash" />, danger: true, onSelect: () => open("remove", bot) } as MenuEntry]),
 ];
 
 export function TwinAgents() {
   // The prototype starts with these two removed (state.botsRemoved).
-  const bots: Bot[] = TWIN_BOTS.filter((b) => !["quiet-clients", "objection-handling"].includes(b.id));
+  const [removed, setRemoved] = useState<string[]>(["quiet-clients", "objection-handling"]);
+  const [dlg, setDlg] = useState<Dlg>(null);
+  const [lastDlg, setLastDlg] = useState<Dlg>(null);
+  const [credit, setCredit] = useState(false);
+  const creditRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!credit) return;
+    const away = (e: PointerEvent) => { if (!creditRef.current?.contains(e.target as Node)) setCredit(false); };
+    document.addEventListener("pointerdown", away);
+    return () => document.removeEventListener("pointerdown", away);
+  }, [credit]);
+  const openDlg = (kind: "share" | "assign" | "remove", bot: Bot) => { const d = { kind, bot }; setDlg(d); setLastDlg(d); };
+  const closeDlg = () => setDlg(null);
+  const bots: Bot[] = TWIN_BOTS.filter((b) => !removed.includes(b.id));
+  const cur = dlg ?? lastDlg;
   return (
     <div className="mx-auto max-w-[1024px] px-16 pt-5 pb-8">
       <PageHeader
@@ -43,7 +56,10 @@ export function TwinAgents() {
         icon={<Icon name="setup" />}
         tools={
           <>
-            <CreditPill left={200} total={1000} />
+            <div ref={creditRef} className="relative">
+              <CreditPill left={200} total={1000} onClick={() => setCredit((c) => !c)} />
+              {credit ? <CreditPopover total={1000} used={416} idle={384} onBuy={() => setCredit(false)} /> : null}
+            </div>
             {/* v3 sets button text to weight 500 on this page (.page--twin-profile .lib-tools .btn). */}
             <Button className="font-medium!">
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
@@ -62,7 +78,7 @@ export function TwinAgents() {
           metaIcon={<svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
           photoSrc={PRESENCE}
           learners={learnersFor(0)}
-          actions={twinAllActions}
+          actions={mk(openDlg, TWIN_ALL, true)}
         />
       </div>
       <div className="mt-10 flex items-center justify-between gap-3">
@@ -79,13 +95,28 @@ export function TwinAgents() {
             index={i}
             faceVideoSrc="../media/twin-listening.mp4"
             learners={learnersFor(i)}
-            actions={botActions}
+            actions={mk(openDlg, bot, false)}
             onOpen={noop}
             className="w-auto"
           />
         ))}
       </div>
-      <span hidden>{TWIN_ALL.id}</span>
+      {cur ? (
+        <>
+          <ShareDialog open={dlg?.kind === "share"} onClose={closeDlg} botId={cur.bot.id} botTitle={cur.bot.title} />
+          <AssignDialog open={dlg?.kind === "assign"} onClose={closeDlg} botTitle={cur.bot.title} />
+          <ConfirmDialog
+            open={dlg?.kind === "remove"}
+            onClose={closeDlg}
+            title={`Remove “${cur.bot.title}”?`}
+            description="It will stop answering and disappear from your twin’s bots."
+            confirmLabel="Remove"
+            confirmVariant="danger"
+            icon={<MenuIcon name="trash" />}
+            onConfirm={() => { setRemoved((r) => [...r, cur.bot.id]); closeDlg(); }}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

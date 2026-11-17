@@ -1,0 +1,107 @@
+{
+ "title": "Assign twin agent",
+ "sub": "The off-plan sales process \u00b7",
+ "assigned": 2,
+ "cohorts": [
+  [
+   "all",
+   "All cohorts"
+  ],
+  [
+   "sep",
+   "Sep 2026 batch"
+  ],
+  [
+   "aug",
+   "Aug 2026 batch"
+  ],
+  [
+   "walk",
+   "Walk-ins"
+  ]
+ ],
+ "rows": [
+  {
+   "done": false,
+   "cohort": "sep",
+   "tone": 1,
+   "initial": "A",
+   "name": "Aisha Khan",
+   "email": "aisha.khan@gmail.com",
+   "phone": "+971 50 123 4567",
+   "min": 30
+  },
+  {
+   "done": true,
+   "cohort": "sep",
+   "tone": 2,
+   "initial": "J",
+   "name": "James Carter",
+   "email": "james.carter@outlook.com",
+   "phone": "+971 55 234 7788",
+   "min": 60
+  },
+  {
+   "done": false,
+   "cohort": "sep",
+   "tone": 3,
+   "initial": "N",
+   "name": "Nora Ali",
+   "email": "nora.ali@gmail.com",
+   "phone": "+44 7700 900 142",
+   "min": 30
+  },
+  {
+   "done": false,
+   "cohort": "aug",
+   "tone": 4,
+   "initial": "L",
+   "name": "Leo Martin",
+   "email": "leo@martinrealty.ae",
+   "phone": "+971 52 889 1023",
+   "min": 30
+  },
+  {
+   "done": false,
+   "cohort": "aug",
+   "tone": 5,
+   "initial": "P",
+   "name": "Priya Nair",
+   "email": "priya.nair@gmail.com",
+   "phone": "+91 98765 43210",
+   "min": 30
+  },
+  {
+   "done": true,
+   "cohort": "walk",
+   "tone": 1,
+   "initial": "O",
+   "name": "Omar Haddad",
+   "email": "omar.haddad@dubaihomes.com",
+   "phone": "+971 56 410 2291",
+   "min": 60
+  },
+  {
+   "done": false,
+   "cohort": "walk",
+   "tone": 2,
+   "initial": "S",
+   "name": "Sofia Rossi",
+   "email": "sofia.rossi@gmail.com",
+   "phone": "+39 345 123 4567",
+   "min": 30
+  },
+  {
+   "done": false,
+   "cohort": "walk",
+   "tone": 3,
+   "initial": "D",
+   "name": "Daniel Cho",
+   "email": "daniel.cho@outlook.com",
+   "phone": "+82 10 5555 1234",
+   "min": 30
+  }
+ ],
+ "note": "Access lasts 30 days from the day you assign.",
+ "search": "Search by name, email or number"
+}

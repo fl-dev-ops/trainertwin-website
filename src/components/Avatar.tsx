@@ -28,6 +28,8 @@ export interface AvatarProps
   size?: AvatarSize;
   /** Tint for the initials fallback. Default neutral. */
   tone?: AvatarTone;
+  /** Override the letters shown when there is no image (the prototype shows one letter, "A"). */
+  initials?: string;
 }
 
 const sizes: Record<AvatarSize, string> = {
@@ -50,7 +52,7 @@ function initials(name: string) {
   return (first + last).toUpperCase();
 }
 
-export function Avatar({ src, alt, size = "md", tone = "neutral", className, ...rest }: AvatarProps) {
+export function Avatar({ src, alt, size = "md", tone = "neutral", initials: letters, className, ...rest }: AvatarProps) {
   const base = cn(
     "shrink-0 overflow-hidden rounded-full object-cover",
     sizes[size],
@@ -78,7 +80,7 @@ export function Avatar({ src, alt, size = "md", tone = "neutral", className, ...
           tones[tone],
         )}
       >
-        <span aria-hidden="true">{initials(alt)}</span>
+        <span aria-hidden="true">{letters ?? initials(alt)}</span>
       </span>
     );
   }
