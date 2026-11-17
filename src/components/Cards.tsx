@@ -111,13 +111,15 @@ export interface TwinAllCardProps {
 }
 
 export function TwinAllCard({ name, meta, metaIcon, photoSrc, learners = [], href, onOpen, onMore, actions, className }: TwinAllCardProps) {
+  // No `relative` here: the ::after stretches to the nearest positioned ancestor, which must be the card itself.
   const nameCls =
-    "relative text-left font-ui text-[18px] leading-6 font-title text-ink after:absolute after:inset-0 after:z-[1] after:content-[''] focus-visible:outline-none tt-open";
+    "text-left font-ui text-[18px] leading-6 font-title text-ink after:absolute after:inset-0 after:z-[1] after:content-[''] focus-visible:outline-none tt-open";
   return (
     <article
       className={cn(
         "relative flex w-full max-w-[896px] items-center gap-5 rounded-lg border border-line-card bg-surface p-5 shadow-card",
-        "transition-colors duration-(--tt-duration-quick) ease-standard hover:border-line-interactive",
+        (href || onOpen) && "cursor-pointer",
+        "transition-shadow duration-(--tt-duration-quick) ease-standard hover:shadow-e2",
         "has-[.tt-open:focus-visible]:outline-2 has-[.tt-open:focus-visible]:outline-offset-2 has-[.tt-open:focus-visible]:outline-primary",
         className,
       )}

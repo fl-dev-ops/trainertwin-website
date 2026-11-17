@@ -27,6 +27,8 @@ const FLOWS = {
   questions: { hash: "knowledge/questions", v3: async (p) => { await p.click('.nav-item[data-id="knowledge"]'); await p.click('.flow-tabs [data-id="questions"]'); } },
   issues: { hash: "knowledge/issues", v3: async (p) => { await p.click('.nav-item[data-id="knowledge"]'); await p.click('.flow-tabs [data-id="reports"]'); } },
   create: { hash: "setup/new", v3: async (p) => p.click(".lib-tools .btn--strong") },
+  twinall: { hash: "setup/olga-twin", v3: async (p) => p.click(".twin-all") },
+  agent2: { hash: "setup/listing-pitch", v3: async (p) => p.click('.rp-grid .rp-card[data-id="listing-pitch"]') },
   edit: { hash: "setup/offplan-process/edit", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-edit"]:visible'); } },
 };
 const SB = `http://localhost:8791/storybook-build/index.html#/${flow ? FLOWS[flow].hash : id}`;

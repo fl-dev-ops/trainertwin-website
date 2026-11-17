@@ -1,4 +1,4 @@
-/** Scrape the Twin agent detail page (click the first card in v3) into prototype-build/src/data/agent-detail.json. Read only. */
+/** Scrape the Twin agent detail page (the first card in v3 -> agent-detail.json) and every agent incl. "Olga's twin" -> agent-details.json, by id. Read only. */
 import { createRequire } from "module";
 import fs from "node:fs";
 const require = createRequire(import.meta.url);
@@ -7,9 +7,8 @@ const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1280, height: 900 } });
 await p.goto("http://localhost:8791/v3/index.html?app=1", { waitUntil: "domcontentloaded" });
 await p.waitForTimeout(1500);
-await p.click(".rp-grid .rp-card >> nth=0");
-await p.waitForTimeout(1000);
-const d = await p.evaluate(() => {
+const IDS = ["offplan-process", "listing-pitch", "fee-negotiation", "cold-calling", "investor-yield", "deposit-handover", "olga-twin"];
+const scrape = () => p.evaluate(() => {
   const t = (e) => (e ? e.textContent.trim() : "");
   const q = (s, r = document) => r.querySelector(s);
   const qa = (s, r = document) => [...r.querySelectorAll(s)];
@@ -30,6 +29,16 @@ const d = await p.evaluate(() => {
     cals: qa(".bot-cal-list .cal-row").map((r) => ({ title: t(q(".cal-title", r)), meta: t(q(".cal-meta", r)), svg: svgOf(r) })),
   };
 });
+const all = {};
+for (const id of IDS) {
+  await p.click(id === "olga-twin" ? ".twin-all" : `.rp-grid .rp-card[data-id="${id}"]`);
+  await p.waitForTimeout(700);
+  all[id] = await scrape();
+  await p.click('[data-action="bot-detail-back"]');
+  await p.waitForTimeout(500);
+}
+const d = all["offplan-process"];
 fs.writeFileSync("prototype-build/src/data/agent-detail.json", JSON.stringify(d, null, 1));
+fs.writeFileSync("prototype-build/src/data/agent-details.json", JSON.stringify(all, null, 1));
 console.log(Object.keys(d).join(","), d.stats.length, d.questions.length, d.cals.length);
 await b.close();

@@ -79,6 +79,7 @@ export function TwinAgents({ onNew = noop, onOpen = noop, onEdit = noop, onGo = 
           metaIcon={<svg viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
           photoSrc={PRESENCE}
           learners={learnersFor(0)}
+          onOpen={() => onOpen(TWIN_ALL.id)}
           actions={mk(openDlg, TWIN_ALL, true, onEdit, onGo)}
         />
       </div>

@@ -1,0 +1,926 @@
+{
+ "offplan-process": {
+  "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "back": "Back",
+  "range": "Last 30 days",
+  "rangeSvg": "<svg viewBox=\"3.8 5.8 8.4 4.9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4.5 6.5 8 10l3.5-3.5\" stroke=\"currentColor\" stroke-width=\"0.94\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "calibrate": "Calibrate",
+  "calibrateSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>",
+  "moreSvg": "<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"3.25\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"8\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"12.75\" r=\"1.15\" fill=\"currentColor\"></circle></svg>",
+  "title": "The off-plan sales process",
+  "kicker1": "What it does",
+  "scenario": "First call, educational Zoom and presentation meeting. Every stage books the next one.",
+  "kicker2": "Build this agent from",
+  "bf": {
+   "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3v4a1 1 0 0 0 1 1h4\"></path><path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2\"></path><path d=\"M9 9h1\"></path><path d=\"M9 13h6\"></path><path d=\"M9 17h6\"></path></svg>",
+   "name": "16 files",
+   "viewAll": "View all",
+   "viewAllSvg": "<svg class=\"bf-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+  },
+  "credit": {
+   "pct": "63%",
+   "used": 63,
+   "kicker": "Usage credit",
+   "value": "190",
+   "muted": "of 300 min used",
+   "note": "110 minutes left"
+  },
+  "reportTitle": "Report",
+  "stats": [
+   {
+    "cls": "rp-stat--sessions rp-stat--link",
+    "label": "Sessions",
+    "value": "112",
+    "muted": "",
+    "view": "View",
+    "viewSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"></path><path d=\"M8 7h9v9\"></path></svg>"
+   },
+   {
+    "cls": "rp-stat--review",
+    "label": "Help score",
+    "value": "4.8",
+    "muted": "/ 5",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--score",
+    "label": "Avg response time",
+    "value": "1.6",
+    "muted": "s",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--neutral",
+    "label": "Avg session length",
+    "value": "3.6",
+    "muted": "min",
+    "view": "",
+    "viewSvg": ""
+   }
+  ],
+  "weeksTitle": "Conversations by week",
+  "chart": "<svg class=\"rp-chart\" viewBox=\"0 0 720 192\" role=\"img\" aria-label=\"Sessions this week\"><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 21 – 27&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;23&quot;],[&quot;Feels like me&quot;,&quot;87%&quot;],[&quot;Reports&quot;,&quot;3&quot;],[&quot;Avg length&quot;,&quot;3.2 min&quot;]]}\" aria-label=\"Oct 21 – 27: Conversations 23, Feels like me 87%, Reports 3, Avg length 3.2 min\"><rect class=\"rp-chart-hit\" x=\"-5.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"4.0\" y=\"75\" width=\"164.5\" height=\"89\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"86.3\" y=\"182\" text-anchor=\"middle\">Oct 21</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 28 – Nov 3&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;40&quot;],[&quot;Feels like me&quot;,&quot;90%&quot;],[&quot;Reports&quot;,&quot;6&quot;],[&quot;Avg length&quot;,&quot;3.6 min&quot;]]}\" aria-label=\"Oct 28 – Nov 3: Conversations 40, Feels like me 90%, Reports 6, Avg length 3.6 min\"><rect class=\"rp-chart-hit\" x=\"177.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"186.5\" y=\"10\" width=\"164.5\" height=\"154\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"268.8\" y=\"182\" text-anchor=\"middle\">Oct 28</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 4 – 10&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;16&quot;],[&quot;Feels like me&quot;,&quot;93%&quot;],[&quot;Reports&quot;,&quot;2&quot;],[&quot;Avg length&quot;,&quot;4.0 min&quot;]]}\" aria-label=\"Nov 4 – 10: Conversations 16, Feels like me 93%, Reports 2, Avg length 4.0 min\"><rect class=\"rp-chart-hit\" x=\"360.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"369.0\" y=\"102\" width=\"164.5\" height=\"62\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"451.3\" y=\"182\" text-anchor=\"middle\">Nov 4</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 11 – 17&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;33&quot;],[&quot;Feels like me&quot;,&quot;81%&quot;],[&quot;Reports&quot;,&quot;5&quot;],[&quot;Avg length&quot;,&quot;4.4 min&quot;]]}\" aria-label=\"Nov 11 – 17: Conversations 33, Feels like me 81%, Reports 5, Avg length 4.4 min\"><rect class=\"rp-chart-hit\" x=\"542.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"551.5\" y=\"37\" width=\"164.5\" height=\"127\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"633.8\" y=\"182\" text-anchor=\"middle\">Nov 11</text></g></svg>",
+  "reports": [
+   {
+    "label": "Total reports",
+    "value": "16",
+    "link": true,
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "label": "Most common report",
+    "value": "Didn’t answer my question",
+    "link": false,
+    "svg": ""
+   }
+  ],
+  "qTitle": "Questions your twin couldn’t answer",
+  "questions": [
+   {
+    "q": "What do I say when a client asks “what good opportunities do you have?”",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "In the meeting, do I first explain the market?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "What numbers do I present?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   }
+  ],
+  "tabs": [
+   {
+    "label": "Calibration",
+    "on": true
+   },
+   {
+    "label": "Sessions",
+    "on": false
+   },
+   {
+    "label": "Assigned to",
+    "on": false
+   }
+  ],
+  "cals": [
+   {
+    "title": "Handling “prices will drop next year”",
+    "meta": "Today, 11:11 · 6 min · 15 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Pushing back on a one percent fee",
+    "meta": "Yesterday, 4:20 · 5 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Opening a cold call with a landlord",
+    "meta": "Mon, 10:05 · 4 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Following up after a viewing",
+    "meta": "Sun, 6:48 · 2 min · 3 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   }
+  ]
+ },
+ "listing-pitch": {
+  "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "back": "Back",
+  "range": "Last 30 days",
+  "rangeSvg": "<svg viewBox=\"3.8 5.8 8.4 4.9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4.5 6.5 8 10l3.5-3.5\" stroke=\"currentColor\" stroke-width=\"0.94\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "calibrate": "Calibrate",
+  "calibrateSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>",
+  "moreSvg": "<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"3.25\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"8\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"12.75\" r=\"1.15\" fill=\"currentColor\"></circle></svg>",
+  "title": "Winning the listing presentation",
+  "kicker1": "What it does",
+  "scenario": "Shows the seller your plan and your numbers before they ask who is cheaper.",
+  "kicker2": "Build this agent from",
+  "bf": {
+   "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3v4a1 1 0 0 0 1 1h4\"></path><path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2\"></path><path d=\"M9 9h1\"></path><path d=\"M9 13h6\"></path><path d=\"M9 17h6\"></path></svg>",
+   "name": "16 files",
+   "viewAll": "View all",
+   "viewAllSvg": "<svg class=\"bf-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+  },
+  "credit": {
+   "pct": "38%",
+   "used": 38,
+   "kicker": "Usage credit",
+   "value": "38",
+   "muted": "of 100 min used",
+   "note": "62 minutes left"
+  },
+  "reportTitle": "Report",
+  "stats": [
+   {
+    "cls": "rp-stat--sessions rp-stat--link",
+    "label": "Sessions",
+    "value": "58",
+    "muted": "",
+    "view": "View",
+    "viewSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"></path><path d=\"M8 7h9v9\"></path></svg>"
+   },
+   {
+    "cls": "rp-stat--review",
+    "label": "Help score",
+    "value": "4.7",
+    "muted": "/ 5",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--score",
+    "label": "Avg response time",
+    "value": "1.6",
+    "muted": "s",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--neutral",
+    "label": "Avg session length",
+    "value": "3.7",
+    "muted": "min",
+    "view": "",
+    "viewSvg": ""
+   }
+  ],
+  "weeksTitle": "Conversations by week",
+  "chart": "<svg class=\"rp-chart\" viewBox=\"0 0 720 192\" role=\"img\" aria-label=\"Sessions this week\"><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 21 – 27&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;22&quot;],[&quot;Feels like me&quot;,&quot;93%&quot;],[&quot;Reports&quot;,&quot;3&quot;],[&quot;Avg length&quot;,&quot;3.4 min&quot;]]}\" aria-label=\"Oct 21 – 27: Conversations 22, Feels like me 93%, Reports 3, Avg length 3.4 min\"><rect class=\"rp-chart-hit\" x=\"-5.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"4.0\" y=\"10\" width=\"164.5\" height=\"154\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"86.3\" y=\"182\" text-anchor=\"middle\">Oct 21</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 28 – Nov 3&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;10&quot;],[&quot;Feels like me&quot;,&quot;81%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;3.8 min&quot;]]}\" aria-label=\"Oct 28 – Nov 3: Conversations 10, Feels like me 81%, Reports 1, Avg length 3.8 min\"><rect class=\"rp-chart-hit\" x=\"177.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"186.5\" y=\"94\" width=\"164.5\" height=\"70\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"268.8\" y=\"182\" text-anchor=\"middle\">Oct 28</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 4 – 10&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;19&quot;],[&quot;Feels like me&quot;,&quot;84%&quot;],[&quot;Reports&quot;,&quot;3&quot;],[&quot;Avg length&quot;,&quot;4.2 min&quot;]]}\" aria-label=\"Nov 4 – 10: Conversations 19, Feels like me 84%, Reports 3, Avg length 4.2 min\"><rect class=\"rp-chart-hit\" x=\"360.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"369.0\" y=\"31\" width=\"164.5\" height=\"133\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"451.3\" y=\"182\" text-anchor=\"middle\">Nov 4</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 11 – 17&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;7&quot;],[&quot;Feels like me&quot;,&quot;87%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;3.2 min&quot;]]}\" aria-label=\"Nov 11 – 17: Conversations 7, Feels like me 87%, Reports 1, Avg length 3.2 min\"><rect class=\"rp-chart-hit\" x=\"542.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"551.5\" y=\"115\" width=\"164.5\" height=\"49\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"633.8\" y=\"182\" text-anchor=\"middle\">Nov 11</text></g></svg>",
+  "reports": [
+   {
+    "label": "Total reports",
+    "value": "8",
+    "link": true,
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "label": "Most common report",
+    "value": "Wrong or inaccurate answer",
+    "link": false,
+    "svg": ""
+   }
+  ],
+  "qTitle": "Questions your twin couldn’t answer",
+  "questions": [
+   {
+    "q": "The seller asks “why should I list with you?”",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "How do I handle a seller who wants a price far above market?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "What do I bring to the presentation?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   }
+  ],
+  "tabs": [
+   {
+    "label": "Calibration",
+    "on": true
+   },
+   {
+    "label": "Sessions",
+    "on": false
+   },
+   {
+    "label": "Assigned to",
+    "on": false
+   }
+  ],
+  "cals": [
+   {
+    "title": "Handling “prices will drop next year”",
+    "meta": "Today, 11:11 · 6 min · 15 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Pushing back on a one percent fee",
+    "meta": "Yesterday, 4:20 · 5 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Opening a cold call with a landlord",
+    "meta": "Mon, 10:05 · 4 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Following up after a viewing",
+    "meta": "Sun, 6:48 · 2 min · 3 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   }
+  ]
+ },
+ "fee-negotiation": {
+  "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "back": "Back",
+  "range": "Last 30 days",
+  "rangeSvg": "<svg viewBox=\"3.8 5.8 8.4 4.9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4.5 6.5 8 10l3.5-3.5\" stroke=\"currentColor\" stroke-width=\"0.94\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "calibrate": "Calibrate",
+  "calibrateSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>",
+  "moreSvg": "<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"3.25\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"8\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"12.75\" r=\"1.15\" fill=\"currentColor\"></circle></svg>",
+  "title": "Defending your commission",
+  "kicker1": "What it does",
+  "scenario": "Names the work behind the fee, then asks which part the client would skip.",
+  "kicker2": "Build this agent from",
+  "bf": {
+   "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3v4a1 1 0 0 0 1 1h4\"></path><path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2\"></path><path d=\"M9 9h1\"></path><path d=\"M9 13h6\"></path><path d=\"M9 17h6\"></path></svg>",
+   "name": "16 files",
+   "viewAll": "View all",
+   "viewAllSvg": "<svg class=\"bf-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+  },
+  "credit": {
+   "pct": "35%",
+   "used": 35,
+   "kicker": "Usage credit",
+   "value": "21",
+   "muted": "of 60 min used",
+   "note": "39 minutes left"
+  },
+  "reportTitle": "Report",
+  "stats": [
+   {
+    "cls": "rp-stat--sessions rp-stat--link",
+    "label": "Sessions",
+    "value": "49",
+    "muted": "",
+    "view": "View",
+    "viewSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"></path><path d=\"M8 7h9v9\"></path></svg>"
+   },
+   {
+    "cls": "rp-stat--review",
+    "label": "Help score",
+    "value": "4.5",
+    "muted": "/ 5",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--score",
+    "label": "Avg response time",
+    "value": "1.6",
+    "muted": "s",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--neutral",
+    "label": "Avg session length",
+    "value": "3.9",
+    "muted": "min",
+    "view": "",
+    "viewSvg": ""
+   }
+  ],
+  "weeksTitle": "Conversations by week",
+  "chart": "<svg class=\"rp-chart\" viewBox=\"0 0 720 192\" role=\"img\" aria-label=\"Sessions this week\"><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 21 – 27&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;6&quot;],[&quot;Feels like me&quot;,&quot;84%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;3.9 min&quot;]]}\" aria-label=\"Oct 21 – 27: Conversations 6, Feels like me 84%, Reports 1, Avg length 3.9 min\"><rect class=\"rp-chart-hit\" x=\"-5.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"4.0\" y=\"118\" width=\"164.5\" height=\"46\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"86.3\" y=\"182\" text-anchor=\"middle\">Oct 21</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 28 – Nov 3&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;13&quot;],[&quot;Feels like me&quot;,&quot;87%&quot;],[&quot;Reports&quot;,&quot;2&quot;],[&quot;Avg length&quot;,&quot;4.3 min&quot;]]}\" aria-label=\"Oct 28 – Nov 3: Conversations 13, Feels like me 87%, Reports 2, Avg length 4.3 min\"><rect class=\"rp-chart-hit\" x=\"177.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"186.5\" y=\"64\" width=\"164.5\" height=\"100\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"268.8\" y=\"182\" text-anchor=\"middle\">Oct 28</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 4 – 10&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;20&quot;],[&quot;Feels like me&quot;,&quot;90%&quot;],[&quot;Reports&quot;,&quot;3&quot;],[&quot;Avg length&quot;,&quot;3.3 min&quot;]]}\" aria-label=\"Nov 4 – 10: Conversations 20, Feels like me 90%, Reports 3, Avg length 3.3 min\"><rect class=\"rp-chart-hit\" x=\"360.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"369.0\" y=\"10\" width=\"164.5\" height=\"154\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"451.3\" y=\"182\" text-anchor=\"middle\">Nov 4</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 11 – 17&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;10&quot;],[&quot;Feels like me&quot;,&quot;93%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;3.7 min&quot;]]}\" aria-label=\"Nov 11 – 17: Conversations 10, Feels like me 93%, Reports 1, Avg length 3.7 min\"><rect class=\"rp-chart-hit\" x=\"542.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"551.5\" y=\"87\" width=\"164.5\" height=\"77\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"633.8\" y=\"182\" text-anchor=\"middle\">Nov 11</text></g></svg>",
+  "reports": [
+   {
+    "label": "Total reports",
+    "value": "7",
+    "link": true,
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "label": "Most common report",
+    "value": "Didn’t answer my question",
+    "link": false,
+    "svg": ""
+   }
+  ],
+  "qTitle": "Questions your twin couldn’t answer",
+  "questions": [
+   {
+    "q": "The client asks if I can do it for one percent.",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "Another agent quoted less. What now?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "When do I walk away?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   }
+  ],
+  "tabs": [
+   {
+    "label": "Calibration",
+    "on": true
+   },
+   {
+    "label": "Sessions",
+    "on": false
+   },
+   {
+    "label": "Assigned to",
+    "on": false
+   }
+  ],
+  "cals": [
+   {
+    "title": "Handling “prices will drop next year”",
+    "meta": "Today, 11:11 · 6 min · 15 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Pushing back on a one percent fee",
+    "meta": "Yesterday, 4:20 · 5 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Opening a cold call with a landlord",
+    "meta": "Mon, 10:05 · 4 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Following up after a viewing",
+    "meta": "Sun, 6:48 · 2 min · 3 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   }
+  ]
+ },
+ "cold-calling": {
+  "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "back": "Back",
+  "range": "Last 30 days",
+  "rangeSvg": "<svg viewBox=\"3.8 5.8 8.4 4.9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4.5 6.5 8 10l3.5-3.5\" stroke=\"currentColor\" stroke-width=\"0.94\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "calibrate": "Calibrate",
+  "calibrateSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>",
+  "moreSvg": "<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"3.25\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"8\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"12.75\" r=\"1.15\" fill=\"currentColor\"></circle></svg>",
+  "title": "Opening a cold call",
+  "kicker1": "What it does",
+  "scenario": "Who you are, why you called and one useful comparable. Then let them talk.",
+  "kicker2": "Build this agent from",
+  "bf": {
+   "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3v4a1 1 0 0 0 1 1h4\"></path><path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2\"></path><path d=\"M9 9h1\"></path><path d=\"M9 13h6\"></path><path d=\"M9 17h6\"></path></svg>",
+   "name": "16 files",
+   "viewAll": "View all",
+   "viewAllSvg": "<svg class=\"bf-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+  },
+  "credit": {
+   "pct": "49%",
+   "used": 49,
+   "kicker": "Usage credit",
+   "value": "44",
+   "muted": "of 90 min used",
+   "note": "46 minutes left"
+  },
+  "reportTitle": "Report",
+  "stats": [
+   {
+    "cls": "rp-stat--sessions rp-stat--link",
+    "label": "Sessions",
+    "value": "63",
+    "muted": "",
+    "view": "View",
+    "viewSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"></path><path d=\"M8 7h9v9\"></path></svg>"
+   },
+   {
+    "cls": "rp-stat--review",
+    "label": "Help score",
+    "value": "4.6",
+    "muted": "/ 5",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--score",
+    "label": "Avg response time",
+    "value": "1.2",
+    "muted": "s",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--neutral",
+    "label": "Avg session length",
+    "value": "4.2",
+    "muted": "min",
+    "view": "",
+    "viewSvg": ""
+   }
+  ],
+  "weeksTitle": "Conversations by week",
+  "chart": "<svg class=\"rp-chart\" viewBox=\"0 0 720 192\" role=\"img\" aria-label=\"Sessions this week\"><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 21 – 27&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;13&quot;],[&quot;Feels like me&quot;,&quot;83%&quot;],[&quot;Reports&quot;,&quot;2&quot;],[&quot;Avg length&quot;,&quot;3.9 min&quot;]]}\" aria-label=\"Oct 21 – 27: Conversations 13, Feels like me 83%, Reports 2, Avg length 3.9 min\"><rect class=\"rp-chart-hit\" x=\"-5.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"4.0\" y=\"77\" width=\"164.5\" height=\"87\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"86.3\" y=\"182\" text-anchor=\"middle\">Oct 21</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 28 – Nov 3&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;23&quot;],[&quot;Feels like me&quot;,&quot;86%&quot;],[&quot;Reports&quot;,&quot;3&quot;],[&quot;Avg length&quot;,&quot;4.3 min&quot;]]}\" aria-label=\"Oct 28 – Nov 3: Conversations 23, Feels like me 86%, Reports 3, Avg length 4.3 min\"><rect class=\"rp-chart-hit\" x=\"177.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"186.5\" y=\"10\" width=\"164.5\" height=\"154\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"268.8\" y=\"182\" text-anchor=\"middle\">Oct 28</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 4 – 10&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;8&quot;],[&quot;Feels like me&quot;,&quot;89%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;3.3 min&quot;]]}\" aria-label=\"Nov 4 – 10: Conversations 8, Feels like me 89%, Reports 1, Avg length 3.3 min\"><rect class=\"rp-chart-hit\" x=\"360.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"369.0\" y=\"110\" width=\"164.5\" height=\"54\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"451.3\" y=\"182\" text-anchor=\"middle\">Nov 4</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 11 – 17&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;19&quot;],[&quot;Feels like me&quot;,&quot;92%&quot;],[&quot;Reports&quot;,&quot;3&quot;],[&quot;Avg length&quot;,&quot;3.7 min&quot;]]}\" aria-label=\"Nov 11 – 17: Conversations 19, Feels like me 92%, Reports 3, Avg length 3.7 min\"><rect class=\"rp-chart-hit\" x=\"542.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"551.5\" y=\"37\" width=\"164.5\" height=\"127\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"633.8\" y=\"182\" text-anchor=\"middle\">Nov 11</text></g></svg>",
+  "reports": [
+   {
+    "label": "Total reports",
+    "value": "9",
+    "link": true,
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "label": "Most common report",
+    "value": "Wrong or inaccurate answer",
+    "link": false,
+    "svg": ""
+   }
+  ],
+  "qTitle": "Questions your twin couldn’t answer",
+  "questions": [
+   {
+    "q": "How do I open a cold call?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "They say “not interested.”",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "What if I get voicemail?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   }
+  ],
+  "tabs": [
+   {
+    "label": "Calibration",
+    "on": true
+   },
+   {
+    "label": "Sessions",
+    "on": false
+   },
+   {
+    "label": "Assigned to",
+    "on": false
+   }
+  ],
+  "cals": [
+   {
+    "title": "Handling “prices will drop next year”",
+    "meta": "Today, 11:11 · 6 min · 15 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Pushing back on a one percent fee",
+    "meta": "Yesterday, 4:20 · 5 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Opening a cold call with a landlord",
+    "meta": "Mon, 10:05 · 4 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Following up after a viewing",
+    "meta": "Sun, 6:48 · 2 min · 3 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   }
+  ]
+ },
+ "investor-yield": {
+  "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "back": "Back",
+  "range": "Last 30 days",
+  "rangeSvg": "<svg viewBox=\"3.8 5.8 8.4 4.9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4.5 6.5 8 10l3.5-3.5\" stroke=\"currentColor\" stroke-width=\"0.94\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "calibrate": "Calibrate",
+  "calibrateSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>",
+  "moreSvg": "<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"3.25\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"8\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"12.75\" r=\"1.15\" fill=\"currentColor\"></circle></svg>",
+  "title": "Explaining yield and ROI to investors",
+  "kicker1": "What it does",
+  "scenario": "Turns the brochure promise into worst, average and best case numbers.",
+  "kicker2": "Build this agent from",
+  "bf": {
+   "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3v4a1 1 0 0 0 1 1h4\"></path><path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2\"></path><path d=\"M9 9h1\"></path><path d=\"M9 13h6\"></path><path d=\"M9 17h6\"></path></svg>",
+   "name": "16 files",
+   "viewAll": "View all",
+   "viewAllSvg": "<svg class=\"bf-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+  },
+  "credit": {
+   "pct": "33%",
+   "used": 33,
+   "kicker": "Usage credit",
+   "value": "26",
+   "muted": "of 80 min used",
+   "note": "54 minutes left"
+  },
+  "reportTitle": "Report",
+  "stats": [
+   {
+    "cls": "rp-stat--sessions rp-stat--link",
+    "label": "Sessions",
+    "value": "41",
+    "muted": "",
+    "view": "View",
+    "viewSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"></path><path d=\"M8 7h9v9\"></path></svg>"
+   },
+   {
+    "cls": "rp-stat--review",
+    "label": "Help score",
+    "value": "4.8",
+    "muted": "/ 5",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--score",
+    "label": "Avg response time",
+    "value": "1.7",
+    "muted": "s",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--neutral",
+    "label": "Avg session length",
+    "value": "4.2",
+    "muted": "min",
+    "view": "",
+    "viewSvg": ""
+   }
+  ],
+  "weeksTitle": "Conversations by week",
+  "chart": "<svg class=\"rp-chart\" viewBox=\"0 0 720 192\" role=\"img\" aria-label=\"Sessions this week\"><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 21 – 27&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;9&quot;],[&quot;Feels like me&quot;,&quot;91%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;4.5 min&quot;]]}\" aria-label=\"Oct 21 – 27: Conversations 9, Feels like me 91%, Reports 1, Avg length 4.5 min\"><rect class=\"rp-chart-hit\" x=\"-5.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"4.0\" y=\"65\" width=\"164.5\" height=\"99\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"86.3\" y=\"182\" text-anchor=\"middle\">Oct 21</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 28 – Nov 3&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;14&quot;],[&quot;Feels like me&quot;,&quot;94%&quot;],[&quot;Reports&quot;,&quot;2&quot;],[&quot;Avg length&quot;,&quot;3.5 min&quot;]]}\" aria-label=\"Oct 28 – Nov 3: Conversations 14, Feels like me 94%, Reports 2, Avg length 3.5 min\"><rect class=\"rp-chart-hit\" x=\"177.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"186.5\" y=\"10\" width=\"164.5\" height=\"154\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"268.8\" y=\"182\" text-anchor=\"middle\">Oct 28</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 4 – 10&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;6&quot;],[&quot;Feels like me&quot;,&quot;82%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;3.9 min&quot;]]}\" aria-label=\"Nov 4 – 10: Conversations 6, Feels like me 82%, Reports 1, Avg length 3.9 min\"><rect class=\"rp-chart-hit\" x=\"360.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"369.0\" y=\"98\" width=\"164.5\" height=\"66\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"451.3\" y=\"182\" text-anchor=\"middle\">Nov 4</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 11 – 17&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;12&quot;],[&quot;Feels like me&quot;,&quot;85%&quot;],[&quot;Reports&quot;,&quot;2&quot;],[&quot;Avg length&quot;,&quot;4.3 min&quot;]]}\" aria-label=\"Nov 11 – 17: Conversations 12, Feels like me 85%, Reports 2, Avg length 4.3 min\"><rect class=\"rp-chart-hit\" x=\"542.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"551.5\" y=\"32\" width=\"164.5\" height=\"132\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"633.8\" y=\"182\" text-anchor=\"middle\">Nov 11</text></g></svg>",
+  "reports": [
+   {
+    "label": "Total reports",
+    "value": "6",
+    "link": true,
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "label": "Most common report",
+    "value": "Other",
+    "link": false,
+    "svg": ""
+   }
+  ],
+  "qTitle": "Questions your twin couldn’t answer",
+  "questions": [
+   {
+    "q": "Is the rental yield really 9%?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "How do I show risk without scaring the investor?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "Should I mention resale?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   }
+  ],
+  "tabs": [
+   {
+    "label": "Calibration",
+    "on": true
+   },
+   {
+    "label": "Sessions",
+    "on": false
+   },
+   {
+    "label": "Assigned to",
+    "on": false
+   }
+  ],
+  "cals": [
+   {
+    "title": "Handling “prices will drop next year”",
+    "meta": "Today, 11:11 · 6 min · 15 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Pushing back on a one percent fee",
+    "meta": "Yesterday, 4:20 · 5 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Opening a cold call with a landlord",
+    "meta": "Mon, 10:05 · 4 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Following up after a viewing",
+    "meta": "Sun, 6:48 · 2 min · 3 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   }
+  ]
+ },
+ "deposit-handover": {
+  "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "back": "Back",
+  "range": "Last 30 days",
+  "rangeSvg": "<svg viewBox=\"3.8 5.8 8.4 4.9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4.5 6.5 8 10l3.5-3.5\" stroke=\"currentColor\" stroke-width=\"0.94\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "calibrate": "Calibrate",
+  "calibrateSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>",
+  "moreSvg": "<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"3.25\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"8\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"12.75\" r=\"1.15\" fill=\"currentColor\"></circle></svg>",
+  "title": "From deposit to handover",
+  "kicker1": "What it does",
+  "scenario": "Each step after the reservation, so a paid deposit never turns into a silent client.",
+  "kicker2": "Build this agent from",
+  "bf": {
+   "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3v4a1 1 0 0 0 1 1h4\"></path><path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2\"></path><path d=\"M9 9h1\"></path><path d=\"M9 13h6\"></path><path d=\"M9 17h6\"></path></svg>",
+   "name": "16 files",
+   "viewAll": "View all",
+   "viewAllSvg": "<svg class=\"bf-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+  },
+  "credit": {
+   "pct": "28%",
+   "used": 28,
+   "kicker": "Usage credit",
+   "value": "17",
+   "muted": "of 60 min used",
+   "note": "43 minutes left"
+  },
+  "reportTitle": "Report",
+  "stats": [
+   {
+    "cls": "rp-stat--sessions rp-stat--link",
+    "label": "Sessions",
+    "value": "37",
+    "muted": "",
+    "view": "View",
+    "viewSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"></path><path d=\"M8 7h9v9\"></path></svg>"
+   },
+   {
+    "cls": "rp-stat--review",
+    "label": "Help score",
+    "value": "4.4",
+    "muted": "/ 5",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--score",
+    "label": "Avg response time",
+    "value": "1.3",
+    "muted": "s",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--neutral",
+    "label": "Avg session length",
+    "value": "3.8",
+    "muted": "min",
+    "view": "",
+    "viewSvg": ""
+   }
+  ],
+  "weeksTitle": "Conversations by week",
+  "chart": "<svg class=\"rp-chart\" viewBox=\"0 0 720 192\" role=\"img\" aria-label=\"Sessions this week\"><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 21 – 27&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;4&quot;],[&quot;Feels like me&quot;,&quot;87%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;4.1 min&quot;]]}\" aria-label=\"Oct 21 – 27: Conversations 4, Feels like me 87%, Reports 1, Avg length 4.1 min\"><rect class=\"rp-chart-hit\" x=\"-5.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"4.0\" y=\"123\" width=\"164.5\" height=\"41\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"86.3\" y=\"182\" text-anchor=\"middle\">Oct 21</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 28 – Nov 3&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;10&quot;],[&quot;Feels like me&quot;,&quot;90%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;4.5 min&quot;]]}\" aria-label=\"Oct 28 – Nov 3: Conversations 10, Feels like me 90%, Reports 1, Avg length 4.5 min\"><rect class=\"rp-chart-hit\" x=\"177.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"186.5\" y=\"61\" width=\"164.5\" height=\"103\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"268.8\" y=\"182\" text-anchor=\"middle\">Oct 28</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 4 – 10&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;15&quot;],[&quot;Feels like me&quot;,&quot;93%&quot;],[&quot;Reports&quot;,&quot;2&quot;],[&quot;Avg length&quot;,&quot;3.5 min&quot;]]}\" aria-label=\"Nov 4 – 10: Conversations 15, Feels like me 93%, Reports 2, Avg length 3.5 min\"><rect class=\"rp-chart-hit\" x=\"360.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"369.0\" y=\"10\" width=\"164.5\" height=\"154\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"451.3\" y=\"182\" text-anchor=\"middle\">Nov 4</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 11 – 17&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;8&quot;],[&quot;Feels like me&quot;,&quot;81%&quot;],[&quot;Reports&quot;,&quot;1&quot;],[&quot;Avg length&quot;,&quot;3.9 min&quot;]]}\" aria-label=\"Nov 11 – 17: Conversations 8, Feels like me 81%, Reports 1, Avg length 3.9 min\"><rect class=\"rp-chart-hit\" x=\"542.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"551.5\" y=\"82\" width=\"164.5\" height=\"82\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"633.8\" y=\"182\" text-anchor=\"middle\">Nov 11</text></g></svg>",
+  "reports": [
+   {
+    "label": "Total reports",
+    "value": "5",
+    "link": true,
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "label": "Most common report",
+    "value": "Wrong or inaccurate answer",
+    "link": false,
+    "svg": ""
+   }
+  ],
+  "qTitle": "Questions your twin couldn’t answer",
+  "questions": [
+   {
+    "q": "My client paid the deposit. What now?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "The client asks why construction is delayed.",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "What happens on handover day?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   }
+  ],
+  "tabs": [
+   {
+    "label": "Calibration",
+    "on": true
+   },
+   {
+    "label": "Sessions",
+    "on": false
+   },
+   {
+    "label": "Assigned to",
+    "on": false
+   }
+  ],
+  "cals": [
+   {
+    "title": "Handling “prices will drop next year”",
+    "meta": "Today, 11:11 · 6 min · 15 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Pushing back on a one percent fee",
+    "meta": "Yesterday, 4:20 · 5 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Opening a cold call with a landlord",
+    "meta": "Mon, 10:05 · 4 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Following up after a viewing",
+    "meta": "Sun, 6:48 · 2 min · 3 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   }
+  ]
+ },
+ "olga-twin": {
+  "backSvg": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12l14 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M5 12l6 -6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "back": "Back",
+  "range": "Last 30 days",
+  "rangeSvg": "<svg viewBox=\"3.8 5.8 8.4 4.9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4.5 6.5 8 10l3.5-3.5\" stroke=\"currentColor\" stroke-width=\"0.94\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+  "calibrate": "Calibrate",
+  "calibrateSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 6l8 0\"></path><path d=\"M16 6l4 0\"></path><path d=\"M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 12l2 0\"></path><path d=\"M10 12l10 0\"></path><path d=\"M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M4 18l11 0\"></path><path d=\"M19 18l1 0\"></path></svg>",
+  "moreSvg": "<svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"3.25\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"8\" r=\"1.15\" fill=\"currentColor\"></circle><circle cx=\"8\" cy=\"12.75\" r=\"1.15\" fill=\"currentColor\"></circle></svg>",
+  "title": "Olga’s twin",
+  "kicker1": "What it does",
+  "scenario": "Answers any question from everything you’ve taught, in your voice.",
+  "kicker2": "Build this agent from",
+  "bf": {
+   "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 3v4a1 1 0 0 0 1 1h4\"></path><path d=\"M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2\"></path><path d=\"M9 9h1\"></path><path d=\"M9 13h6\"></path><path d=\"M9 17h6\"></path></svg>",
+   "name": "16 files",
+   "viewAll": "View all",
+   "viewAllSvg": "<svg class=\"bf-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+  },
+  "credit": {
+   "pct": "31%",
+   "used": 31,
+   "kicker": "Usage credit",
+   "value": "46",
+   "muted": "of 150 min used",
+   "note": "104 minutes left"
+  },
+  "reportTitle": "Report",
+  "stats": [
+   {
+    "cls": "rp-stat--sessions rp-stat--link",
+    "label": "Sessions",
+    "value": "412",
+    "muted": "",
+    "view": "View",
+    "viewSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"></path><path d=\"M8 7h9v9\"></path></svg>"
+   },
+   {
+    "cls": "rp-stat--review",
+    "label": "Help score",
+    "value": "4.5",
+    "muted": "/ 5",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--score",
+    "label": "Avg response time",
+    "value": "1.9",
+    "muted": "s",
+    "view": "",
+    "viewSvg": ""
+   },
+   {
+    "cls": "rp-stat--neutral",
+    "label": "Avg session length",
+    "value": "3.9",
+    "muted": "min",
+    "view": "",
+    "viewSvg": ""
+   }
+  ],
+  "weeksTitle": "Conversations by week",
+  "chart": "<svg class=\"rp-chart\" viewBox=\"0 0 720 192\" role=\"img\" aria-label=\"Sessions this week\"><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 21 – 27&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;85&quot;],[&quot;Feels like me&quot;,&quot;87%&quot;],[&quot;Reports&quot;,&quot;12&quot;],[&quot;Avg length&quot;,&quot;3.8 min&quot;]]}\" aria-label=\"Oct 21 – 27: Conversations 85, Feels like me 87%, Reports 12, Avg length 3.8 min\"><rect class=\"rp-chart-hit\" x=\"-5.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"4.0\" y=\"74\" width=\"164.5\" height=\"90\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"86.3\" y=\"182\" text-anchor=\"middle\">Oct 21</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Oct 28 – Nov 3&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;145&quot;],[&quot;Feels like me&quot;,&quot;90%&quot;],[&quot;Reports&quot;,&quot;20&quot;],[&quot;Avg length&quot;,&quot;4.2 min&quot;]]}\" aria-label=\"Oct 28 – Nov 3: Conversations 145, Feels like me 90%, Reports 20, Avg length 4.2 min\"><rect class=\"rp-chart-hit\" x=\"177.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"186.5\" y=\"10\" width=\"164.5\" height=\"154\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"268.8\" y=\"182\" text-anchor=\"middle\">Oct 28</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 4 – 10&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;61&quot;],[&quot;Feels like me&quot;,&quot;93%&quot;],[&quot;Reports&quot;,&quot;9&quot;],[&quot;Avg length&quot;,&quot;3.2 min&quot;]]}\" aria-label=\"Nov 4 – 10: Conversations 61, Feels like me 93%, Reports 9, Avg length 3.2 min\"><rect class=\"rp-chart-hit\" x=\"360.0\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"369.0\" y=\"99\" width=\"164.5\" height=\"65\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"451.3\" y=\"182\" text-anchor=\"middle\">Nov 4</text></g><g class=\"rp-chart-col\" tabindex=\"0\" data-tip=\"{&quot;title&quot;:&quot;Nov 11 – 17&quot;,&quot;rows&quot;:[[&quot;Conversations&quot;,&quot;121&quot;],[&quot;Feels like me&quot;,&quot;81%&quot;],[&quot;Reports&quot;,&quot;17&quot;],[&quot;Avg length&quot;,&quot;3.6 min&quot;]]}\" aria-label=\"Nov 11 – 17: Conversations 121, Feels like me 81%, Reports 17, Avg length 3.6 min\"><rect class=\"rp-chart-hit\" x=\"542.5\" y=\"0\" width=\"182.5\" height=\"192\"></rect><rect class=\"rp-chart-bar\" x=\"551.5\" y=\"35\" width=\"164.5\" height=\"129\" rx=\"6\"></rect><text class=\"rp-chart-label\" x=\"633.8\" y=\"182\" text-anchor=\"middle\">Nov 11</text></g></svg>",
+  "reports": [
+   {
+    "label": "Total reports",
+    "value": "58",
+    "link": true,
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "label": "Most common report",
+    "value": "Didn’t answer my question",
+    "link": false,
+    "svg": ""
+   }
+  ],
+  "qTitle": "Questions your twin couldn’t answer",
+  "questions": [
+   {
+    "q": "What should I say when a buyer wants to wait for prices to drop?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "How do I open a cold call with a landlord?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   },
+   {
+    "q": "Should I cut my fee to one percent?",
+    "btn": "Respond",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+   }
+  ],
+  "tabs": [
+   {
+    "label": "Calibration",
+    "on": true
+   },
+   {
+    "label": "Sessions",
+    "on": false
+   },
+   {
+    "label": "Assigned to",
+    "on": false
+   }
+  ],
+  "cals": [
+   {
+    "title": "Handling “prices will drop next year”",
+    "meta": "Today, 11:11 · 6 min · 15 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Pushing back on a one percent fee",
+    "meta": "Yesterday, 4:20 · 5 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Opening a cold call with a landlord",
+    "meta": "Mon, 10:05 · 4 min · 4 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   },
+   {
+    "title": "Following up after a viewing",
+    "meta": "Sun, 6:48 · 2 min · 3 turns",
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 17 17 7M8 7h9v9\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>"
+   }
+  ]
+ }
+}

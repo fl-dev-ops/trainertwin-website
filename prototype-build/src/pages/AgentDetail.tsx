@@ -9,7 +9,8 @@ import { Menu, type MenuEntry } from "@components/Menu";
 import { FilterSelect } from "@components/FilterSelect";
 
 import { MenuIcon, html } from "../Svg";
-import data from "../data/agent-detail.json";
+import base from "../data/agent-detail.json";
+import all from "../data/agent-details.json";
 
 const noop = () => {};
 const TONES: Record<string, string> = {
@@ -19,7 +20,7 @@ const TONES: Record<string, string> = {
   "rp-stat--neutral": "bg-fill-soft text-ink-secondary",
 };
 // The week chart: bars parsed from v3's svg (x, y, width, height, label).
-const BARS = [...data.chart.matchAll(/class="rp-chart-bar" x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)" rx="(\d+)"><\/rect><text class="rp-chart-label" x="([\d.]+)" y="182" text-anchor="middle">([^<]+)</g)].map((m) => ({ x: +m[1], y: +m[2], w: +m[3], h: +m[4], r: +m[5], lx: +m[6], label: m[7] }));
+const barsOf = (chart: string) => [...chart.matchAll(/class="rp-chart-bar" x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)" rx="(\d+)"><\/rect><text class="rp-chart-label" x="([\d.]+)" y="182" text-anchor="middle">([^<]+)</g)].map((m) => ({ x: +m[1], y: +m[2], w: +m[3], h: +m[4], r: +m[5], lx: +m[6], label: m[7] }));
 
 /** NOT IN STORYBOOK YET: the 63% usage ring (the prototype's `.rp-credit-ring`, an orange-to-blue conic gradient). */
 function UsageRing({ pct, label }: { pct: number; label: string }) {
@@ -31,7 +32,9 @@ function UsageRing({ pct, label }: { pct: number; label: string }) {
   );
 }
 
-export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack: () => void; onCalibrate?: () => void; onTry?: () => void }) {
+export function AgentDetail({ id, onBack, onCalibrate, onTry }: { id: string; onBack: () => void; onCalibrate?: () => void; onTry?: () => void }) {
+  const data = (all as Record<string, typeof base>)[id] ?? base;
+  const BARS = barsOf(data.chart);
   const [tab, setTab] = useState("calibration");
   const [range, setRange] = useState(data.range);
   const actions: MenuEntry[] = [
@@ -60,7 +63,7 @@ export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack
               <div className="min-w-0 flex-1">
                 <h1 className="m-0 mb-5 font-ui text-[20px] leading-7 font-title tracking-[-0.015em] text-ink">{data.title}</h1>
                 <Eyebrow className="mt-0 mb-3">{data.kicker1}</Eyebrow>
-                <p className="m-0 max-w-[65ch] font-ui text-[15px] leading-[23px] text-ink-secondary">{data.scenario}</p>
+                <p className="m-0 max-w-[407px] font-ui text-[15px] leading-[23px] text-ink-secondary">{data.scenario}</p>
               </div>
               <div className={`flex flex-none items-center gap-5 rounded-md bg-surface px-5 py-4 shadow-lift`}>
                 <UsageRing pct={c.used} label={c.pct} />
