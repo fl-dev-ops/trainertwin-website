@@ -45,6 +45,12 @@ export const Sources: Story = {
 
 export const SourceChecked: Story = { render: () => <SourceCard name="Blog" count="14 pages" checked onChange={() => {}} /> };
 
+export const TwinAllHover: Story = {
+  parameters: { docs: { description: { story: "Hover: the card lifts to elevation-2, the same as an AgentCard. Shown here forced; move the pointer over the first story to see it live." } } },
+  render: () => (
+    <TwinAllCard forceState="hover" name="Olga’s twin" meta="Last updated 29 Oct, 13:00" photoSrc="/tt/avatar-learner.png" learners={learners} onOpen={() => {}} onMore={() => {}} />
+  ),
+};
 export const TwinAll: Story = {
   render: () => (
     <TwinAllCard name="Olga’s twin" meta="Last updated 29 Oct, 13:00" photoSrc="/tt/avatar-learner.png" learners={learners} onOpen={() => {}} onMore={() => {}} />

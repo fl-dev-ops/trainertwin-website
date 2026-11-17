@@ -107,10 +107,17 @@ export interface TwinAllCardProps {
   onMore?: () => void;
   /** The card's own ⋮ menu: pass the items and the card renders a `Menu`. Ignored `onMore` then. */
   actions?: readonly MenuEntry[];
+  /** Force a state for documentation. */
+  forceState?: "hover" | "focus";
   className?: string;
 }
 
-export function TwinAllCard({ name, meta, metaIcon, photoSrc, learners = [], href, onOpen, onMore, actions, className }: TwinAllCardProps) {
+/**
+ * The wide "Twin for all use cases" card. The whole card is the click target (the name is a stretched link, so the ⋮
+ * stays separate) and it lifts to `--tt-elevation-2` on hover, the same lift as an `AgentCard`. That needs the link NOT to be
+ * `relative`: its ::after stretches to the nearest positioned ancestor, which must be the card.
+ */
+export function TwinAllCard({ name, meta, metaIcon, photoSrc, learners = [], href, onOpen, onMore, actions, forceState, className }: TwinAllCardProps) {
   // No `relative` here: the ::after stretches to the nearest positioned ancestor, which must be the card itself.
   const nameCls =
     "text-left font-ui text-[18px] leading-6 font-title text-ink after:absolute after:inset-0 after:z-[1] after:content-[''] focus-visible:outline-none tt-open";
@@ -120,6 +127,8 @@ export function TwinAllCard({ name, meta, metaIcon, photoSrc, learners = [], hre
         "relative flex w-full max-w-[896px] items-center gap-5 rounded-lg border border-line-card bg-surface p-5 shadow-card",
         (href || onOpen) && "cursor-pointer",
         "transition-shadow duration-(--tt-duration-quick) ease-standard hover:shadow-e2",
+        forceState === "hover" && "shadow-e2",
+        forceState === "focus" && "outline-2 outline-offset-2 outline-primary",
         "has-[.tt-open:focus-visible]:outline-2 has-[.tt-open:focus-visible]:outline-offset-2 has-[.tt-open:focus-visible]:outline-primary",
         className,
       )}
