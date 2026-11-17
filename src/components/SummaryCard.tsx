@@ -36,7 +36,7 @@ export function SummaryCard({ title, icon, value, unit, count, valueSize = "md",
       {visual ? <div className="flex-none">{visual}</div> : null}
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <div className="flex items-center gap-[6px] font-ui text-[15px] leading-5 text-ink-secondary">
-          {icon ? <span className="flex-none [&>svg]:h-[14px] [&>svg]:w-[14px]">{icon}</span> : null}
+          {icon ? <span className="flex-none [&_svg]:h-[14px] [&_svg]:w-[14px]">{icon}</span> : null}
           {title}
         </div>
         <div className="flex items-baseline justify-between gap-4">

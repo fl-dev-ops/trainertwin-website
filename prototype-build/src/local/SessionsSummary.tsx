@@ -14,12 +14,12 @@ export interface SessionsSummaryData {
   rating: { value: string; count: string; svg: string; icon: string };
   paid: { pct: string; amount: string; count: string; title: string; icon: string };
   attnIcon: string;
-  attn: { tone: string; label: string }[];
+  attn: { tone: string; label: string; id?: string }[];
 }
 
 const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 
-export function SessionsSummary({ label, data }: { label: string; data: SessionsSummaryData }) {
+export function SessionsSummary({ label, data, pressedId, onChip, onShowAll, onTile }: { label: string; data: SessionsSummaryData; pressedId?: string | null; onChip?: (id: string) => void; onShowAll?: () => void; onTile?: (label: string) => void }) {
   return (
     <>
       <section aria-label={label} className="mt-6 grid grid-cols-2 items-stretch gap-4">
@@ -35,7 +35,7 @@ export function SessionsSummary({ label, data }: { label: string; data: Sessions
                   {t.muted ? <span className="ml-1 text-[18px] font-medium text-ink-secondary">{t.muted}</span> : null}
                 </>
               }
-              onGo={t.go ? () => {} : undefined}
+              onGo={t.go ? () => onTile?.(t.label) : undefined}
               goLabel={`${t.label}: see the details`}
             />
           ))}
@@ -47,16 +47,19 @@ export function SessionsSummary({ label, data }: { label: string; data: Sessions
             value={data.rating.value}
             unit="/ 5"
             count={data.rating.count}
-            visual={<span aria-hidden="true" className="-my-[2px] block h-[66px] w-[66px]" dangerouslySetInnerHTML={{ __html: data.rating.svg }} />}
+            visual={<span aria-hidden="true" className="block h-[62px] w-[66px] [&_svg]:h-[66px] [&_svg]:w-[66px] [&_svg]:-translate-y-[2px]" dangerouslySetInnerHTML={{ __html: data.rating.svg }} />}
           />
-          <SummaryCard title="Paid by learners" icon={html(data.paid.icon)} valueSize="sm" value={data.paid.amount} count={data.paid.count} visual={<ProgressRing percent={parseInt(data.paid.pct)} title={data.paid.title} />} />
+          <SummaryCard title="Paid by learners" icon={html(data.paid.icon)} valueSize="sm" value={data.paid.amount} count={data.paid.count} visual={<span className="flex"><ProgressRing percent={parseInt(data.paid.pct)} title={data.paid.title} /></span>} />
         </div>
       </section>
       <div role="group" aria-label="Needs a look" className="mt-5 mb-3 flex flex-wrap items-center gap-2">
         <span className="mr-1 inline-flex items-center gap-1 font-ui text-[13px] leading-5 font-label text-ink [&>span>svg]:h-[14px] [&>span>svg]:w-[14px]">{html(data.attnIcon)}Needs a look</span>
         {data.attn.map((a) => (
-          <AttentionChip key={a.label} tone={a.tone as "danger" | "caution" | "info"} label={a.label} />
+          <AttentionChip key={a.label} tone={a.tone as "danger" | "caution" | "info"} label={a.label} pressed={!!a.id && pressedId === a.id} onClick={() => onChip?.(a.id ?? a.tone)} />
         ))}
+        {pressedId ? (
+          <button type="button" onClick={onShowAll} className="cursor-pointer font-ui text-[13px] leading-5 text-ink-secondary underline underline-offset-2 hover:text-ink">Show all</button>
+        ) : null}
       </div>
     </>
   );

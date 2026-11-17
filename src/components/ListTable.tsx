@@ -27,12 +27,15 @@ export interface ListRowProps {
   head?: boolean;
   children: ReactNode;
   className?: string;
+  /** Makes the row a keyboard-reachable target (Enter or click). */
+  onClick?: () => void;
 }
 
-export function ListRow({ columns, head = false, children, className }: ListRowProps) {
+export function ListRow({ columns, head = false, children, className, onClick }: ListRowProps) {
   return (
     <div
       role="row"
+      {...(onClick ? { tabIndex: 0, onClick, onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter") onClick(); } } : {})}
       style={{ gridTemplateColumns: columns } as CSSProperties}
       className={cn(
         "grid items-center gap-3 px-5 leading-5 not-first:border-t not-first:border-line",

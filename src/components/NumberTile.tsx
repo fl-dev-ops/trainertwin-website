@@ -26,7 +26,7 @@ export function NumberTile({ label, icon, value, onGo, goLabel, className }: Num
   return (
     <div className={cn("flex flex-col justify-center rounded-md bg-surface-sunken px-5 py-4 shadow-[inset_0_0_0_1px_var(--tt-border)]", className)}>
       <div className="flex items-center gap-2 font-ui text-[14px] leading-[23px] text-ink-secondary">
-        {icon ? <span className="flex-none [&>svg]:h-[14px] [&>svg]:w-[14px]">{icon}</span> : null}
+        {icon ? <span className="flex-none [&_svg]:h-[14px] [&_svg]:w-[14px]">{icon}</span> : null}
         {label}
       </div>
       <div className="flex items-center justify-between gap-3">
