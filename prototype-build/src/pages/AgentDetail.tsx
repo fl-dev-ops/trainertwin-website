@@ -30,12 +30,12 @@ function UsageRing({ pct, label }: { pct: number; label: string }) {
   );
 }
 
-export function AgentDetail({ onBack, onCalibrate }: { id: string; onBack: () => void; onCalibrate?: () => void }) {
+export function AgentDetail({ onBack, onCalibrate, onTry }: { id: string; onBack: () => void; onCalibrate?: () => void; onTry?: () => void }) {
   const [tab, setTab] = useState("calibration");
   const [range, setRange] = useState(data.range);
   const actions: MenuEntry[] = [
     { label: "Configure", icon: <MenuIcon name="edit" />, onSelect: noop },
-    { label: "Try as learner", icon: <MenuIcon name="play" />, onSelect: noop },
+    { label: "Try as learner", icon: <MenuIcon name="play" />, onSelect: () => onTry?.() },
     { label: "Assign", icon: <MenuIcon name="assign" />, onSelect: noop },
     { label: "Share", icon: <MenuIcon name="share" />, onSelect: noop },
     "divider",

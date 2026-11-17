@@ -16,6 +16,9 @@ import { Settings } from "./pages/Settings";
 import { SupportDialog } from "./pages/SupportDialog";
 import { AgentDetail } from "./pages/AgentDetail";
 import { AgentEdit } from "./pages/AgentEdit";
+import { CalibrateOverview } from "./pages/CalibrateOverview";
+import { TryRoom } from "./pages/TryRoom";
+import { TWIN_BOTS } from "./generated";
 
 /**
  * The V3 prototype, rebuilt from the Storybook components (src/components). Everything visible here is a
@@ -45,7 +48,7 @@ const FOOT: Nav[] = [
 const ALL = [...TWIN, ...ROLEPLAY, ...FOOT];
 
 const PAGES: Record<string, (r: { sub: string; go: (id: string, sub?: string) => void }) => ReactNode> = {
-  setup: ({ sub, go }) => (sub.endsWith("/edit") ? <AgentEdit id={sub.split("/")[0]} onBack={() => go("setup", sub.split("/")[0])} /> : sub ? <AgentDetail id={sub} onBack={() => go("setup")} /> : <TwinAgents onOpen={(id) => go("setup", id)} onEdit={(id) => go("setup", `${id}/edit`)} />),
+  setup: ({ sub, go }) => (sub.endsWith("/try") ? <TryRoom onEnd={() => go("setup", sub.split("/")[0])} /> : sub.endsWith("/calibrate") ? <CalibrateOverview title={TWIN_BOTS.find((b) => b.id === sub.split("/")[0])?.title ?? ""} onBack={() => go("setup", sub.split("/")[0])} onNow={() => {}} /> : sub.endsWith("/edit") ? <AgentEdit id={sub.split("/")[0]} onBack={() => go("setup", sub.split("/")[0])} /> : sub ? <AgentDetail id={sub} onBack={() => go("setup")} onCalibrate={() => go("setup", `${sub}/calibrate`)} onTry={() => go("setup", `${sub}/try`)} /> : <TwinAgents onOpen={(id) => go("setup", id)} onEdit={(id) => go("setup", `${id}/edit`)} onGo={(id, sub) => go("setup", `${id}/${sub}`)} />),
   calibrations: () => <TwinSessions />,
   twinusers: () => <TwinUsers />,
   knowledge: () => <TwinBrain />,
@@ -96,6 +99,8 @@ export function App() {
       </div>
     </div>
   );
+
+  if (page === "setup" && route.sub.endsWith("/try")) return <TryRoom onEnd={() => go("setup", route.sub.split("/")[0])} />;
 
   return (
     <div className="flex h-full min-h-screen bg-surface-sunken">

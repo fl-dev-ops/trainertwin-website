@@ -27,6 +27,11 @@ export interface AuroraProps {
   amplitude?: number;
   /** Mixes toward white instead of compositing additively — for light pages. */
   lightMode?: boolean;
+  /**
+   * The call-room look (the prototype's `.demo-aurora`): colour rises from the BOTTOM edge and is the plain
+   * colour ramp, not dimmed by intensity, so it reads as soft pastel washes. Use with a low-opacity wrapper.
+   */
+  stage?: boolean;
   className?: string;
 }
 
@@ -46,6 +51,7 @@ uniform vec3 uColorStops[3];
 uniform vec2 uResolution;
 uniform float uBlend;
 uniform float uLightMode;
+uniform float uStage;
 
 out vec4 fragColor;
 
@@ -125,13 +131,13 @@ void main() {
 
   float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
-  height = (uv.y * 2.0 - height + 0.2);
+  height = ((uStage > 0.5 ? 1.0 - uv.y : uv.y) * 2.0 - height + 0.2);
   float intensity = 0.6 * height;
 
   float midPoint = 0.20;
   float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
 
-  vec3 auroraColor = intensity * rampColor;
+  vec3 auroraColor = (uStage > 0.5 ? 1.0 : intensity) * rampColor;
 
   if (uLightMode > 0.5) {
     float energy = clamp(max(intensity, 0.0), 0.0, 1.0);
@@ -152,14 +158,15 @@ export function Aurora({
   blend = 0.5,
   amplitude = 1,
   lightMode = false,
+  stage = false,
   className,
 }: AuroraProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   /* Live props the loop reads each frame, so retuning the aurora does not
      rebuild the GL context. */
-  const live = useRef({ colorStops, speed, blend, amplitude, lightMode });
+  const live = useRef({ colorStops, speed, blend, amplitude, lightMode, stage });
   useEffect(() => {
-    live.current = { colorStops, speed, blend, amplitude, lightMode };
+    live.current = { colorStops, speed, blend, amplitude, lightMode, stage };
   });
 
   useEffect(() => {
@@ -208,6 +215,7 @@ export function Aurora({
         uResolution: { value: [host.offsetWidth, host.offsetHeight] },
         uBlend: { value: blend },
         uLightMode: { value: lightMode ? 1 : 0 },
+        uStage: { value: stage ? 1 : 0 },
       },
     });
 
@@ -231,6 +239,7 @@ export function Aurora({
       program.uniforms.uAmplitude.value = p.amplitude;
       program.uniforms.uBlend.value = p.blend;
       program.uniforms.uLightMode.value = p.lightMode ? 1 : 0;
+      program.uniforms.uStage.value = p.stage ? 1 : 0;
       program.uniforms.uColorStops.value = toRgb(p.colorStops);
       renderer.render({ scene: mesh });
     };

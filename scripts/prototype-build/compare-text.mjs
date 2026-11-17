@@ -21,6 +21,8 @@ const flow = (process.argv.find((a) => a.startsWith("--flow=")) || "").slice(7);
 // Flows: a sub-view reached by clicking in v3 (first agent card, or its Configure) and the matching hash here.
 const FLOWS = {
   detail: { hash: "setup/offplan-process", v3: async (p) => p.click(".rp-grid .rp-card >> nth=0") },
+  calibrate: { hash: "setup/offplan-process/calibrate", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-calibrate"]:visible'); } },
+  try: { hash: "setup/offplan-process/try", rootA: ".demo-room", rootB: "#root", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="role-row-test"]:visible'); } },
   edit: { hash: "setup/offplan-process/edit", v3: async (p) => { await p.click(".rp-grid .rp-row-more >> nth=0"); await p.click('.rp-row-menu [data-action="twin-bot-edit"]:visible'); } },
 };
 const SB = `http://localhost:8791/storybook-build/index.html#/${flow ? FLOWS[flow].hash : id}`;
@@ -65,9 +67,10 @@ const b = await open(SB, async (p) => {
 });
 await a.mouse.move(1270, 890);
 await b.mouse.move(1270, 890);
-const A = await a.evaluate(`(${COLLECT})(".main")`);
+const rootA = (flow && FLOWS[flow].rootA) || ".main", rootB = (flow && FLOWS[flow].rootB) || "main";
+const A = await a.evaluate(`(${COLLECT})(${JSON.stringify(rootA)})`);
 console.log("v3 main found; build main found");
-const B = await b.evaluate(`(${COLLECT})("main")`);
+const B = await b.evaluate(`(${COLLECT})(${JSON.stringify(rootB)})`);
 
 // Match by text + occurrence index.
 const key = (list) => {
@@ -81,8 +84,8 @@ const key = (list) => {
 };
 const KA = key(A), KB = new Map(key(B).map((e) => [e.k, e]));
 // The content area is offset by the main sheet origin: compare relative to each page's main element.
-const ma = await a.evaluate(`(() => { const r = document.querySelector(".main").getBoundingClientRect(); return [r.x, r.y]; })()`);
-const mb = await b.evaluate(`(() => { const r = document.querySelector("main").getBoundingClientRect(); return [r.x, r.y]; })()`);
+const ma = await a.evaluate(`(() => { const r = document.querySelector(${JSON.stringify(rootA)}).getBoundingClientRect(); return [r.x, r.y]; })()`);
+const mb = await b.evaluate(`(() => { const r = document.querySelector(${JSON.stringify(rootB)}).getBoundingClientRect(); return [r.x, r.y]; })()`);
 const onlyA = [], diffs = [];
 let matched = 0;
 for (const e of KA) {
