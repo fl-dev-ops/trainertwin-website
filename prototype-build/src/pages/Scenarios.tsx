@@ -4,11 +4,10 @@ import { Button } from "@components/Button";
 import { AgentCard } from "@components/AgentCard";
 import { SegmentedControl } from "@components/SegmentedControl";
 import type { MenuEntry } from "@components/Menu";
-import { Icon, MenuIcon } from "../Svg";
+import { Icon, MenuIcon, html } from "../Svg";
 import { SearchField } from "../local/SearchField";
 import data from "../data/roleplay.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const noop = () => {};
 const actions: MenuEntry[] = [
   { label: "Try as learner", icon: <MenuIcon name="play" />, onSelect: noop },

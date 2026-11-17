@@ -18,6 +18,8 @@ export interface PageHeaderProps {
   title: string;
   /** A 18px outline icon for the 28px box beside the title. */
   icon?: ReactNode;
+  /** A line under the title (14/20, secondary). With it the title is 18/24 and the tools sit at the top, as on Usage and Billing. */
+  description?: ReactNode;
   /** Right-hand cluster: filters, search, one action. */
   tools?: ReactNode;
   /** 32px instead of 40px, for a header whose tools are only small filters. */
@@ -27,18 +29,22 @@ export interface PageHeaderProps {
   className?: string;
 }
 
-export function PageHeader({ title, icon, tools, compact = false, as: Tag = "h1", className }: PageHeaderProps) {
+export function PageHeader({ title, icon, description, tools, compact = false, as: Tag = "h1", className }: PageHeaderProps) {
+  const icoBox = icon ? (
+    <span aria-hidden="true" className="grid h-7 w-7 flex-none place-items-center rounded-sm text-ink-secondary [&_svg]:h-[18px] [&_svg]:w-[18px]">
+      {icon}
+    </span>
+  ) : null;
   return (
-    <div className={cn("flex items-center justify-between gap-4 font-ui", compact ? "min-h-8" : "min-h-10", className)}>
-      <Tag className="m-0 flex items-center gap-2 text-[16px] leading-[22px] font-title tracking-[-0.015em] text-ink">
-        {icon ? (
-          <span aria-hidden="true" className="grid h-7 w-7 flex-none place-items-center rounded-sm text-ink-secondary [&>svg]:h-[18px] [&>svg]:w-[18px]">
-            {icon}
-          </span>
-        ) : null}
-        {title}
-      </Tag>
-      {tools ? <div className="flex items-center gap-3">{tools}</div> : null}
+    <div className={cn("flex justify-between gap-4 font-ui", description ? "items-start" : "items-center", compact ? "min-h-8" : "min-h-10", className)}>
+      <div className="min-w-0">
+        <Tag className={cn("m-0 flex items-center text-ink", description ? "gap-3 text-[18px] leading-6 font-title" : "gap-2 text-[16px] leading-[22px] font-title tracking-[-0.015em]")}>
+          {icoBox}
+          {title}
+        </Tag>
+        {description ? <p className="m-0 mt-1 text-[14px] leading-5 text-ink-secondary">{description}</p> : null}
+      </div>
+      {tools ? <div className="flex flex-none items-center gap-3">{tools}</div> : null}
     </div>
   );
 }

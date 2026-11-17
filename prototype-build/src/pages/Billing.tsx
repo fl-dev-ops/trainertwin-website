@@ -1,12 +1,11 @@
 import { Button } from "@components/Button";
+import { PageHeader } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { Badge } from "@components/Badge";
 import { Menu, type MenuEntry } from "@components/Menu";
-import { Icon } from "../Svg";
-import { SettingsHead } from "../local/SettingsHead";
+import { Icon, html } from "../Svg";
 import data from "../data/billing.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const rich = (h: string) => <span dangerouslySetInnerHTML={{ __html: h.replace(/class="bl-price"/g, 'style="font-weight:600;color:var(--tt-text-primary)"') }} />;
 const noop = () => {};
 const invActions: MenuEntry[] = [
@@ -20,11 +19,11 @@ const icoBox = "grid h-9 w-9 flex-none place-items-center rounded-[10px] bg-fill
 export function Billing() {
   return (
     <div className="mx-auto max-w-[1000px] px-16 pt-5 pb-8">
-      <SettingsHead
+      <PageHeader
         title={data.title}
         icon={<Icon name="billing" />}
-        sub={data.sub}
-        tool={
+        description={data.sub}
+        tools={
           <Button variant="secondary" className="flex-none [&_svg]:h-4 [&_svg]:w-4">
             {html(data.toolSvg)}
             {data.tool}

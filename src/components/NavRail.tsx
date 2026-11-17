@@ -127,7 +127,7 @@ export function RailAction({
       onClick={onClick}
       aria-label={label}
       aria-pressed={pressed}
-      className="grid h-8 w-8 flex-none place-items-center rounded-sm text-ink-secondary cursor-pointer hover:bg-fill-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&>svg]:h-4 [&>svg]:w-4"
+      className="grid h-8 w-8 flex-none place-items-center rounded-sm text-ink-secondary cursor-pointer hover:bg-fill-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&_svg]:h-4 [&_svg]:w-4"
     >
       {icon}
     </button>
@@ -196,7 +196,7 @@ export function NavItem({ label, icon, active = false, href, onClick, alert, ale
   ) : null;
   const inner = (
     <>
-      <span className={cn("flex-none [&>svg]:h-5 [&>svg]:w-5", active && "text-primary dark:text-ink")} aria-hidden="true">
+      <span className={cn("flex-none [&_svg]:h-5 [&_svg]:w-5", active && "text-primary dark:text-ink")} aria-hidden="true">
         {icon}
       </span>
       <span className={cn("min-w-0 truncate", collapsed ? "sr-only" : !meta && !alert && "flex-1")}>{label}</span>

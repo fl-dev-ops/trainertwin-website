@@ -140,7 +140,7 @@ export function TwinAllCard({ name, meta, metaIcon, photoSrc, learners = [], hre
             {name}
           </button>
         )}
-        <p className="m-0 flex items-center gap-1 font-ui text-[15px] leading-5 text-ink-secondary">{meta}{metaIcon ? <span aria-hidden="true" className="flex-none [&>svg]:h-3 [&>svg]:w-3">{metaIcon}</span> : null}</p>
+        <p className="m-0 flex items-center gap-1 font-ui text-[15px] leading-5 text-ink-secondary">{meta}{metaIcon ? <span aria-hidden="true" className="flex-none [&_svg]:h-3 [&_svg]:w-3">{metaIcon}</span> : null}</p>
         {learners.length ? <LearnerStack learners={learners} /> : null}
       </div>
       {actions ? (

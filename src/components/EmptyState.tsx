@@ -24,7 +24,7 @@ export function EmptyState({ title, description, action, icon, className }: Empt
         className,
       )}
     >
-      {icon ? <span className="text-ink-tertiary [&>svg]:h-6 [&>svg]:w-6">{icon}</span> : null}
+      {icon ? <span className="text-ink-tertiary [&_svg]:h-6 [&_svg]:w-6">{icon}</span> : null}
       <div className="flex max-w-[44ch] flex-col gap-1">
         <h3 className="m-0 text-[16px] leading-6 font-title text-ink">{title}</h3>
         <p className="m-0 text-[14px] leading-5 text-ink-tertiary">{description}</p>

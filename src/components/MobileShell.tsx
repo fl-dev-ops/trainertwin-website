@@ -54,7 +54,7 @@ export function HeaderButton({ label, onClick, children }: { label: string; onCl
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="grid h-10 w-10 place-items-center rounded-full border-0 bg-transparent text-ink-secondary cursor-pointer hover:bg-fill-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&>svg]:h-5 [&>svg]:w-5"
+      className="grid h-10 w-10 place-items-center rounded-full border-0 bg-transparent text-ink-secondary cursor-pointer hover:bg-fill-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&_svg]:h-5 [&_svg]:w-5"
     >
       {children}
     </button>
@@ -103,7 +103,7 @@ export function TabBarItem({ label, icon, active = false, href, onClick }: TabBa
   );
   const inner = (
     <>
-      <span aria-hidden="true" className={cn("[&>svg]:h-[22px] [&>svg]:w-[22px]", active && "text-primary")}>
+      <span aria-hidden="true" className={cn("[&_svg]:h-[22px] [&_svg]:w-[22px]", active && "text-primary")}>
         {icon}
       </span>
       <span className="max-w-full truncate">{label}</span>

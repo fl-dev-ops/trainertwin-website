@@ -20,14 +20,14 @@ Ranked by how many pages need it, then by how much each copy costs to keep in st
 | # | Gap | Evidence in the build | Proposed component | Size |
 |---|---|---|---|---|
 | 1 | **Page container** | `mx-auto max-w-[…] px-16 pt-5 pb-8` written on **14** pages, with three widths (1024, 1000, 718) | `Page` (`width: "library" \| "narrow" \| "form"`) so the padding and max-width live in one place | S |
-| 2 | **Page header with a subtitle** | `SettingsHead` (Usage, Billing) is `PageHeader` plus a 14/20 line and one tool | Add `description` to `PageHeader`; delete `SettingsHead` | S |
+| 2 | ~~**Page header with a subtitle**~~ (done 17 Nov, D128) | `SettingsHead` (Usage, Billing) is `PageHeader` plus a 14/20 line and one tool | Add `description` to `PageHeader`; delete `SettingsHead` | S |
 | 3 | **Toolbar select / filter chip** | `FilterSelect` used **7×** (Twin sessions ×4, Roleplay sessions ×4, assign dialog, detail); `ChipSelect` in the Questions/Issues pane; both are a pill + listbox | `FilterSelect` (pill, listbox, `active` state, optional leading icon). `Select` stays the labelled form field | M |
 | 4 | **Stat tiles** | Three looks written by hand: tone tiles on the agent detail (success/caution/info/neutral), `an-stat` cards on Calibrate, and `SessionsSummary` (tiles + rating card + paid ring + attention row) | `StatCard` (`tone`, overline, value, note, optional link) and `SummaryBlock` for the Twin/Roleplay sessions layout. `NumberTile` and `SummaryCard` already cover two of the looks | M |
 | 5 | **List row / data list** | `ListRow` + `Avatar` + name cell repeated on **5** pages; `BrainPane` writes its own head, rows, answer-inline, ⋮ menu and empty state | `DataList` with `columns`, `head`, row `onClick`, and an `actions` slot (already added `onClick` to `ListRow`). `InboxPane` on top of it | L |
 | 6 | **Eyebrow / overline label** | `Overline` used **9×** in 5 files; also hand-written in the stat tiles | A typographic primitive `Eyebrow` (11/12, 600, +.09em, uppercase) | S |
 | 7 | **Star rating** | `Stars` used 3× (two list pages, session report at 16 and 20px); colour by value (5 green, 4 gold, ≤3 red) | `StarRating` (`value`, `size`, auto tone) | S |
 | 8 | **Search field** | `SearchField` plus two inline copies (assign dialog, Questions/Issues search) | `Input` variant `type="search"` with leading icon and clear button, pill shape for toolbars | S |
-| 9 | **Icon set** | **19** `dangerouslySetInnerHTML` icons copied from V3; **14** files define the same `html()` helper | Extend `UiIcons` to the ~45 icons V3 uses (Tabler 24px, 2px stroke) and import them by name. This is the biggest cleanup because it removes the raw-HTML escape hatch | M |
+| 9 | ~~**Icon set**~~ (done 17 Nov, D128: `icons.tsx` + `Foundations/Icons`; 3 raw glyphs remain, two are brand marks) | **19** `dangerouslySetInnerHTML` icons copied from V3; **14** files define the same `html()` helper | Extend `UiIcons` to the ~45 icons V3 uses (Tabler 24px, 2px stroke) and import them by name. This is the biggest cleanup because it removes the raw-HTML escape hatch | M |
 | 10 | **Accordion / collapsible card** | Create page's "New use case" card (title + chevron + body) | `Accordion` (the design system lists it under "not built") | S |
 | 11 | **Drop zone and file row** | Edit and Create pages: dashed/filled drop area, file chips with a status badge and remove | `FileDropZone` and `FileRow` (the system lists "file dropzone" as not built) | M |
 | 12 | **Chart** | Weekly bar chart on the agent detail, parsed from V3's SVG | `BarChart` (4–12 bars, labels, tooltip). Charts are not built yet | M |
@@ -39,8 +39,7 @@ Ranked by how many pages need it, then by how much each copy costs to keep in st
 
 ## 2. Suggested order
 
-1. ~~Swap `BackBar` in~~ (done) and **add `description` to `PageHeader`** (item 2): no new component, removes the hand-rolled settings header.
-2. **Icons (9)**: removes the HTML escape hatch and 14 duplicate helpers; unblocks everything else.
+1. ~~Swap `BackBar` in~~, ~~`description` on `PageHeader` (2)~~ and ~~icons (9)~~: all done 17 Nov 2026 (D128). The build page now resolves every scraped icon to a library icon except Drive, Notion and one sparkle variant, and the 14 duplicate `html()` helpers are one function.
 3. **`Page` (1), `Eyebrow` (6), `StarRating` (7), shadow tokens (16)**: all small, all used across most pages.
 4. **`FilterSelect` (3) and `SearchField` (8)**: used on the busiest pages.
 5. **`DataList`/`InboxPane` (5) and `StatCard`/`SummaryBlock` (4)**: the biggest wins, and the largest.

@@ -2,11 +2,10 @@ import { useState } from "react";
 import { PageHeader } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { Switch } from "@components/Switch";
-import { Icon } from "../Svg";
+import { Icon, html } from "../Svg";
 import { Overline } from "../local/bits";
 import data from "../data/settings.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const TILE = ["bg-info-subtle text-info", "bg-success-subtle text-success", "bg-caution-subtle text-caution", "bg-primary-subtle text-primary-ink"];
 
 export function Settings() {

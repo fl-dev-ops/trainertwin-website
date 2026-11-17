@@ -6,10 +6,9 @@ import { SegmentedControl } from "@components/SegmentedControl";
 import { Menu, type MenuEntry } from "@components/Menu";
 import { FilterSelect } from "../local/FilterSelect";
 import { Overline } from "../local/bits";
-import { MenuIcon } from "../Svg";
+import { MenuIcon, html } from "../Svg";
 import data from "../data/agent-detail.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const noop = () => {};
 const shadow = "shadow-[0_1px_2px_rgb(30_28_25/0.05),0_4px_14px_rgb(30_28_25/0.07)]";
 const TONES: Record<string, string> = {

@@ -1,4 +1,5 @@
 import { NumberTile } from "@components/NumberTile";
+import { html } from "../Svg";
 import { SummaryCard } from "@components/SummaryCard";
 import { ProgressRing } from "@components/Progress";
 import { AttentionChip } from "@components/AttentionChip";
@@ -17,7 +18,6 @@ export interface SessionsSummaryData {
   attn: { tone: string; label: string; id?: string }[];
 }
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 
 export function SessionsSummary({ label, data, pressedId, onChip, onShowAll, onTile }: { label: string; data: SessionsSummaryData; pressedId?: string | null; onChip?: (id: string) => void; onShowAll?: () => void; onTile?: (label: string) => void }) {
   return (

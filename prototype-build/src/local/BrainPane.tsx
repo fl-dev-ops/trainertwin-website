@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { html } from "../Svg";
 import { Avatar } from "@components/Avatar";
 import { Button } from "@components/Button";
 import { Textarea } from "@components/Textarea";
@@ -7,7 +8,6 @@ import { AVATAR_TONES } from "./bits";
 import inbox from "../data/brain-inbox.json";
 import ui from "../data/brain-ui.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const tone = (name: string) => AVATAR_TONES[(name.length % 5)];
 const Who = ({ name, detail }: { name: string; detail?: string }) => (
   <span className="flex min-w-0 items-center gap-2">

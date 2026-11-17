@@ -2210,10 +2210,14 @@ footer { padding-top: var(--space-6); }
         <p>These came out of the brief and are treated as fixed. Everything downstream derives from them, so changing one of these is a system-level change, not a tweak.</p>
       </div>
       <div class="c-seg dec-tabs" role="tablist" aria-label="Decision status">
-        <button type="button" role="tab" aria-selected="true" data-dec-tab="locked">Locked <span class="c-segbadge">51</span></button>
+        <button type="button" role="tab" aria-selected="true" data-dec-tab="locked">Locked <span class="c-segbadge">52</span></button>
         <button type="button" role="tab" aria-selected="false" data-dec-tab="reversed">Reversed <span class="c-segbadge">4</span></button>
       </div>
       <div class="status">
+        <div class="status-item" data-dec="locked">
+          <span class="status-tag st-locked">Locked</span>
+          <p><b>Two gaps closed from the rebuild: PageHeader takes a description, and the icon set grows from 12 to ~70: 17 Nov 2026</b> Rebuilding V3 from the library (see <code>STORYBOOK-GAPS.md</code>) showed what was missing. <code>PageHeader</code> gains <code>description</code>: with it the title is 18/24 (the prototype's Usage and Billing header) and the tools sit at the top; without it nothing changes. A new <code>icons.tsx</code> holds about 60 more outline icons generated from the glyphs V3 draws (<code>scripts/prototype-build/gen-icons.py</code>; 24 viewBox, stroke 2, <code>currentColor</code>, decorative), with a <code>Foundations/Icons</code> gallery story. Icon slots in the library now size a nested icon (<code>[&_svg]</code>, not <code>[&>svg]</code>), so an icon can be wrapped. Brand marks (Google Drive, Notion) are not in the set.</p>
+        </div>
         <div class="status-item" data-dec="locked">
           <span class="status-tag st-locked">Locked</span>
           <p><b>The recording wave is the prototype's: the react-animated-waves canvas, 72px tall, orange: 17 Nov 2026</b> Bhuvan: use the wave the prototype uses. The prototype's "Add your voice" step draws the <code>react-animated-waves</code> canvas (three soft layers in a <code>--tt-primary</code>, #FF8A4C, <code>--tt-primary</code> gradient), not a row of bars. <code>Waveform</code> is now that component: <code>live</code> is the recording preset (amplitude 30, intensity 1, speed 1.4), off is the idle swell (12, .35, .6); it fills its container and is 72px tall. The earlier bar version (32px, 3px gap, <code>--tt-live</code>, with <code>levels</code> and <code>tone</code>) is retired. The package <code>react-animated-waves</code> (MIT, peer React 19) is the first runtime dependency added for a component. The wave is orange, not <code>--tt-live</code> red, because the prototype is final; <code>--tt-live</code> stays for the live dot and "Stop" indicators. One difference on purpose: the prototype ignores reduced motion, the component respects it (<code>respectReducedMotion</code>, default on).</p>

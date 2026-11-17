@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { BackBar } from "@components/PageHeader";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
-import { Icon } from "../Svg";
+import { Icon, html } from "../Svg";
 import { AgentForm } from "./AgentEdit";
 import detail from "../data/agent-detail.json";
 import data from "../data/create.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const card = "shadow-[0_2px_4px_rgb(30_28_25/0.035),0_8px_20px_rgb(30_28_25/0.055)]";
 
 /**

@@ -24,6 +24,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 export const WithIcon: Story = { args: { icon: <EyeIcon /> } };
+export const WithDescription: Story = {
+  args: { icon: <EyeIcon />, description: "One line saying what this page is for.", tools: <Button variant="secondary" size="sm">Action</Button> },
+  parameters: { docs: { description: { story: "Usage and Billing: an 18/24 title, a 14/20 line under it, one secondary tool top-right." } } },
+};
 export const WithTools: Story = {
   args: { title: "Page title", tools: <Button variant="secondary" size="sm">Action</Button> },
 };

@@ -1,11 +1,11 @@
 import { Button } from "@components/Button";
+import { html } from "../Svg";
 import { BackBar } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { SectionHeading } from "@components/PageHeader";
 import { Overline } from "../local/bits";
 import detail from "../data/agent-detail.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const STATS: [string, string, string][] = [
   ["Total sessions", "4", "calibrations"],
   ["Feels like me", "9", "responses"],

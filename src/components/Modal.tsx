@@ -83,7 +83,7 @@ function IconTile({ children, tone }: { children: ReactNode; tone: "danger" | "c
     <span aria-hidden="true" className="flex rounded-[18px] bg-[linear-gradient(180deg,var(--tt-border),var(--tt-surface))] p-[2px]">
       <span
         className={cn(
-          "flex rounded-lg border-4 border-surface p-3 shadow-[0_4px_8px_rgb(30_28_25/0.2),inset_0_0_4px_rgb(30_28_25/0.05)] [&>svg]:h-5 [&>svg]:w-5",
+          "flex rounded-lg border-4 border-surface p-3 shadow-[0_4px_8px_rgb(30_28_25/0.2),inset_0_0_4px_rgb(30_28_25/0.05)] [&_svg]:h-5 [&_svg]:w-5",
           GRADIENT,
           tone === "danger" ? "text-danger" : "text-ink",
         )}

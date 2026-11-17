@@ -53,7 +53,7 @@ export function FlowNode({ kicker, title, note, children, on = false, onSelect, 
 export function FlowSource({ icon, children }: { icon?: ReactNode; children: ReactNode }) {
   return (
     <span className="flex w-full items-center gap-2 rounded-md bg-fill-soft py-2 pr-2 pl-[10px] font-ui text-[13px] leading-[18px] text-ink">
-      {icon ? <span aria-hidden="true" className="inline-flex h-4 w-4 flex-none text-ink [&>svg]:h-4 [&>svg]:w-4">{icon}</span> : null}
+      {icon ? <span aria-hidden="true" className="inline-flex h-4 w-4 flex-none text-ink [&_svg]:h-4 [&_svg]:w-4">{icon}</span> : null}
       {children}
     </span>
   );
@@ -64,7 +64,7 @@ export function FlowStartNode({ children, icon, onClick }: { children: ReactNode
     <button
       type="button"
       onClick={onClick}
-      className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-strong px-[18px] font-ui text-[14px] leading-5 font-cta text-on-strong cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&>svg]:h-[14px] [&>svg]:w-[14px]"
+      className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-strong px-[18px] font-ui text-[14px] leading-5 font-cta text-on-strong cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&_svg]:h-[14px] [&_svg]:w-[14px]"
     >
       {icon}
       {children}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { html } from "../Svg";
 import { FlowNode, FlowSource } from "@components/FlowNode";
 import { Button } from "@components/Button";
 import { SegmentedControl } from "@components/SegmentedControl";
@@ -6,7 +7,6 @@ import { BrainPane, useInboxStore } from "../local/BrainPane";
 import { useToast } from "@components/Toast";
 import data from "../data/knowledge.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const TAGS = { info: "bg-info-subtle text-info", caution: "bg-caution-subtle text-caution", success: "bg-success-subtle text-success" } as const;
 const BARS = [8, 14, 6, 18, 10, 16, 7, 12];
 

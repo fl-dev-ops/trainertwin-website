@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { html } from "../Svg";
 import { Aurora } from "@components/Aurora";
 import { LogoSymbol } from "@components/Logo";
 import data from "../data/try.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 
 /**
  * v3 "Try as learner" / call room (`pageTwinDemo`): a full-screen takeover, no rail. The Session Shell is not in

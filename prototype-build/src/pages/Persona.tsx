@@ -5,10 +5,9 @@ import { SegmentedControl } from "@components/SegmentedControl";
 import { ListTable, ListRow } from "@components/ListTable";
 import { Menu, type MenuEntry } from "@components/Menu";
 import { Badge } from "@components/Badge";
-import { Icon, MenuIcon } from "../Svg";
+import { Icon, MenuIcon, html } from "../Svg";
 import data from "../data/rpsettings.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const COLS = "40px minmax(150px,1.1fr) minmax(130px,1fr) minmax(0,2fr) minmax(90px,.8fr) 36px";
 const noop = () => {};
 const actions: MenuEntry[] = [

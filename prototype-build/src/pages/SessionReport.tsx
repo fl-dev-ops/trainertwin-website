@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { html } from "../Svg";
 import { BackBar } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { Badge } from "@components/Badge";
@@ -9,7 +10,6 @@ import { Stars, AVATAR_TONES } from "../local/bits";
 import detail from "../data/agent-detail.json";
 import all from "../data/twin-session-detail.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const h = "m-0 mb-3 font-ui text-[16px] leading-6 font-title text-ink";
 
 /** v3 `pageTwinSessionReport`: one conversation (learner, recording, feedback, topics, transcript with "Feels like me / off"). */

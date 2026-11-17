@@ -167,7 +167,7 @@ export function Menu({ label, items, align = "end", trigger, className }: MenuPr
                   it.danger ? "text-danger" : "text-ink",
                 )}
               >
-                {it.icon ? <span className="flex-none [&>svg]:h-4 [&>svg]:w-4">{it.icon}</span> : null}
+                {it.icon ? <span className="flex-none [&_svg]:h-4 [&_svg]:w-4">{it.icon}</span> : null}
                 {it.label}
               </button>
             ),

@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Button } from "@components/Button";
+import { PageHeader } from "@components/PageHeader";
 import { Card } from "@components/Card";
 import { SegmentedControl } from "@components/SegmentedControl";
 import { ListTable, ListRow } from "@components/ListTable";
-import { Icon } from "../Svg";
-import { SettingsHead } from "../local/SettingsHead";
+import { Icon, html } from "../Svg";
 import data from "../data/usage.json";
 
-const html = (svg: string) => <span aria-hidden="true" className="contents" dangerouslySetInnerHTML={{ __html: svg }} />;
 const COLS = "minmax(0,1fr) 140px 140px 120px";
 
 export function Usage() {
@@ -15,11 +14,11 @@ export function Usage() {
   const c = data.card;
   return (
     <div className="mx-auto max-w-[1000px] px-16 pt-5 pb-8">
-      <SettingsHead
+      <PageHeader
         title={data.title}
         icon={<Icon name="credits" />}
-        sub={data.sub}
-        tool={
+        description={data.sub}
+        tools={
           <Button variant="secondary" className="flex-none [&_svg]:h-4 [&_svg]:w-4">
             {html(data.toolSvg)}
             {data.tool}
