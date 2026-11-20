@@ -274,6 +274,7 @@ const state = {
   portalView: "trainer",
   portalOpen: false,
   learnerMenu: "agents",
+  learnerActivityBot: "",
   teeAskMode: "roleplay",
   botAsk: "",
   botManual: null,
@@ -1570,12 +1571,47 @@ function learnerMenuCard() {
 }
 
 function pageLearnerPortal() {
-  const tab = state.learnerMenu === "roleplays" ? "roleplays" : "agents";
-  const pane = tab === "roleplays" ? pageLearnerRoleplays() : pageTwinProfile();
+  let pane;
+  if (state.learnerActivityBot) {
+    const bot = state.learnerActivityBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((b) => b.id === state.learnerActivityBot);
+    if (bot) pane = pageLearnerTwinActivities(bot);
+    else state.learnerActivityBot = "";
+  }
+  if (!pane) {
+    const tab = state.learnerMenu === "roleplays" ? "roleplays" : "agents";
+    pane = tab === "roleplays" ? pageLearnerRoleplays() : pageTwinProfile();
+  }
   return `
     <div class="learner-layout">
       ${learnerMenuCard()}
       <div class="learner-pane">${pane}</div>
+    </div>
+  `;
+}
+
+function pageLearnerTwinActivities(bot) {
+  const list = botConversations(bot);
+  return `
+    <div class="page page--library page--learner-activities">
+      <header class="create-bar">
+        <button class="create-bar-back" type="button" data-action="learner-activities-back">${icon("back")} Back</button>
+      </header>
+      <div class="lib-head">
+        <h1 class="lib-title"><span class="lib-mark">${icon("setup")}</span>${esc(bot.title)}</h1>
+      </div>
+      <p class="card-sub learner-act-intro">Your activities with this twin</p>
+      ${list.length ? `
+      <ul class="learner-act-list">
+        ${list.map((c, i) => `
+          <li class="card learner-act">
+            <div class="learner-act-body">
+              <p class="learner-act-title">${esc(c.q)}</p>
+              <p class="learner-act-meta an-muted tabular">${esc(c.when)} · ${TS_MINUTES[i % TS_MINUTES.length]} min</p>
+            </div>
+            <button class="btn btn--secondary btn--sm" type="button" data-action="twin-session-open" data-bot="${esc(bot.id)}" data-id="${esc(c.id)}">View report</button>
+          </li>
+        `).join("")}
+      </ul>` : `<p class="card-sub">No activities yet. Connect to start a session.</p>`}
     </div>
   `;
 }
@@ -2542,23 +2578,26 @@ function twinHero() {
 function twinAllCard() {
   const learners = roleLearnerAvatars(TWIN_ALL, 0);
   const learner = isLearnerView();
+  const cardAction = learner ? "learner-twin-activities" : "twin-bot-open";
   return `
       <div class="twin-bots-head">
         <h2 class="page-title">Twin for all use cases</h2>
       </div>
-      <article class="card twin-all is-clickable" data-action="twin-bot-open" data-id="${esc(TWIN_ALL.id)}" tabindex="0" aria-label="Open ${esc(TWIN_ALL.title)}">
+      <article class="card twin-all is-clickable" data-action="${cardAction}" data-id="${esc(TWIN_ALL.id)}" tabindex="0" aria-label="${learner ? "Open activities for" : "Open"} ${esc(TWIN_ALL.title)}">
         <img class="twin-all-photo" src="${esc(presenceSrc())}" alt="">
         <div class="twin-all-body">
           <h3 class="twin-all-name">Olga’s twin</h3>
           <p class="twin-all-meta">Last updated 29 Oct, 13:00 <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-          ${learner
-            ? learnerTimeMeta(TWIN_ALL)
-            : `<span class="rp-learners" aria-label="Learners who asked this twin">
+          ${learner ? "" : `<span class="rp-learners" aria-label="Learners who asked this twin">
             ${learners.shown.map(learnerFace).join("")}
             ${learners.extra > 0 ? `<span class="rp-learner-avatar rp-learner-avatar--more">+${learners.extra}</span>` : ""}
           </span>`}
         </div>
-        ${learner ? "" : `<button class="btn btn--ghost btn--icon btn--sm rp-row-more twin-all-more" type="button" id="role-menu-${esc(TWIN_ALL.id)}" data-action="role-row-menu" data-id="${esc(TWIN_ALL.id)}" aria-label="Actions for ${esc(TWIN_ALL.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === TWIN_ALL.id}">
+        ${learner ? `
+        <div class="twin-all-aside">
+          ${learnerTimeMeta(TWIN_ALL)}
+          <button class="btn btn--strong btn--sm" type="button" data-action="learner-twin-connect" data-id="${esc(TWIN_ALL.id)}">Connect</button>
+        </div>` : `<button class="btn btn--ghost btn--icon btn--sm rp-row-more twin-all-more" type="button" id="role-menu-${esc(TWIN_ALL.id)}" data-action="role-row-menu" data-id="${esc(TWIN_ALL.id)}" aria-label="Actions for ${esc(TWIN_ALL.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === TWIN_ALL.id}">
           <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg>
         </button>`}
       </article>
@@ -15642,7 +15681,10 @@ const actions = {
     if (id === "learner") {
       state.botDetailId = "";
       state.roleDetailId = "";
+      state.learnerActivityBot = "";
       if (!state.learnerMenu) state.learnerMenu = "agents";
+    } else {
+      state.learnerActivityBot = "";
     }
     render();
   },
@@ -15653,6 +15695,27 @@ const actions = {
     state.botDetailId = "";
     state.roleDetailId = "";
     state.roleMenuId = "";
+    state.learnerActivityBot = "";
+    state.twinSessionId = "";
+    render();
+  },
+  "learner-twin-connect"(el) {
+    if (!isLearnerView()) return;
+    // Same path as trainer “Try as learner” for a twin agent.
+    actions["open-demo"]({ dataset: { id: el.dataset.id } });
+  },
+  "learner-twin-activities"(el) {
+    if (!isLearnerView()) return;
+    state.learnerActivityBot = el.dataset.id || TWIN_ALL.id;
+    state.twinSessionId = "";
+    state.botDetailId = "";
+    render();
+    const scroller = document.querySelector(".main");
+    if (scroller) scroller.scrollTop = 0;
+  },
+  "learner-activities-back"() {
+    state.learnerActivityBot = "";
+    state.twinSessionId = "";
     render();
   },
   "ask-type-toggle"(el) {
@@ -17701,6 +17764,11 @@ document.addEventListener("keydown", (e) => {
   if ((e.key === "Enter" || e.key === " ") && e.target && e.target.getAttribute && e.target.getAttribute("role") === "button" && e.target.dataset.action === "role-pick-persona") {
     e.preventDefault();
     actions["role-pick-persona"](e.target);
+    return;
+  }
+  if (e.key === "Enter" && e.target && e.target.dataset.action === "learner-twin-activities") {
+    e.preventDefault();
+    actions["learner-twin-activities"](e.target);
     return;
   }
   if (e.key === "Enter" && e.target && e.target.dataset.action === "twin-bot-open") {

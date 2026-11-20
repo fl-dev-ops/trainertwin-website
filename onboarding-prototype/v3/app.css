@@ -11901,3 +11901,48 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
   .learner-menu { width: 100%; position: static; flex-direction: row; }
   .learner-menu-item { flex: 1; justify-content: center; }
 }
+
+/* Learner twin-all: Assigned·Used right-aligned + Connect */
+.learner-pane .twin-all-aside {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--tt-space-3);
+  flex: none;
+}
+.learner-pane .twin-all-aside .rp-time { margin-top: 0; text-align: right; justify-content: flex-end; }
+.learner-pane .twin-all-aside .btn { min-width: 96px; }
+
+/* Learner activities list */
+.learner-act-intro { margin: var(--tt-space-2) 0 var(--tt-space-5); }
+.learner-act-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tt-space-3);
+}
+.learner-act {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--tt-space-4);
+  padding: var(--tt-space-4) var(--tt-space-5);
+}
+.learner-act-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.learner-act-title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--tt-weight-title);
+  color: var(--tt-text-primary);
+}
+.learner-act-meta { margin: 0; font-size: 13px; line-height: 20px; }
+.page--learner-activities .create-bar {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0 0 var(--tt-space-4);
+}
+
