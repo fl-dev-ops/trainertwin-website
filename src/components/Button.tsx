@@ -7,7 +7,8 @@ export type ButtonVariant =
   | "strong"
   | "secondary"
   | "ghost"
-  | "danger";
+  | "danger"
+  | "success";
 /**
  * `lg` and `xl` are MARKETING ONLY as of 25 Sep 2026 — product code uses `sm`
  * or `md`. This creates a real, unresolved conflict with the `primary`
@@ -65,91 +66,68 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const base = cn(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap",
   "font-ui font-semibold rounded-full border",
-  "transition-colors duration-150 ease-standard",
+  "transition-[color,background-color,border-color,box-shadow,transform] duration-(--tt-duration-quick) ease-standard",
   // An inline SVG is flex-shrink:1 by default, so a too-tight content box
   // silently SQUASHES the glyph instead of overflowing where you would see it.
   // Belt and braces alongside the padding fix above.
-  "[&>svg]:shrink-0",
-  // Opacity is NOT here as `disabled:opacity-45` — `loading` also sets the
-  // native `disabled` attribute (real keyboard/click blocking), and needs a
-  // visibly different, lighter dim than true-disabled (45%) so "processing"
-  // never reads as "unavailable". Two `:disabled` utilities at equal
-  // specificity race on stylesheet order, which Tailwind doesn't guarantee
-  // across separate class strings — so the exact opacity is computed once in
-  // JS below and applied as a single unambiguous class instead.
+  "[&_svg]:shrink-0",
+  // Every glyph in a button is 16px (`--tt-icon-sm`), as the V3 prototype forces with `.btn svg`.
+  "[&_svg]:h-(--tt-icon-sm) [&_svg]:w-(--tt-icon-sm)",
+  // Disabled is a flat fill-soft / muted label (the prototype), chosen in JS below; `loading` keeps
+  // the variant and dims to 70% so "processing" never reads as "unavailable".
 );
 
+/**
+ * VARIANTS ARE THE V3 PROTOTYPE'S (decided 16 Nov 2026: "use buttons from the prototype"). Mapping
+ * from the prototype's classes:
+ *
+ *   btn--primary, btn--strong  ->  `primary`   (BOTH render orange in the prototype: the later
+ *                                  `.btn--strong` rule overrides the dark fill. The dark `strong`
+ *                                  below is kept for the marketing site only.)
+ *   btn--secondary             ->  `secondary` white (`--tt-surface`) with the soft shadow
+ *   btn--ghost                 ->  `ghost`
+ *   btn--danger                ->  `danger`
+ *   btn--success               ->  `success`
+ *
+ * Sizes: default 36 tall with 16px padding, `sm` 32 tall with 12px padding at 13px. Every button
+ * is a pill at 14px / 600. Disabled is a flat `--tt-fill-soft` with `--tt-text-muted` text and a
+ * not-allowed cursor, not a faded copy of the variant.
+ */
 const variants: Record<ButtonVariant, string> = {
-  /**
-   * THE DEFAULT — white on orange. At most one per view or dialog.
-   *
-   * Reversed 4 Nov 2026 (D107, "Orange everywhere"), matching what the
-   * onboarding V3 build ships: Create new, Next, Looks right, Save and assign,
-   * Calibrate, Done are all this variant. It replaces the 29 Sep rule that made
-   * `strong` the default and allowlisted orange to three moments (D04, D45 —
-   * both now Reversed for buttons). The exclusions in D04 still stand: orange
-   * is not selection, state, tints or avatars, only this button.
-   *
-   * WCAG, now on every view rather than three per flow: white on #FF5A00 is
-   * 3.13:1, which FAILS AA for normal text and clears it only at large sizes
-   * (>=18.66px bold or >=24px). `lg` is marketing-only, so `primary` at
-   * `sm`/`md` has NO compliant configuration. Still flagged in DECISIONS.md
-   * (D29, "What is left of strong") rather than silently patched, and the axe
-   * colour-contrast rule stays disabled for this component's stories.
-   */
-  primary:
-    "border-transparent bg-primary text-on-primary hover:bg-primary-hover",
+  /** The default: white on orange. At most one per view or dialog (D107). */
+  primary: "border-transparent bg-primary text-on-primary enabled:hover:bg-primary-hover",
 
   /**
-   * Black in light theme, white in dark theme — the neutral filled button.
-   *
-   * No longer the default (D107). Nothing in product uses it as a button now;
-   * it stays for marketing CTAs (EarlyAccessSteps, InviteForm pass it
-   * explicitly) and for a second filled button on a screen that already has
-   * its one orange primary. Whether to keep, merge or retire it is open
-   * (DECISIONS.md, "What is left of strong").
-   *
-   * One variant, not two: the fill and label flip with the token layer, so it
-   * is always the opposite polarity of its canvas and cannot be shipped
-   * invisible. 19.78:1 in both themes.
+   * Black in light theme, white in dark: the neutral filled button. NOT in the V3 prototype (its
+   * `btn--strong` is orange, see the mapping above); kept for the marketing site's CTAs
+   * (EarlyAccessSteps, InviteForm). Whether to retire it is open.
    */
-  strong:
-    "border-transparent bg-strong text-on-strong hover:bg-strong-hover",
+  strong: "border-transparent bg-strong text-on-strong enabled:hover:bg-strong-hover",
 
   /**
-   * A soft grey fill, not an outline — the utility button. Toolbars, Help/Docs,
-   * notification bells: things that sit together and should not each shout.
-   *
-   * The fill is `--tt-fill-soft`, NOT `--tt-surface-sunken`. In dark theme sunken
-   * is darker than the card a button sits on, so a button using it reads as a hole
-   * rather than a control; fill-soft steps away from the surface in whichever
-   * direction the theme requires. (That dark-theme fork went missing from the
-   * explicit `[data-theme="dark"]` block at some point — found and fixed 30 Sep
-   * 2026 by checking a real dark Storybook against an onboarding prototype;
-   * `secondary` had been rendering light-grey on black in production dark mode.)
-   *
-   * `shadow-secondary` added 30 Sep 2026, confirmed on three separate buttons in
-   * that same onboarding flow. `strong`/`primary` read as buttons through their
-   * fill; `secondary`'s fill is a near-invisible step off the surface, so it
-   * gets a small proportionate lift instead of true elevation.
+   * White (`--tt-surface`) with `--tt-shadow-secondary`, as the V3 prototype draws it. Hover mixes
+   * 3% ink into the surface, press scales to 98%. (It was a soft grey fill before 16 Nov 2026,
+   * from an earlier Figma read; the prototype is the reference.)
    */
   secondary:
-    "border-transparent bg-fill-soft text-ink shadow-secondary hover:bg-fill-soft-hover",
+    "border-transparent bg-surface text-ink shadow-secondary [&_svg]:text-ink-secondary active:scale-[0.98] enabled:hover:bg-[color-mix(in_srgb,var(--tt-text-primary)_3%,var(--tt-surface))]",
 
-  ghost:
-    "border-transparent bg-transparent text-ink-secondary hover:bg-surface-sunken hover:text-ink",
+  /** Transparent, ink text, a soft grey fill on hover. */
+  ghost: "border-transparent bg-transparent text-ink [&_svg]:text-ink-secondary enabled:hover:bg-fill-soft",
 
   /**
-   * Destructive is outlined, not filled — two reasons.
-   * 1. A filled destructive button has the same visual weight as the primary
-   *    action, which is how people delete a trainer's uploaded material by mistake.
-   * 2. --tt-danger inverts across themes (#CE2C33 light, #F58F93 dark), so as a
-   *    fill it would need a theme-forked label colour. As a border and label it
-   *    reads correctly on both grounds with no fork.
+   * Destructive is outlined, not filled: a filled destructive button has the same weight as the
+   * primary action. Soft status border (`--tt-danger-border`), danger label.
    */
-  danger:
-    "border-danger bg-transparent text-danger hover:bg-danger-subtle",
+  danger: "border-danger-border bg-transparent text-danger enabled:hover:bg-danger-subtle",
+
+  /** Green fill, white label (the prototype's `btn--success`); the label flips to the subtle tint in dark. */
+  success:
+    "border-transparent bg-success text-surface dark:text-success-subtle enabled:hover:bg-[color-mix(in_srgb,var(--tt-text-primary)_12%,var(--tt-success))]",
 };
+
+/** Disabled: flat fill, muted label, not-allowed. `secondary` keeps its shadow, as in the prototype. */
+const disabledStyle = "cursor-not-allowed border-transparent bg-fill-soft text-ink-muted [&_svg]:text-current";
 
 /**
  * Icon-only buttons are square at every size, so a toolbar keeps its rhythm.
@@ -182,7 +160,7 @@ const iconSizes: Record<ButtonSize, string> = {
  */
 const paddings: Record<ButtonSize, string> = {
   sm: "px-3",
-  md: "px-5",
+  md: "px-4",
   lg: "px-6",
   xl: "px-6",
 };
@@ -201,8 +179,8 @@ const paddings: Record<ButtonSize, string> = {
  * 54px tall, the page hierarchy is wrong, not the button.
  */
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-8 text-[13px]",
-  md: "h-9 text-[14px]",
+  sm: "h-8 text-[13px] leading-5",
+  md: "h-9 text-[14px] leading-5",
   lg: "h-[50px] text-[19px]",
   xl: "h-[54px] text-[16px]",
 };
@@ -230,12 +208,12 @@ export function Button({
       aria-busy={loading || undefined}
       className={cn(
         base,
-        variants[variant],
+        isDisabled ? cn(disabledStyle, variant === "secondary" && "shadow-secondary") : variants[variant],
         sizes[size],
         // Exactly one of these — never both. See the note on `iconSizes`.
         iconOnly ? iconSizes[size] : paddings[size],
         fullWidth && "w-full",
-        isDisabled && "pointer-events-none opacity-45",
+        
         // Lighter than true-disabled, and non-interactive without looking
         // "unavailable" — matches the Figma reference's still-legible,
         // pastel-toned "Processing" state, distinct from its separate,

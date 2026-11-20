@@ -235,6 +235,82 @@
   --tt-ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --tt-ease-enter: cubic-bezier(0, 0, 0, 1);
   --tt-ease-exit: cubic-bezier(0.3, 0, 1, 1);
+
+  /* ---- Added 16 Nov 2026 — phase 1 of the scalable-system pass. Everything below
+     was already in the product as a literal; it is named here so a component, a
+     story and the foundations page all read one value. Theme-independent. ---- */
+
+  /* Motion, continued. The three durations/eases above cover state changes; the
+     card tilt needed two more. FOLLOW is the 90ms linear catch-up while a pointer
+     moves over a card's picture; SETTLE is the 600ms release when it leaves. */
+  --tt-duration-follow: 90ms;
+  --tt-duration-settle: 600ms;
+  --tt-ease-settle: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Tilt of the quote bubble on a Twin agent / roleplay card. Mouse and pen only,
+     never touch. Reduced motion keeps the tilt at --tt-tilt-reduced of its depth
+     and removes the transitions. */
+  --tt-tilt-max: 9deg;
+  --tt-tilt-scale: 1.04;
+  --tt-tilt-perspective: 700px;
+  --tt-tilt-reduced: 0.3;
+
+  /* Component sizes. Avatars are a ladder, not a free value: the Avatar component
+     already shipped 24 / 28 / 32 / 44, and the prototype uses 64 for a progress
+     ring and 76 for the Twin-for-all photo. */
+  --tt-size-avatar-xs: 24px;
+  --tt-size-avatar-sm: 28px;
+  --tt-size-avatar-md: 32px;
+  --tt-size-avatar-lg: 44px;
+  --tt-size-avatar-xl: 64px;
+  --tt-size-photo: 76px;        /* the Twin-for-all use-cases card photo */
+
+  /* The Twin agent / roleplay card. 288 wide is what three columns resolve to in
+     the 896 library page; the picture is a fixed 168 so a list of cards reads as
+     one row of equal tops. */
+  --tt-size-card-w: 288px;
+  --tt-size-card-h: 338px;      /* min-height */
+  --tt-size-card-art: 168px;
+
+  /* Card art — ten pastel three-stop gradients, one picture per card. A card never
+     chooses its own: it takes --tt-art-<index % 10> from its position, so a list
+     reads as a run of ten. Identical in light and dark on purpose: the picture is
+     an illustration surface with a white bubble on it, not a theme surface.
+     Use them as `background: var(--tt-art-3)` or the `bg-art-3` utility. */
+  --tt-art-0: linear-gradient(135deg, #A8C6EC 0%, #D2C3E8 50%, #F1C6D7 100%);
+  --tt-art-1: linear-gradient(135deg, #A8E0C9 0%, #BFE0E8 50%, #C7CDF2 100%);
+  --tt-art-2: linear-gradient(135deg, #F3CFA0 0%, #F0BCC7 50%, #DDB8EA 100%);
+  --tt-art-3: linear-gradient(135deg, #CBE3A8 0%, #BFE6CF 50%, #A8E0E0 100%);
+  --tt-art-4: linear-gradient(135deg, #F6D9A0 0%, #F2C2B0 50%, #ECB6CC 100%);
+  --tt-art-5: linear-gradient(135deg, #B8CDF0 0%, #C8C4EC 50%, #E0C0E8 100%);
+  --tt-art-6: linear-gradient(135deg, #F0E3A0 0%, #ECD0B0 50%, #E8BCC4 100%);
+  --tt-art-7: linear-gradient(135deg, #A0E4E0 0%, #B8D4EC 50%, #CCC8F0 100%);
+  --tt-art-8: linear-gradient(135deg, #F0C8A8 0%, #EEC0D0 50%, #D8BCE8 100%);
+  --tt-art-9: linear-gradient(135deg, #BCEAD0 0%, #C4E0E4 50%, #D4D0F0 100%);
+  /* Text on the art (client eyebrow) and the quote bubble's shadow, which has to
+     work on a pastel regardless of theme. */
+  --tt-on-art: rgb(28 27 27 / 0.72);
+  --tt-shadow-bubble: 0 2px 8px rgb(0 0 0 / 0.08);
+  /* The glare that follows the pointer across the bubble while it tilts. */
+  --tt-art-glare-core: rgb(255 90 0 / 0.10);
+  --tt-art-glare-edge: rgb(255 90 0 / 0.04);
+
+  /* Scrim behind a modal or side panel, from the Modal spec (§8). One value, both
+     themes: a scrim darkens what is behind it either way. */
+  --tt-scrim: rgb(11 10 9 / 0.55);
+
+  /* Dialog and toast shadows, from the V3 prototype (16 Nov 2026: "prototype is final" for
+     Toast and Modal). A dialog is ONE drop shadow, `0 4px 8px` at 20% of the warm ink; a toast
+     is a softer two-layer lift. Same in both themes: on a dark surface they all but vanish,
+     which is what the prototype does. */
+  --tt-shadow-dialog: 0 4px 8px rgb(30 28 25 / 0.2);
+  --tt-shadow-toast: 0 8px 24px rgb(30 28 25 / 0.12), 0 2px 6px rgb(30 28 25 / 0.06);
+  /* List-as-table card and flow node lift, measured from the V3 prototype (.an-table, .flow-node). */
+  --tt-shadow-list: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055);
+  --tt-shadow-node: 0 2px 4px rgb(30 28 25 / 0.0525), 0 8px 20px rgb(30 28 25 / 0.0825);
+  /* A card that sits a little above the page: the detail cards and the Twin's brain pane (V3 .rp-analytics, .brain-card). */
+  --tt-shadow-lift: 0 1px 2px rgb(30 28 25 / 0.05), 0 4px 14px rgb(30 28 25 / 0.07);
+  /* The white main sheet lifting off the grey rail (V3 .main on desktop). Falls to the left. */
+  --tt-shadow-sheet: -4px 0 16px rgb(30 28 25 / 0.06);
 }
 
 /* ---------------------------------------------------- 2. SEMANTIC — LIGHT (base)
@@ -426,6 +502,14 @@
      blocks) WAS measured live at the time and is unchanged here; it already
      matched exactly. */
   --tt-shadow-secondary: 0 0 1px rgba(0, 0, 0, .4), 0 1px 1px rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .04);
+
+  /* Ink alpha — added 16 Nov 2026. The tint that hairlines, wells and soft shadows
+     are built from. The prototype wrote it as rgb(30 28 25 / x) about 60 times; the
+     two lightest (.035, .055) are --tt-card-shadow and --tt-elevation-1 already.
+     Dark flips the base to the warm white, as the elevation tokens do. */
+  --tt-ink-faint:  rgb(30 28 25 / 0.06);
+  --tt-ink-soft:   rgb(30 28 25 / 0.12);
+  --tt-ink-strong: rgb(30 28 25 / 0.20);
 }
 
 /* The two dark blocks below are intentionally duplicated rather than combined in a
@@ -495,7 +579,11 @@
     --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
     --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
     /* Measured directly off the onboarding prototype's secondary buttons. */
-    --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+    --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
+
+    --tt-ink-faint:  rgb(253 251 247 / 0.06);
+    --tt-ink-soft:   rgb(253 251 247 / 0.12);
+    --tt-ink-strong: rgb(253 251 247 / 0.20);
   }
 }
 
@@ -564,5 +652,9 @@
   --tt-card-shadow: 0 0 0 1px rgb(253 251 247 / 0.035);
   --tt-elevation-2: 0 0 0 1px rgb(253 251 247 / 0.07), 0 4px 16px rgb(0 0 0 / 0.5);
   --tt-elevation-3: 0 0 0 1px rgb(253 251 247 / 0.09), 0 12px 32px rgb(0 0 0 / 0.6);
-  --tt-shadow-secondary: 0 0 1px rgb(253 251 247 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+  --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
+
+  --tt-ink-faint:  rgb(253 251 247 / 0.06);
+  --tt-ink-soft:   rgb(253 251 247 / 0.12);
+  --tt-ink-strong: rgb(253 251 247 / 0.20);
 }

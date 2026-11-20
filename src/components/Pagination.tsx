@@ -5,6 +5,8 @@ export interface PaginationProps {
   page: number;
   total: number;
   onPageChange?: (page: number) => void;
+  /** Words on the control, for translation. Defaults are plain English chrome. */
+  labels?: { previous?: string; next?: string; navigation?: string; status?: (page: number, total: number) => string };
   className?: string;
 }
 
@@ -19,13 +21,14 @@ export function Pagination({
   page,
   total,
   onPageChange,
+  labels,
   className,
 }: PaginationProps) {
   const atStart = page <= 1;
   const atEnd = page >= total;
   return (
     <nav
-      aria-label="Pagination"
+      aria-label={labels?.navigation ?? "Pagination"}
       className={cn(
         "flex items-center justify-between gap-3 border-t border-line px-4 py-3 md:px-6",
         className,
@@ -37,7 +40,7 @@ export function Pagination({
         disabled={atStart}
         onClick={() => onPageChange?.(page - 1)}
       >
-        Previous
+        {labels?.previous ?? "Previous"}
       </Button>
       {/* aria-live so a screen reader hears the page change, which is otherwise
           a silent content swap. */}
@@ -49,7 +52,7 @@ export function Pagination({
         // the page counter would visibly jitter as it advanced without it.
         className="text-[11.5px] tabular-nums text-ink-tertiary"
       >
-        Page {page} of {total}
+        {labels?.status ? labels.status(page, total) : `Page ${page} of ${total}`}
       </span>
       <Button
         variant="secondary"
@@ -57,7 +60,7 @@ export function Pagination({
         disabled={atEnd}
         onClick={() => onPageChange?.(page + 1)}
       >
-        Next
+        {labels?.next ?? "Next"}
       </Button>
     </nav>
   );

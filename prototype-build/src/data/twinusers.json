@@ -1,0 +1,98 @@
+{
+ "title": "All learners",
+ "sub": "People who can learn from your twins",
+ "head": [
+  "Learner",
+  "Email",
+  "Assigned",
+  "Credits given",
+  "Until",
+  "Credits used"
+ ],
+ "rows": [
+  {
+   "tone": 4,
+   "name": "bechir.realestate",
+   "email": "bechir.realestate@gmail.com",
+   "agents": "1 agents",
+   "credits": "60 min",
+   "until": "Until 12 Dec 2026",
+   "used": "30 used · 30 left",
+   "pct": 50,
+   "high": false,
+   "low": false
+  },
+  {
+   "tone": 2,
+   "name": "egoryakina",
+   "email": "egoryakina@gmail.com",
+   "agents": "1 agents",
+   "credits": "60 min",
+   "until": "Until 12 Dec 2026",
+   "used": "60 used · 0 left Low",
+   "pct": 100,
+   "high": true,
+   "low": true
+  },
+  {
+   "tone": 3,
+   "name": "kjsofficemail",
+   "email": "kjsofficemail@gmail.com",
+   "agents": "1 agents",
+   "credits": "60 min",
+   "until": "Until 12 Dec 2026",
+   "used": "1.7 used · 58.3 left",
+   "pct": 3,
+   "high": false,
+   "low": false
+  },
+  {
+   "tone": 5,
+   "name": "mady24n",
+   "email": "mady24n@gmail.com",
+   "agents": "1 agents",
+   "credits": "60 min",
+   "until": "Until 12 Dec 2026",
+   "used": "0 used · 60 left",
+   "pct": 0,
+   "high": false,
+   "low": false
+  },
+  {
+   "tone": 5,
+   "name": "mila.konsina",
+   "email": "mila.konsina@gmail.com",
+   "agents": "1 agents",
+   "credits": "60 min",
+   "until": "Until 12 Dec 2026",
+   "used": "0 used · 60 left",
+   "pct": 0,
+   "high": false,
+   "low": false
+  },
+  {
+   "tone": 1,
+   "name": "safwankadri786786",
+   "email": "safwankadri786786@gmail.com",
+   "agents": "1 agents",
+   "credits": "60 min",
+   "until": "Until 12 Dec 2026",
+   "used": "2.6 used · 57.4 left",
+   "pct": 4,
+   "high": false,
+   "low": false
+  },
+  {
+   "tone": 2,
+   "name": "themehakbhutani",
+   "email": "themehakbhutani@gmail.com",
+   "agents": "1 agents",
+   "credits": "60 min",
+   "until": "Until 12 Dec 2026",
+   "used": "0 used · 60 left",
+   "pct": 0,
+   "high": false,
+   "low": false
+  }
+ ]
+}

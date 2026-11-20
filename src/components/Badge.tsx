@@ -42,7 +42,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  * Removing it there wouldn't lighten the badge, it would delete it.
  */
 const tones: Record<BadgeTone, string> = {
-  neutral: "bg-surface-sunken text-ink-secondary",
+  neutral: "bg-fill-soft text-ink-secondary",
   /**
    * `brand` is the RECOMMENDED marker, and nothing else — narrowed 29 Sep 2026.
    *
@@ -64,13 +64,14 @@ const tones: Record<BadgeTone, string> = {
 };
 
 const sizes: Record<BadgeSize, string> = {
-  sm: "text-[11px] px-2 py-[2px] leading-4",
-  md: "text-[11.5px] px-3 py-1 leading-4",
+  // The prototype's `.badge` is 12px with `--tt-pad-pill-md` (4 / 12); `sm` is its `.badge--count` (2 / 8).
+  sm: "text-[12px] px-2 py-[2px] leading-4",
+  md: "text-[12px] px-3 py-1 leading-4",
 };
 
 export function Badge({
   tone = "neutral",
-  size = "sm",
+  size = "md",
   dot = false,
   className,
   children,

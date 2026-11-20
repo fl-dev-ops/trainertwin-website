@@ -1,0 +1,108 @@
+{
+ "questions": [
+  {
+   "id": "q-1",
+   "q": "What do I say if the client already bought with another agent?",
+   "who": "James Carter",
+   "agent": "The off-plan sales process",
+   "when": "Today, 11:05 am"
+  },
+  {
+   "id": "q-2",
+   "q": "How do I handle a client who wants to pay in crypto?",
+   "who": "Nora Ali",
+   "agent": "The off-plan sales process",
+   "when": "Yesterday"
+  }
+ ],
+ "history": [
+  {
+   "id": "h-1",
+   "q": "Can I offer a discount on off-plan units?",
+   "who": "Omar Haddad",
+   "agent": "The off-plan sales process",
+   "when": "21 Oct",
+   "answer": "Never lead with price. Ask what the client needs first, then show the payment plan before any discount."
+  },
+  {
+   "id": "h-2",
+   "q": "What if the buyer wants to see the developer’s track record?",
+   "who": "Aisha Khan",
+   "agent": "The off-plan sales process",
+   "when": "12 Oct",
+   "answer": "Share two delivered projects with handover dates, then walk through the escrow protection."
+  }
+ ],
+ "issues": [
+  {
+   "id": "ti-1",
+   "who": "Priya Nair",
+   "agent": "The off-plan sales process",
+   "where": "During the call · 3:12 · Today, 8:15 am",
+   "reason": "Wrong or inaccurate answer",
+   "said": "If they go silent, send the brochure again with a discount.",
+   "fix": "Olga says never resend brochures; ask one open question."
+  },
+  {
+   "id": "ti-2",
+   "who": "Hassan Ali",
+   "agent": "The off-plan sales process",
+   "where": "During the call · 1:48 · Today, 7:40 am",
+   "reason": "Doesn’t sound like me",
+   "said": "You should buy now before prices go up.",
+   "fix": "Olga never pushes urgency; she asks what the client needs first."
+  },
+  {
+   "id": "ti-3",
+   "who": "Nora Ali",
+   "agent": "The off-plan sales process",
+   "where": "During the call · 5:02 · Yesterday, 6:10 pm",
+   "reason": "Wrong pronunciation",
+   "said": "Let’s look at the Dubai Marina plan.",
+   "fix": "Say “Marina” the way Olga does."
+  },
+  {
+   "id": "ti-4",
+   "who": "Omar Haddad",
+   "agent": "The off-plan sales process",
+   "where": "During the call · 2:25 · Yesterday, 11:30 am",
+   "reason": "Pacing feels off",
+   "said": "Here are the five steps of the process.",
+   "fix": "Olga gives one step, then checks with the client."
+  },
+  {
+   "id": "ti-5",
+   "who": "Aisha Khan",
+   "agent": "The off-plan sales process",
+   "where": "During the call · 4:10 · 21 Oct, 2:15 pm",
+   "reason": "Sounds robotic",
+   "said": "Thank you for your question.",
+   "fix": "Olga answers in short, warm sentences."
+  }
+ ],
+ "resolved": [
+  {
+   "id": "rs-1",
+   "who": "Hassan Ali",
+   "agent": "The off-plan sales process",
+   "where": "Yesterday, 4:20 pm",
+   "reason": "Sounds robotic"
+  },
+  {
+   "id": "rs-2",
+   "who": "Aisha Khan",
+   "agent": "The off-plan sales process",
+   "where": "21 Oct, 10:05 am",
+   "reason": "Pacing feels off"
+  }
+ ],
+ "corrected": [
+  {
+   "id": "co-1",
+   "who": "Omar Haddad",
+   "agent": "The off-plan sales process",
+   "where": "20 Oct, 3:40 pm",
+   "reason": "Wrong or inaccurate answer"
+  }
+ ]
+}

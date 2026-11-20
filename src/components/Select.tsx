@@ -82,7 +82,7 @@ export function Select({
 
   return (
     <div className="flex w-full flex-col gap-1.5" ref={rootRef}>
-      <span id={labelId} className="font-ui text-[13px] font-label text-ink">
+      <span id={labelId} className="font-ui text-[13px] leading-5 font-label text-ink-secondary">
         {label}
       </span>
 
@@ -101,7 +101,7 @@ export function Select({
           className={cn(
             "tt-lb-field",
             "flex w-full items-center justify-between gap-2",
-            "min-h-9 rounded-sm bg-surface px-3 py-1.5",
+            "min-h-10 rounded-sm bg-surface px-3 py-1.5",
             "font-ui text-left text-[14px]",
             "border-[length:var(--tt-border-form)] border-solid",
             "transition-colors duration-150 ease-standard",
@@ -135,9 +135,9 @@ export function Select({
           onKeyDown={onListKeyDown}
           className={cn(
             "tt-lb-list",
-            "absolute z-20 mt-1 max-h-64 w-full overflow-y-auto",
-            "rounded-sm border-[length:var(--tt-border-form)] border-solid border-line-field",
-            "bg-surface-raised py-1 shadow-e2",
+            // V3's one dropdown surface (D131): white, 1px card border, 12px radius, 2px between options.
+            "absolute z-20 mt-[6px] flex max-h-64 w-full flex-col gap-0.5 overflow-y-auto",
+            "rounded-md border border-line-card bg-surface p-2 shadow-e2",
           )}
         >
           {options.map((option, index) => {
@@ -154,8 +154,8 @@ export function Select({
                 onClick={() => pick(option.value)}
                 className={cn(
                   "tt-lb-option",
-                  "flex cursor-pointer items-center gap-2 px-3 py-2",
-                  "font-ui text-[14px] text-ink outline-none",
+                  "flex min-h-9 cursor-pointer items-center gap-2 rounded-sm px-2 py-2",
+                  "font-ui text-[14px] leading-5 text-ink outline-none",
                   isSelected && "bg-fill-soft",
                   "hover:bg-fill-soft focus-visible:bg-fill-soft",
                   "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus",
@@ -188,11 +188,11 @@ export function Select({
       {name ? <input type="hidden" name={name} value={value} /> : null}
 
       {error ? (
-        <p id={describedBy} className="font-ui text-[12px] text-danger">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-danger">
           {error}
         </p>
       ) : hint ? (
-        <p id={describedBy} className="font-ui text-[12px] text-ink-tertiary">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-ink-tertiary">
           {hint}
         </p>
       ) : null}

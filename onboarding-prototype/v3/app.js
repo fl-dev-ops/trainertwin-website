@@ -134,8 +134,6 @@ const state = {
   accRole: "all",
   accTab: "twin",
   tsFocus: "",
-  inboxTab: "twin",
-  inboxView: "all",
   inboxDone: [],
   inboxAnswered: [],
   brainQView: "open",
@@ -273,6 +271,10 @@ const state = {
   botShareCopied: false,
   twinAskMode: "bot",
   askMenu: "",
+  portalView: "trainer",
+  portalOpen: false,
+  learnerMenu: "agents",
+  learnerActivityBot: "",
   teeAskMode: "roleplay",
   botAsk: "",
   botManual: null,
@@ -797,7 +799,7 @@ function render() {
     if (n) n.scrollTop = scrolls[i];
   });
   if (state.step >= 1 && state.step <= 5) state.setupStep = state.step;
-  const titles = { home: "Home", analytics: "Analytics", roleplay: "Scenarios", videos: "Gen videos", setup: "Twin Agents", knowledge: "Twin’s brain", calibrations: "Twin sessions", learners: "Twin users", roleusers: "Roleplay users", sessions: "Roleplay sessions", rpsettings: "Persona", inbox: "Inbox", cohorts: "Cohorts", acclearners: "Learners", team: "Team", settings: "Settings", profile: "Profile", voices: "Voices", devapi: "Developer API", ask: "Ask your twin" };
+  const titles = { home: "Home", analytics: "Analytics", roleplay: "Scenarios", videos: "Gen videos", setup: "Twin Agents", knowledge: "Twin’s brain", calibrations: "Twin sessions", learners: "Twin users", roleusers: "Roleplay users", sessions: "Roleplay sessions", rpsettings: "Persona", cohorts: "Cohorts", acclearners: "Learners", team: "Team", settings: "Settings", profile: "Profile", voices: "Voices", devapi: "Developer API", ask: "Ask your twin" };
   document.title = "TrainerTwin — " + (titles[activeNav()] || "Home");
   mountAuth();
   mountAddKnowledge();
@@ -853,6 +855,20 @@ function render() {
   }
 }
 
+// Signed-in v3 surface: plain /v3/index.html and ?app=1 (kept for login redirects).
+// Skip onboarding / persona-editor query modes.
+function isAppSurface() {
+  try {
+    const q = new URLSearchParams(location.search);
+    if (q.has("onboarding") || q.get("editPersona")) return false;
+  } catch (err) { /* ignore */ }
+  return !state.authStart;
+}
+
+function isLearnerView() {
+  return isAppSurface() && state.portalView === "learner";
+}
+
 function boxedSetup() {
   if (state.talkOpen || activeNav() !== "setup") return false;
   if (state.twinReady) return state.ob.page === "twinready";
@@ -865,6 +881,35 @@ function showingGate() {
   return !state.accountReady && (nav === "home" || nav === "analytics" || nav === "roleplay");
 }
 
+function portalSwitcher() {
+  if (!isAppSurface()) return "";
+  const learner = state.portalView === "learner";
+  const label = learner ? "Learner View" : "Trainer portal";
+  const open = !!state.portalOpen;
+  const opts = [
+    ["trainer", "Trainer portal"],
+    ["learner", "Learner View"]
+  ];
+  return `
+    <div class="portal-switch${open ? " is-open" : ""}" id="portal-switch">
+      <button class="portal-switch-btn" type="button" data-action="portal-toggle" aria-haspopup="listbox" aria-expanded="${open}" aria-label="Portal: ${esc(label)}">
+        <span>${esc(label)}</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 6.5 8 10l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      ${open ? `
+        <div class="portal-switch-menu" role="listbox" aria-label="Choose portal">
+          ${opts.map(([id, text]) => `
+            <button type="button" class="portal-switch-opt${state.portalView === id ? " is-selected" : ""}" role="option" aria-selected="${state.portalView === id}" data-action="portal-pick" data-id="${id}">
+              <span>${esc(text)}</span>
+              ${state.portalView === id ? roleCheckIcon() : ""}
+            </button>
+          `).join("")}
+        </div>
+      ` : ""}
+    </div>
+  `;
+}
+
 function view() {
   if (state.authStart && state.auth) {
     return `${authDialog()}${toastHtml()}`;
@@ -873,16 +918,19 @@ function view() {
     return `
       ${pageTwinDemo()}
       ${toastHtml()}
+      ${portalSwitcher()}
     `;
   }
   const bar = tabbar();
+  const solo = obMode() === "solo" || isLearnerView();
   return `
     ${bar ? mobileHead() : ""}
-    <div class="shell${bar ? " has-tabbar" : ""}${obMode() === "solo" ? " shell--solo" : ""}">
-      ${obMode() === "mini" ? obMiniRail() : obMode() === "solo" ? "" : rail()}
+    <div class="shell${bar ? " has-tabbar" : ""}${solo ? " shell--solo" : ""}${isLearnerView() ? " shell--learner" : ""}">
+      ${isLearnerView() ? "" : obMode() === "mini" ? obMiniRail() : obMode() === "solo" ? "" : rail()}
       <main class="main${(activeNav() === "home" || activeNav() === "analytics") && !showingGate() ? " is-home" : ""}${boxedSetup() ? " is-find" : ""}${state.talkOpen && state.obCall ? " v2-call" : ""}">${main()}</main>
     </div>
     ${bar}
+    ${portalSwitcher()}
     ${state.userMenu ? userMenu() : ""}
     ${state.drawer ? drawer() : ""}
     ${state.builtFromOpen ? builtFromPanel() : ""}
@@ -934,7 +982,6 @@ function icon(name) {
     usage: '<path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     cohorts: '<path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 10h2a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13v-1a2 2 0 0 1 2 -2h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     team: '<path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 13a20 20 0 0 0 18 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
-    inbox: '<path d="M4 6a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 13h3l3 3h4l3 -3h3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     messages: '<path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     sessions: '<path d="M12 8l0 4l2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
     rpsettings: '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 21v-2a4 4 0 0 1 4 -4h2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.001 15.5v1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.001 21v1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22.032 17.25l-1.299 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.27 20l-1.3 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.97 17.25l1.3 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.733 20l1.3 .75" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -963,7 +1010,7 @@ function icon(name) {
     receipt: '<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 8h-2.5a1.5 1.5 0 0 0 0 3h1a1.5 1.5 0 0 1 0 3h-2.5m2 0v1.5m0 -9v1.5"/>',
     back: '<path d="M5 12l14 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12l6 -6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
   };
-  const viewBox = name === "receipt" || name === "phone" || name === "crown" || name === "mail" || name === "building" || name === "mappin" || name === "credits" || name === "billing" || name === "lifebuoy" || name === "inbox" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
+  const viewBox = name === "receipt" || name === "phone" || name === "crown" || name === "mail" || name === "building" || name === "mappin" || name === "credits" || name === "billing" || name === "lifebuoy" || name === "usage" || name === "cohorts" || name === "team" || name === "home" || name === "brain" || name === "calibrate" || name === "messages" || name === "sessions" || name === "rpsettings" || name === "setup" || name === "learners" || name === "analytics" || name === "role" || name === "settings" || name === "back" || name === "video" ? "0 0 24 24" : "0 0 16 16";
   return `<svg viewBox="${viewBox}" aria-hidden="true">${paths[name]}</svg>`;
 }
 
@@ -984,7 +1031,7 @@ function navItem(id, label, glyph, badge, meta) {
 // Phone layout: the left rail turns into a slim header (logo, knowledge, theme, profile) and a
 // bottom tab bar (Home, Roleplay, Twin Studio, Report, Settings). Both are hidden on desktop.
 function tabbar() {
-  if (state.talkOpen || state.calibId || state.roleCreate || state.botCreate || showingGate() || obMode()) return "";
+  if (isLearnerView() || state.talkOpen || state.calibId || state.roleCreate || state.botCreate || showingGate() || obMode()) return "";
   const items = [
     ["home", "Home", "home"],
     ["roleplay", "Roleplay", "role"],
@@ -1465,11 +1512,20 @@ function main() {
   if (state.sessionReportId) return pageSessionReport();
   if (state.calibId) return pageCalibration();
   if (state.botCreate) return pageBotCreate();
+  // Learner View: simple left menu card + Agents / Roleplays (not the trainer rail).
+  if (isLearnerView()) {
+    if (state.botDetailId && botDetailRow()) return pageBotDetail();
+    if (state.roleDetailId) {
+      const openRow = sharedRoles().find((row) => row.id === state.roleDetailId);
+      if (openRow) return roleDetail(openRow);
+      state.roleDetailId = "";
+    }
+    return pageLearnerPortal();
+  }
   if (state.learnerId && (nav === "usage" || nav === "twinusers")) return pageLearnerDetail();
   if (nav === "usage") return pageUsage();
   if (nav === "billing") return pageBilling();
   if (nav === "settings") return pageSettings();
-  if (nav === "inbox") return pageInbox();
   if (nav === "cohorts") return pageCohorts();
   if (nav === "acclearners") return pageAccLearners();
   if (nav === "team") return pageTeam();
@@ -1495,6 +1551,121 @@ function main() {
   }
   if (state.step === 7 && state.runId) return pageRun();
   return pageHome();
+}
+
+function learnerMenuCard() {
+  const tab = state.learnerMenu === "roleplays" ? "roleplays" : "agents";
+  const items = [
+    ["agents", "Agents", "setup"],
+    ["roleplays", "Roleplays", "role"]
+  ];
+  return `
+    <aside class="card learner-menu" aria-label="Learner menu">
+      ${items.map(([id, label, glyph]) => `
+        <button class="learner-menu-item" type="button" data-action="learner-menu" data-id="${id}"${tab === id ? ' aria-current="page"' : ""}>
+          ${icon(glyph)}<span>${label}</span>
+        </button>
+      `).join("")}
+    </aside>
+  `;
+}
+
+function pageLearnerPortal() {
+  let pane;
+  if (state.learnerActivityBot) {
+    const bot = learnerAssignedTwin(state.learnerActivityBot) || (state.learnerActivityBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((b) => b.id === state.learnerActivityBot));
+    if (bot) pane = pageLearnerTwinActivities(bot);
+    else state.learnerActivityBot = "";
+  }
+  if (!pane) {
+    const tab = state.learnerMenu === "roleplays" ? "roleplays" : "agents";
+    pane = tab === "roleplays" ? pageLearnerRoleplays() : pageTwinProfile();
+  }
+  return `
+    <div class="learner-layout">
+      ${learnerMenuCard()}
+      <div class="learner-pane">${pane}</div>
+    </div>
+  `;
+}
+
+function pageLearnerTwinActivities(bot) {
+  const list = botConversations(bot);
+  return `
+    <div class="page page--library page--learner-activities">
+      <header class="create-bar">
+        <button class="create-bar-back" type="button" data-action="learner-activities-back">${icon("back")} Back</button>
+      </header>
+      <div class="lib-head">
+        <h1 class="lib-title"><span class="lib-mark">${icon("setup")}</span>${esc(bot.title)}</h1>
+      </div>
+      <p class="card-sub learner-act-intro">Your activities with this twin</p>
+      ${list.length ? `
+      <ul class="learner-act-list">
+        ${list.map((c, i) => `
+          <li class="card learner-act">
+            <div class="learner-act-body">
+              <p class="learner-act-title">${esc(c.q)}</p>
+              <p class="learner-act-meta an-muted tabular">${esc(c.when)} · ${TS_MINUTES[i % TS_MINUTES.length]} min</p>
+            </div>
+            <button class="btn btn--secondary btn--sm" type="button" data-action="twin-session-open" data-bot="${esc(bot.id)}" data-id="${esc(c.id)}">View report</button>
+          </li>
+        `).join("")}
+      </ul>` : `<p class="card-sub">No activities yet. Connect to start a session.</p>`}
+    </div>
+  `;
+}
+
+// Roleplays assigned to the demo learner (published shared scenarios).
+function learnerAssignedRoleplays() {
+  return sharedRoles().filter((row) => sharedStatus(row) !== "paused");
+}
+
+const LEARNER_ROLE_CREDIT = {
+  "wait-and-see": { minutes: 60, used: 22 },
+  "options-collector": { minutes: 45, used: 12 }
+};
+
+function learnerRoleCredit(row) {
+  return LEARNER_ROLE_CREDIT[row.id] || { minutes: 30, used: 0 };
+}
+
+function learnerRoleCard(row, index) {
+  const task = sharedCardTask(row);
+  const credit = learnerRoleCredit(row);
+  const quote = task.preview && task.preview[0] ? String(task.preview[0]).replace(/^[^:]+:\s*/, "") : (row.quote || row.blurb);
+  return `
+    <article class="rp-card is-clickable" data-action="role-open" data-id="${esc(row.id)}" tabindex="0" aria-label="Open ${esc(row.title)}">
+      <span class="rp-art rp-art--${index % 10}" aria-hidden="true">
+        <span class="rp-quote"><span class="rp-who">${esc(row.clientName || row.client || "Client")}</span><span class="rp-quote-bubble${row.clientFace ? " has-face" : ""}">${row.clientFace ? `<img class="rp-quote-face" src="${esc(row.clientFace)}" alt="">` : ""}<span class="rp-quote-text">${row.clientName ? `<span class="rp-quote-name">${esc(row.clientName)}</span>` : ""}<span>“${esc(quote)}”</span></span></span></span>
+      </span>
+      <span class="rp-body">
+        <span class="rp-title">${esc(row.title)}</span>
+        <span class="rp-copy">${esc(row.blurb)}</span>
+      </span>
+      <span class="rp-actions">
+        <span class="rp-time tabular" aria-label="${credit.used} of ${credit.minutes} minutes used">
+          <span class="rp-time-label">Assigned</span> <b>${credit.minutes}</b>
+          <span class="rp-time-sep" aria-hidden="true">·</span>
+          <span class="rp-time-label">Used</span> <b>${credit.used}</b>
+        </span>
+      </span>
+    </article>
+  `;
+}
+
+function pageLearnerRoleplays() {
+  const rows = learnerAssignedRoleplays();
+  return `
+    <div class="page page--library page--learner-roleplays">
+      <div class="lib-head">
+        <h1 class="lib-title"><span class="lib-mark">${icon("role")}</span>Roleplays</h1>
+      </div>
+      ${rows.length
+        ? `<div class="rp-grid">${rows.map((row, i) => learnerRoleCard(row, i)).join("")}</div>`
+        : `<p class="card-sub">No roleplays assigned yet.</p>`}
+    </div>
+  `;
 }
 
 // ===== Onboarding V2: Build my twin =====
@@ -2312,9 +2483,10 @@ const TWIN_TOPICS = ["Cold calling", "Off-plan buyer qualification", "Objection 
 function pageTwinProfile() {
   const bots = twinBots();
   const openBot = state.roleMenuId === TWIN_ALL.id ? TWIN_ALL : bots.find((bot) => bot.id === state.roleMenuId);
+  const learner = isLearnerView();
   return `
     <div class="page page--library page--twin-profile">
-      <div class="lib-head">
+      ${learner ? "" : `<div class="lib-head">
         <h1 class="lib-title"><span class="lib-mark">${icon("setup")}</span>Twin Agents</h1>
         <div class="lib-tools">
           ${creditPill()}
@@ -2323,9 +2495,22 @@ function pageTwinProfile() {
           Create new
         </button>
         </div>
-      </div>
+      </div>`}
       ${twinBotsSection(bots, openBot)}
     </div>
+  `;
+}
+
+function learnerTimeMeta(bot) {
+  const credit = botCredit(bot);
+  const assigned = credit.minutes || 0;
+  const used = credit.used || 0;
+  return `
+    <span class="rp-time tabular" aria-label="${used} of ${assigned} minutes used">
+      <span class="rp-time-label">Assigned</span> <b>${assigned}</b>
+      <span class="rp-time-sep" aria-hidden="true">·</span>
+      <span class="rp-time-label">Used</span> <b>${used}</b>
+    </span>
   `;
 }
 
@@ -2390,8 +2575,51 @@ function twinHero() {
   `;
 }
 
+// Learner View: twins assigned to this learner (wide twin-all cards). Trainer layout unchanged.
+function learnerAssignedTwins() {
+  return [
+    { id: TWIN_ALL.id, title: TWIN_ALL.title, updated: "29 Oct, 13:00", photo: "", quote: TWIN_ALL.quote, blurb: TWIN_ALL.blurb, sessions: TWIN_ALL.sessions, twin: true },
+    { id: "elena-twin", title: "Elena’s twin", updated: "14 Nov, 16:20", photo: "../media/persona-elena.jpg", quote: "Should I push for a Zoom this week?", blurb: "Overseas investor coaching in Elena’s calm, numbers-first voice.", sessions: 96, twin: true, minutes: 120, used: 48 },
+    { id: "marcus-twin", title: "Marcus’s twin", updated: "11 Nov, 10:05", photo: "../media/persona-marcus.jpg", quote: "How do I reopen a quiet first-time buyer?", blurb: "Follow-ups that feel personal, not pushy — the way Marcus writes them.", sessions: 71, twin: true, minutes: 90, used: 33 },
+    { id: "claire-twin", title: "Claire’s twin", updated: "7 Nov, 18:40", photo: "../media/client-seller.jpg", quote: "A seller asks why my fee isn’t 1%.", blurb: "Listing and fee conversations in Claire’s direct Marina style.", sessions: 58, twin: true, minutes: 75, used: 19 },
+    { id: "daniel-twin", title: "Daniel’s twin", updated: "3 Nov, 09:15", photo: "../media/client-buyer.jpg", quote: "They want to wait for prices to drop.", blurb: "Buyer-objection answers Daniel uses on off-plan calls.", sessions: 84, twin: true, minutes: 100, used: 62 }
+  ];
+}
+
+function learnerAssignedTwin(id) {
+  return learnerAssignedTwins().find((bot) => bot.id === id) || null;
+}
+
+function twinAllLearnerCard(bot) {
+  const photo = bot.photo || presenceSrc();
+  const updated = bot.updated || "Recently";
+  return `
+      <article class="card twin-all is-clickable" data-action="learner-twin-activities" data-id="${esc(bot.id)}" tabindex="0" aria-label="Open activities for ${esc(bot.title)}">
+        <img class="twin-all-photo" src="${esc(photo)}" alt="">
+        <div class="twin-all-body">
+          <h3 class="twin-all-name">${esc(bot.title)}</h3>
+          <p class="twin-all-meta">Last updated ${esc(updated)} <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+        </div>
+        <div class="twin-all-aside">
+          ${learnerTimeMeta(bot)}
+          <button class="btn btn--strong btn--sm" type="button" data-action="learner-twin-connect" data-id="${esc(bot.id)}">${sparklesIcon()}Connect</button>
+        </div>
+      </article>`;
+}
+
 function twinAllCard() {
   const learners = roleLearnerAvatars(TWIN_ALL, 0);
+  const learner = isLearnerView();
+  if (learner) {
+    return `
+      <div class="twin-bots-head">
+        <h2 class="page-title">Twins assigned</h2>
+      </div>
+      <div class="twin-all-stack">
+        ${learnerAssignedTwins().map(twinAllLearnerCard).join("")}
+      </div>
+`;
+  }
   return `
       <div class="twin-bots-head">
         <h2 class="page-title">Twin for all use cases</h2>
@@ -2399,7 +2627,7 @@ function twinAllCard() {
       <article class="card twin-all is-clickable" data-action="twin-bot-open" data-id="${esc(TWIN_ALL.id)}" tabindex="0" aria-label="Open ${esc(TWIN_ALL.title)}">
         <img class="twin-all-photo" src="${esc(presenceSrc())}" alt="">
         <div class="twin-all-body">
-          <h3 class="twin-all-name">Olga’s twin</h3>
+          <h3 class="twin-all-name">${esc(TWIN_ALL.title)}</h3>
           <p class="twin-all-meta">Last updated 29 Oct, 13:00 <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
           <span class="rp-learners" aria-label="Learners who asked this twin">
             ${learners.shown.map(learnerFace).join("")}
@@ -2414,6 +2642,7 @@ function twinAllCard() {
 }
 
 function twinBotsSection(bots, openBot) {
+  if (isLearnerView()) return twinAllCard();
   return `
       ${twinAllCard()}
       <div class="twin-bots-head">
@@ -3444,7 +3673,7 @@ function mountTwinOffDialog() {
 }
 
 function pageTwinSessionReport() {
-  const bot = (state.twinSessionBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === state.twinSessionBot));
+  const bot = learnerAssignedTwin(state.twinSessionBot) || (state.twinSessionBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === state.twinSessionBot));
   const list = bot ? botConversations(bot) : [];
   const idx = list.findIndex((item) => item.id === state.twinSessionId);
   if (!bot || idx < 0) { state.twinSessionId = ""; return pageTwinSessions(); }
@@ -3676,17 +3905,7 @@ const ROLE_USERS = [
   { name: "Daniel Cho", phone: "+82 10 5555 1234", email: "daniel.cho@outlook.com", roles: 1, sessions: 2 }
 ];
 
-// ---- Inbox: everything waiting on Olga, split by Twin and Roleplay ----
-const INBOX_TWIN_REQUESTS = [
-  { chip: "Free trial · 10 min", tone: "info", who: "Hassan Ali", text: "tried The off-plan sales process", when: "Today" },
-  { chip: "Paid · AED 90", tone: "success", who: "Nora Ali", text: "extended The off-plan sales process +30 min · +30 days", when: "Today" },
-  { chip: "Paid · AED 90", tone: "success", who: "Aisha Khan", text: "extended The off-plan sales process +30 min · +30 days", when: "21 Oct" },
-  { chip: "Paid · AED 90", tone: "success", who: "Omar Haddad", text: "extended The off-plan sales process +30 min · +30 days", when: "12 Oct" }
-];
-const INBOX_ROLE_REQUESTS = [
-  { chip: "Free trial · 1 session", tone: "info", who: "Leo Martin", text: "tried Ravi: first conversation", when: "Today" },
-  { chip: "Paid · AED 60", tone: "success", who: "Priya Nair", text: "bought 3 more sessions of Ravi: first conversation", when: "Yesterday" }
-];
+// ---- Questions and issues waiting on Olga (shown on Twin’s brain) ----
 const INBOX_QUESTIONS = [
   { id: "q-1", q: "What do I say if the client already bought with another agent?", who: "James Carter", agent: "The off-plan sales process", when: "Today, 11:05 am" },
   { id: "q-2", q: "How do I handle a client who wants to pay in crypto?", who: "Nora Ali", agent: "The off-plan sales process", when: "Yesterday" }
@@ -3706,45 +3925,9 @@ const INBOX_ISSUES_RESOLVED = [
 const INBOX_ISSUES_CORRECTED = [
   { id: "co-1", who: "Omar Haddad", agent: "The off-plan sales process", where: "20 Oct, 3:40 pm", reason: "Wrong or inaccurate answer" }
 ];
-const INBOX_ROLE_ISSUES = [
-  { id: "ri-1", who: "Aisha Khan", role: "Ravi: first conversation", roleId: "ravi", session: "ravi-0", where: "During the call · 2:40 · Today, 9:02 am", reason: "Sounds robotic", note: "The client repeated the same line twice and went flat." },
-  { id: "ri-2", who: "James Carter", role: "Faisal: first conversation", roleId: "faisal", session: "faisal-1", where: "During the call · 4:05 · Yesterday, 11:02 am", reason: "Wrong accent", note: "Daniel’s accent changed halfway through." }
-];
-const INBOX_EXPIRING = {
-  twin: { title: "Sep 2026 batch · access to The off-plan sales process ends 15 Nov 2026", sub: "40 min each · learners can extend themselves for AED 90", nav: "learners" },
-  roleplay: { title: "Sep 2026 batch · access to Ravi: first conversation ends 22 Nov 2026", sub: "3 sessions each · learners can buy more for AED 60", nav: "roleusers" }
-};
-
 function inboxPending(list) {
   return list.filter((item) => !state.inboxDone.includes(item.id));
 }
-function inboxTabCount(tab) {
-  return tab === "twin" ? inboxPending(INBOX_QUESTIONS).length + inboxPending(INBOX_TWIN_ISSUES).length : inboxPending(INBOX_ROLE_ISSUES).length;
-}
-function inboxCount() {
-  return (state.features.twin ? inboxTabCount("twin") : 0) + (state.features.roleplay ? inboxTabCount("roleplay") : 0);
-}
-
-function inboxSection(title, sub, count, body) {
-  return `
-    <section class="inbox-sec">
-      <h2 class="inbox-h">${esc(title)}${count ? `<b class="inbox-count" aria-label="${count} waiting">${count}</b>` : ""}</h2>
-      ${sub ? `<p class="inbox-sub">${esc(sub)}</p>` : ""}
-      ${body}
-    </section>`;
-}
-
-function inboxRequests(list) {
-  return `
-    <ul class="inbox-requests">
-      ${list.map((r) => `
-        <li>
-          <span class="badge badge--${r.tone}">${esc(r.chip)}</span>
-          <span class="inbox-line"><b>${esc(r.who)}</b> ${esc(r.text)} · ${esc(r.when)}<span class="inbox-quiet"> · no action needed</span></span>
-        </li>`).join("")}
-    </ul>`;
-}
-
 // Who it is from: a small avatar, the name, and when. Shared by the cards below.
 function inboxWho(name, detail) {
   const tone = (name.length % 5) + 1;
@@ -3807,132 +3990,6 @@ function inboxHistoryCard(item) {
         </div>
       </div>
     </article>`;
-}
-
-function inboxIssueCard(item, kind) {
-  const twin = kind === "twin";
-  return `
-    <article class="inbox-card">
-      <div class="inbox-row">
-        <div class="inbox-main">
-          ${inboxWho(item.who, "· " + item.where)}
-          <p class="inbox-title">${esc(item.reason)}</p>
-          <span class="badge inbox-agent">${esc(twin ? item.agent : item.role)}</span>
-          ${twin ? `
-          <div class="inbox-quote">
-            <p class="inbox-label">Twin said</p>
-            <p class="inbox-said">${esc(item.said)}</p>
-          </div>
-          <div class="inbox-quote">
-            <p class="inbox-label">Your calibration</p>
-            <p class="inbox-fix">${esc(item.fix)}</p>
-          </div>` : `
-          <div class="inbox-quote">
-            <p class="inbox-label">Learner’s note</p>
-            <p class="inbox-fix">${esc(item.note)}</p>
-          </div>`}
-        </div>
-        <div class="inbox-actions">
-          ${twin
-            ? `<button class="btn btn--secondary btn--sm" type="button" data-action="inbox-issue-correct" data-id="${esc(item.id)}">Correct the answer</button>`
-            : `<button class="btn btn--secondary btn--sm" type="button" data-action="inbox-issue-open" data-role="${esc(item.roleId)}" data-id="${esc(item.session)}">Open session</button>`}
-          <button class="btn btn--ghost btn--sm" type="button" data-action="inbox-issue-resolve" data-id="${esc(item.id)}">Mark resolved</button>
-        </div>
-      </div>
-    </article>`;
-}
-
-function inboxExpiring(kind) {
-  const e = INBOX_EXPIRING[kind];
-  return `
-    <article class="inbox-card">
-      <div class="inbox-row">
-        <div class="inbox-main">
-          <p class="inbox-title">${esc(e.title)}</p>
-          <p class="inbox-meta">${esc(e.sub)}</p>
-        </div>
-        <div class="inbox-actions"><button class="btn btn--secondary btn--sm" type="button" data-action="inbox-open-access" data-id="${esc(e.nav)}">Open access</button></div>
-      </div>
-    </article>`;
-}
-
-const INBOX_VIEWS = [
-  ["all", "All alerts", "Everything waiting on you, newest first."],
-  ["requests", "Access requests", "Learners who asked you for more. Learners extend themselves when you’ve set an extension price."],
-  ["ask", "Ask Olga", "Questions your twin agents couldn’t answer from your material."],
-  ["issues", "Reported issues", "Problems learners flagged during a call."],
-  ["ending", "Access ending soon", "In the next 3 weeks."]
-];
-
-function inboxViewCount(view, tab) {
-  if (view === "ask") return tab === "twin" ? inboxPending(INBOX_QUESTIONS).length : 0;
-  if (view === "issues") return inboxPending(tab === "twin" ? INBOX_TWIN_ISSUES : INBOX_ROLE_ISSUES).length;
-  if (view === "all") return inboxTabCount(tab);
-  return 0;
-}
-
-function pageInbox() {
-  const both = state.features.twin && state.features.roleplay;
-  let tab = state.inboxTab;
-  if (tab === "twin" && !state.features.twin) tab = "roleplay";
-  if (tab === "roleplay" && !state.features.roleplay) tab = "twin";
-  const tabs = [["twin", "Twin"], ["roleplay", "Roleplay"]];
-  const views = INBOX_VIEWS.filter(([id]) => id !== "ask" || tab === "twin");
-  let view = state.inboxView;
-  if (!views.some(([id]) => id === view)) view = "all";
-  const [, viewTitle, viewSub] = INBOX_VIEWS.find(([id]) => id === view);
-  const quiet = (text) => `<p class="inbox-empty">${text}</p>`;
-    let body;
-  if (view === "all") {
-    const questions = inboxPending(INBOX_QUESTIONS);
-    const issues = inboxPending(tab === "twin" ? INBOX_TWIN_ISSUES : INBOX_ROLE_ISSUES);
-    const sec = (id, count, content) => { const [, title, sub] = INBOX_VIEWS.find(([v]) => v === id); return inboxSection(title, sub, count, content); };
-    body = `<div class="inbox-all">${[
-      sec("requests", 0, inboxRequests(tab === "twin" ? INBOX_TWIN_REQUESTS : INBOX_ROLE_REQUESTS)),
-      tab === "twin" ? sec("ask", questions.length, questions.length ? questions.map(inboxQuestionCard).join("") : quiet("All caught up. No questions waiting.")) : "",
-      sec("issues", issues.length, issues.length ? issues.map((item) => inboxIssueCard(item, tab)).join("") : quiet("All caught up. No issues reported.")),
-      sec("ending", 0, inboxExpiring(tab === "twin" ? "twin" : "roleplay"))
-    ].join("")}</div>`;
-  } else if (view === "requests") {
-    body = inboxRequests(tab === "twin" ? INBOX_TWIN_REQUESTS : INBOX_ROLE_REQUESTS);
-  } else if (view === "ask") {
-    const items = inboxPending(INBOX_QUESTIONS);
-    body = items.length ? items.map(inboxQuestionCard).join("") : quiet("All caught up. No questions waiting.");
-  } else if (view === "issues") {
-    const items = inboxPending(tab === "twin" ? INBOX_TWIN_ISSUES : INBOX_ROLE_ISSUES);
-    body = items.length ? items.map((item) => inboxIssueCard(item, tab)).join("") : quiet("All caught up. No issues reported.");
-  } else {
-    body = inboxExpiring(tab === "twin" ? "twin" : "roleplay");
-  }
-  return `
-    <div class="page page--library page--twin-profile page--inbox">
-      <div class="lib-head">
-        <h1 class="lib-title"><span class="lib-mark">${icon("inbox")}</span>Inbox</h1>
-        ${both ? `
-        <div class="seg inbox-seg" role="group" aria-label="Inbox">
-          ${tabs.map(([id, label]) => { const n = inboxTabCount(id); return `<button type="button" data-action="inbox-tab" data-id="${id}" aria-pressed="${tab === id}">${label}${n ? `<b class="inbox-count">${n}</b>` : ""}</button>`; }).join("")}
-        </div>` : ""}
-      </div>
-      <div class="inbox-layout">
-        <nav class="inbox-menu" aria-label="Inbox folders">
-          ${views.map(([id, label]) => { const n = inboxViewCount(id, tab); return `<button type="button" class="inbox-menu-item" data-action="inbox-view" data-id="${id}" ${view === id ? 'aria-current="page"' : ""}><span>${label}</span>${n ? `<b class="inbox-count">${n}</b>` : ""}</button>`; }).join("")}
-        </nav>
-        <section class="inbox-pane" aria-label="${esc(viewTitle)}">
-          ${view === "all" ? "" : (() => {
-            // The first sentence is the heading; anything after it is the line of detail under it.
-            const cut = viewSub.indexOf(". ");
-            const lead = cut < 0 ? viewSub : viewSub.slice(0, cut + 1);
-            const rest = cut < 0 ? "" : viewSub.slice(cut + 2);
-            return `<header class="inbox-pane-head">
-            <h2 class="inbox-h">${esc(lead)}</h2>
-            ${rest ? `<p class="inbox-sub">${esc(rest)}</p>` : ""}
-          </header>`;
-          })()}
-          ${body}
-        </section>
-      </div>
-    </div>
-  `;
 }
 
 // ---- Accounts: cohorts, learners and the team ----
@@ -4798,6 +4855,7 @@ function flagBadge(text) {
 
 function twinBotCard(bot, index) {
   const learners = roleLearnerAvatars(bot, index);
+  const learner = isLearnerView();
   return `
     <article class="rp-card is-clickable${bot.flag ? " is-flagged" : ""}" data-action="twin-bot-open" data-id="${esc(bot.id)}" tabindex="0" aria-label="Open ${esc(bot.title)}">
       <span class="rp-art rp-art--twin rp-art--${index % 10}" aria-hidden="true">
@@ -4810,13 +4868,15 @@ function twinBotCard(bot, index) {
         ${bot.created ? `<span class="rp-created">${esc(bot.created)}</span>` : ""}
       </span>
       <span class="rp-actions">
-        <span class="rp-learners" aria-label="Learners who asked this bot">
+        ${learner
+          ? learnerTimeMeta(bot)
+          : `<span class="rp-learners" aria-label="Learners who asked this bot">
           ${learners.shown.map(learnerFace).join("")}
           ${learners.extra > 0 ? `<span class="rp-learner-avatar rp-learner-avatar--more">+${learners.extra}</span>` : ""}
         </span>
         <button class="btn btn--ghost btn--icon btn--sm rp-row-more" type="button" id="role-menu-${esc(bot.id)}" data-action="role-row-menu" data-id="${esc(bot.id)}" aria-label="Actions for ${esc(bot.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === bot.id}">
           <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg>
-        </button>
+        </button>`}
       </span>
     </article>
   `;
@@ -7397,7 +7457,8 @@ function botCredit(bot) {
   const known = BOT_CREDIT[bot.id];
   if (known) return known;
   const minutes = Number(bot.minutes) || 0;
-  return { minutes, used: 0 };
+  const used = Number(bot.used) || 0;
+  return { minutes, used };
 }
 
 function creditPill() {
@@ -9262,7 +9323,7 @@ function draftAgent() {
   return d && d.id ? { id: d.id, title: d.name.trim() || "New agent" } : null;
 }
 function isTwinAgentId(id) {
-  return id === TWIN_ALL.id || twinBots().some((b) => b.id === id) || !!(draftAgent() && draftAgent().id === id);
+  return id === TWIN_ALL.id || twinBots().some((b) => b.id === id) || !!learnerAssignedTwin(id) || !!(draftAgent() && draftAgent().id === id);
 }
 function agentMinutes(id, email) {
   const m = state.assignMins[id] && state.assignMins[id][email];
@@ -11464,7 +11525,7 @@ function demoModel(taskId) {
 
 // A twin's practice call: the learner asks, Olga's twin answers from the twin's own Q&A.
 function demoTwinModel(taskId) {
-  const bot = taskId === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === taskId);
+  const bot = learnerAssignedTwin(taskId) || (taskId === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === taskId));
   if (!bot) return null;
   const qa = botQA(bot);
   const lines = [{ who: "twin", text: BOT_GREETING }];
@@ -11472,7 +11533,8 @@ function demoTwinModel(taskId) {
     lines.push({ who: "student", text: q });
     if (i < 2) lines.push({ who: "twin", text: a });
   });
-  return { title: bot.title, lead: "Olga’s twin", lines, isTwin: true, persona: { name: "Olga’s twin", face: presenceSrc() } };
+  const face = bot.photo || presenceSrc();
+  return { title: bot.title, lead: bot.title, lines, isTwin: true, persona: { name: bot.title, face } };
 }
 
 function demoModelBase(taskId) {
@@ -15285,17 +15347,6 @@ const actions = {
   "acc-new-cohort"() { toast("Name the cohort, then add learners and pick what they get access to."); },
   "acc-invite-learner"() { toast("Invite link copied. Share it with your learners."); },
   "acc-invite-member"() { toast("Invite sent. They will get an email to join your team."); },
-  "inbox-tab"(el) {
-    state.inboxTab = el.dataset.id;
-    state.inboxAnswering = "";
-    if (state.inboxTab !== "twin" && state.inboxView === "ask") state.inboxView = "all";
-    render();
-  },
-  "inbox-view"(el) {
-    state.inboxView = el.dataset.id;
-    state.inboxAnswering = "";
-    render();
-  },
   "inbox-answer"(el) {
     state.inboxAnswering = el.dataset.id;
     state.inboxDraft = "";
@@ -15343,15 +15394,6 @@ const actions = {
     state.brainTab = "knowledge";
     actions.nav({ dataset: { id: "knowledge" } });
     toast("Add the right answer here. The issue is now under Corrected.");
-  },
-  "inbox-issue-open"(el) {
-    actions.nav({ dataset: { id: "sessions" } });
-    actions["session-open"]({ dataset: { role: el.dataset.role, id: el.dataset.id } });
-  },
-  "inbox-open-access"(el) {
-    // Access lives on Accounts > Learners, on the Twin or Roleplay tab.
-    state.accTab = el.dataset.id === "roleusers" ? "roleplay" : "twin";
-    actions.nav({ dataset: { id: "acclearners" } });
   },
   "bot-assign-open"() {
     const d = state.botDraft;
@@ -15662,6 +15704,58 @@ const actions = {
   },
   "twin-info-toggle"() {
     state.twinInfoOpen = !state.twinInfoOpen;
+    render();
+  },
+  "portal-toggle"() {
+    if (!isAppSurface()) return;
+    state.portalOpen = !state.portalOpen;
+    render();
+  },
+  "portal-pick"(el) {
+    if (!isAppSurface()) return;
+    const id = el.dataset.id === "learner" ? "learner" : "trainer";
+    state.portalView = id;
+    state.portalOpen = false;
+    state.roleMenuId = "";
+    state.creditOpen = false;
+    if (id === "learner") {
+      state.botDetailId = "";
+      state.roleDetailId = "";
+      state.learnerActivityBot = "";
+      if (!state.learnerMenu) state.learnerMenu = "agents";
+    } else {
+      state.learnerActivityBot = "";
+    }
+    render();
+  },
+  "learner-menu"(el) {
+    if (!isLearnerView()) return;
+    const id = el.dataset.id === "roleplays" ? "roleplays" : "agents";
+    state.learnerMenu = id;
+    state.botDetailId = "";
+    state.roleDetailId = "";
+    state.roleMenuId = "";
+    state.learnerActivityBot = "";
+    state.twinSessionId = "";
+    render();
+  },
+  "learner-twin-connect"(el) {
+    if (!isLearnerView()) return;
+    // Same path as trainer “Try as learner” for a twin agent.
+    actions["open-demo"]({ dataset: { id: el.dataset.id } });
+  },
+  "learner-twin-activities"(el) {
+    if (!isLearnerView()) return;
+    state.learnerActivityBot = el.dataset.id || TWIN_ALL.id;
+    state.twinSessionId = "";
+    state.botDetailId = "";
+    render();
+    const scroller = document.querySelector(".main");
+    if (scroller) scroller.scrollTop = 0;
+  },
+  "learner-activities-back"() {
+    state.learnerActivityBot = "";
+    state.twinSessionId = "";
     render();
   },
   "ask-type-toggle"(el) {
@@ -17321,6 +17415,11 @@ document.addEventListener("click", (e) => {
     render();
     if (!el || el.disabled) return;
   }
+  if (state.portalOpen && !e.target.closest(".portal-switch")) {
+    state.portalOpen = false;
+    render();
+    if (!el || el.disabled) return;
+  }
   if (!el || el.disabled) return;
   const act = el.dataset.action;
   if (state.talkOpen && !/^(talk-|demo-issue|close-demo-issue|submit-demo-issue|close-auth|signup-google|toggle-auth-password|confirm-email)/.test(act)) {
@@ -17705,6 +17804,11 @@ document.addEventListener("keydown", (e) => {
   if ((e.key === "Enter" || e.key === " ") && e.target && e.target.getAttribute && e.target.getAttribute("role") === "button" && e.target.dataset.action === "role-pick-persona") {
     e.preventDefault();
     actions["role-pick-persona"](e.target);
+    return;
+  }
+  if (e.key === "Enter" && e.target && e.target.dataset.action === "learner-twin-activities") {
+    e.preventDefault();
+    actions["learner-twin-activities"](e.target);
     return;
   }
   if (e.key === "Enter" && e.target && e.target.dataset.action === "twin-bot-open") {

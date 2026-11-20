@@ -1,0 +1,37 @@
+/* Native <dialog> modal and side panel. Scrim, radii, ease and durations are tokens. */
+.tt-dialog::backdrop {
+  background: var(--tt-scrim);
+}
+@keyframes tt-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tt-panel-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.tt-dialog[open] {
+  animation: tt-dialog-in var(--tt-duration-base) var(--tt-ease-enter) both;
+}
+/* Plays once, on open: the panel is mounted open, not re-keyed on every render. */
+.tt-panel[open] {
+  animation: tt-panel-in var(--tt-duration-slow) var(--tt-ease-enter) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-dialog[open],
+  .tt-panel[open] {
+    animation: none;
+  }
+}

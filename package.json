@@ -7,8 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "tokens:sync": "node scripts/sync-tokens.mjs",
+    "tokens:check": "node scripts/sync-tokens.mjs --check",
+    "compare:prototype": "node scripts/compare-prototype/run.mjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build:prototype": "vite build --config prototype-build/vite.config.mjs",
+    "watch:prototype": "vite build --watch --config prototype-build/vite.config.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^9.7.0",
@@ -19,6 +24,7 @@
     "ogl": "^1.0.11",
     "postprocessing": "^6.39.5",
     "react": "19.2.8",
+    "react-animated-waves": "^1.1.1",
     "react-dom": "19.2.8",
     "three": "^0.186.0"
   },

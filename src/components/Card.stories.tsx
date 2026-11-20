@@ -28,24 +28,23 @@ export const Default: Story = {
   render: (args) => (
     <Card {...args} className="max-w-[380px]">
       <CardHeader>
-        <CardTitle>System Design — week 3</CardTitle>
-        <span className="text-[11px] text-ink-tertiary">14 pages</span>
+        <CardTitle>Card title</CardTitle>
+        <span className="text-[11px] text-ink-tertiary">Meta</span>
       </CardHeader>
       <CardBody>
         <p className="text-[14px] leading-relaxed text-ink-secondary">
-          Covers partitioning, write paths, and when to reach for a queue. Your twin
-          cites this in 23 answers.
+          Body text that describes the card. Padding lives on the sections, not on the card.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
-          <SourceChip confidence="grounded" source="Sprint Planning.pdf, p.14" />
+          <SourceChip confidence="grounded" source="Source name, p.1" />
         </div>
       </CardBody>
       <CardFooter>
         <Button variant="ghost" size="sm">
-          Remove
+          Action
         </Button>
         <Button variant="secondary" size="sm">
-          Open source
+          Action
         </Button>
       </CardFooter>
     </Card>
@@ -93,10 +92,10 @@ export const InAGrid: Story = {
   render: () => (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {[
-        ["System Design — week 3", "14 pages", "PDF"],
-        ["Behavioural rounds", "8 pages", "Notion"],
-        ["Mock interview recording", "42 min", "Video"],
-        ["Coaching notes Q3", "6 pages", "Doc"],
+        ["Card title one", "Meta", "Type"],
+        ["Card title two", "Meta", "Type"],
+        ["Card title three", "Meta", "Type"],
+        ["Card title four", "Meta", "Type"],
       ].map(([title, meta_, kind]) => (
         <Card key={title} variant="interactive">
           <CardBody>
@@ -129,7 +128,7 @@ export const FullBleed: Story = {
         <span className="text-[11px] text-primary-ink">full-bleed media</span>
       </div>
       <CardBody>
-        <CardTitle className="mb-1">Cover art</CardTitle>
+        <CardTitle className="mb-1">Card title</CardTitle>
         <p className="text-[13px] text-ink-tertiary">
           Flush to the edge, clipped by the card&rsquo;s own radius.
         </p>
@@ -149,15 +148,15 @@ export const Setup: Story = {
   },
   render: () => (
     <Card variant="setup" className="mx-auto max-w-[480px] gap-4">
-      <h2 className="text-[20px] leading-7 font-title text-ink">Add your voice</h2>
+      <h2 className="text-[20px] leading-7 font-title text-ink">Setup card title</h2>
       <p className="text-[14px] leading-5 text-ink-secondary">
-        Record a short clip so your twin sounds like you, or pick a voice from the library.
+        Supporting text for the setup card: a short line that says what this step is for.
       </p>
       <Button variant="secondary" fullWidth>
-        Record your voice
+        Button
       </Button>
       <Button variant="secondary" fullWidth>
-        Select voice
+        Button
       </Button>
     </Card>
   ),

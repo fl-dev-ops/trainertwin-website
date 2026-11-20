@@ -143,6 +143,47 @@
   --ease-standard: var(--tt-ease-standard);
   --ease-enter: var(--tt-ease-enter);
   --ease-exit: var(--tt-ease-exit);
+  --ease-settle: var(--tt-ease-settle);
+
+  /* Added 16 Nov 2026 (phase 1). `bg-art-0` .. `bg-art-9` are the ten card-picture
+     gradients; `shadow-bubble` the quote bubble's; `bg-tint-soft` etc. the
+     theme-aware ink alphas; `bg-scrim` the modal backdrop. Sizes and tilt values
+     have no Tailwind namespace, so reach them with the arbitrary form:
+     `size-(--tt-size-avatar-md)`, `duration-(--tt-duration-follow)`. */
+  --background-image-art-0: var(--tt-art-0);
+  --background-image-art-1: var(--tt-art-1);
+  --background-image-art-2: var(--tt-art-2);
+  --background-image-art-3: var(--tt-art-3);
+  --background-image-art-4: var(--tt-art-4);
+  --background-image-art-5: var(--tt-art-5);
+  --background-image-art-6: var(--tt-art-6);
+  --background-image-art-7: var(--tt-art-7);
+  --background-image-art-8: var(--tt-art-8);
+  --background-image-art-9: var(--tt-art-9);
+  --shadow-bubble: var(--tt-shadow-bubble);
+  --shadow-dialog: var(--tt-shadow-dialog);
+  --shadow-toast: var(--tt-shadow-toast);
+  --shadow-list: var(--tt-shadow-list);
+  --shadow-node: var(--tt-shadow-node);
+  --shadow-lift: var(--tt-shadow-lift);
+  --shadow-sheet: var(--tt-shadow-sheet);
+  --color-tint-faint: var(--tt-ink-faint);
+  --color-tint-soft: var(--tt-ink-soft);
+  --color-tint-strong: var(--tt-ink-strong);
+  --color-scrim: var(--tt-scrim);
+  --color-on-art: var(--tt-on-art);
+}
+
+/* Tailwind v4 resets buttons to `cursor: default`. The prototype (and every user) expects a pointer on
+   anything you can press; disabled ones keep not-allowed from their own styles. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+[role="switch"]:not(:disabled),
+[role="radio"]:not(:disabled),
+[role="tab"],
+[role="menuitem"]:not(:disabled),
+summary {
+  cursor: pointer;
 }
 
 body {
@@ -190,6 +231,12 @@ body {
   --tt-on-cta-strong: var(--tt-night);
 
   --tt-available: #7FD1A0;   /* 9.86:1 on night; the light value is 2.6:1 there */
+
+  /* Ink alpha, night — same reason as the elevation below: a night band is not
+     dark theme, so it would otherwise carry the light (dark-ink) tint on dark. */
+  --tt-ink-faint:  rgb(253 251 247 / 0.06);
+  --tt-ink-soft:   rgb(253 251 247 / 0.12);
+  --tt-ink-strong: rgb(253 251 247 / 0.20);
 
   /* Elevation, night. D50 says a dark surface elevates with lightness plus a
      black shadow, because a light-theme shadow is invisible on near-black —

@@ -589,3 +589,63 @@ img { max-width: 100%; }
     transition-duration: .01ms !important;
   }
 }
+
+/* tt:generated:start — written by scripts/sync-tokens.mjs from src/styles/tokens.css (80702961).
+   Every token this file does not define by hand. Do not edit. */
+:root {
+  --tt-radius-xl: 24px;
+  --tt-duration-follow: 90ms;
+  --tt-duration-settle: 600ms;
+  --tt-ease-settle: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --tt-tilt-max: 9deg;
+  --tt-tilt-scale: 1.04;
+  --tt-tilt-perspective: 700px;
+  --tt-tilt-reduced: 0.3;
+  --tt-size-avatar-xs: 24px;
+  --tt-size-avatar-sm: 28px;
+  --tt-size-avatar-md: 32px;
+  --tt-size-avatar-lg: 44px;
+  --tt-size-avatar-xl: 64px;
+  --tt-size-photo: 76px;
+  --tt-size-card-w: 288px;
+  --tt-size-card-h: 338px;
+  --tt-size-card-art: 168px;
+  --tt-art-0: linear-gradient(135deg, #A8C6EC 0%, #D2C3E8 50%, #F1C6D7 100%);
+  --tt-art-1: linear-gradient(135deg, #A8E0C9 0%, #BFE0E8 50%, #C7CDF2 100%);
+  --tt-art-2: linear-gradient(135deg, #F3CFA0 0%, #F0BCC7 50%, #DDB8EA 100%);
+  --tt-art-3: linear-gradient(135deg, #CBE3A8 0%, #BFE6CF 50%, #A8E0E0 100%);
+  --tt-art-4: linear-gradient(135deg, #F6D9A0 0%, #F2C2B0 50%, #ECB6CC 100%);
+  --tt-art-5: linear-gradient(135deg, #B8CDF0 0%, #C8C4EC 50%, #E0C0E8 100%);
+  --tt-art-6: linear-gradient(135deg, #F0E3A0 0%, #ECD0B0 50%, #E8BCC4 100%);
+  --tt-art-7: linear-gradient(135deg, #A0E4E0 0%, #B8D4EC 50%, #CCC8F0 100%);
+  --tt-art-8: linear-gradient(135deg, #F0C8A8 0%, #EEC0D0 50%, #D8BCE8 100%);
+  --tt-art-9: linear-gradient(135deg, #BCEAD0 0%, #C4E0E4 50%, #D4D0F0 100%);
+  --tt-on-art: rgb(28 27 27 / 0.72);
+  --tt-shadow-bubble: 0 2px 8px rgb(0 0 0 / 0.08);
+  --tt-art-glare-core: rgb(255 90 0 / 0.10);
+  --tt-art-glare-edge: rgb(255 90 0 / 0.04);
+  --tt-scrim: rgb(11 10 9 / 0.55);
+  --tt-shadow-dialog: 0 4px 8px rgb(30 28 25 / 0.2);
+  --tt-shadow-toast: 0 8px 24px rgb(30 28 25 / 0.12), 0 2px 6px rgb(30 28 25 / 0.06);
+  --tt-shadow-list: 0 2px 4px rgb(30 28 25 / 0.035), 0 8px 20px rgb(30 28 25 / 0.055);
+  --tt-shadow-node: 0 2px 4px rgb(30 28 25 / 0.0525), 0 8px 20px rgb(30 28 25 / 0.0825);
+  --tt-shadow-secondary: 0 0 1px rgba(0, 0, 0, .4), 0 1px 1px rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .04);
+  --tt-ink-faint: rgb(30 28 25 / 0.06);
+  --tt-ink-soft: rgb(30 28 25 / 0.12);
+  --tt-ink-strong: rgb(30 28 25 / 0.20);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
+    --tt-ink-faint: rgb(253 251 247 / 0.06);
+    --tt-ink-soft: rgb(253 251 247 / 0.12);
+    --tt-ink-strong: rgb(253 251 247 / 0.20);
+  }
+}
+:root[data-theme="dark"] {
+  --tt-shadow-secondary: 0 0 1px color-mix(in srgb, var(--tt-text-primary) 45%, transparent), 0 1px 2px rgb(0 0 0 / 0.35);
+  --tt-ink-faint: rgb(253 251 247 / 0.06);
+  --tt-ink-soft: rgb(253 251 247 / 0.12);
+  --tt-ink-strong: rgb(253 251 247 / 0.20);
+}
+/* tt:generated:end */

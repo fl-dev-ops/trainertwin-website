@@ -104,7 +104,7 @@ export function MultiSelect({
     <div className="flex w-full flex-col gap-1.5" ref={rootRef}>
       <span
         id={labelId}
-        className="font-ui text-[13px] font-label text-ink"
+        className="font-ui text-[13px] leading-5 font-label text-ink-secondary"
       >
         {label}
       </span>
@@ -113,10 +113,12 @@ export function MultiSelect({
         <div
           className={cn(
             "tt-lb-field",
-            "flex w-full flex-wrap items-center gap-1.5 rounded-sm bg-surface",
+            // `min-w-0` + a width the parent decides: chips wrap inside the field and
+            // grow it DOWN, never wider.
+            "flex w-full min-w-0 flex-wrap items-center gap-1.5 rounded-sm bg-surface",
             // Matches the text field: 36px at rest, but min-height so the field
             // grows down as chips wrap instead of clipping them.
-            "min-h-9 px-2 py-1",
+            "min-h-10 px-2 py-1",
             "border-[length:var(--tt-border-form)] border-solid",
             "transition-colors duration-150 ease-standard",
             error
@@ -129,18 +131,18 @@ export function MultiSelect({
               key={option.value}
               className={cn(
                 "tt-ms-chip",
-                "inline-flex items-center gap-1 rounded-sm bg-fill-soft",
+                "inline-flex max-w-full min-w-0 items-center gap-1 rounded-sm bg-fill-soft",
                 "py-0.5 pr-0.5 pl-2 font-ui text-[13px] text-ink",
               )}
             >
-              {option.label}
+              <span className="truncate">{option.label}</span>
               <button
                 type="button"
                 aria-label={`Remove ${option.label}`}
                 onClick={() => toggle(option.value)}
                 className={cn(
                   "tt-ms-chip-x",
-                  "grid size-5 place-items-center rounded-sm text-ink-tertiary",
+                  "grid size-5 shrink-0 place-items-center rounded-sm text-ink-tertiary",
                   "transition-colors duration-150 ease-standard",
                   "hover:bg-fill-soft-hover hover:text-ink",
                   "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-focus",
@@ -205,9 +207,9 @@ export function MultiSelect({
           onKeyDown={onListKeyDown}
           className={cn(
             "tt-lb-list",
-            "absolute z-20 mt-1 max-h-64 w-full overflow-y-auto",
-            "rounded-sm border-[length:var(--tt-border-form)] border-solid border-line-field",
-            "bg-surface-raised py-1 shadow-e2",
+            // V3's one dropdown surface (D131): white, 1px card border, 12px radius, 2px between options.
+            "absolute z-20 mt-[6px] flex max-h-64 w-full flex-col gap-0.5 overflow-y-auto",
+            "rounded-md border border-line-card bg-surface p-2 shadow-e2",
           )}
         >
           {options.map((option, index) => {
@@ -226,8 +228,8 @@ export function MultiSelect({
                 onClick={() => toggle(option.value)}
                 className={cn(
                   "tt-lb-option",
-                  "flex items-center gap-2 px-3 py-2",
-                  "font-ui text-[14px] text-ink outline-none",
+                  "flex min-h-9 items-center gap-2 rounded-sm px-2 py-2",
+                  "font-ui text-[14px] leading-5 text-ink outline-none",
                   isSelected && "bg-fill-soft",
                   isBlocked
                     ? "cursor-not-allowed opacity-45"
@@ -266,11 +268,11 @@ export function MultiSelect({
         : null}
 
       {error ? (
-        <p id={describedBy} className="font-ui text-[12px] text-danger">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-danger">
           {error}
         </p>
       ) : hint ? (
-        <p id={describedBy} className="font-ui text-[12px] text-ink-tertiary">
+        <p id={describedBy} className="font-ui text-[13px] leading-5 text-ink-tertiary">
           {hint}
         </p>
       ) : null}

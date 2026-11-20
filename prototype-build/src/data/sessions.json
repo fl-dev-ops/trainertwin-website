@@ -1,0 +1,463 @@
+{
+ "filters": [
+  {
+   "label": "Filter by cohort",
+   "value": "All cohorts"
+  },
+  {
+   "label": "Filter by learner",
+   "value": "All learners"
+  },
+  {
+   "label": "Filter by roleplay",
+   "value": "All roleplays"
+  },
+  {
+   "label": "Filter by date",
+   "value": "Last 30 days"
+  }
+ ],
+ "tiles": [
+  {
+   "label": "Sessions",
+   "value": "27",
+   "muted": "",
+   "go": true,
+   "svg": "<svg class=\"stat-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10\"></path><path d=\"M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2\"></path></svg>"
+  },
+  {
+   "label": "Practice minutes",
+   "value": "225",
+   "muted": "",
+   "go": false,
+   "svg": "<svg class=\"stat-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0\"></path><path d=\"M12 7v5l3 3\"></path></svg>"
+  },
+  {
+   "label": "Average score",
+   "value": "71",
+   "muted": "/ 100",
+   "go": true,
+   "svg": "<svg class=\"stat-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\"></path><path d=\"M7 12a5 5 0 1 0 10 0a5 5 0 1 0 -10 0\"></path><path d=\"M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0\"></path></svg>"
+  },
+  {
+   "label": "Issues reported",
+   "value": "12",
+   "muted": "",
+   "go": true,
+   "svg": "<svg class=\"stat-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1 -7 0a5 5 0 0 0 -7 0v-9z\"></path><path d=\"M5 21v-7\"></path></svg>"
+  }
+ ],
+ "rating": {
+  "value": "4.1",
+  "count": "21 sessions rated",
+  "svg": "<svg class=\"tm-illus\" viewBox=\"0 0 96 96\" aria-hidden=\"true\" focusable=\"false\"><g stroke=\"var(--tt-text-tertiary)\" stroke-opacity=\".35\" stroke-width=\"4\" stroke-linecap=\"round\" fill=\"none\"><path d=\"M48 6V18\"></path><path d=\"M26 10l5 11\"></path><path d=\"M70 10l-5 11\"></path></g><path d=\"M16.0 57.0 L19.5 65.1 L28.4 66.0 L21.7 71.9 L23.6 80.5 L16.0 76.0 L8.4 80.5 L10.3 71.9 L3.6 66.0 L12.5 65.1 Z\" fill=\"var(--tt-gold-500)\" stroke=\"var(--tt-gold-500)\" stroke-width=\"5\" stroke-linejoin=\"round\"></path><path d=\"M80.0 57.0 L83.5 65.1 L92.4 66.0 L85.7 71.9 L87.6 80.5 L80.0 76.0 L72.4 80.5 L74.3 71.9 L67.6 66.0 L76.5 65.1 Z\" fill=\"var(--tt-gold-500)\" stroke=\"var(--tt-gold-500)\" stroke-width=\"5\" stroke-linejoin=\"round\"></path><path d=\"M48.0 25.0 L54.5 41.1 L71.8 42.3 L58.5 53.4 L62.7 70.2 L48.0 61.0 L33.3 70.2 L37.5 53.4 L24.2 42.3 L41.5 41.1 Z\" fill=\"var(--tt-gold-300)\" stroke=\"var(--tt-gold-300)\" stroke-width=\"5\" stroke-linejoin=\"round\"></path></svg>",
+  "icon": "<svg class=\"stat-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z\"></path></svg>"
+ },
+ "paid": {
+  "pct": "22%",
+  "amount": "AED 360",
+  "count": "6 purchases",
+  "title": "6 of 27 sessions were purchased",
+  "icon": "<svg class=\"stat-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0\"></path><path d=\"M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1\"></path><path d=\"M12 7v10\"></path></svg>"
+ },
+ "attnIcon": "<svg class=\"stat-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0\"></path><path d=\"M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6\"></path></svg>",
+ "attn": [
+  {
+   "tone": "danger",
+   "label": "12 reported problems"
+  },
+  {
+   "tone": "caution",
+   "label": "12 sessions with a low scorecard or a client that didn’t feel real"
+  }
+ ],
+ "overline": "Roleplay sessions",
+ "tableLabel": "Practice sessions",
+ "head": [
+  "Name",
+  "Scenario",
+  "Score",
+  "Weakest area",
+  "Rating"
+ ],
+ "rows": [
+  {
+   "tone": 1,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "74",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "17/25",
+   "stars": 3,
+   "starTone": "is-low",
+   "helpLabel": "Somewhat helpful",
+   "issue": "Other"
+  },
+  {
+   "tone": 2,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "81",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "18/25",
+   "stars": null,
+   "starTone": "",
+   "helpLabel": "",
+   "issue": ""
+  },
+  {
+   "tone": 3,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "74",
+   "scoreOf": "/ 100",
+   "weak": "Opened the client up",
+   "weakScore": "19/30",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": ""
+  },
+  {
+   "tone": 4,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "70",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "16/25",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": ""
+  },
+  {
+   "tone": 5,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "77",
+   "scoreOf": "/ 100",
+   "weak": "Secured the goal next step with a date",
+   "weakScore": "14/20",
+   "stars": 4,
+   "starTone": "is-good",
+   "helpLabel": "Helpful",
+   "issue": ""
+  },
+  {
+   "tone": 1,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "70",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "15/25",
+   "stars": 4,
+   "starTone": "is-good",
+   "helpLabel": "Helpful",
+   "issue": "Flat or no emotion"
+  },
+  {
+   "tone": 2,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "67",
+   "scoreOf": "/ 100",
+   "weak": "Secured the goal next step with a date",
+   "weakScore": "11/20",
+   "stars": 4,
+   "starTone": "is-good",
+   "helpLabel": "Helpful",
+   "issue": "Doesn't sound like me"
+  },
+  {
+   "tone": 3,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "74",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "16/25",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": ""
+  },
+  {
+   "tone": 4,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "67",
+   "scoreOf": "/ 100",
+   "weak": "Covered what matters most",
+   "weakScore": "14/25",
+   "stars": 3,
+   "starTone": "is-low",
+   "helpLabel": "Somewhat helpful",
+   "issue": "Wrong accent"
+  },
+  {
+   "tone": 5,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "72",
+   "scoreOf": "/ 100",
+   "weak": "Opened the client up",
+   "weakScore": "19/30",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": ""
+  },
+  {
+   "tone": 1,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "79",
+   "scoreOf": "/ 100",
+   "weak": "Opened the client up",
+   "weakScore": "22/30",
+   "stars": 3,
+   "starTone": "is-low",
+   "helpLabel": "Somewhat helpful",
+   "issue": "Wrong pronunciation"
+  },
+  {
+   "tone": 2,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "72",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "13/25",
+   "stars": null,
+   "starTone": "",
+   "helpLabel": "",
+   "issue": ""
+  },
+  {
+   "tone": 3,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "65",
+   "scoreOf": "/ 100",
+   "weak": "Covered what matters most",
+   "weakScore": "14/25",
+   "stars": 3,
+   "starTone": "is-low",
+   "helpLabel": "Somewhat helpful",
+   "issue": "Flat or no emotion"
+  },
+  {
+   "tone": 4,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "72",
+   "scoreOf": "/ 100",
+   "weak": "Secured the goal next step with a date",
+   "weakScore": "10/20",
+   "stars": null,
+   "starTone": "",
+   "helpLabel": "",
+   "issue": ""
+  },
+  {
+   "tone": 5,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "65",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "13/25",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": ""
+  },
+  {
+   "tone": 1,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "69",
+   "scoreOf": "/ 100",
+   "weak": "Secured the goal next step with a date",
+   "weakScore": "12/20",
+   "stars": 3,
+   "starTone": "is-low",
+   "helpLabel": "Somewhat helpful",
+   "issue": "Wrong accent"
+  },
+  {
+   "tone": 2,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "76",
+   "scoreOf": "/ 100",
+   "weak": "Secured the goal next step with a date",
+   "weakScore": "13/20",
+   "stars": null,
+   "starTone": "",
+   "helpLabel": "",
+   "issue": ""
+  },
+  {
+   "tone": 3,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "69",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "16/25",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": ""
+  },
+  {
+   "tone": 4,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "66",
+   "scoreOf": "/ 100",
+   "weak": "Opened the client up",
+   "weakScore": "16/30",
+   "stars": 4,
+   "starTone": "is-good",
+   "helpLabel": "Helpful",
+   "issue": "Sounds robotic"
+  },
+  {
+   "tone": 5,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "73",
+   "scoreOf": "/ 100",
+   "weak": "Covered what matters most",
+   "weakScore": "15/25",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": ""
+  },
+  {
+   "tone": 1,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "66",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "15/25",
+   "stars": 3,
+   "starTone": "is-low",
+   "helpLabel": "Somewhat helpful",
+   "issue": "Flat or no emotion"
+  },
+  {
+   "tone": 2,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "71",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "16/25",
+   "stars": null,
+   "starTone": "",
+   "helpLabel": "",
+   "issue": ""
+  },
+  {
+   "tone": 3,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "78",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "17/25",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": "Sounds robotic"
+  },
+  {
+   "tone": 4,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "71",
+   "scoreOf": "/ 100",
+   "weak": "Opened the client up",
+   "weakScore": "18/30",
+   "stars": 4,
+   "starTone": "is-good",
+   "helpLabel": "Helpful",
+   "issue": ""
+  },
+  {
+   "tone": 5,
+   "name": "Aisha",
+   "sub": "Today, 2:14 pm · 8 min",
+   "scenario": "First conversation",
+   "score": "68",
+   "scoreOf": "/ 100",
+   "weak": "Avoided shutdown triggers and pet peeves",
+   "weakScore": "14/25",
+   "stars": 3,
+   "starTone": "is-low",
+   "helpLabel": "Somewhat helpful",
+   "issue": "Flat or no emotion"
+  },
+  {
+   "tone": 1,
+   "name": "James",
+   "sub": "Yesterday, 11:02 am · 6 min",
+   "scenario": "First conversation",
+   "score": "75",
+   "scoreOf": "/ 100",
+   "weak": "Secured the goal next step with a date",
+   "weakScore": "13/20",
+   "stars": null,
+   "starTone": "",
+   "helpLabel": "",
+   "issue": ""
+  },
+  {
+   "tone": 2,
+   "name": "Nora",
+   "sub": "Yesterday, 4:40 pm · 11 min",
+   "scenario": "First conversation",
+   "score": "68",
+   "scoreOf": "/ 100",
+   "weak": "Secured the goal next step with a date",
+   "weakScore": "12/20",
+   "stars": 5,
+   "starTone": "is-great",
+   "helpLabel": "Very helpful",
+   "issue": "Pacing feels off"
+  }
+ ]
+}

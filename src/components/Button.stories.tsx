@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { Button } from "./Button";
+import { ArrowLeftIcon, ArrowUpRightIcon, CheckIcon, EyeIcon, MoreVerticalIcon, XIcon } from "./UiIcons";
 
 const meta = {
   title: "Foundations/Button",
@@ -21,19 +22,19 @@ const meta = {
     docs: {
       description: {
         component:
-          "**`primary` is the default** as of 4 Nov 2026 (D107, \"Orange everywhere\") — `<Button>` with no variant is white on orange, at most one per view or dialog: Create new, Next, Looks right, Save and assign, Calibrate, Done. It reverses the 29 Sep rule that made black `strong` the default and allowlisted orange to three moments. Selection, state, tints and avatars stay neutral (D04's exclusions); orange is a button, not a theme.\n\nThe tradeoff now applies to every view: white on `#FF5A00` measures 3.13:1, which fails WCAG AA for normal text and passes only at large sizes (≥18.66px bold, or ≥24px). `lg` is marketing-only, so `primary` has no compliant in-product size. Recorded as open (D29), not patched. The axe colour-contrast rule is disabled for this component alone so the rest of the library keeps its gate.",
+          "Story copy: the first stories use the neutral word \"Button\"; the pattern stories further down (OneOrangePerView, WhichCtaWhere, Toolbar) use realistic product copy and are examples, not defaults.\n\n**Buttons are the V3 prototype's (decided 16 Nov 2026).** Prototype `btn--primary` and `btn--strong` both render orange, so both map to `primary`; `btn--secondary` is `secondary` (white with the soft shadow, hover mixes 3% ink, press scales to 98%); then `ghost`, `danger` and `success`. Sizes: 36 tall with 16px padding, `sm` 32 tall with 12px padding at 13px, every button a pill at 14/600. Disabled is a flat grey fill with a muted label, not a faded copy. The dark `strong` is kept for the marketing site only.\n\n**`primary` is the default** as of 4 Nov 2026 (D107, \"Orange everywhere\") — `<Button>` with no variant is white on orange, at most one per view or dialog: Create new, Next, Looks right, Save and assign, Calibrate, Done. It reverses the 29 Sep rule that made black `strong` the default and allowlisted orange to three moments. Selection, state, tints and avatars stay neutral (D04's exclusions); orange is a button, not a theme.\n\nThe tradeoff now applies to every view: white on `#FF5A00` measures 3.13:1, which fails WCAG AA for normal text and passes only at large sizes (≥18.66px bold, or ≥24px). `lg` is marketing-only, so `primary` has no compliant in-product size. Recorded as open (D29), not patched. The axe colour-contrast rule is disabled for this component alone so the rest of the library keeps its gate.",
       },
     },
   },
   argTypes: {
-    variant: { control: "inline-radio", options: ["primary", "strong", "secondary", "ghost", "danger"] },
+    variant: { control: "inline-radio", options: ["primary", "strong", "secondary", "ghost", "danger", "success"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     fullWidth: { control: "boolean" },
     disabled: { control: "boolean" },
     children: { control: "text" },
   },
   args: {
-    children: "Start mock interview",
+    children: "Button",
     variant: "primary",
     size: "md",
   },
@@ -43,7 +44,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: { variant: "primary", children: "Create new" },
+  args: { variant: "primary", children: "Button" },
   parameters: {
     docs: {
       description: {
@@ -55,27 +56,27 @@ export const Primary: Story = {
 };
 
 export const Strong: Story = {
-  args: { variant: "strong", children: "Customize page" },
+  args: { variant: "strong", children: "Button" },
   parameters: {
     docs: {
       description: {
         story:
-          "Black in light theme, white in dark — flip the toolbar and watch it invert. **No longer the default (D107).** Nothing in product uses it as a button now; it stays for marketing CTAs and for a second filled button on a screen that already has its one orange primary. 19.78:1 in both themes, the only filled variant with no accessibility tradeoff. Whether to keep, merge or retire it is open (DECISIONS.md, \"What is left of strong\").",
+          "Black in light theme, white in dark — flip the toolbar and watch it invert. **Not in the V3 prototype**, whose `btn--strong` renders orange (use `primary`); kept for the marketing site's CTAs. **No longer the default (D107).** Nothing in product uses it as a button now; it stays for marketing CTAs and for a second filled button on a screen that already has its one orange primary. 19.78:1 in both themes, the only filled variant with no accessibility tradeoff. Whether to keep, merge or retire it is open (DECISIONS.md, \"What is left of strong\").",
       },
     },
   },
 };
 
 export const Secondary: Story = {
-  args: { variant: "secondary", children: "Save draft" },
+  args: { variant: "secondary", children: "Button" },
 };
 
 export const Ghost: Story = {
-  args: { variant: "ghost", children: "Cancel" },
+  args: { variant: "ghost", children: "Button" },
 };
 
 export const Danger: Story = {
-  args: { variant: "danger", children: "Delete source" },
+  args: { variant: "danger", children: "Button" },
   parameters: {
     docs: {
       description: {
@@ -98,13 +99,19 @@ export const AllVariants: Story = {
   },
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
-      <Button variant="primary">Save &amp; finish</Button>
-      <Button variant="strong">Customize page</Button>
-      <Button variant="secondary">Save draft</Button>
-      <Button variant="ghost">Cancel</Button>
-      <Button variant="danger">Delete source</Button>
+      <Button variant="primary">Primary</Button>
+      <Button variant="strong">Strong</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="danger">Danger</Button>
+      <Button variant="success">Success</Button>
     </div>
   ),
+};
+
+export const Success: Story = {
+  args: { variant: "success", children: "Button" },
+  parameters: { docs: { description: { story: "The prototype's `btn--success`: green fill, white label (the subtle tint in dark)." } } },
 };
 
 /**
@@ -295,7 +302,7 @@ export const Toolbar: Story = {
     docs: {
       description: {
         story:
-          "`secondary` is a soft grey fill rather than an outline — the utility button, for things that sit together in a toolbar and should not each shout. Its fill is `--tt-fill-soft`, deliberately not `--tt-surface-sunken`: in dark theme sunken is *darker* than the card a button sits on, so a button using it would read as a hole rather than a control. **Every icon-only button carries an `aria-label`** — without one a screen reader announces \"button\" and nothing else.",
+          "`secondary` is white (`--tt-surface`) with a soft shadow, as the V3 prototype draws it — the utility button, for things that sit together in a toolbar and should not each shout. **Every icon-only button carries an `aria-label`** — without one a screen reader announces \"button\" and nothing else.",
       },
     },
   },
@@ -316,8 +323,94 @@ const Plus = (
   </svg>
 );
 
+const PlayGlyph = (
+  <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.5v9l7.5-4.5L5 3.5Z" /></svg>
+);
+const PlusGlyph = (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>
+);
+const MicGlyph = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3" /></svg>
+);
+
+export const WithIcons: Story = {
+  parameters: {
+    layout: "padded",
+    docs: {
+      description: {
+        story:
+          "A glyph before the label (`leadingIcon`) or after it (`trailingIcon`). Every glyph is forced to 16px (`--tt-icon-sm`), as the V3 prototype does with `.btn svg`, and is decorative: the label carries the meaning. Leading is for the action's object (Play, Add, Record); trailing is for direction or an external destination (Next, ↗). Never both on one button.",
+      },
+    },
+  },
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap items-center gap-3">
+        <Button variant="primary" leadingIcon={PlusGlyph}>Button</Button>
+        <Button variant="secondary" leadingIcon={MicGlyph}>Button</Button>
+        <Button variant="ghost" leadingIcon={PlayGlyph}>Button</Button>
+        <Button variant="danger" leadingIcon={<XIcon />}>Button</Button>
+        <Button variant="success" leadingIcon={<CheckIcon />}>Button</Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button variant="primary" trailingIcon={<ArrowUpRightIcon />}>Button</Button>
+        <Button variant="secondary" trailingIcon={<ArrowUpRightIcon />}>Button</Button>
+        <Button variant="ghost" leadingIcon={<ArrowLeftIcon />}>Button</Button>
+      </div>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button size="sm" variant="secondary" leadingIcon={PlayGlyph}>Button</Button>
+        <Button size="sm" variant="primary" leadingIcon={PlusGlyph}>Button</Button>
+        <Button size="sm" variant="ghost" leadingIcon={<EyeIcon />}>Button</Button>
+      </div>
+    </div>
+  ),
+};
+
+export const IconOnly: Story = {
+  parameters: {
+    layout: "padded",
+    docs: {
+      description: {
+        story:
+          "Square, circular, no label, so it **must carry an `aria-label`**. The prototype's workhorses are the small ghost (close ×, the ⋮ row menu) and the small secondary. The icon is 16px at every size. `sm` is 32 × 32, `md` 36 × 36.",
+      },
+    },
+  },
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-3">
+        <Button variant="ghost" size="sm" iconOnly leadingIcon={<XIcon />} aria-label="Close" />
+        <Button variant="ghost" size="sm" iconOnly leadingIcon={<MoreVerticalIcon />} aria-label="More options" />
+        <Button variant="secondary" size="sm" iconOnly leadingIcon={PlayGlyph} aria-label="Play" />
+        <Button variant="secondary" size="sm" iconOnly leadingIcon={PlusGlyph} aria-label="Add" />
+        <Button variant="primary" size="sm" iconOnly leadingIcon={<CheckIcon />} aria-label="Confirm" />
+        <Button variant="danger" size="sm" iconOnly leadingIcon={<XIcon />} aria-label="Remove" />
+      </div>
+      <div className="flex items-center gap-3">
+        <Button variant="ghost" iconOnly leadingIcon={<XIcon />} aria-label="Close" />
+        <Button variant="secondary" iconOnly leadingIcon={<MoreVerticalIcon />} aria-label="More options" />
+        <Button variant="primary" iconOnly leadingIcon={PlusGlyph} aria-label="Add" />
+      </div>
+    </div>
+  ),
+};
+
+export const IconWithCount: Story = {
+  parameters: {
+    layout: "padded",
+    docs: { description: { story: "`count` adds an unread pill beside the glyph; omit it rather than pass 0. The pill inverts against its own button, so it works on every variant. Put the count in the `aria-label` too." } },
+  },
+  render: () => (
+    <div className="flex items-center gap-3">
+      <Button variant="secondary" leadingIcon={<EyeIcon />} count={3}>Button</Button>
+      <Button variant="secondary" iconOnly leadingIcon={<EyeIcon />} count={1} aria-label="Notifications, 1 unread" />
+      <Button variant="ghost" leadingIcon={<EyeIcon />} count={12}>Button</Button>
+    </div>
+  ),
+};
+
 export const Disabled: Story = {
-  args: { disabled: true, children: "Save" },
+  args: { disabled: true, children: "Button" },
 };
 
 /**
@@ -339,7 +432,7 @@ export const LoadingAndDisabled: Story = {
   parameters: { layout: "padded" },
   render: () => (
     <div className="flex flex-wrap items-center gap-3">
-      <Button leadingIcon={Plus}>Add source</Button>
+      <Button leadingIcon={Plus}>Button</Button>
       <Button loading>
         Processing 12 sources
       </Button>

@@ -21,8 +21,8 @@ const meta = {
     disabled: { control: "boolean" },
   },
   args: {
-    label: "Source name",
-    placeholder: "Sprint Planning — week 3",
+    label: "Label",
+    placeholder: "Value",
   },
 } satisfies Meta<typeof Input>;
 
@@ -32,12 +32,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const WithHint: Story = {
-  args: { hint: "Shown to learners when the twin cites this source." },
+  args: { hint: "Helper text." },
 };
 
 export const WithError: Story = {
   args: {
-    error: "Add a name so learners can see where an answer came from.",
+    error: "Error message that names the fix.",
     defaultValue: "",
   },
   parameters: {
@@ -64,14 +64,14 @@ export const HairlineAtScale: Story = {
     },
   },
   render: () => (
-    <div className="flex max-w-[380px] flex-col gap-4">
-      <Input label="Trainer name" defaultValue="Priya Raman" />
-      <Input label="Specialism" defaultValue="System design interviews" />
-      <Input label="Session length" defaultValue="45 minutes" />
+    <div className="flex w-[380px] max-w-full flex-col gap-4">
+      <Input label="Label" defaultValue="Value" />
+      <Input label="Label" defaultValue="Value" />
+      <Input label="Label" defaultValue="45 minutes" />
       <Input
-        label="Source name"
-        placeholder="Sprint Planning — week 3"
-        hint="Shown to learners when the twin cites this source."
+        label="Label"
+        placeholder="Value"
+        hint="Helper text."
       />
     </div>
   ),

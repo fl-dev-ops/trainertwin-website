@@ -1,0 +1,45 @@
+/* Toast: slides in once on arrival; the timer bar drains over the toast's life and pauses with it. */
+@keyframes tt-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes tt-toast-timer {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+.tt-toast-in {
+  animation: tt-toast-in 380ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+.tt-toast-timer {
+  transform-origin: left;
+  animation: tt-toast-timer var(--ms, 4500ms) linear forwards;
+}
+.tt-toast:hover .tt-toast-timer,
+.tt-toast:focus-within .tt-toast-timer {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-toast-in {
+    animation: none;
+  }
+}
+/* The popover viewport must not pick up the UA's centred, bordered box. */
+.tt-toast-viewport:popover-open {
+  inset: auto 20px 20px auto;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  overflow: visible;
+  color: inherit;
+}

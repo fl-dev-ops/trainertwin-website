@@ -1,0 +1,69 @@
+/*
+ * AgentCard — the Twin agent card and the roleplay card (D117).
+ * Tilt of the quote bubble toward the pointer. Every number is a token:
+ * --tt-tilt-*, --tt-duration-follow/settle, --tt-ease-settle, --tt-shadow-bubble,
+ * --tt-art-glare-*. The pointer handler in AgentCard.tsx only writes the
+ * --rx / --ry / --tx / --gx / --gy custom properties below.
+ */
+.tt-bubble {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(var(--tt-tilt-perspective))
+    rotateX(calc(var(--rx, 0) * 1deg)) rotateY(calc(var(--ry, 0) * 1deg)) scale(var(--sc, 1));
+  box-shadow: var(--tt-shadow-bubble);
+  transition:
+    transform var(--tt-duration-settle) var(--tt-ease-settle),
+    box-shadow var(--tt-duration-settle) var(--tt-ease-settle);
+  will-change: transform;
+}
+.tt-bubble.is-tilting {
+  --sc: var(--tt-tilt-scale);
+  box-shadow:
+    calc(var(--tx, 0) * -1px) 12px 22px var(--tt-ink-strong),
+    var(--tt-shadow-bubble);
+  transition:
+    transform var(--tt-duration-follow) linear,
+    box-shadow var(--tt-duration-follow) linear;
+}
+/* A faint second layer under the bubble, so it reads as a card lifted off the art. */
+.tt-bubble::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -10px;
+  height: 16px;
+  border-radius: 0 0 var(--tt-radius-md) var(--tt-radius-md);
+  background: color-mix(in srgb, var(--tt-surface) 28%, transparent);
+  z-index: -1;
+}
+.tt-bubble::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    farthest-corner circle at var(--gx, 50%) var(--gy, 50%),
+    var(--tt-art-glare-core),
+    var(--tt-art-glare-edge) 35%,
+    transparent 62%
+  );
+  transition: opacity 0.4s ease;
+}
+.tt-bubble.is-tilting::after {
+  opacity: 1;
+}
+.tt-bubble-face {
+  transform: translateZ(14px);
+}
+.tt-bubble-text {
+  transform: translateZ(6px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tt-bubble,
+  .tt-bubble.is-tilting {
+    transition: none;
+  }
+}

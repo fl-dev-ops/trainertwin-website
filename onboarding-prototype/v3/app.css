@@ -6199,7 +6199,7 @@ body:has(.rail.is-collapsed) .drawer--conversations {
   bottom: var(--tt-space-4);
   width: 176px;
   height: 112px;
-  border-radius: var(--tt-radius-xl, 16px);
+  border-radius: var(--tt-radius-lg);
   background: rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
@@ -9819,33 +9819,18 @@ label.assign-row:hover { background: var(--tt-fill-soft); }
 .rp-detail-stats--grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .rp-stat--neutral { background: var(--tt-fill-soft); color: var(--tt-text-secondary); }
 
-/* Inbox: everything waiting on Olga, by Twin and Roleplay. */
 .nav-badge { margin-left: auto; min-width: 18px; height: 18px; padding: 0 6px; display: inline-grid; place-items: center; border-radius: var(--tt-radius-pill); background: var(--tt-primary); color: var(--tt-on-primary); font-size: 11px; line-height: 18px; font-weight: var(--tt-weight-label); }
 .rail.is-collapsed .nav-badge { position: absolute; top: 2px; right: 2px; min-width: 14px; height: 14px; padding: 0 4px; font-size: 10px; line-height: 14px; }
 .rail.is-collapsed .nav-item { position: relative; }
-.page--inbox { max-width: 1080px; }
-.inbox-lede { margin: var(--tt-space-1) 0 var(--tt-space-5); color: var(--tt-text-secondary); font-size: 14px; line-height: 20px; }
-.inbox-seg { margin-bottom: var(--tt-space-5); }
-.inbox-seg button { display: inline-flex; align-items: center; gap: var(--tt-space-2); }
 .inbox-count { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 6px; border-radius: var(--tt-radius-pill); background: var(--tt-primary); color: var(--tt-on-primary); font-size: 11px; line-height: 18px; font-weight: var(--tt-weight-label); }
-.inbox-sec { margin-top: var(--tt-space-6); display: flex; flex-direction: column; gap: var(--tt-space-3); }
-.inbox-seg + .inbox-sec { margin-top: 0; }
 .inbox-h { display: flex; align-items: center; gap: var(--tt-space-2); margin: 0; font-size: 17px; line-height: 24px; font-weight: var(--tt-weight-title); letter-spacing: -0.01em; }
 .inbox-sub { margin: calc(var(--tt-space-2) * -1) 0 0; color: var(--tt-text-secondary); font-size: 14px; line-height: 20px; }
-.inbox-requests { list-style: none; margin: 0; padding: var(--tt-space-3) var(--tt-space-4); display: flex; flex-direction: column; gap: var(--tt-space-3); border: 1px dashed var(--tt-border); border-radius: var(--tt-radius-lg); }
-.inbox-requests li { display: flex; align-items: baseline; gap: var(--tt-space-3); flex-wrap: wrap; font-size: 14px; line-height: 20px; }
-.inbox-requests .badge { flex: none; }
-.inbox-line b { font-weight: var(--tt-weight-title); }
-.inbox-quiet { color: var(--tt-text-tertiary); }
 .inbox-card { padding: var(--tt-space-5) var(--tt-space-6); border: 1px solid var(--tt-border); border-radius: var(--tt-radius-lg); background: var(--tt-surface); }
 .inbox-row { display: flex; align-items: center; justify-content: space-between; gap: var(--tt-space-5); }
-.inbox-row:has(.inbox-reason) { align-items: flex-start; }
 .inbox-main { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--tt-space-1); }
 .inbox-title { margin: 0; font-size: 16px; line-height: 24px; color: var(--tt-text-primary); }
 .inbox-title b { font-weight: var(--tt-weight-title); }
-.inbox-meta { margin: 0; font-size: 14px; line-height: 20px; color: var(--tt-text-secondary); }
 .inbox-actions { flex: none; display: flex; align-items: center; gap: var(--tt-space-2); }
-.inbox-reason { margin-top: var(--tt-space-2); }
 .inbox-said { align-self: stretch; margin: var(--tt-space-2) 0 0; padding: var(--tt-space-3) var(--tt-space-4); border-left: 3px solid var(--tt-danger-border); border-radius: var(--tt-radius-sm); background: var(--tt-fill-soft); font-size: 15px; line-height: 22px; }
 .inbox-fix { margin: var(--tt-space-2) 0 0; font-size: 15px; line-height: 22px; color: var(--tt-text-primary); }
 .inbox-answer { margin-top: var(--tt-space-4); display: flex; flex-direction: column; gap: var(--tt-space-3); }
@@ -9885,11 +9870,6 @@ label.assign-row:hover { background: var(--tt-fill-soft); }
 }
 .page--tsess .lib-title { flex: none; white-space: nowrap; }
 
-/* Inbox, mail style: folders on the left, the selected list on the right. */
-.page--inbox .lib-head { align-items: center; }
-.inbox-seg { margin: 0; }
-.inbox-layout { display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: var(--tt-space-5); align-items: start; margin-top: var(--tt-space-4); }
-.inbox-menu { display: flex; flex-direction: column; gap: 2px; position: sticky; top: var(--tt-space-4); }
 .inbox-menu-item { display: flex; align-items: center; justify-content: space-between; gap: var(--tt-space-2); width: 100%; min-height: 40px; padding: 0 var(--tt-space-4); border: 0; border-radius: var(--tt-radius-pill); background: transparent; color: var(--tt-text-secondary); font: inherit; font-size: 14px; line-height: 20px; text-align: left; cursor: pointer; }
 .inbox-menu-item:hover { background: var(--tt-surface-sunken); }
 .inbox-menu-item[aria-current="page"] { background: var(--tt-primary-subtle, var(--tt-fill-soft)); color: var(--tt-text-primary); font-weight: var(--tt-weight-title); }
@@ -9897,15 +9877,6 @@ label.assign-row:hover { background: var(--tt-fill-soft); }
 .inbox-pane { min-width: 0; display: flex; flex-direction: column; gap: var(--tt-space-3); padding: var(--tt-space-5) var(--tt-space-6); border: 1px solid var(--tt-border); border-radius: var(--tt-radius-lg); background: var(--tt-surface); min-height: 420px; }
 .inbox-pane-head { display: flex; flex-direction: column; gap: var(--tt-space-1); margin-bottom: var(--tt-space-2); }
 .inbox-pane .inbox-sub { margin: 0; }
-.inbox-pane .inbox-requests { border-style: solid; border-color: var(--tt-border); }
-.inbox-all { display: flex; flex-direction: column; }
-.inbox-all .inbox-sec:first-child { margin-top: 0; }
-@media (max-width: 860px) {
-  .inbox-layout { grid-template-columns: 1fr; }
-  .inbox-menu { position: static; flex-direction: row; flex-wrap: wrap; }
-}
-/* Inbox runs edge to edge: the folder list sits at the far left of the content area. */
-.page.page--inbox { max-width: none; width: 100%; margin: 0; padding-left: var(--tt-space-4); padding-right: var(--tt-space-6); }
 
 /* Inbox cards: who it is from, then the point, then the detail. Buttons stay small and quiet. */
 .inbox-card { padding: var(--tt-space-4) var(--tt-space-5); }
@@ -11546,6 +11517,8 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 @media (max-width: 720px) { .set-grid { grid-template-columns: 1fr; } }
 
 /* Twin for all use cases: one wide card above the specific agents */
+/* Title → Olga card: same gap as title → specific-use cards (.rp-grid). */
+.twin-bots-head + .twin-all { margin-top: var(--tt-space-5); }
 .twin-all { position: relative; flex-direction: row; align-items: center; gap: var(--tt-space-5); padding: var(--tt-space-5); margin-bottom: var(--tt-space-8); cursor: pointer; overflow: visible; }
 .twin-all:hover { border-color: var(--tt-border-interactive); }
 .twin-all-photo { flex: none; width: 76px; height: 76px; border-radius: 16px; object-fit: cover; object-position: center 18%; background: var(--tt-fill-soft); }
@@ -11778,3 +11751,206 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 .bl-info .bl-sub { white-space: pre-line; }
 .bl-info > div { align-items: center; }
 .bl-inv-cr { min-width: 96px; text-align: right; font-size: 14px; color: var(--tt-text-secondary); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rps-row-who b { font-weight: var(--tt-weight-title); }
+.rps-list .rps-row.rps-row--head { border-radius: calc(var(--tt-radius-lg) - 1px) calc(var(--tt-radius-lg) - 1px) 0 0; }
+
+/* Portal switcher: floating bottom-right, app=1 only. Light shadow. */
+.portal-switch {
+  position: fixed;
+  right: var(--tt-space-5);
+  bottom: var(--tt-space-5);
+  z-index: var(--tt-z-dropdown);
+}
+.portal-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tt-space-2);
+  min-height: 36px;
+  padding: 0 var(--tt-space-4);
+  border: var(--tt-border-thin) solid var(--tt-border);
+  border-radius: var(--tt-radius-sm);
+  background: var(--tt-surface);
+  color: var(--tt-text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: var(--tt-weight-label);
+  line-height: 20px;
+  box-shadow: var(--tt-elevation-1);
+  cursor: pointer;
+}
+.portal-switch-btn:hover { background: var(--tt-surface-sunken); }
+.portal-switch-btn svg { width: 16px; height: 16px; flex: none; color: var(--tt-text-secondary); }
+.portal-switch.is-open .portal-switch-btn svg { transform: rotate(180deg); }
+.portal-switch-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  min-width: 200px;
+  padding: var(--tt-space-2);
+  border-radius: var(--tt-radius-sm);
+  background: var(--tt-surface-raised);
+  box-shadow: var(--tt-elevation-1);
+  border: var(--tt-border-thin) solid var(--tt-border);
+}
+.portal-switch-opt {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tt-space-3);
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--tt-radius-xs);
+  background: transparent;
+  color: var(--tt-text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: left;
+  cursor: pointer;
+}
+.portal-switch-opt:hover,
+.portal-switch-opt.is-selected { background: var(--tt-fill-soft); }
+.portal-switch-opt svg { width: 16px; height: 16px; flex: none; color: var(--tt-text-primary); }
+
+/* Learner View: no trainer rail; menu card + pane; cards show assigned vs used. */
+.shell--learner > .main { flex: 1; min-width: 0; width: 100%; }
+.learner-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tt-space-6);
+  padding: var(--tt-space-8) var(--tt-space-8) var(--tt-space-16);
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+.learner-menu {
+  flex: none;
+  width: 200px;
+  position: sticky;
+  top: var(--tt-space-5);
+  padding: var(--tt-space-2);
+  gap: 2px;
+  box-shadow: var(--tt-elevation-1);
+}
+.learner-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--tt-space-2);
+  width: 100%;
+  min-height: 36px;
+  padding: 0 var(--tt-space-3);
+  border: 0;
+  border-radius: var(--tt-radius-sm);
+  background: transparent;
+  color: var(--tt-text-secondary);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--tt-weight-body);
+  text-align: left;
+  cursor: pointer;
+}
+.learner-menu-item svg {
+  width: var(--tt-icon-md);
+  height: var(--tt-icon-md);
+  flex: none;
+}
+.learner-menu-item:hover { background: var(--tt-fill-soft); color: var(--tt-text-primary); }
+.learner-menu-item[aria-current="page"] {
+  background: var(--tt-surface);
+  color: var(--tt-primary);
+  font-weight: var(--tt-weight-label);
+  box-shadow: var(--tt-elevation-1), inset 0 0 0 1px var(--tt-border);
+}
+.learner-menu-item[aria-current="page"] span { color: var(--tt-primary); }
+.learner-pane {
+  flex: none;
+  /* 896px grid (trainer) + 64px right pad; left pad removed so menu→title is 24px. */
+  width: 960px;
+  max-width: min(960px, 100%);
+  min-width: 0;
+}
+.learner-pane > .page {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+  /* Drop left library pad: layout gap (24px) is the space to the Twin title. */
+  padding-left: 0;
+}
+.learner-pane .page--twin-profile > .twin-bots-head:first-child { margin-top: 0; }
+
+.rp-time {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--tt-text-primary);
+}
+.rp-time b { font-weight: var(--tt-weight-title); font-variant-numeric: tabular-nums; }
+.rp-time-label { color: var(--tt-text-secondary); font-weight: var(--tt-weight-body); }
+.rp-time-sep { color: var(--tt-text-tertiary); margin: 0 2px; }
+.twin-all .rp-time { margin-top: var(--tt-space-2); }
+.rp-actions .rp-time { align-self: center; }
+@media (max-width: 767px) {
+  .learner-layout { flex-direction: column; padding: var(--tt-space-5); }
+  .learner-menu { width: 100%; position: static; flex-direction: row; }
+  .learner-menu-item { flex: 1; justify-content: center; }
+}
+
+/* Learner twin-all: Assigned·Used right-aligned + Connect */
+.learner-pane .twin-bots-head + .twin-all-stack { margin-top: var(--tt-space-5); }
+.learner-pane .twin-all-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tt-space-4);
+}
+.learner-pane .twin-all-stack .twin-all { margin-bottom: 0; }
+.learner-pane .twin-all-aside {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--tt-space-3);
+  flex: none;
+}
+.learner-pane .twin-all-aside .rp-time { margin-top: 0; text-align: right; justify-content: flex-end; }
+.learner-pane .twin-all-aside .btn { min-width: 96px; display: inline-flex; align-items: center; gap: var(--tt-space-2); }
+.learner-pane .twin-all-aside .btn .line-ico { width: 16px; height: 16px; flex: none; }
+
+/* Learner activities list */
+.learner-act-intro { margin: var(--tt-space-2) 0 var(--tt-space-5); }
+.learner-act-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--tt-space-3);
+}
+.learner-act {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--tt-space-4);
+  padding: var(--tt-space-4) var(--tt-space-5);
+}
+.learner-act-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.learner-act-title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--tt-weight-title);
+  color: var(--tt-text-primary);
+}
+.learner-act-meta { margin: 0; font-size: 13px; line-height: 20px; }
+.page--learner-activities .create-bar {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0 0 var(--tt-space-4);
+}
+
