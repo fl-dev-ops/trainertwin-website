@@ -273,6 +273,7 @@ const state = {
   askMenu: "",
   portalView: "trainer",
   portalOpen: false,
+  learnerMenu: "agents",
   teeAskMode: "roleplay",
   botAsk: "",
   botManual: null,
@@ -1505,6 +1506,16 @@ function main() {
   if (state.sessionReportId) return pageSessionReport();
   if (state.calibId) return pageCalibration();
   if (state.botCreate) return pageBotCreate();
+  // Learner View: simple left menu card + Agents / Roleplays (not the trainer rail).
+  if (isLearnerView()) {
+    if (state.botDetailId && botDetailRow()) return pageBotDetail();
+    if (state.roleDetailId) {
+      const openRow = sharedRoles().find((row) => row.id === state.roleDetailId);
+      if (openRow) return roleDetail(openRow);
+      state.roleDetailId = "";
+    }
+    return pageLearnerPortal();
+  }
   if (state.learnerId && (nav === "usage" || nav === "twinusers")) return pageLearnerDetail();
   if (nav === "usage") return pageUsage();
   if (nav === "billing") return pageBilling();
@@ -1534,6 +1545,86 @@ function main() {
   }
   if (state.step === 7 && state.runId) return pageRun();
   return pageHome();
+}
+
+function learnerMenuCard() {
+  const tab = state.learnerMenu === "roleplays" ? "roleplays" : "agents";
+  const items = [
+    ["agents", "Agents", "setup"],
+    ["roleplays", "Roleplays", "role"]
+  ];
+  return `
+    <aside class="card learner-menu" aria-label="Learner menu">
+      ${items.map(([id, label, glyph]) => `
+        <button class="learner-menu-item" type="button" data-action="learner-menu" data-id="${id}"${tab === id ? ' aria-current="page"' : ""}>
+          ${icon(glyph)}<span>${label}</span>
+        </button>
+      `).join("")}
+    </aside>
+  `;
+}
+
+function pageLearnerPortal() {
+  const tab = state.learnerMenu === "roleplays" ? "roleplays" : "agents";
+  const pane = tab === "roleplays" ? pageLearnerRoleplays() : pageTwinProfile();
+  return `
+    <div class="learner-layout">
+      ${learnerMenuCard()}
+      <div class="learner-pane">${pane}</div>
+    </div>
+  `;
+}
+
+// Roleplays assigned to the demo learner (published shared scenarios).
+function learnerAssignedRoleplays() {
+  return sharedRoles().filter((row) => sharedStatus(row) !== "paused");
+}
+
+const LEARNER_ROLE_CREDIT = {
+  "wait-and-see": { minutes: 60, used: 22 },
+  "options-collector": { minutes: 45, used: 12 }
+};
+
+function learnerRoleCredit(row) {
+  return LEARNER_ROLE_CREDIT[row.id] || { minutes: 30, used: 0 };
+}
+
+function learnerRoleCard(row, index) {
+  const task = sharedCardTask(row);
+  const credit = learnerRoleCredit(row);
+  const quote = task.preview && task.preview[0] ? String(task.preview[0]).replace(/^[^:]+:\s*/, "") : (row.quote || row.blurb);
+  return `
+    <article class="rp-card is-clickable" data-action="role-open" data-id="${esc(row.id)}" tabindex="0" aria-label="Open ${esc(row.title)}">
+      <span class="rp-art rp-art--${index % 10}" aria-hidden="true">
+        <span class="rp-quote"><span class="rp-who">${esc(row.clientName || row.client || "Client")}</span><span class="rp-quote-bubble${row.clientFace ? " has-face" : ""}">${row.clientFace ? `<img class="rp-quote-face" src="${esc(row.clientFace)}" alt="">` : ""}<span class="rp-quote-text">${row.clientName ? `<span class="rp-quote-name">${esc(row.clientName)}</span>` : ""}<span>“${esc(quote)}”</span></span></span></span>
+      </span>
+      <span class="rp-body">
+        <span class="rp-title">${esc(row.title)}</span>
+        <span class="rp-copy">${esc(row.blurb)}</span>
+      </span>
+      <span class="rp-actions">
+        <span class="rp-time tabular" aria-label="${credit.used} of ${credit.minutes} minutes used">
+          <span class="rp-time-label">Assigned</span> <b>${credit.minutes}</b>
+          <span class="rp-time-sep" aria-hidden="true">·</span>
+          <span class="rp-time-label">Used</span> <b>${credit.used}</b>
+        </span>
+      </span>
+    </article>
+  `;
+}
+
+function pageLearnerRoleplays() {
+  const rows = learnerAssignedRoleplays();
+  return `
+    <div class="page page--library page--learner-roleplays">
+      <div class="lib-head">
+        <h1 class="lib-title"><span class="lib-mark">${icon("role")}</span>Roleplays</h1>
+      </div>
+      ${rows.length
+        ? `<div class="rp-grid">${rows.map((row, i) => learnerRoleCard(row, i)).join("")}</div>`
+        : `<p class="card-sub">No roleplays assigned yet.</p>`}
+    </div>
+  `;
 }
 
 // ===== Onboarding V2: Build my twin =====
@@ -15543,6 +15634,20 @@ const actions = {
     state.portalOpen = false;
     state.roleMenuId = "";
     state.creditOpen = false;
+    if (id === "learner") {
+      state.botDetailId = "";
+      state.roleDetailId = "";
+      if (!state.learnerMenu) state.learnerMenu = "agents";
+    }
+    render();
+  },
+  "learner-menu"(el) {
+    if (!isLearnerView()) return;
+    const id = el.dataset.id === "roleplays" ? "roleplays" : "agents";
+    state.learnerMenu = id;
+    state.botDetailId = "";
+    state.roleDetailId = "";
+    state.roleMenuId = "";
     render();
   },
   "ask-type-toggle"(el) {

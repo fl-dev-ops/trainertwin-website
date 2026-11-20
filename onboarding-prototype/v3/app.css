@@ -11812,8 +11812,61 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 .portal-switch-opt.is-selected { background: var(--tt-fill-soft); }
 .portal-switch-opt svg { width: 16px; height: 16px; flex: none; color: var(--tt-text-primary); }
 
-/* Learner View: center column alone; cards show assigned vs used. */
+/* Learner View: no trainer rail; menu card + pane; cards show assigned vs used. */
 .shell--learner > .main { flex: 1; min-width: 0; width: 100%; }
+.learner-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tt-space-6);
+  padding: var(--tt-space-8) var(--tt-space-8) var(--tt-space-16);
+  max-width: calc(var(--tt-container-lg) + 64px + 220px + var(--tt-space-6));
+  box-sizing: border-box;
+}
+.learner-menu {
+  flex: none;
+  width: 200px;
+  position: sticky;
+  top: var(--tt-space-5);
+  padding: var(--tt-space-2);
+  gap: 2px;
+  box-shadow: var(--tt-elevation-1);
+}
+.learner-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--tt-space-2);
+  width: 100%;
+  min-height: 36px;
+  padding: 0 var(--tt-space-3);
+  border: 0;
+  border-radius: var(--tt-radius-sm);
+  background: transparent;
+  color: var(--tt-text-secondary);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--tt-weight-body);
+  text-align: left;
+  cursor: pointer;
+}
+.learner-menu-item svg {
+  width: var(--tt-icon-md);
+  height: var(--tt-icon-md);
+  flex: none;
+}
+.learner-menu-item:hover { background: var(--tt-fill-soft); color: var(--tt-text-primary); }
+.learner-menu-item[aria-current="page"] {
+  background: var(--tt-surface);
+  color: var(--tt-primary);
+  font-weight: var(--tt-weight-label);
+  box-shadow: var(--tt-elevation-1), inset 0 0 0 1px var(--tt-border);
+}
+.learner-menu-item[aria-current="page"] span { color: var(--tt-primary); }
+.learner-pane { flex: 1; min-width: 0; }
+.learner-pane > .page {
+  padding: 0;
+  max-width: none;
+}
 .rp-time {
   display: inline-flex;
   align-items: center;
@@ -11828,3 +11881,8 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 .rp-time-sep { color: var(--tt-text-tertiary); margin: 0 2px; }
 .twin-all .rp-time { margin-top: var(--tt-space-2); }
 .rp-actions .rp-time { align-self: center; }
+@media (max-width: 767px) {
+  .learner-layout { flex-direction: column; padding: var(--tt-space-5); }
+  .learner-menu { width: 100%; position: static; flex-direction: row; }
+  .learner-menu-item { flex: 1; justify-content: center; }
+}
