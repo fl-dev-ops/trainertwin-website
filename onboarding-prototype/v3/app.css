@@ -11903,6 +11903,13 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 }
 
 /* Learner twin-all: Assigned·Used right-aligned + Connect */
+.learner-pane .twin-bots-head + .twin-all-stack { margin-top: var(--tt-space-5); }
+.learner-pane .twin-all-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tt-space-4);
+}
+.learner-pane .twin-all-stack .twin-all { margin-bottom: 0; }
 .learner-pane .twin-all-aside {
   margin-left: auto;
   display: flex;
@@ -11913,7 +11920,8 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
   flex: none;
 }
 .learner-pane .twin-all-aside .rp-time { margin-top: 0; text-align: right; justify-content: flex-end; }
-.learner-pane .twin-all-aside .btn { min-width: 96px; }
+.learner-pane .twin-all-aside .btn { min-width: 96px; display: inline-flex; align-items: center; gap: var(--tt-space-2); }
+.learner-pane .twin-all-aside .btn .line-ico { width: 16px; height: 16px; flex: none; }
 
 /* Learner activities list */
 .learner-act-intro { margin: var(--tt-space-2) 0 var(--tt-space-5); }

@@ -1573,7 +1573,7 @@ function learnerMenuCard() {
 function pageLearnerPortal() {
   let pane;
   if (state.learnerActivityBot) {
-    const bot = state.learnerActivityBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((b) => b.id === state.learnerActivityBot);
+    const bot = learnerAssignedTwin(state.learnerActivityBot) || (state.learnerActivityBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((b) => b.id === state.learnerActivityBot));
     if (bot) pane = pageLearnerTwinActivities(bot);
     else state.learnerActivityBot = "";
   }
@@ -2575,36 +2575,74 @@ function twinHero() {
   `;
 }
 
+// Learner View: twins assigned to this learner (wide twin-all cards). Trainer layout unchanged.
+function learnerAssignedTwins() {
+  return [
+    { id: TWIN_ALL.id, title: TWIN_ALL.title, updated: "29 Oct, 13:00", photo: "", quote: TWIN_ALL.quote, blurb: TWIN_ALL.blurb, sessions: TWIN_ALL.sessions, twin: true },
+    { id: "elena-twin", title: "Elena’s twin", updated: "14 Nov, 16:20", photo: "../media/persona-elena.jpg", quote: "Should I push for a Zoom this week?", blurb: "Overseas investor coaching in Elena’s calm, numbers-first voice.", sessions: 96, twin: true, minutes: 120, used: 48 },
+    { id: "marcus-twin", title: "Marcus’s twin", updated: "11 Nov, 10:05", photo: "../media/persona-marcus.jpg", quote: "How do I reopen a quiet first-time buyer?", blurb: "Follow-ups that feel personal, not pushy — the way Marcus writes them.", sessions: 71, twin: true, minutes: 90, used: 33 },
+    { id: "claire-twin", title: "Claire’s twin", updated: "7 Nov, 18:40", photo: "../media/client-seller.jpg", quote: "A seller asks why my fee isn’t 1%.", blurb: "Listing and fee conversations in Claire’s direct Marina style.", sessions: 58, twin: true, minutes: 75, used: 19 },
+    { id: "daniel-twin", title: "Daniel’s twin", updated: "3 Nov, 09:15", photo: "../media/client-buyer.jpg", quote: "They want to wait for prices to drop.", blurb: "Buyer-objection answers Daniel uses on off-plan calls.", sessions: 84, twin: true, minutes: 100, used: 62 }
+  ];
+}
+
+function learnerAssignedTwin(id) {
+  return learnerAssignedTwins().find((bot) => bot.id === id) || null;
+}
+
+function twinAllLearnerCard(bot) {
+  const photo = bot.photo || presenceSrc();
+  const updated = bot.updated || "Recently";
+  return `
+      <article class="card twin-all is-clickable" data-action="learner-twin-activities" data-id="${esc(bot.id)}" tabindex="0" aria-label="Open activities for ${esc(bot.title)}">
+        <img class="twin-all-photo" src="${esc(photo)}" alt="">
+        <div class="twin-all-body">
+          <h3 class="twin-all-name">${esc(bot.title)}</h3>
+          <p class="twin-all-meta">Last updated ${esc(updated)} <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+        </div>
+        <div class="twin-all-aside">
+          ${learnerTimeMeta(bot)}
+          <button class="btn btn--strong btn--sm" type="button" data-action="learner-twin-connect" data-id="${esc(bot.id)}">${sparklesIcon()}Connect</button>
+        </div>
+      </article>`;
+}
+
 function twinAllCard() {
   const learners = roleLearnerAvatars(TWIN_ALL, 0);
   const learner = isLearnerView();
-  const cardAction = learner ? "learner-twin-activities" : "twin-bot-open";
+  if (learner) {
+    return `
+      <div class="twin-bots-head">
+        <h2 class="page-title">Twins assigned</h2>
+      </div>
+      <div class="twin-all-stack">
+        ${learnerAssignedTwins().map(twinAllLearnerCard).join("")}
+      </div>
+`;
+  }
   return `
       <div class="twin-bots-head">
-        <h2 class="page-title">${learner ? "Twins assigned" : "Twin for all use cases"}</h2>
+        <h2 class="page-title">Twin for all use cases</h2>
       </div>
-      <article class="card twin-all is-clickable" data-action="${cardAction}" data-id="${esc(TWIN_ALL.id)}" tabindex="0" aria-label="${learner ? "Open activities for" : "Open"} ${esc(TWIN_ALL.title)}">
+      <article class="card twin-all is-clickable" data-action="twin-bot-open" data-id="${esc(TWIN_ALL.id)}" tabindex="0" aria-label="Open ${esc(TWIN_ALL.title)}">
         <img class="twin-all-photo" src="${esc(presenceSrc())}" alt="">
         <div class="twin-all-body">
-          <h3 class="twin-all-name">Olga’s twin</h3>
+          <h3 class="twin-all-name">${esc(TWIN_ALL.title)}</h3>
           <p class="twin-all-meta">Last updated 29 Oct, 13:00 <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-          ${learner ? "" : `<span class="rp-learners" aria-label="Learners who asked this twin">
+          <span class="rp-learners" aria-label="Learners who asked this twin">
             ${learners.shown.map(learnerFace).join("")}
             ${learners.extra > 0 ? `<span class="rp-learner-avatar rp-learner-avatar--more">+${learners.extra}</span>` : ""}
-          </span>`}
+          </span>
         </div>
-        ${learner ? `
-        <div class="twin-all-aside">
-          ${learnerTimeMeta(TWIN_ALL)}
-          <button class="btn btn--strong btn--sm" type="button" data-action="learner-twin-connect" data-id="${esc(TWIN_ALL.id)}">Connect</button>
-        </div>` : `<button class="btn btn--ghost btn--icon btn--sm rp-row-more twin-all-more" type="button" id="role-menu-${esc(TWIN_ALL.id)}" data-action="role-row-menu" data-id="${esc(TWIN_ALL.id)}" aria-label="Actions for ${esc(TWIN_ALL.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === TWIN_ALL.id}">
+        <button class="btn btn--ghost btn--icon btn--sm rp-row-more twin-all-more" type="button" id="role-menu-${esc(TWIN_ALL.id)}" data-action="role-row-menu" data-id="${esc(TWIN_ALL.id)}" aria-label="Actions for ${esc(TWIN_ALL.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === TWIN_ALL.id}">
           <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg>
-        </button>`}
+        </button>
       </article>
 `;
 }
 
 function twinBotsSection(bots, openBot) {
+  if (isLearnerView()) return twinAllCard();
   return `
       ${twinAllCard()}
       <div class="twin-bots-head">
@@ -2613,7 +2651,7 @@ function twinBotsSection(bots, openBot) {
       <div class="rp-grid">
         ${bots.map((bot, i) => twinBotCard(bot, i)).join("")}
       </div>
-      ${!isLearnerView() && openBot ? twinBotMenu(openBot) : ""}
+      ${openBot ? twinBotMenu(openBot) : ""}
   `;
 }
 
@@ -3635,7 +3673,7 @@ function mountTwinOffDialog() {
 }
 
 function pageTwinSessionReport() {
-  const bot = (state.twinSessionBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === state.twinSessionBot));
+  const bot = learnerAssignedTwin(state.twinSessionBot) || (state.twinSessionBot === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === state.twinSessionBot));
   const list = bot ? botConversations(bot) : [];
   const idx = list.findIndex((item) => item.id === state.twinSessionId);
   if (!bot || idx < 0) { state.twinSessionId = ""; return pageTwinSessions(); }
@@ -7419,7 +7457,8 @@ function botCredit(bot) {
   const known = BOT_CREDIT[bot.id];
   if (known) return known;
   const minutes = Number(bot.minutes) || 0;
-  return { minutes, used: 0 };
+  const used = Number(bot.used) || 0;
+  return { minutes, used };
 }
 
 function creditPill() {
@@ -9284,7 +9323,7 @@ function draftAgent() {
   return d && d.id ? { id: d.id, title: d.name.trim() || "New agent" } : null;
 }
 function isTwinAgentId(id) {
-  return id === TWIN_ALL.id || twinBots().some((b) => b.id === id) || !!(draftAgent() && draftAgent().id === id);
+  return id === TWIN_ALL.id || twinBots().some((b) => b.id === id) || !!learnerAssignedTwin(id) || !!(draftAgent() && draftAgent().id === id);
 }
 function agentMinutes(id, email) {
   const m = state.assignMins[id] && state.assignMins[id][email];
@@ -11486,7 +11525,7 @@ function demoModel(taskId) {
 
 // A twin's practice call: the learner asks, Olga's twin answers from the twin's own Q&A.
 function demoTwinModel(taskId) {
-  const bot = taskId === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === taskId);
+  const bot = learnerAssignedTwin(taskId) || (taskId === TWIN_ALL.id ? TWIN_ALL : twinBots().find((item) => item.id === taskId));
   if (!bot) return null;
   const qa = botQA(bot);
   const lines = [{ who: "twin", text: BOT_GREETING }];
@@ -11494,7 +11533,8 @@ function demoTwinModel(taskId) {
     lines.push({ who: "student", text: q });
     if (i < 2) lines.push({ who: "twin", text: a });
   });
-  return { title: bot.title, lead: "Olga’s twin", lines, isTwin: true, persona: { name: "Olga’s twin", face: presenceSrc() } };
+  const face = bot.photo || presenceSrc();
+  return { title: bot.title, lead: bot.title, lines, isTwin: true, persona: { name: bot.title, face } };
 }
 
 function demoModelBase(taskId) {
