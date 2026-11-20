@@ -11866,13 +11866,17 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 .learner-menu-item[aria-current="page"] span { color: var(--tt-primary); }
 .learner-pane {
   flex: none;
-  width: 1024px;
-  max-width: min(1024px, 100%);
+  /* 896px grid (trainer) + 64px right pad; left pad removed so menu→title is 24px. */
+  width: 960px;
+  max-width: min(960px, 100%);
   min-width: 0;
 }
-/* Keep .page--library’s 1024px + side padding so .rp-grid cards match trainer (~288px). */
 .learner-pane > .page {
   margin: 0;
+  max-width: none;
+  width: 100%;
+  /* Drop left library pad: layout gap (24px) is the space to the Twin title. */
+  padding-left: 0;
 }
 .rp-time {
   display: inline-flex;
