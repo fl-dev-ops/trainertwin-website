@@ -11821,10 +11821,11 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
   align-items: flex-start;
   gap: var(--tt-space-6);
   padding: var(--tt-space-8) var(--tt-space-8) var(--tt-space-16);
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
   box-sizing: border-box;
+  width: 100%;
+  /* menu (200) + gap + pane cap (960) + side padding: centers with room, fills edge-to-edge below it. */
+  max-width: calc(200px + var(--tt-space-6) + 960px + (var(--tt-space-8) * 2));
+  margin-inline: auto;
 }
 .learner-menu {
   flex: none;
@@ -11867,10 +11868,9 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 }
 .learner-menu-item[aria-current="page"] span { color: var(--tt-primary); }
 .learner-pane {
-  flex: none;
   /* 896px grid (trainer) + 64px right pad; left pad removed so menu→title is 24px. */
-  width: 960px;
-  max-width: min(960px, 100%);
+  flex: 1 1 960px;
+  max-width: 960px;
   min-width: 0;
 }
 .learner-pane > .page {
