@@ -271,6 +271,8 @@ const state = {
   botShareCopied: false,
   twinAskMode: "bot",
   askMenu: "",
+  portalView: "trainer",
+  portalOpen: false,
   teeAskMode: "roleplay",
   botAsk: "",
   botManual: null,
@@ -851,6 +853,15 @@ function render() {
   }
 }
 
+// ?app=1 is the signed-in prototype surface; the portal switcher lives only there.
+function isAppSurface() {
+  try { return new URLSearchParams(location.search).get("app") === "1"; } catch (err) { return false; }
+}
+
+function isLearnerView() {
+  return isAppSurface() && state.portalView === "learner";
+}
+
 function boxedSetup() {
   if (state.talkOpen || activeNav() !== "setup") return false;
   if (state.twinReady) return state.ob.page === "twinready";
@@ -863,6 +874,35 @@ function showingGate() {
   return !state.accountReady && (nav === "home" || nav === "analytics" || nav === "roleplay");
 }
 
+function portalSwitcher() {
+  if (!isAppSurface()) return "";
+  const learner = state.portalView === "learner";
+  const label = learner ? "Learner View" : "Trainer portal";
+  const open = !!state.portalOpen;
+  const opts = [
+    ["trainer", "Trainer portal"],
+    ["learner", "Learner View"]
+  ];
+  return `
+    <div class="portal-switch${open ? " is-open" : ""}" id="portal-switch">
+      <button class="portal-switch-btn" type="button" data-action="portal-toggle" aria-haspopup="listbox" aria-expanded="${open}" aria-label="Portal: ${esc(label)}">
+        <span>${esc(label)}</span>
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 6.5 8 10l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      ${open ? `
+        <div class="portal-switch-menu" role="listbox" aria-label="Choose portal">
+          ${opts.map(([id, text]) => `
+            <button type="button" class="portal-switch-opt${state.portalView === id ? " is-selected" : ""}" role="option" aria-selected="${state.portalView === id}" data-action="portal-pick" data-id="${id}">
+              <span>${esc(text)}</span>
+              ${state.portalView === id ? roleCheckIcon() : ""}
+            </button>
+          `).join("")}
+        </div>
+      ` : ""}
+    </div>
+  `;
+}
+
 function view() {
   if (state.authStart && state.auth) {
     return `${authDialog()}${toastHtml()}`;
@@ -871,16 +911,19 @@ function view() {
     return `
       ${pageTwinDemo()}
       ${toastHtml()}
+      ${portalSwitcher()}
     `;
   }
   const bar = tabbar();
+  const solo = obMode() === "solo" || isLearnerView();
   return `
     ${bar ? mobileHead() : ""}
-    <div class="shell${bar ? " has-tabbar" : ""}${obMode() === "solo" ? " shell--solo" : ""}">
-      ${obMode() === "mini" ? obMiniRail() : obMode() === "solo" ? "" : rail()}
+    <div class="shell${bar ? " has-tabbar" : ""}${solo ? " shell--solo" : ""}${isLearnerView() ? " shell--learner" : ""}">
+      ${isLearnerView() ? "" : obMode() === "mini" ? obMiniRail() : obMode() === "solo" ? "" : rail()}
       <main class="main${(activeNav() === "home" || activeNav() === "analytics") && !showingGate() ? " is-home" : ""}${boxedSetup() ? " is-find" : ""}${state.talkOpen && state.obCall ? " v2-call" : ""}">${main()}</main>
     </div>
     ${bar}
+    ${portalSwitcher()}
     ${state.userMenu ? userMenu() : ""}
     ${state.drawer ? drawer() : ""}
     ${state.builtFromOpen ? builtFromPanel() : ""}
@@ -981,7 +1024,7 @@ function navItem(id, label, glyph, badge, meta) {
 // Phone layout: the left rail turns into a slim header (logo, knowledge, theme, profile) and a
 // bottom tab bar (Home, Roleplay, Twin Studio, Report, Settings). Both are hidden on desktop.
 function tabbar() {
-  if (state.talkOpen || state.calibId || state.roleCreate || state.botCreate || showingGate() || obMode()) return "";
+  if (isLearnerView() || state.talkOpen || state.calibId || state.roleCreate || state.botCreate || showingGate() || obMode()) return "";
   const items = [
     ["home", "Home", "home"],
     ["roleplay", "Roleplay", "role"],
@@ -2308,20 +2351,34 @@ const TWIN_TOPICS = ["Cold calling", "Off-plan buyer qualification", "Objection 
 function pageTwinProfile() {
   const bots = twinBots();
   const openBot = state.roleMenuId === TWIN_ALL.id ? TWIN_ALL : bots.find((bot) => bot.id === state.roleMenuId);
+  const learner = isLearnerView();
   return `
     <div class="page page--library page--twin-profile">
       <div class="lib-head">
         <h1 class="lib-title"><span class="lib-mark">${icon("setup")}</span>Twin Agents</h1>
-        <div class="lib-tools">
+        ${learner ? "" : `<div class="lib-tools">
           ${creditPill()}
           <button class="btn btn--strong" type="button" data-action="create-bot">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           Create new
         </button>
-        </div>
+        </div>`}
       </div>
       ${twinBotsSection(bots, openBot)}
     </div>
+  `;
+}
+
+function learnerTimeMeta(bot) {
+  const credit = botCredit(bot);
+  const assigned = credit.minutes || 0;
+  const used = credit.used || 0;
+  return `
+    <span class="rp-time tabular" aria-label="${used} of ${assigned} minutes used">
+      <span class="rp-time-label">Assigned</span> <b>${assigned}</b>
+      <span class="rp-time-sep" aria-hidden="true">·</span>
+      <span class="rp-time-label">Used</span> <b>${used}</b>
+    </span>
   `;
 }
 
@@ -2388,6 +2445,7 @@ function twinHero() {
 
 function twinAllCard() {
   const learners = roleLearnerAvatars(TWIN_ALL, 0);
+  const learner = isLearnerView();
   return `
       <div class="twin-bots-head">
         <h2 class="page-title">Twin for all use cases</h2>
@@ -2397,14 +2455,16 @@ function twinAllCard() {
         <div class="twin-all-body">
           <h3 class="twin-all-name">Olga’s twin</h3>
           <p class="twin-all-meta">Last updated 29 Oct, 13:00 <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-          <span class="rp-learners" aria-label="Learners who asked this twin">
+          ${learner
+            ? learnerTimeMeta(TWIN_ALL)
+            : `<span class="rp-learners" aria-label="Learners who asked this twin">
             ${learners.shown.map(learnerFace).join("")}
             ${learners.extra > 0 ? `<span class="rp-learner-avatar rp-learner-avatar--more">+${learners.extra}</span>` : ""}
-          </span>
+          </span>`}
         </div>
-        <button class="btn btn--ghost btn--icon btn--sm rp-row-more twin-all-more" type="button" id="role-menu-${esc(TWIN_ALL.id)}" data-action="role-row-menu" data-id="${esc(TWIN_ALL.id)}" aria-label="Actions for ${esc(TWIN_ALL.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === TWIN_ALL.id}">
+        ${learner ? "" : `<button class="btn btn--ghost btn--icon btn--sm rp-row-more twin-all-more" type="button" id="role-menu-${esc(TWIN_ALL.id)}" data-action="role-row-menu" data-id="${esc(TWIN_ALL.id)}" aria-label="Actions for ${esc(TWIN_ALL.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === TWIN_ALL.id}">
           <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg>
-        </button>
+        </button>`}
       </article>
 `;
 }
@@ -2418,7 +2478,7 @@ function twinBotsSection(bots, openBot) {
       <div class="rp-grid">
         ${bots.map((bot, i) => twinBotCard(bot, i)).join("")}
       </div>
-      ${openBot ? twinBotMenu(openBot) : ""}
+      ${!isLearnerView() && openBot ? twinBotMenu(openBot) : ""}
   `;
 }
 
@@ -4622,6 +4682,7 @@ function flagBadge(text) {
 
 function twinBotCard(bot, index) {
   const learners = roleLearnerAvatars(bot, index);
+  const learner = isLearnerView();
   return `
     <article class="rp-card is-clickable${bot.flag ? " is-flagged" : ""}" data-action="twin-bot-open" data-id="${esc(bot.id)}" tabindex="0" aria-label="Open ${esc(bot.title)}">
       <span class="rp-art rp-art--twin rp-art--${index % 10}" aria-hidden="true">
@@ -4634,13 +4695,15 @@ function twinBotCard(bot, index) {
         ${bot.created ? `<span class="rp-created">${esc(bot.created)}</span>` : ""}
       </span>
       <span class="rp-actions">
-        <span class="rp-learners" aria-label="Learners who asked this bot">
+        ${learner
+          ? learnerTimeMeta(bot)
+          : `<span class="rp-learners" aria-label="Learners who asked this bot">
           ${learners.shown.map(learnerFace).join("")}
           ${learners.extra > 0 ? `<span class="rp-learner-avatar rp-learner-avatar--more">+${learners.extra}</span>` : ""}
         </span>
         <button class="btn btn--ghost btn--icon btn--sm rp-row-more" type="button" id="role-menu-${esc(bot.id)}" data-action="role-row-menu" data-id="${esc(bot.id)}" aria-label="Actions for ${esc(bot.title)}" aria-haspopup="menu" aria-expanded="${state.roleMenuId === bot.id}">
           <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="3.25" r="1.15" fill="currentColor"/><circle cx="8" cy="8" r="1.15" fill="currentColor"/><circle cx="8" cy="12.75" r="1.15" fill="currentColor"/></svg>
-        </button>
+        </button>`}
       </span>
     </article>
   `;
@@ -15468,6 +15531,20 @@ const actions = {
     state.twinInfoOpen = !state.twinInfoOpen;
     render();
   },
+  "portal-toggle"() {
+    if (!isAppSurface()) return;
+    state.portalOpen = !state.portalOpen;
+    render();
+  },
+  "portal-pick"(el) {
+    if (!isAppSurface()) return;
+    const id = el.dataset.id === "learner" ? "learner" : "trainer";
+    state.portalView = id;
+    state.portalOpen = false;
+    state.roleMenuId = "";
+    state.creditOpen = false;
+    render();
+  },
   "ask-type-toggle"(el) {
     const scope = el.dataset.scope;
     state.askMenu = state.askMenu === scope ? "" : scope;
@@ -17122,6 +17199,11 @@ document.addEventListener("click", (e) => {
   }
   if (state.askMenu && !e.target.closest(".twin-hero-ask-type")) {
     state.askMenu = "";
+    render();
+    if (!el || el.disabled) return;
+  }
+  if (state.portalOpen && !e.target.closest(".portal-switch")) {
+    state.portalOpen = false;
     render();
     if (!el || el.disabled) return;
   }

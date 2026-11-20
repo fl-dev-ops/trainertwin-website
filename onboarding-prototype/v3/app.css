@@ -11751,3 +11751,80 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 .bl-inv-cr { min-width: 96px; text-align: right; font-size: 14px; color: var(--tt-text-secondary); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .rps-row-who b { font-weight: var(--tt-weight-title); }
 .rps-list .rps-row.rps-row--head { border-radius: calc(var(--tt-radius-lg) - 1px) calc(var(--tt-radius-lg) - 1px) 0 0; }
+
+/* Portal switcher: floating bottom-right, app=1 only. Light shadow. */
+.portal-switch {
+  position: fixed;
+  right: var(--tt-space-5);
+  bottom: var(--tt-space-5);
+  z-index: var(--tt-z-dropdown);
+}
+.portal-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tt-space-2);
+  min-height: 36px;
+  padding: 0 var(--tt-space-4);
+  border: var(--tt-border-thin) solid var(--tt-border);
+  border-radius: var(--tt-radius-sm);
+  background: var(--tt-surface);
+  color: var(--tt-text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: var(--tt-weight-label);
+  line-height: 20px;
+  box-shadow: var(--tt-elevation-1);
+  cursor: pointer;
+}
+.portal-switch-btn:hover { background: var(--tt-surface-sunken); }
+.portal-switch-btn svg { width: 16px; height: 16px; flex: none; color: var(--tt-text-secondary); }
+.portal-switch.is-open .portal-switch-btn svg { transform: rotate(180deg); }
+.portal-switch-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  min-width: 200px;
+  padding: var(--tt-space-2);
+  border-radius: var(--tt-radius-sm);
+  background: var(--tt-surface-raised);
+  box-shadow: var(--tt-elevation-1);
+  border: var(--tt-border-thin) solid var(--tt-border);
+}
+.portal-switch-opt {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tt-space-3);
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--tt-radius-xs);
+  background: transparent;
+  color: var(--tt-text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 20px;
+  text-align: left;
+  cursor: pointer;
+}
+.portal-switch-opt:hover,
+.portal-switch-opt.is-selected { background: var(--tt-fill-soft); }
+.portal-switch-opt svg { width: 16px; height: 16px; flex: none; color: var(--tt-text-primary); }
+
+/* Learner View: center column alone; cards show assigned vs used. */
+.shell--learner > .main { flex: 1; min-width: 0; width: 100%; }
+.rp-time {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--tt-text-primary);
+}
+.rp-time b { font-weight: var(--tt-weight-title); font-variant-numeric: tabular-nums; }
+.rp-time-label { color: var(--tt-text-secondary); font-weight: var(--tt-weight-body); }
+.rp-time-sep { color: var(--tt-text-tertiary); margin: 0 2px; }
+.twin-all .rp-time { margin-top: var(--tt-space-2); }
+.rp-actions .rp-time { align-self: center; }
