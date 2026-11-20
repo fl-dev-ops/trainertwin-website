@@ -2450,16 +2450,16 @@ function pageTwinProfile() {
   const learner = isLearnerView();
   return `
     <div class="page page--library page--twin-profile">
-      <div class="lib-head">
+      ${learner ? "" : `<div class="lib-head">
         <h1 class="lib-title"><span class="lib-mark">${icon("setup")}</span>Twin Agents</h1>
-        ${learner ? "" : `<div class="lib-tools">
+        <div class="lib-tools">
           ${creditPill()}
           <button class="btn btn--strong" type="button" data-action="create-bot">
           <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           Create new
         </button>
-        </div>`}
-      </div>
+        </div>
+      </div>`}
       ${twinBotsSection(bots, openBot)}
     </div>
   `;

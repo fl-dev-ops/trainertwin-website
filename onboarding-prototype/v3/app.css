@@ -11517,6 +11517,8 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
 @media (max-width: 720px) { .set-grid { grid-template-columns: 1fr; } }
 
 /* Twin for all use cases: one wide card above the specific agents */
+/* Title → Olga card: same gap as title → specific-use cards (.rp-grid). */
+.twin-bots-head + .twin-all { margin-top: var(--tt-space-5); }
 .twin-all { position: relative; flex-direction: row; align-items: center; gap: var(--tt-space-5); padding: var(--tt-space-5); margin-bottom: var(--tt-space-8); cursor: pointer; overflow: visible; }
 .twin-all:hover { border-color: var(--tt-border-interactive); }
 .twin-all-photo { flex: none; width: 76px; height: 76px; border-radius: 16px; object-fit: cover; object-position: center 18%; background: var(--tt-fill-soft); }
@@ -11878,6 +11880,8 @@ textarea.ts-overview-edit { flex: none; width: 100%; height: 60px; max-height: 6
   /* Drop left library pad: layout gap (24px) is the space to the Twin title. */
   padding-left: 0;
 }
+.learner-pane .page--twin-profile > .twin-bots-head:first-child { margin-top: 0; }
+
 .rp-time {
   display: inline-flex;
   align-items: center;
