@@ -2581,7 +2581,7 @@ function twinAllCard() {
   const cardAction = learner ? "learner-twin-activities" : "twin-bot-open";
   return `
       <div class="twin-bots-head">
-        <h2 class="page-title">Twin for all use cases</h2>
+        <h2 class="page-title">${learner ? "Twins assigned" : "Twin for all use cases"}</h2>
       </div>
       <article class="card twin-all is-clickable" data-action="${cardAction}" data-id="${esc(TWIN_ALL.id)}" tabindex="0" aria-label="${learner ? "Open activities for" : "Open"} ${esc(TWIN_ALL.title)}">
         <img class="twin-all-photo" src="${esc(presenceSrc())}" alt="">
