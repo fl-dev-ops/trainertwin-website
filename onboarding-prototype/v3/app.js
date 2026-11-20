@@ -854,9 +854,14 @@ function render() {
   }
 }
 
-// ?app=1 is the signed-in prototype surface; the portal switcher lives only there.
+// Signed-in v3 surface: plain /v3/index.html and ?app=1 (kept for login redirects).
+// Skip onboarding / persona-editor query modes.
 function isAppSurface() {
-  try { return new URLSearchParams(location.search).get("app") === "1"; } catch (err) { return false; }
+  try {
+    const q = new URLSearchParams(location.search);
+    if (q.has("onboarding") || q.get("editPersona")) return false;
+  } catch (err) { /* ignore */ }
+  return !state.authStart;
 }
 
 function isLearnerView() {
