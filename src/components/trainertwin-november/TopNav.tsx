@@ -13,7 +13,7 @@ export function TopNav() {
   return (
     <header className="top">
       <div className="brand">
-        <img src="/trainertwin-november/mark.svg" alt="" width={24} height={24} />
+        <img src="/trainertwin-november/mark.svg" alt="" width={18} height={18} />
         TrainerTwin
       </div>
       <nav aria-label="Sections">

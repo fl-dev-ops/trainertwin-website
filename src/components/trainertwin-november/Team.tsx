@@ -90,7 +90,7 @@ const SLIDES: FlexCarouselItem[] = MEMBERS.map((m) => ({
  * The team, shown as a WebGL "liquid glass" carousel (React Bits'
  * FlexCarousel): the row bends and splits around an invisible lens as it
  * scrolls, the centred person's name and role shown above. Clicking the
- * centred card opens that person's LinkedIn, matching the old grid's behaviour.
+ * centred card opens that person's LinkedIn.
  */
 export function Team() {
   return (
@@ -106,7 +106,6 @@ export function Team() {
             cardHeight={0.48}
             gap={10}
             squeeze={0.2}
-            bend={0}
             focusOnClick={false}
             captureWheel={false}
             captions

@@ -206,7 +206,7 @@ export function VideoStage() {
             containerHeight="100%"
             imageWidth="100%"
             imageHeight="100%"
-            radius={0}
+            radius={22}
             // `.stage` plays its own transform-animated entrance; a 3D (perspective +
             // preserve-3d) descendant mounted while an ancestor is mid-transform-animation
             // can render sheared in Chromium, so the tilt only turns on once that settles.

@@ -52,7 +52,6 @@ export function Testimonials() {
   return (
     <div className="wrap told">
       <h3>What they&rsquo;ve told us</h3>
-      <p className="tip">Tap a message to zoom in.</p>
       <div className="notes">
         <Note id="olga" popped={popped} onToggle={toggle}>
           <div className="shot pic-shot">

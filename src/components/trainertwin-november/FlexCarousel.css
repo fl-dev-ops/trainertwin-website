@@ -70,7 +70,6 @@
   justify-content: flex-end;
   padding: 0 8% calc(var(--cw, 200) * 1px * 0.07) 8%;
   pointer-events: none;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.12) 45%, transparent 70%);
 }
 
 .flex-carousel__card-label span,
@@ -81,6 +80,7 @@
   line-height: 1.2;
   color: #fff;
   text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 1px 12px rgba(0, 0, 0, 0.5);
 }
 
 .flex-carousel__card-label small {

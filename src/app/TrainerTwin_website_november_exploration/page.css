@@ -36,7 +36,7 @@
 .tte-page .hero{background:var(--ink)}
 .tte-page .hero .wrap{padding-block:24px 64px;display:flex;flex-direction:column;gap:48px}
 .tte-page .brand{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em}
-.tte-page .brand img{display:block;width:24px;height:auto}
+.tte-page .brand img{display:block;width:18px;height:auto;filter:brightness(0) invert(1)}
 .tte-page .lead{display:flex;flex-wrap:wrap;gap:32px 64px;align-items:flex-end;animation:rise .8s ease-out both}
 .tte-page .lead h1{flex:999 1 560px;min-width:0;font-size:clamp(52px,9vw,132px);line-height:.9;letter-spacing:-.04em}
 .tte-page .pitch{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:22px;align-items:flex-start}
@@ -115,7 +115,7 @@
 .tte-page .doubt-banner p{margin:0;max-width:40ch;font-size:18px;line-height:1.45;color:var(--text-soft)}
 .tte-page .doubt-banner b{font-weight:700;color:var(--paper)}
 .tte-page .doubt-send{flex-direction:row;flex-wrap:nowrap;align-items:center;gap:10px}
-.tte-page .doubt-send input{flex:1 1 220px;width:auto;min-width:0;min-height:48px}
+.tte-page .doubt-send input{flex:0 0 312px;width:312px;min-width:0;min-height:48px;border:1.5px solid color-mix(in srgb, var(--field) 50%, transparent)}
 .tte-page .doubt-send .cta{flex:none;min-height:48px;padding:0 22px;font-size:16px}
 .tte-page .doubt-thanks{font-weight:700}
 .tte-page .panel{flex:1 1 460px;min-width:0}
@@ -130,6 +130,7 @@
 .tte-page .two>div{flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:6px}
 .tte-page .two label{font-size:15px;color:var(--text-dim)}
 .tte-page input{width:100%;min-height:58px;padding:0 16px;border:1.5px solid var(--field);border-radius:16px;font-size:17px;color:var(--paper);background:var(--panel)}
+.tte-page #form input{border-color:color-mix(in srgb, var(--field) 50%, transparent)}
 .tte-page input::placeholder{color:#9AA0AB}
 .tte-page .send{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
 .tte-page .send .cta{font-size:16px}
@@ -185,7 +186,7 @@
 /* Top navigation, team, footer */
 .tte-page .top{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:center;justify-content:space-between}
 .tte-page .top nav{display:flex;flex-wrap:wrap;gap:2px}
-.tte-page .top nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;color:var(--text-soft);font-size:15px;font-weight:500;text-decoration:none}
+.tte-page .top nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;color:var(--text-soft);font-size:16px;font-weight:500;text-decoration:none}
 .tte-page .top nav a:hover{background:var(--panel-2);color:var(--paper)}
 .tte-page .build .wrap{padding-block:104px}
 .tte-page .team{background:var(--paper);color:var(--ink)}
@@ -260,7 +261,7 @@
 .tte-page .note small{display:block}
 
 /* The hero video fills the glowing frame */
-.tte-page .screen.has-video{padding:0;overflow:hidden;display:block;position:relative}
+.tte-page .screen.has-video{padding:0;overflow:visible;display:block;position:relative;border:0;background:transparent}
 .tte-page .screen.has-video video{display:block;width:100%;height:100%;object-fit:cover;background:#000}
 
 /* Video cover: blurred still, Cathy's face, a pulsing play button */
@@ -427,14 +428,22 @@
 .tte-page .spot-dot img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .tte-page .spot-dot.on{opacity:1;filter:none;transform:scale(1.28);z-index:2;box-shadow:0 0 0 3px var(--paper),0 0 0 6px var(--accent),0 14px 30px -10px rgba(14,16,20,.5)}
 @media (hover:hover) and (pointer:fine){.tte-page .spot-dot:hover{opacity:.9;filter:none}}
-.tte-page .spot-card{flex:1 1 300px;min-width:0;max-width:420px;display:flex;gap:18px;align-items:center;padding:20px;border-radius:24px;background:var(--ink);color:var(--paper);box-shadow:0 20px 40px -20px rgba(14,16,20,.5)}
+.tte-page .spot-card{flex:1 1 300px;min-width:0;max-width:420px;display:flex;gap:18px;align-items:center;padding:20px;border-radius:24px;border:1px solid var(--grey-tint);background:var(--paper);color:var(--ink);text-decoration:none;box-shadow:0 20px 40px -20px rgba(14,16,20,.18)}
 .tte-page .spot-card.in{animation:spotIn .5s cubic-bezier(.2,1.2,.3,1)}
 @keyframes spotIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
-.tte-page .spot-card img{flex:none;width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--accent)}
+.tte-page .spot-card img{flex:none;width:96px;height:96px;border-radius:50%;object-fit:cover}
 .tte-page .spot-text{display:flex;flex-direction:column;gap:4px;min-width:0}
 .tte-page .spot-text b{font-family:var(--display);font-size:22px;line-height:1.15}
-.tte-page .spot-text span{font-size:15px;color:var(--text-soft)}
-.tte-page .spot-text p{margin:6px 0 0;font-size:15px;line-height:1.4;color:var(--paper)}
+.tte-page .spot-text span{font-size:15px;color:var(--muted)}
+.tte-page .spot-text p{margin:6px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:15px;line-height:1.4;color:var(--ink)}
+.tte-page .use-lab{margin-right:2px;color:#6B7280;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.tte-page .use-tag{padding:3px 9px;border-radius:999px;font-size:12px;font-weight:500;line-height:1.4;white-space:nowrap}
+.tte-page .use-tag--coral{background:#FFEDE6;color:#C1440E}
+.tte-page .use-tag--blue{background:var(--blue-tint);color:var(--blue)}
+.tte-page .use-tag--green{background:#E6F6EC;color:#1A6739}
+.tte-page .use-tag--purple{background:#F1E9FB;color:#6B3FA0}
+.tte-page .use-tag--teal{background:#E3F6F5;color:#0E7C86}
+.tte-page .use-tag--gold{background:#FBF2DC;color:#8A6D00}
 @media (max-width:640px){.tte-page .spot-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}.tte-page .spot-card{max-width:none}.tte-page .spot-card img{width:72px;height:72px}.tte-page .spot-text b{font-size:19px}}
 
 /* What can your twin do */
@@ -451,7 +460,7 @@
 .tte-page .crew-label{margin:0 0 -24px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
 
 /* Coach spotlight, v2: one panel, card on the left, smaller faces on the right that gently drift */
-.tte-page .spot{display:flex;flex-wrap:wrap;gap:28px 40px;align-items:center;padding:28px;border-radius:28px;background:var(--chip)}
+.tte-page .spot{display:flex;flex-wrap:wrap;gap:28px 40px;align-items:center;padding:28px 28px 28px 0;border-radius:28px;background:var(--chip)}
 .tte-page .spot-card{flex:0 1 400px;max-width:400px;min-height:150px;align-self:stretch}
 @media (max-width:900px){.tte-page .spot-card{flex:1 1 100%;max-width:none}}
 .tte-page .spot-card img{width:88px;height:88px}
@@ -460,7 +469,7 @@
 .tte-page .spot-dot.on{transform:scale(1.22);opacity:1;filter:none;animation-play-state:paused}
 @keyframes dotDrift{0%,100%{translate:0 0}50%{translate:0 -5px}}
 @media (max-width:640px){
-  .tte-page .spot{padding:18px;gap:20px}
+  .tte-page .spot{padding:18px 18px 18px 0;gap:20px}
   .tte-page .spot-grid{grid-template-columns:repeat(6,40px);gap:10px 12px;justify-content:center}
   .tte-page .spot-dot{width:40px;height:40px}
   .tte-page .spot-card{min-height:0}
